@@ -1,0 +1,454 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		9551D041160891B40094FCA7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9551D040160891B40094FCA7 /* UIKit.framework */; };
+		9551D043160891B40094FCA7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9551D042160891B40094FCA7 /* Foundation.framework */; };
+		9551D045160891B40094FCA7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9551D044160891B40094FCA7 /* CoreGraphics.framework */; };
+		9551D047160891B40094FCA7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9551D046160891B40094FCA7 /* CoreData.framework */; };
+		9551D04D160891B40094FCA7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9551D04B160891B40094FCA7 /* InfoPlist.strings */; };
+		9551D04F160891B40094FCA7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9551D04E160891B40094FCA7 /* main.m */; };
+		9551D053160891B40094FCA7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9551D052160891B40094FCA7 /* AppDelegate.m */; };
+		9551D056160891B40094FCA7 /* MagBoard.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9551D054160891B40094FCA7 /* MagBoard.xcdatamodeld */; };
+		9551D05E160891B40094FCA7 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9551D05D160891B40094FCA7 /* SenTestingKit.framework */; };
+		9551D05F160891B40094FCA7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9551D040160891B40094FCA7 /* UIKit.framework */; };
+		9551D060160891B40094FCA7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9551D042160891B40094FCA7 /* Foundation.framework */; };
+		9551D061160891B40094FCA7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9551D046160891B40094FCA7 /* CoreData.framework */; };
+		9551D069160891B40094FCA7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9551D067160891B40094FCA7 /* InfoPlist.strings */; };
+		9551D06C160891B40094FCA7 /* MagBoardTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9551D06B160891B40094FCA7 /* MagBoardTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9551D062160891B40094FCA7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9551D033160891B40094FCA7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9551D03B160891B40094FCA7;
+			remoteInfo = MagBoard;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		9551D03C160891B40094FCA7 /* MagBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MagBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9551D040160891B40094FCA7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		9551D042160891B40094FCA7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		9551D044160891B40094FCA7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		9551D046160891B40094FCA7 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		9551D04A160891B40094FCA7 /* MagBoard-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MagBoard-Info.plist"; sourceTree = "<group>"; };
+		9551D04C160891B40094FCA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		9551D04E160891B40094FCA7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		9551D050160891B40094FCA7 /* MagBoard-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MagBoard-Prefix.pch"; sourceTree = "<group>"; };
+		9551D051160891B40094FCA7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		9551D052160891B40094FCA7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		9551D055160891B40094FCA7 /* MagBoard.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MagBoard.xcdatamodel; sourceTree = "<group>"; };
+		9551D05C160891B40094FCA7 /* MagBoardTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MagBoardTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9551D05D160891B40094FCA7 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		9551D066160891B40094FCA7 /* MagBoardTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MagBoardTests-Info.plist"; sourceTree = "<group>"; };
+		9551D068160891B40094FCA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		9551D06A160891B40094FCA7 /* MagBoardTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MagBoardTests.h; sourceTree = "<group>"; };
+		9551D06B160891B40094FCA7 /* MagBoardTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MagBoardTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9551D039160891B40094FCA7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9551D041160891B40094FCA7 /* UIKit.framework in Frameworks */,
+				9551D043160891B40094FCA7 /* Foundation.framework in Frameworks */,
+				9551D045160891B40094FCA7 /* CoreGraphics.framework in Frameworks */,
+				9551D047160891B40094FCA7 /* CoreData.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9551D058160891B40094FCA7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9551D05E160891B40094FCA7 /* SenTestingKit.framework in Frameworks */,
+				9551D05F160891B40094FCA7 /* UIKit.framework in Frameworks */,
+				9551D060160891B40094FCA7 /* Foundation.framework in Frameworks */,
+				9551D061160891B40094FCA7 /* CoreData.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		9551D031160891B40094FCA7 = {
+			isa = PBXGroup;
+			children = (
+				9551D048160891B40094FCA7 /* MagBoard */,
+				9551D064160891B40094FCA7 /* MagBoardTests */,
+				9551D03F160891B40094FCA7 /* Frameworks */,
+				9551D03D160891B40094FCA7 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		9551D03D160891B40094FCA7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9551D03C160891B40094FCA7 /* MagBoard.app */,
+				9551D05C160891B40094FCA7 /* MagBoardTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9551D03F160891B40094FCA7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9551D040160891B40094FCA7 /* UIKit.framework */,
+				9551D042160891B40094FCA7 /* Foundation.framework */,
+				9551D044160891B40094FCA7 /* CoreGraphics.framework */,
+				9551D046160891B40094FCA7 /* CoreData.framework */,
+				9551D05D160891B40094FCA7 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9551D048160891B40094FCA7 /* MagBoard */ = {
+			isa = PBXGroup;
+			children = (
+				9551D051160891B40094FCA7 /* AppDelegate.h */,
+				9551D052160891B40094FCA7 /* AppDelegate.m */,
+				9551D054160891B40094FCA7 /* MagBoard.xcdatamodeld */,
+				9551D049160891B40094FCA7 /* Supporting Files */,
+			);
+			path = MagBoard;
+			sourceTree = "<group>";
+		};
+		9551D049160891B40094FCA7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9551D04A160891B40094FCA7 /* MagBoard-Info.plist */,
+				9551D04B160891B40094FCA7 /* InfoPlist.strings */,
+				9551D04E160891B40094FCA7 /* main.m */,
+				9551D050160891B40094FCA7 /* MagBoard-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9551D064160891B40094FCA7 /* MagBoardTests */ = {
+			isa = PBXGroup;
+			children = (
+				9551D06A160891B40094FCA7 /* MagBoardTests.h */,
+				9551D06B160891B40094FCA7 /* MagBoardTests.m */,
+				9551D065160891B40094FCA7 /* Supporting Files */,
+			);
+			path = MagBoardTests;
+			sourceTree = "<group>";
+		};
+		9551D065160891B40094FCA7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9551D066160891B40094FCA7 /* MagBoardTests-Info.plist */,
+				9551D067160891B40094FCA7 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9551D03B160891B40094FCA7 /* MagBoard */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9551D06F160891B40094FCA7 /* Build configuration list for PBXNativeTarget "MagBoard" */;
+			buildPhases = (
+				9551D038160891B40094FCA7 /* Sources */,
+				9551D039160891B40094FCA7 /* Frameworks */,
+				9551D03A160891B40094FCA7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MagBoard;
+			productName = MagBoard;
+			productReference = 9551D03C160891B40094FCA7 /* MagBoard.app */;
+			productType = "com.apple.product-type.application";
+		};
+		9551D05B160891B40094FCA7 /* MagBoardTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9551D072160891B40094FCA7 /* Build configuration list for PBXNativeTarget "MagBoardTests" */;
+			buildPhases = (
+				9551D057160891B40094FCA7 /* Sources */,
+				9551D058160891B40094FCA7 /* Frameworks */,
+				9551D059160891B40094FCA7 /* Resources */,
+				9551D05A160891B40094FCA7 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9551D063160891B40094FCA7 /* PBXTargetDependency */,
+			);
+			name = MagBoardTests;
+			productName = MagBoardTests;
+			productReference = 9551D05C160891B40094FCA7 /* MagBoardTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9551D033160891B40094FCA7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0440;
+				ORGANIZATIONNAME = "Dennis de Jong";
+			};
+			buildConfigurationList = 9551D036160891B40094FCA7 /* Build configuration list for PBXProject "MagBoard" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 9551D031160891B40094FCA7;
+			productRefGroup = 9551D03D160891B40094FCA7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9551D03B160891B40094FCA7 /* MagBoard */,
+				9551D05B160891B40094FCA7 /* MagBoardTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9551D03A160891B40094FCA7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9551D04D160891B40094FCA7 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9551D059160891B40094FCA7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9551D069160891B40094FCA7 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		9551D05A160891B40094FCA7 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9551D038160891B40094FCA7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9551D04F160891B40094FCA7 /* main.m in Sources */,
+				9551D053160891B40094FCA7 /* AppDelegate.m in Sources */,
+				9551D056160891B40094FCA7 /* MagBoard.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9551D057160891B40094FCA7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9551D06C160891B40094FCA7 /* MagBoardTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9551D063160891B40094FCA7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9551D03B160891B40094FCA7 /* MagBoard */;
+			targetProxy = 9551D062160891B40094FCA7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		9551D04B160891B40094FCA7 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9551D04C160891B40094FCA7 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		9551D067160891B40094FCA7 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9551D068160891B40094FCA7 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		9551D06D160891B40094FCA7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		9551D06E160891B40094FCA7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		9551D070160891B40094FCA7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MagBoard/MagBoard-Prefix.pch";
+				INFOPLIST_FILE = "MagBoard/MagBoard-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		9551D071160891B40094FCA7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MagBoard/MagBoard-Prefix.pch";
+				INFOPLIST_FILE = "MagBoard/MagBoard-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		9551D073160891B40094FCA7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MagBoard.app/MagBoard";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MagBoard/MagBoard-Prefix.pch";
+				INFOPLIST_FILE = "MagBoardTests/MagBoardTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		9551D074160891B40094FCA7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MagBoard.app/MagBoard";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MagBoard/MagBoard-Prefix.pch";
+				INFOPLIST_FILE = "MagBoardTests/MagBoardTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9551D036160891B40094FCA7 /* Build configuration list for PBXProject "MagBoard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9551D06D160891B40094FCA7 /* Debug */,
+				9551D06E160891B40094FCA7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9551D06F160891B40094FCA7 /* Build configuration list for PBXNativeTarget "MagBoard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9551D070160891B40094FCA7 /* Debug */,
+				9551D071160891B40094FCA7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		9551D072160891B40094FCA7 /* Build configuration list for PBXNativeTarget "MagBoardTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9551D073160891B40094FCA7 /* Debug */,
+				9551D074160891B40094FCA7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		9551D054160891B40094FCA7 /* MagBoard.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				9551D055160891B40094FCA7 /* MagBoard.xcdatamodel */,
+			);
+			currentVersion = 9551D055160891B40094FCA7 /* MagBoard.xcdatamodel */;
+			path = MagBoard.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 9551D033160891B40094FCA7 /* Project object */;
+}
