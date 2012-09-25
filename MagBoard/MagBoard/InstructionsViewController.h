@@ -1,5 +1,5 @@
 //
-//  FirstViewController.h
+//  InstructionsViewController.h
 //  MagBoard
 //
 //  Created by Dennis de Jong on 25-09-12.
@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FirstViewController : UIViewController
+@interface InstructionsViewController : UIViewController <UIScrollViewDelegate>
+
+-(void)addScrollView;
 
 @end

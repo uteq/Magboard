@@ -14,10 +14,8 @@
 		958AF6471611AEA700E94995 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 958AF6461611AEA700E94995 /* main.m */; };
 		958AF64B1611AEA700E94995 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 958AF64A1611AEA700E94995 /* AppDelegate.m */; };
 		958AF64E1611AEA800E94995 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 958AF64C1611AEA800E94995 /* MainStoryboard.storyboard */; };
-		958AF6511611AEA800E94995 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 958AF6501611AEA800E94995 /* FirstViewController.m */; };
 		958AF6531611AEA800E94995 /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = 958AF6521611AEA800E94995 /* first.png */; };
 		958AF6551611AEA800E94995 /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 958AF6541611AEA800E94995 /* first@2x.png */; };
-		958AF6581611AEA800E94995 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 958AF6571611AEA800E94995 /* SecondViewController.m */; };
 		958AF65A1611AEA800E94995 /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = 958AF6591611AEA800E94995 /* second.png */; };
 		958AF65C1611AEA800E94995 /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 958AF65B1611AEA800E94995 /* second@2x.png */; };
 		958AF6641611AEA800E94995 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 958AF6631611AEA800E94995 /* SenTestingKit.framework */; };
@@ -25,6 +23,9 @@
 		958AF6661611AEA800E94995 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 958AF63C1611AEA700E94995 /* Foundation.framework */; };
 		958AF66E1611AEA800E94995 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 958AF66C1611AEA800E94995 /* InfoPlist.strings */; };
 		958AF6711611AEA800E94995 /* MagBoardTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 958AF6701611AEA800E94995 /* MagBoardTests.m */; };
+		958AF6871611B10500E94995 /* NoShopsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 958AF6861611B10500E94995 /* NoShopsViewController.m */; };
+		958AF6C81611B7B400E94995 /* AddShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 958AF6C71611B7B400E94995 /* AddShopViewController.m */; };
+		958AF6CC1611B7F400E94995 /* InstructionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 958AF6CB1611B7F400E94995 /* InstructionsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,12 +50,8 @@
 		958AF6491611AEA700E94995 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		958AF64A1611AEA700E94995 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		958AF64D1611AEA800E94995 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		958AF64F1611AEA800E94995 /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
-		958AF6501611AEA800E94995 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
 		958AF6521611AEA800E94995 /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
 		958AF6541611AEA800E94995 /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
-		958AF6561611AEA800E94995 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
-		958AF6571611AEA800E94995 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
 		958AF6591611AEA800E94995 /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
 		958AF65B1611AEA800E94995 /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
 		958AF6621611AEA800E94995 /* MagBoardTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MagBoardTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -63,6 +60,12 @@
 		958AF66D1611AEA800E94995 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		958AF66F1611AEA800E94995 /* MagBoardTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MagBoardTests.h; sourceTree = "<group>"; };
 		958AF6701611AEA800E94995 /* MagBoardTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MagBoardTests.m; sourceTree = "<group>"; };
+		958AF6851611B10500E94995 /* NoShopsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoShopsViewController.h; sourceTree = "<group>"; };
+		958AF6861611B10500E94995 /* NoShopsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoShopsViewController.m; sourceTree = "<group>"; };
+		958AF6C61611B7B400E94995 /* AddShopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddShopViewController.h; sourceTree = "<group>"; };
+		958AF6C71611B7B400E94995 /* AddShopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddShopViewController.m; sourceTree = "<group>"; };
+		958AF6CA1611B7F400E94995 /* InstructionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstructionsViewController.h; sourceTree = "<group>"; };
+		958AF6CB1611B7F400E94995 /* InstructionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstructionsViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,12 +131,8 @@
 				958AF6491611AEA700E94995 /* AppDelegate.h */,
 				958AF64A1611AEA700E94995 /* AppDelegate.m */,
 				958AF64C1611AEA800E94995 /* MainStoryboard.storyboard */,
-				958AF64F1611AEA800E94995 /* FirstViewController.h */,
-				958AF6501611AEA800E94995 /* FirstViewController.m */,
 				958AF6521611AEA800E94995 /* first.png */,
 				958AF6541611AEA800E94995 /* first@2x.png */,
-				958AF6561611AEA800E94995 /* SecondViewController.h */,
-				958AF6571611AEA800E94995 /* SecondViewController.m */,
 				958AF6591611AEA800E94995 /* second.png */,
 				958AF65B1611AEA800E94995 /* second@2x.png */,
 				958AF6411611AEA700E94995 /* Supporting Files */,
@@ -181,6 +180,7 @@
 		958AF67B1611AEBD00E94995 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				958AF6C91611B7B800E94995 /* No shops */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -190,6 +190,19 @@
 			children = (
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		958AF6C91611B7B800E94995 /* No shops */ = {
+			isa = PBXGroup;
+			children = (
+				958AF6851611B10500E94995 /* NoShopsViewController.h */,
+				958AF6861611B10500E94995 /* NoShopsViewController.m */,
+				958AF6C61611B7B400E94995 /* AddShopViewController.h */,
+				958AF6C71611B7B400E94995 /* AddShopViewController.m */,
+				958AF6CA1611B7F400E94995 /* InstructionsViewController.h */,
+				958AF6CB1611B7F400E94995 /* InstructionsViewController.m */,
+			);
+			name = "No shops";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -305,8 +318,9 @@
 			files = (
 				958AF6471611AEA700E94995 /* main.m in Sources */,
 				958AF64B1611AEA700E94995 /* AppDelegate.m in Sources */,
-				958AF6511611AEA800E94995 /* FirstViewController.m in Sources */,
-				958AF6581611AEA800E94995 /* SecondViewController.m in Sources */,
+				958AF6871611B10500E94995 /* NoShopsViewController.m in Sources */,
+				958AF6C81611B7B400E94995 /* AddShopViewController.m in Sources */,
+				958AF6CC1611B7F400E94995 /* InstructionsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -480,6 +494,7 @@
 				958AF6761611AEA800E94995 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		958AF6771611AEA800E94995 /* Build configuration list for PBXNativeTarget "MagBoardTests" */ = {
 			isa = XCConfigurationList;
@@ -488,6 +503,7 @@
 				958AF6791611AEA800E94995 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
