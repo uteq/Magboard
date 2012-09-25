@@ -26,6 +26,7 @@
 		958AF6871611B10500E94995 /* NoShopsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 958AF6861611B10500E94995 /* NoShopsViewController.m */; };
 		958AF6C81611B7B400E94995 /* AddShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 958AF6C71611B7B400E94995 /* AddShopViewController.m */; };
 		958AF6CC1611B7F400E94995 /* InstructionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 958AF6CB1611B7F400E94995 /* InstructionsViewController.m */; };
+		958AF6D41611E82700E94995 /* magento_4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 958AF6D31611E82700E94995 /* magento_4.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		958AF6C71611B7B400E94995 /* AddShopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddShopViewController.m; sourceTree = "<group>"; };
 		958AF6CA1611B7F400E94995 /* InstructionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstructionsViewController.h; sourceTree = "<group>"; };
 		958AF6CB1611B7F400E94995 /* InstructionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstructionsViewController.m; sourceTree = "<group>"; };
+		958AF6D31611E82700E94995 /* magento_4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = magento_4.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +145,7 @@
 		958AF6411611AEA700E94995 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				958AF6D11611E81E00E94995 /* Images */,
 				958AF6421611AEA700E94995 /* MagBoard-Info.plist */,
 				958AF6431611AEA700E94995 /* InfoPlist.strings */,
 				958AF6461611AEA700E94995 /* main.m */,
@@ -203,6 +206,14 @@
 				958AF6CB1611B7F400E94995 /* InstructionsViewController.m */,
 			);
 			name = "No shops";
+			sourceTree = "<group>";
+		};
+		958AF6D11611E81E00E94995 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				958AF6D31611E82700E94995 /* magento_4.jpg */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -282,6 +293,7 @@
 				958AF6551611AEA800E94995 /* first@2x.png in Resources */,
 				958AF65A1611AEA800E94995 /* second.png in Resources */,
 				958AF65C1611AEA800E94995 /* second@2x.png in Resources */,
+				958AF6D41611E82700E94995 /* magento_4.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
