@@ -1,0 +1,495 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		958AF63B1611AEA700E94995 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 958AF63A1611AEA700E94995 /* UIKit.framework */; };
+		958AF63D1611AEA700E94995 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 958AF63C1611AEA700E94995 /* Foundation.framework */; };
+		958AF63F1611AEA700E94995 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 958AF63E1611AEA700E94995 /* CoreGraphics.framework */; };
+		958AF6451611AEA700E94995 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 958AF6431611AEA700E94995 /* InfoPlist.strings */; };
+		958AF6471611AEA700E94995 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 958AF6461611AEA700E94995 /* main.m */; };
+		958AF64B1611AEA700E94995 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 958AF64A1611AEA700E94995 /* AppDelegate.m */; };
+		958AF64E1611AEA800E94995 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 958AF64C1611AEA800E94995 /* MainStoryboard.storyboard */; };
+		958AF6511611AEA800E94995 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 958AF6501611AEA800E94995 /* FirstViewController.m */; };
+		958AF6531611AEA800E94995 /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = 958AF6521611AEA800E94995 /* first.png */; };
+		958AF6551611AEA800E94995 /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 958AF6541611AEA800E94995 /* first@2x.png */; };
+		958AF6581611AEA800E94995 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 958AF6571611AEA800E94995 /* SecondViewController.m */; };
+		958AF65A1611AEA800E94995 /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = 958AF6591611AEA800E94995 /* second.png */; };
+		958AF65C1611AEA800E94995 /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 958AF65B1611AEA800E94995 /* second@2x.png */; };
+		958AF6641611AEA800E94995 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 958AF6631611AEA800E94995 /* SenTestingKit.framework */; };
+		958AF6651611AEA800E94995 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 958AF63A1611AEA700E94995 /* UIKit.framework */; };
+		958AF6661611AEA800E94995 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 958AF63C1611AEA700E94995 /* Foundation.framework */; };
+		958AF66E1611AEA800E94995 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 958AF66C1611AEA800E94995 /* InfoPlist.strings */; };
+		958AF6711611AEA800E94995 /* MagBoardTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 958AF6701611AEA800E94995 /* MagBoardTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		958AF6671611AEA800E94995 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 958AF62D1611AEA700E94995 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 958AF6351611AEA700E94995;
+			remoteInfo = MagBoard;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		958AF6361611AEA700E94995 /* MagBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MagBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		958AF63A1611AEA700E94995 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		958AF63C1611AEA700E94995 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		958AF63E1611AEA700E94995 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		958AF6421611AEA700E94995 /* MagBoard-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MagBoard-Info.plist"; sourceTree = "<group>"; };
+		958AF6441611AEA700E94995 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		958AF6461611AEA700E94995 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		958AF6481611AEA700E94995 /* MagBoard-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MagBoard-Prefix.pch"; sourceTree = "<group>"; };
+		958AF6491611AEA700E94995 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		958AF64A1611AEA700E94995 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		958AF64D1611AEA800E94995 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		958AF64F1611AEA800E94995 /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
+		958AF6501611AEA800E94995 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
+		958AF6521611AEA800E94995 /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
+		958AF6541611AEA800E94995 /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
+		958AF6561611AEA800E94995 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
+		958AF6571611AEA800E94995 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		958AF6591611AEA800E94995 /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
+		958AF65B1611AEA800E94995 /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
+		958AF6621611AEA800E94995 /* MagBoardTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MagBoardTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		958AF6631611AEA800E94995 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		958AF66B1611AEA800E94995 /* MagBoardTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MagBoardTests-Info.plist"; sourceTree = "<group>"; };
+		958AF66D1611AEA800E94995 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		958AF66F1611AEA800E94995 /* MagBoardTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MagBoardTests.h; sourceTree = "<group>"; };
+		958AF6701611AEA800E94995 /* MagBoardTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MagBoardTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		958AF6331611AEA700E94995 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				958AF63B1611AEA700E94995 /* UIKit.framework in Frameworks */,
+				958AF63D1611AEA700E94995 /* Foundation.framework in Frameworks */,
+				958AF63F1611AEA700E94995 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		958AF65E1611AEA800E94995 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				958AF6641611AEA800E94995 /* SenTestingKit.framework in Frameworks */,
+				958AF6651611AEA800E94995 /* UIKit.framework in Frameworks */,
+				958AF6661611AEA800E94995 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		958AF62B1611AEA700E94995 = {
+			isa = PBXGroup;
+			children = (
+				958AF6401611AEA700E94995 /* MagBoard */,
+				958AF6691611AEA800E94995 /* MagBoardTests */,
+				958AF6391611AEA700E94995 /* Frameworks */,
+				958AF6371611AEA700E94995 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		958AF6371611AEA700E94995 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				958AF6361611AEA700E94995 /* MagBoard.app */,
+				958AF6621611AEA800E94995 /* MagBoardTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		958AF6391611AEA700E94995 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				958AF63A1611AEA700E94995 /* UIKit.framework */,
+				958AF63C1611AEA700E94995 /* Foundation.framework */,
+				958AF63E1611AEA700E94995 /* CoreGraphics.framework */,
+				958AF6631611AEA800E94995 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		958AF6401611AEA700E94995 /* MagBoard */ = {
+			isa = PBXGroup;
+			children = (
+				958AF67C1611AEC400E94995 /* Controllers */,
+				958AF67B1611AEBD00E94995 /* Views */,
+				958AF67A1611AEB600E94995 /* Models */,
+				958AF6491611AEA700E94995 /* AppDelegate.h */,
+				958AF64A1611AEA700E94995 /* AppDelegate.m */,
+				958AF64C1611AEA800E94995 /* MainStoryboard.storyboard */,
+				958AF64F1611AEA800E94995 /* FirstViewController.h */,
+				958AF6501611AEA800E94995 /* FirstViewController.m */,
+				958AF6521611AEA800E94995 /* first.png */,
+				958AF6541611AEA800E94995 /* first@2x.png */,
+				958AF6561611AEA800E94995 /* SecondViewController.h */,
+				958AF6571611AEA800E94995 /* SecondViewController.m */,
+				958AF6591611AEA800E94995 /* second.png */,
+				958AF65B1611AEA800E94995 /* second@2x.png */,
+				958AF6411611AEA700E94995 /* Supporting Files */,
+			);
+			path = MagBoard;
+			sourceTree = "<group>";
+		};
+		958AF6411611AEA700E94995 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				958AF6421611AEA700E94995 /* MagBoard-Info.plist */,
+				958AF6431611AEA700E94995 /* InfoPlist.strings */,
+				958AF6461611AEA700E94995 /* main.m */,
+				958AF6481611AEA700E94995 /* MagBoard-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		958AF6691611AEA800E94995 /* MagBoardTests */ = {
+			isa = PBXGroup;
+			children = (
+				958AF66F1611AEA800E94995 /* MagBoardTests.h */,
+				958AF6701611AEA800E94995 /* MagBoardTests.m */,
+				958AF66A1611AEA800E94995 /* Supporting Files */,
+			);
+			path = MagBoardTests;
+			sourceTree = "<group>";
+		};
+		958AF66A1611AEA800E94995 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				958AF66B1611AEA800E94995 /* MagBoardTests-Info.plist */,
+				958AF66C1611AEA800E94995 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		958AF67A1611AEB600E94995 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		958AF67B1611AEBD00E94995 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		958AF67C1611AEC400E94995 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		958AF6351611AEA700E94995 /* MagBoard */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 958AF6741611AEA800E94995 /* Build configuration list for PBXNativeTarget "MagBoard" */;
+			buildPhases = (
+				958AF6321611AEA700E94995 /* Sources */,
+				958AF6331611AEA700E94995 /* Frameworks */,
+				958AF6341611AEA700E94995 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MagBoard;
+			productName = MagBoard;
+			productReference = 958AF6361611AEA700E94995 /* MagBoard.app */;
+			productType = "com.apple.product-type.application";
+		};
+		958AF6611611AEA800E94995 /* MagBoardTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 958AF6771611AEA800E94995 /* Build configuration list for PBXNativeTarget "MagBoardTests" */;
+			buildPhases = (
+				958AF65D1611AEA800E94995 /* Sources */,
+				958AF65E1611AEA800E94995 /* Frameworks */,
+				958AF65F1611AEA800E94995 /* Resources */,
+				958AF6601611AEA800E94995 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				958AF6681611AEA800E94995 /* PBXTargetDependency */,
+			);
+			name = MagBoardTests;
+			productName = MagBoardTests;
+			productReference = 958AF6621611AEA800E94995 /* MagBoardTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		958AF62D1611AEA700E94995 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0440;
+				ORGANIZATIONNAME = "Dennis de Jong";
+			};
+			buildConfigurationList = 958AF6301611AEA700E94995 /* Build configuration list for PBXProject "MagBoard" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 958AF62B1611AEA700E94995;
+			productRefGroup = 958AF6371611AEA700E94995 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				958AF6351611AEA700E94995 /* MagBoard */,
+				958AF6611611AEA800E94995 /* MagBoardTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		958AF6341611AEA700E94995 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				958AF6451611AEA700E94995 /* InfoPlist.strings in Resources */,
+				958AF64E1611AEA800E94995 /* MainStoryboard.storyboard in Resources */,
+				958AF6531611AEA800E94995 /* first.png in Resources */,
+				958AF6551611AEA800E94995 /* first@2x.png in Resources */,
+				958AF65A1611AEA800E94995 /* second.png in Resources */,
+				958AF65C1611AEA800E94995 /* second@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		958AF65F1611AEA800E94995 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				958AF66E1611AEA800E94995 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		958AF6601611AEA800E94995 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		958AF6321611AEA700E94995 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				958AF6471611AEA700E94995 /* main.m in Sources */,
+				958AF64B1611AEA700E94995 /* AppDelegate.m in Sources */,
+				958AF6511611AEA800E94995 /* FirstViewController.m in Sources */,
+				958AF6581611AEA800E94995 /* SecondViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		958AF65D1611AEA800E94995 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				958AF6711611AEA800E94995 /* MagBoardTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		958AF6681611AEA800E94995 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 958AF6351611AEA700E94995 /* MagBoard */;
+			targetProxy = 958AF6671611AEA800E94995 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		958AF6431611AEA700E94995 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				958AF6441611AEA700E94995 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		958AF64C1611AEA800E94995 /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				958AF64D1611AEA800E94995 /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+		958AF66C1611AEA800E94995 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				958AF66D1611AEA800E94995 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		958AF6721611AEA800E94995 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		958AF6731611AEA800E94995 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		958AF6751611AEA800E94995 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MagBoard/MagBoard-Prefix.pch";
+				INFOPLIST_FILE = "MagBoard/MagBoard-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		958AF6761611AEA800E94995 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MagBoard/MagBoard-Prefix.pch";
+				INFOPLIST_FILE = "MagBoard/MagBoard-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		958AF6781611AEA800E94995 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MagBoard.app/MagBoard";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MagBoard/MagBoard-Prefix.pch";
+				INFOPLIST_FILE = "MagBoardTests/MagBoardTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		958AF6791611AEA800E94995 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MagBoard.app/MagBoard";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MagBoard/MagBoard-Prefix.pch";
+				INFOPLIST_FILE = "MagBoardTests/MagBoardTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		958AF6301611AEA700E94995 /* Build configuration list for PBXProject "MagBoard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				958AF6721611AEA800E94995 /* Debug */,
+				958AF6731611AEA800E94995 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		958AF6741611AEA800E94995 /* Build configuration list for PBXNativeTarget "MagBoard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				958AF6751611AEA800E94995 /* Debug */,
+				958AF6761611AEA800E94995 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		958AF6771611AEA800E94995 /* Build configuration list for PBXNativeTarget "MagBoardTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				958AF6781611AEA800E94995 /* Debug */,
+				958AF6791611AEA800E94995 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 958AF62D1611AEA700E94995 /* Project object */;
+}
