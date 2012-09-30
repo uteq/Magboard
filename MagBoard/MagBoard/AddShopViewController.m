@@ -17,6 +17,8 @@
 @synthesize urlWebshop;
 @synthesize username;
 @synthesize password;
+@synthesize savePassword;
+@synthesize registerSuccess;
 
 - (void)viewDidLoad
 {
@@ -32,6 +34,8 @@
     [self setUrlWebshop:nil];
     [self setUsername:nil];
     [self setPassword:nil];
+    [self setSavePassword:nil];
+    [self setRegisterSuccess:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -53,6 +57,32 @@
 //Functie die ervoor zorgt dat de gegevens van de webshop worden opgeslagen
 - (IBAction)saveWebshop:(id)sender
 {
+    // Het hoofdpad plus de MagBoardUserData.plist opvragen
+    NSArray *paths = NSSearchPathForDirectoriesInDomains (NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsPath = [paths objectAtIndex:0];
+    NSString *plistPath = [documentsPath stringByAppendingPathComponent:@"MagboardUserData.plist"];
+    bool passwordSave;
+    if(savePassword.on){
+        passwordSave = YES;
+    } else {
+        passwordSave = NO;
+    }
+    
+    // een dictionary creëren aan de hand van de ingevulde velden
+    NSDictionary *plistDict = [NSDictionary dictionaryWithObjects: [NSArray arrayWithObjects: nameWebshop.text, urlWebshop.text, username.text, password.text, [NSNumber numberWithBool:passwordSave], nil] forKeys:[NSArray arrayWithObjects: @"WebshopName", @"WebshopUrl", @"Username", @"Password", @"SavePassword", nil]];
+    
+    NSString *error = nil;
+    // NSData creëren aan de hand van de NSDictionary
+    NSData *plistData = [NSPropertyListSerialization dataFromPropertyList:plistDict format:NSPropertyListXMLFormat_v1_0 errorDescription:&error];
+    
+    // als plistdata bestaat
+    if(plistData){
+        // plistdata schrijven naar de MagBoardUserdata
+        [plistData writeToFile:plistPath atomically:YES];
+        [registerSuccess setText:@"U bent succesvol geregistreerd"];
+    }else{
+        NSLog(@"Error in saveData: %@", error);
+    }
 }
 
 //Functie voor het annuleren van het toevoegen van een webshop
