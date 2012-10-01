@@ -1,13 +1,13 @@
 //
-//  MagBoardTests.h
-//  MagBoardTests
+//  ViewController.h
+//  MagBoard
 //
 //  Created by Dennis de Jong on 01-10-12.
 //  Copyright (c) 2012 Dennis de Jong. All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <UIKit/UIKit.h>
 
-@interface MagBoardTests : SenTestCase
+@interface ViewController : UIViewController
 
 @end
