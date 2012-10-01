@@ -14,10 +14,6 @@
 		958AF6471611AEA700E94995 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 958AF6461611AEA700E94995 /* main.m */; };
 		958AF64B1611AEA700E94995 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 958AF64A1611AEA700E94995 /* AppDelegate.m */; };
 		958AF64E1611AEA800E94995 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 958AF64C1611AEA800E94995 /* MainStoryboard.storyboard */; };
-		958AF6531611AEA800E94995 /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = 958AF6521611AEA800E94995 /* first.png */; };
-		958AF6551611AEA800E94995 /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 958AF6541611AEA800E94995 /* first@2x.png */; };
-		958AF65A1611AEA800E94995 /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = 958AF6591611AEA800E94995 /* second.png */; };
-		958AF65C1611AEA800E94995 /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 958AF65B1611AEA800E94995 /* second@2x.png */; };
 		958AF6641611AEA800E94995 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 958AF6631611AEA800E94995 /* SenTestingKit.framework */; };
 		958AF6651611AEA800E94995 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 958AF63A1611AEA700E94995 /* UIKit.framework */; };
 		958AF6661611AEA800E94995 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 958AF63C1611AEA700E94995 /* Foundation.framework */; };
@@ -29,6 +25,8 @@
 		958AF6D41611E82700E94995 /* magento_4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 958AF6D31611E82700E94995 /* magento_4.jpg */; };
 		958AF6D61611F20300E94995 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 958AF6D51611F20300E94995 /* CoreData.framework */; };
 		958AF6DA1611F28B00E94995 /* UserWebshop.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 958AF6D81611F28B00E94995 /* UserWebshop.xcdatamodeld */; };
+		95B60F53161995A500392B0A /* Users.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B60F52161995A500392B0A /* Users.m */; };
+		95B60F57161995C300392B0A /* Webshops.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B60F56161995C300392B0A /* Webshops.m */; };
 		CECFEC801618D4ED00C1AA76 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CECFEC7F1618D4ED00C1AA76 /* Default-568h@2x.png */; };
 		CECFEC831618D51300C1AA76 /* MagboardUserData.plist in Resources */ = {isa = PBXBuildFile; fileRef = CECFEC821618D51300C1AA76 /* MagboardUserData.plist */; };
 /* End PBXBuildFile section */
@@ -55,10 +53,6 @@
 		958AF6491611AEA700E94995 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		958AF64A1611AEA700E94995 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		958AF64D1611AEA800E94995 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		958AF6521611AEA800E94995 /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
-		958AF6541611AEA800E94995 /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
-		958AF6591611AEA800E94995 /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
-		958AF65B1611AEA800E94995 /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
 		958AF6621611AEA800E94995 /* MagBoardTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MagBoardTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		958AF6631611AEA800E94995 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		958AF66B1611AEA800E94995 /* MagBoardTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MagBoardTests-Info.plist"; sourceTree = "<group>"; };
@@ -74,6 +68,10 @@
 		958AF6D31611E82700E94995 /* magento_4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = magento_4.jpg; sourceTree = "<group>"; };
 		958AF6D51611F20300E94995 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		958AF6D91611F28B00E94995 /* UserWebshop.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserWebshop.xcdatamodel; sourceTree = "<group>"; };
+		95B60F51161995A500392B0A /* Users.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Users.h; sourceTree = "<group>"; };
+		95B60F52161995A500392B0A /* Users.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Users.m; sourceTree = "<group>"; };
+		95B60F55161995C300392B0A /* Webshops.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Webshops.h; sourceTree = "<group>"; };
+		95B60F56161995C300392B0A /* Webshops.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Webshops.m; sourceTree = "<group>"; };
 		CECFEC7F1618D4ED00C1AA76 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		CECFEC821618D51300C1AA76 /* MagboardUserData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MagboardUserData.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -137,16 +135,13 @@
 		958AF6401611AEA700E94995 /* MagBoard */ = {
 			isa = PBXGroup;
 			children = (
+				958AF6D71611F24E00E94995 /* Core Data */,
 				958AF67C1611AEC400E94995 /* Controllers */,
 				958AF67B1611AEBD00E94995 /* Views */,
 				958AF67A1611AEB600E94995 /* Models */,
 				958AF6491611AEA700E94995 /* AppDelegate.h */,
 				958AF64A1611AEA700E94995 /* AppDelegate.m */,
 				958AF64C1611AEA800E94995 /* MainStoryboard.storyboard */,
-				958AF6521611AEA800E94995 /* first.png */,
-				958AF6541611AEA800E94995 /* first@2x.png */,
-				958AF6591611AEA800E94995 /* second.png */,
-				958AF65B1611AEA800E94995 /* second@2x.png */,
 				958AF6411611AEA700E94995 /* Supporting Files */,
 			);
 			path = MagBoard;
@@ -188,7 +183,8 @@
 		958AF67A1611AEB600E94995 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				958AF6D71611F24E00E94995 /* Webshop */,
+				95B60F591619962C00392B0A /* Webshops */,
+				95B60F581619961F00392B0A /* Users */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -196,7 +192,7 @@
 		958AF67B1611AEBD00E94995 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				958AF6C91611B7B800E94995 /* No shops */,
+				958AF6C91611B7B800E94995 /* Home */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -208,7 +204,7 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
-		958AF6C91611B7B800E94995 /* No shops */ = {
+		958AF6C91611B7B800E94995 /* Home */ = {
 			isa = PBXGroup;
 			children = (
 				958AF6851611B10500E94995 /* NoShopsViewController.h */,
@@ -218,7 +214,7 @@
 				958AF6CA1611B7F400E94995 /* InstructionsViewController.h */,
 				958AF6CB1611B7F400E94995 /* InstructionsViewController.m */,
 			);
-			name = "No shops";
+			name = Home;
 			sourceTree = "<group>";
 		};
 		958AF6D11611E81E00E94995 /* Images */ = {
@@ -229,12 +225,30 @@
 			name = Images;
 			sourceTree = "<group>";
 		};
-		958AF6D71611F24E00E94995 /* Webshop */ = {
+		958AF6D71611F24E00E94995 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
 				958AF6D81611F28B00E94995 /* UserWebshop.xcdatamodeld */,
 			);
-			name = Webshop;
+			name = "Core Data";
+			sourceTree = "<group>";
+		};
+		95B60F581619961F00392B0A /* Users */ = {
+			isa = PBXGroup;
+			children = (
+				95B60F51161995A500392B0A /* Users.h */,
+				95B60F52161995A500392B0A /* Users.m */,
+			);
+			name = Users;
+			sourceTree = "<group>";
+		};
+		95B60F591619962C00392B0A /* Webshops */ = {
+			isa = PBXGroup;
+			children = (
+				95B60F55161995C300392B0A /* Webshops.h */,
+				95B60F56161995C300392B0A /* Webshops.m */,
+			);
+			name = Webshops;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -310,10 +324,6 @@
 			files = (
 				958AF6451611AEA700E94995 /* InfoPlist.strings in Resources */,
 				958AF64E1611AEA800E94995 /* MainStoryboard.storyboard in Resources */,
-				958AF6531611AEA800E94995 /* first.png in Resources */,
-				958AF6551611AEA800E94995 /* first@2x.png in Resources */,
-				958AF65A1611AEA800E94995 /* second.png in Resources */,
-				958AF65C1611AEA800E94995 /* second@2x.png in Resources */,
 				958AF6D41611E82700E94995 /* magento_4.jpg in Resources */,
 				CECFEC801618D4ED00C1AA76 /* Default-568h@2x.png in Resources */,
 				CECFEC831618D51300C1AA76 /* MagboardUserData.plist in Resources */,
@@ -357,6 +367,8 @@
 				958AF6C81611B7B400E94995 /* AddShopViewController.m in Sources */,
 				958AF6CC1611B7F400E94995 /* InstructionsViewController.m in Sources */,
 				958AF6DA1611F28B00E94995 /* UserWebshop.xcdatamodeld in Sources */,
+				95B60F53161995A500392B0A /* Users.m in Sources */,
+				95B60F57161995C300392B0A /* Webshops.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
