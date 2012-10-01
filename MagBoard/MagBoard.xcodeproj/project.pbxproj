@@ -30,6 +30,7 @@
 		955B38D51619BD430064E831 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 955B38D31619BD430064E831 /* Model.xcdatamodeld */; };
 		955B38D81619BDFB0064E831 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 955B38D71619BDFB0064E831 /* User.m */; };
 		955B38DB1619BE030064E831 /* Webshop.m in Sources */ = {isa = PBXBuildFile; fileRef = 955B38DA1619BE030064E831 /* Webshop.m */; };
+		955B38E9161A17EF0064E831 /* InfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 955B38E8161A17EF0064E831 /* InfoVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,8 @@
 		955B38D71619BDFB0064E831 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		955B38D91619BE030064E831 /* Webshop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Webshop.h; path = ../Webshop.h; sourceTree = "<group>"; };
 		955B38DA1619BE030064E831 /* Webshop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Webshop.m; path = ../Webshop.m; sourceTree = "<group>"; };
+		955B38E7161A17EF0064E831 /* InfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoVC.h; sourceTree = "<group>"; };
+		955B38E8161A17EF0064E831 /* InfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoVC.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +141,7 @@
 		955B383F1619B6580064E831 /* MagBoard */ = {
 			isa = PBXGroup;
 			children = (
+				955B38E5161A17B70064E831 /* Info */,
 				955B38DC1619BE0D0064E831 /* Models */,
 				955B387C1619B9A70064E831 /* Webshops */,
 				955B38481619B6580064E831 /* AppDelegate.h */,
@@ -206,6 +210,15 @@
 				955B38DA1619BE030064E831 /* Webshop.m */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		955B38E5161A17B70064E831 /* Info */ = {
+			isa = PBXGroup;
+			children = (
+				955B38E7161A17EF0064E831 /* InfoVC.h */,
+				955B38E8161A17EF0064E831 /* InfoVC.m */,
+			);
+			name = Info;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -327,6 +340,7 @@
 				955B38D51619BD430064E831 /* Model.xcdatamodeld in Sources */,
 				955B38D81619BDFB0064E831 /* User.m in Sources */,
 				955B38DB1619BE030064E831 /* Webshop.m in Sources */,
+				955B38E9161A17EF0064E831 /* InfoVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -500,6 +514,7 @@
 				955B38701619B6590064E831 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		955B38711619B6590064E831 /* Build configuration list for PBXNativeTarget "MagBoardTests" */ = {
 			isa = XCConfigurationList;
@@ -508,6 +523,7 @@
 				955B38731619B6590064E831 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

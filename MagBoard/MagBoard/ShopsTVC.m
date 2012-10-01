@@ -8,6 +8,7 @@
 
 #import "ShopsTVC.h"
 #import "User.h"
+#import "InfoVC.h"
 
 @interface ShopsTVC ()
 
@@ -85,4 +86,9 @@
     [controller.navigationController popViewControllerAnimated:YES];
 }
 
+//Action to push to the info view
+- (IBAction)pushToInfoVC:(id)sender {
+    InfoVC *infoScreen = [[InfoVC alloc] init];
+    [self.navigationController pushViewController:infoScreen animated:YES];
+}
 @end

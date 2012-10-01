@@ -16,7 +16,7 @@
 - (void)theSaveButtonOnTheAddShopTVCWasTapped:(AddShopTVC *)controller;
 @end
 
-@interface AddShopTVC : UITableViewController
+@interface AddShopTVC : UITableViewController <UITextFieldDelegate>
 @property (nonatomic, weak) id <AddShopTVCDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UITextField *webshopNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *urlTextField;
@@ -25,5 +25,6 @@
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 - (IBAction)save:(id)sender;
+- (IBAction)textFieldReturn:(id)sender;
 
 @end
