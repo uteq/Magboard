@@ -1,5 +1,5 @@
 //
-//  NoShopsViewController.h
+//  ShopsViewController.h
 //  MagBoard
 //
 //  Created by Dennis de Jong on 25-09-12.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NoShopsViewController : UIViewController
+@interface ShopsViewController : UIViewController
 
 - (IBAction)goToAddShop:(id)sender;
 - (IBAction)goToInstructions:(id)sender;

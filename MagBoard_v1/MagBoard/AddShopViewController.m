@@ -7,6 +7,8 @@
 //
 
 #import "AddShopViewController.h"
+#import "ObjectiveRecord.h"
+#import "Webshop.h"
 
 @interface AddShopViewController ()
 
@@ -57,7 +59,16 @@
 //Functie die ervoor zorgt dat de gegevens van de webshop worden opgeslagen
 - (IBAction)saveWebshop:(id)sender
 {
-    //TODO: functie schrijven die data opslaat in core data
+    //NSArray *shops = [Webshop where:@"name == 'John'"];
+    Webshop *webshop = [Webshop create];
+    webshop.name = nameWebshop.text;
+    webshop.url = urlWebshop.text;
+    webshop.username = username.text;
+    webshop.password = password.text;
+    
+    if(webshop.save){
+        NSLog(@"shop gesaved");
+    }
 }
 
 //Functie voor het annuleren van het toevoegen van een webshop

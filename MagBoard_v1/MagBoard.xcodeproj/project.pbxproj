@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		955674D3161C412200F02D18 /* Webshop.m in Sources */ = {isa = PBXBuildFile; fileRef = 955674D2161C412200F02D18 /* Webshop.m */; };
 		958AF63B1611AEA700E94995 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 958AF63A1611AEA700E94995 /* UIKit.framework */; };
 		958AF63D1611AEA700E94995 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 958AF63C1611AEA700E94995 /* Foundation.framework */; };
 		958AF63F1611AEA700E94995 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 958AF63E1611AEA700E94995 /* CoreGraphics.framework */; };
@@ -19,16 +20,15 @@
 		958AF6661611AEA800E94995 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 958AF63C1611AEA700E94995 /* Foundation.framework */; };
 		958AF66E1611AEA800E94995 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 958AF66C1611AEA800E94995 /* InfoPlist.strings */; };
 		958AF6711611AEA800E94995 /* MagBoardTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 958AF6701611AEA800E94995 /* MagBoardTests.m */; };
-		958AF6871611B10500E94995 /* NoShopsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 958AF6861611B10500E94995 /* NoShopsViewController.m */; };
+		958AF6871611B10500E94995 /* ShopsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 958AF6861611B10500E94995 /* ShopsViewController.m */; };
 		958AF6C81611B7B400E94995 /* AddShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 958AF6C71611B7B400E94995 /* AddShopViewController.m */; };
 		958AF6CC1611B7F400E94995 /* InstructionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 958AF6CB1611B7F400E94995 /* InstructionsViewController.m */; };
 		958AF6D41611E82700E94995 /* magento_4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 958AF6D31611E82700E94995 /* magento_4.jpg */; };
 		958AF6D61611F20300E94995 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 958AF6D51611F20300E94995 /* CoreData.framework */; };
 		958AF6DA1611F28B00E94995 /* UserWebshop.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 958AF6D81611F28B00E94995 /* UserWebshop.xcdatamodeld */; };
-		95B60F53161995A500392B0A /* Users.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B60F52161995A500392B0A /* Users.m */; };
-		95B60F57161995C300392B0A /* Webshops.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B60F56161995C300392B0A /* Webshops.m */; };
 		CECFEC801618D4ED00C1AA76 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CECFEC7F1618D4ED00C1AA76 /* Default-568h@2x.png */; };
 		CECFEC831618D51300C1AA76 /* MagboardUserData.plist in Resources */ = {isa = PBXBuildFile; fileRef = CECFEC821618D51300C1AA76 /* MagboardUserData.plist */; };
+		F44323DDE07B4CA788C28D7C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FAA1F48224F4E06A2F4AE1F /* libPods.a */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,10 +42,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7FAA1F48224F4E06A2F4AE1F /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		955674C3161C3B1A00F02D18 /* Pods */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Pods; sourceTree = "<group>"; };
+		955674D1161C412200F02D18 /* Webshop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Webshop.h; sourceTree = "<group>"; };
+		955674D2161C412200F02D18 /* Webshop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Webshop.m; sourceTree = "<group>"; };
 		958AF6361611AEA700E94995 /* MagBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MagBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		958AF63A1611AEA700E94995 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		958AF63C1611AEA700E94995 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		958AF63E1611AEA700E94995 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		958AF63A1611AEA700E94995 /* UIKit.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		958AF63C1611AEA700E94995 /* Foundation.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		958AF63E1611AEA700E94995 /* CoreGraphics.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		958AF6421611AEA700E94995 /* MagBoard-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MagBoard-Info.plist"; sourceTree = "<group>"; };
 		958AF6441611AEA700E94995 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		958AF6461611AEA700E94995 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -59,19 +63,16 @@
 		958AF66D1611AEA800E94995 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		958AF66F1611AEA800E94995 /* MagBoardTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MagBoardTests.h; sourceTree = "<group>"; };
 		958AF6701611AEA800E94995 /* MagBoardTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MagBoardTests.m; sourceTree = "<group>"; };
-		958AF6851611B10500E94995 /* NoShopsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoShopsViewController.h; sourceTree = "<group>"; };
-		958AF6861611B10500E94995 /* NoShopsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoShopsViewController.m; sourceTree = "<group>"; };
+		958AF6851611B10500E94995 /* ShopsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopsViewController.h; sourceTree = "<group>"; };
+		958AF6861611B10500E94995 /* ShopsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopsViewController.m; sourceTree = "<group>"; };
 		958AF6C61611B7B400E94995 /* AddShopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddShopViewController.h; sourceTree = "<group>"; };
 		958AF6C71611B7B400E94995 /* AddShopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddShopViewController.m; sourceTree = "<group>"; };
 		958AF6CA1611B7F400E94995 /* InstructionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstructionsViewController.h; sourceTree = "<group>"; };
 		958AF6CB1611B7F400E94995 /* InstructionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstructionsViewController.m; sourceTree = "<group>"; };
 		958AF6D31611E82700E94995 /* magento_4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = magento_4.jpg; sourceTree = "<group>"; };
-		958AF6D51611F20300E94995 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		958AF6D51611F20300E94995 /* CoreData.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		958AF6D91611F28B00E94995 /* UserWebshop.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserWebshop.xcdatamodel; sourceTree = "<group>"; };
-		95B60F51161995A500392B0A /* Users.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Users.h; sourceTree = "<group>"; };
-		95B60F52161995A500392B0A /* Users.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Users.m; sourceTree = "<group>"; };
-		95B60F55161995C300392B0A /* Webshops.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Webshops.h; sourceTree = "<group>"; };
-		95B60F56161995C300392B0A /* Webshops.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Webshops.m; sourceTree = "<group>"; };
+		B5FD7A7C18B84A8F9C128B48 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		CECFEC7F1618D4ED00C1AA76 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		CECFEC821618D51300C1AA76 /* MagboardUserData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MagboardUserData.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -85,6 +86,7 @@
 				958AF63B1611AEA700E94995 /* UIKit.framework in Frameworks */,
 				958AF63D1611AEA700E94995 /* Foundation.framework in Frameworks */,
 				958AF63F1611AEA700E94995 /* CoreGraphics.framework in Frameworks */,
+				F44323DDE07B4CA788C28D7C /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,13 +103,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9532C2E9161C2AC400C63A53 /* Plugins */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Plugins;
+			sourceTree = "<group>";
+		};
 		958AF62B1611AEA700E94995 = {
 			isa = PBXGroup;
 			children = (
+				955674C3161C3B1A00F02D18 /* Pods */,
 				958AF6401611AEA700E94995 /* MagBoard */,
 				958AF6691611AEA800E94995 /* MagBoardTests */,
 				958AF6391611AEA700E94995 /* Frameworks */,
 				958AF6371611AEA700E94995 /* Products */,
+				B5FD7A7C18B84A8F9C128B48 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -128,6 +139,7 @@
 				958AF63C1611AEA700E94995 /* Foundation.framework */,
 				958AF63E1611AEA700E94995 /* CoreGraphics.framework */,
 				958AF6631611AEA800E94995 /* SenTestingKit.framework */,
+				7FAA1F48224F4E06A2F4AE1F /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -135,6 +147,7 @@
 		958AF6401611AEA700E94995 /* MagBoard */ = {
 			isa = PBXGroup;
 			children = (
+				9532C2E9161C2AC400C63A53 /* Plugins */,
 				958AF6D71611F24E00E94995 /* Core Data */,
 				958AF67C1611AEC400E94995 /* Controllers */,
 				958AF67B1611AEBD00E94995 /* Views */,
@@ -207,8 +220,8 @@
 		958AF6C91611B7B800E94995 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				958AF6851611B10500E94995 /* NoShopsViewController.h */,
-				958AF6861611B10500E94995 /* NoShopsViewController.m */,
+				958AF6851611B10500E94995 /* ShopsViewController.h */,
+				958AF6861611B10500E94995 /* ShopsViewController.m */,
 				958AF6C61611B7B400E94995 /* AddShopViewController.h */,
 				958AF6C71611B7B400E94995 /* AddShopViewController.m */,
 				958AF6CA1611B7F400E94995 /* InstructionsViewController.h */,
@@ -236,8 +249,6 @@
 		95B60F581619961F00392B0A /* Users */ = {
 			isa = PBXGroup;
 			children = (
-				95B60F51161995A500392B0A /* Users.h */,
-				95B60F52161995A500392B0A /* Users.m */,
 			);
 			name = Users;
 			sourceTree = "<group>";
@@ -245,8 +256,8 @@
 		95B60F591619962C00392B0A /* Webshops */ = {
 			isa = PBXGroup;
 			children = (
-				95B60F55161995C300392B0A /* Webshops.h */,
-				95B60F56161995C300392B0A /* Webshops.m */,
+				955674D1161C412200F02D18 /* Webshop.h */,
+				955674D2161C412200F02D18 /* Webshop.m */,
 			);
 			name = Webshops;
 			sourceTree = "<group>";
@@ -261,6 +272,7 @@
 				958AF6321611AEA700E94995 /* Sources */,
 				958AF6331611AEA700E94995 /* Frameworks */,
 				958AF6341611AEA700E94995 /* Resources */,
+				67FAB39944D94ECCB087D5D7 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -341,6 +353,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		67FAB39944D94ECCB087D5D7 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+		};
 		958AF6601611AEA800E94995 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -363,12 +389,11 @@
 			files = (
 				958AF6471611AEA700E94995 /* main.m in Sources */,
 				958AF64B1611AEA700E94995 /* AppDelegate.m in Sources */,
-				958AF6871611B10500E94995 /* NoShopsViewController.m in Sources */,
+				958AF6871611B10500E94995 /* ShopsViewController.m in Sources */,
 				958AF6C81611B7B400E94995 /* AddShopViewController.m in Sources */,
 				958AF6CC1611B7F400E94995 /* InstructionsViewController.m in Sources */,
 				958AF6DA1611F28B00E94995 /* UserWebshop.xcdatamodeld in Sources */,
-				95B60F53161995A500392B0A /* Users.m in Sources */,
-				95B60F57161995C300392B0A /* Webshops.m in Sources */,
+				955674D3161C412200F02D18 /* Webshop.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -469,6 +494,7 @@
 		};
 		958AF6751611AEA800E94995 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B5FD7A7C18B84A8F9C128B48 /* Pods.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MagBoard/MagBoard-Prefix.pch";
@@ -480,6 +506,7 @@
 		};
 		958AF6761611AEA800E94995 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B5FD7A7C18B84A8F9C128B48 /* Pods.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MagBoard/MagBoard-Prefix.pch";

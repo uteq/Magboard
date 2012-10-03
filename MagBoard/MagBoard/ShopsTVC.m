@@ -29,7 +29,7 @@
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:entityName];
     
     // 3 - Filter it if you want
-    //request.predicate = [NSPredicate predicateWithFormat:@"Role.name = Blah"];
+    //request.predicate = [NSPredicate predicateWithFormat:@"Webshop.name = Blah"];
     
     // 4 - Sort it if you want
     request.sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name"
@@ -50,6 +50,21 @@
     [self setupFetchedResultsController];
 }
 
+//This is the function which returns the number of table rows to display in the tvc
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    int numberOfRows = 0;
+    
+    //If there are no rows fetched show 1 row
+    if([self.fetchedResultsController.fetchedObjects count] != 0){
+        numberOfRows = [self.fetchedResultsController.fetchedObjects count];
+    } else {
+        numberOfRows = 1;
+    }
+    NSLog(@"%d", numberOfRows);
+    return numberOfRows;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Shop cell";
@@ -60,8 +75,13 @@
     }
     
     // Configure the cell...
-    Webshop *webshop = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = webshop.name;
+    if([self.fetchedResultsController.fetchedObjects count] != 0)
+    {
+        Webshop *webshop = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        cell.textLabel.text = webshop.name;
+    } else {
+        cell.textLabel.text = @"Er zijn helaas geen webshops beschikbaar, klik op het + tekentje bovenin de applicatie om een shop toe te voegen.";
+    }
     
     return cell;
 }
