@@ -9,7 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface InstructionsViewController : UIViewController <UIScrollViewDelegate>
+{
+    UIScrollView *instructionsHolder;
+    int scrollMove;
+}
 
 -(void)addScrollView;
+-(IBAction)goToNextInstruction:(id)sender;
 
 @end
