@@ -1,5 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<dict/>
+<dict>
+	<key>Step1</key>
+	<dict>
+		<key>id</key>
+		<integer>1</integer>
+		<key>text</key>
+		<string>Om Magboard te kunnen gebruiken zijn een paar instellingen in Magento vereist. Er moet een API account worden aangemaakt, dit account moet tevens bevoegdheden hebben om bestellingen te kunnen opvragen.</string>
+		<key>title</key>
+		<string>1.Magboard</string>
+		<key>image</key>
+		<string>instructions-1.png</string>
+	</dict>
+	<key>Step2</key>
+	<dict>
+		<key>id</key>
+		<integer>2</integer>
+		<key>text</key>
+		<string>Log in op uw Magento webshop backend, ga daarna naar &apos;Systeem&apos; -&gt; &apos;Web services&apos; -&gt; &apos;SOAP/XML-RPC Roles&apos;</string>
+		<key>title</key>
+		<string>2. Gebruikers rol aanmaken</string>
+		<key>image</key>
+		<string>instructions-2.png</string>
+	</dict>
+	<key>Step3</key>
+	<dict>
+		<key>id</key>
+		<integer>3</integer>
+		<key>text</key>
+		<string>Vul bij &apos;Rol info&apos; de rolnaam in. Vink daarna in &apos;Rol Bronnen&apos;, &apos;Verkopen&apos; aan. Hiermee krijgt Magboard toegang tot uw verkoopgegevens. Sla nu de rol op.</string>
+		<key>title</key>
+		<string>3. Gebruikers rol invullen</string>
+		<key>image</key>
+		<string>instructions-3.png</string>
+	</dict>
+	<key>Step4</key>
+	<dict>
+		<key>id</key>
+		<integer>4</integer>
+		<key>text</key>
+		<string>Nadat de rol is opgeslagen kan nu de API gebruiker worden aangemaakt. Ga nu naar &apos;Systeem&apos; -&gt; &apos;Web services&apos; -&gt; &apos;SOAP/XML-RPC Users&apos; en maak een nieuwe gebruiker aan.</string>
+		<key>title</key>
+		<string>4. Gebruiker aanmaken</string>
+		<key>image</key>
+		<string>instructions-4.png</string>
+	</dict>
+	<key>Step5</key>
+	<dict>
+		<key>id</key>
+		<integer>5</integer>
+		<key>text</key>
+		<string>Vul bij &apos;Gebruikerinfo&apos; uw gegevens in. Onthoud hierbij goed uw &apos;Gebruikersnaam&apos; en &apos;API-key&apos;. Vink bij &apos;Rol van de gebruiker&apos; uw net aangemaakte rol aan (uit stap 4).</string>
+		<key>title</key>
+		<string>5. Gebruikersgegevens invullen</string>
+		<key>image</key>
+		<string>instructions-5.png</string>
+	</dict>
+	<key>Step6</key>
+	<dict>
+		<key>id</key>
+		<integer>6</integer>
+		<key>text</key>
+		<string>Als u de gebruikersgegevens hebt ingevuld in Magento, kunt u Magboard instellen. Bij shop toevoegen kunt u uw eigen webshopnaam toevoegen, de url naar de webshop en de gebruikersnaam en wachtwoord van uw Magento account (aangemaakt in stap 5)</string>
+		<key>title</key>
+		<string>6. Magboard shop toevoegen</string>
+		<key>instructions-6</key>
+		<string>instructions-6.png</string>
+	</dict>
+</dict>
 </plist>

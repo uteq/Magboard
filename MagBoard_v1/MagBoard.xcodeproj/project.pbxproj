@@ -26,11 +26,16 @@
 		958AF6871611B10500E94995 /* ShopsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 958AF6861611B10500E94995 /* ShopsViewController.m */; };
 		958AF6C81611B7B400E94995 /* AddShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 958AF6C71611B7B400E94995 /* AddShopViewController.m */; };
 		958AF6CC1611B7F400E94995 /* InstructionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 958AF6CB1611B7F400E94995 /* InstructionsViewController.m */; };
-		958AF6D41611E82700E94995 /* magento_4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 958AF6D31611E82700E94995 /* magento_4.jpg */; };
 		958AF6D61611F20300E94995 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 958AF6D51611F20300E94995 /* CoreData.framework */; };
 		958AF6DA1611F28B00E94995 /* UserWebshop.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 958AF6D81611F28B00E94995 /* UserWebshop.xcdatamodeld */; };
+		CE31958C161C973500506699 /* MagboardInstructions.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE31958B161C973500506699 /* MagboardInstructions.plist */; };
+		CE319593161CC3C000506699 /* instructions-1.png in Resources */ = {isa = PBXBuildFile; fileRef = CE31958D161CC3C000506699 /* instructions-1.png */; };
+		CE319594161CC3C000506699 /* instructions-2.png in Resources */ = {isa = PBXBuildFile; fileRef = CE31958E161CC3C000506699 /* instructions-2.png */; };
+		CE319595161CC3C000506699 /* instructions-3.png in Resources */ = {isa = PBXBuildFile; fileRef = CE31958F161CC3C000506699 /* instructions-3.png */; };
+		CE319596161CC3C000506699 /* instructions-4.png in Resources */ = {isa = PBXBuildFile; fileRef = CE319590161CC3C000506699 /* instructions-4.png */; };
+		CE319597161CC3C000506699 /* instructions-5.png in Resources */ = {isa = PBXBuildFile; fileRef = CE319591161CC3C000506699 /* instructions-5.png */; };
+		CE319598161CC3C000506699 /* instructions-6.png in Resources */ = {isa = PBXBuildFile; fileRef = CE319592161CC3C000506699 /* instructions-6.png */; };
 		CECFEC801618D4ED00C1AA76 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CECFEC7F1618D4ED00C1AA76 /* Default-568h@2x.png */; };
-		CECFEC831618D51300C1AA76 /* MagboardUserData.plist in Resources */ = {isa = PBXBuildFile; fileRef = CECFEC821618D51300C1AA76 /* MagboardUserData.plist */; };
 		F44323DDE07B4CA788C28D7C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FAA1F48224F4E06A2F4AE1F /* libPods.a */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
 
@@ -77,12 +82,17 @@
 		958AF6C71611B7B400E94995 /* AddShopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddShopViewController.m; sourceTree = "<group>"; };
 		958AF6CA1611B7F400E94995 /* InstructionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstructionsViewController.h; sourceTree = "<group>"; };
 		958AF6CB1611B7F400E94995 /* InstructionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstructionsViewController.m; sourceTree = "<group>"; };
-		958AF6D31611E82700E94995 /* magento_4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = magento_4.jpg; sourceTree = "<group>"; };
 		958AF6D51611F20300E94995 /* CoreData.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		958AF6D91611F28B00E94995 /* UserWebshop.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserWebshop.xcdatamodel; sourceTree = "<group>"; };
 		B5FD7A7C18B84A8F9C128B48 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		CE31958B161C973500506699 /* MagboardInstructions.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MagboardInstructions.plist; sourceTree = "<group>"; };
+		CE31958D161CC3C000506699 /* instructions-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "instructions-1.png"; sourceTree = "<group>"; };
+		CE31958E161CC3C000506699 /* instructions-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "instructions-2.png"; sourceTree = "<group>"; };
+		CE31958F161CC3C000506699 /* instructions-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "instructions-3.png"; sourceTree = "<group>"; };
+		CE319590161CC3C000506699 /* instructions-4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "instructions-4.png"; sourceTree = "<group>"; };
+		CE319591161CC3C000506699 /* instructions-5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "instructions-5.png"; sourceTree = "<group>"; };
+		CE319592161CC3C000506699 /* instructions-6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "instructions-6.png"; sourceTree = "<group>"; };
 		CECFEC7F1618D4ED00C1AA76 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		CECFEC821618D51300C1AA76 /* MagboardUserData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MagboardUserData.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,7 +198,7 @@
 				958AF6431611AEA700E94995 /* InfoPlist.strings */,
 				958AF6461611AEA700E94995 /* main.m */,
 				958AF6481611AEA700E94995 /* MagBoard-Prefix.pch */,
-				CECFEC821618D51300C1AA76 /* MagboardUserData.plist */,
+				CE31958B161C973500506699 /* MagboardInstructions.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -253,7 +263,12 @@
 		958AF6D11611E81E00E94995 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				958AF6D31611E82700E94995 /* magento_4.jpg */,
+				CE31958D161CC3C000506699 /* instructions-1.png */,
+				CE31958E161CC3C000506699 /* instructions-2.png */,
+				CE31958F161CC3C000506699 /* instructions-3.png */,
+				CE319590161CC3C000506699 /* instructions-4.png */,
+				CE319591161CC3C000506699 /* instructions-5.png */,
+				CE319592161CC3C000506699 /* instructions-6.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -358,9 +373,14 @@
 			files = (
 				958AF6451611AEA700E94995 /* InfoPlist.strings in Resources */,
 				958AF64E1611AEA800E94995 /* MainStoryboard.storyboard in Resources */,
-				958AF6D41611E82700E94995 /* magento_4.jpg in Resources */,
 				CECFEC801618D4ED00C1AA76 /* Default-568h@2x.png in Resources */,
-				CECFEC831618D51300C1AA76 /* MagboardUserData.plist in Resources */,
+				CE31958C161C973500506699 /* MagboardInstructions.plist in Resources */,
+				CE319593161CC3C000506699 /* instructions-1.png in Resources */,
+				CE319594161CC3C000506699 /* instructions-2.png in Resources */,
+				CE319595161CC3C000506699 /* instructions-3.png in Resources */,
+				CE319596161CC3C000506699 /* instructions-4.png in Resources */,
+				CE319597161CC3C000506699 /* instructions-5.png in Resources */,
+				CE319598161CC3C000506699 /* instructions-6.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
