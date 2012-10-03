@@ -9,6 +9,8 @@
 #import "ShopsViewController.h"
 #import "ObjectiveRecord.h"
 #import "Webshop.h"
+#import "ShopSingleton.h"
+#import "DashboardVC.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface ShopsViewController ()
@@ -28,8 +30,6 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    //Check list of shops
-    NSLog(@"%@", [self fetchAllShops]);
     
     if([self fetchAllShops] == NULL)
     {
@@ -130,13 +130,38 @@
     [bubble addSubview:nameLabel];
     
     // Setting subject
-    NSString *subjectText = [[NSString alloc] initWithFormat:@"Gebruikersnaam: %@", name];
+    NSString *subjectText = [[NSString alloc] initWithFormat:@"Gebruikersnaam: %@", username];
     UILabel *subject = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 30.0f, 270.0f, 20.0f)];
     subject.font = [UIFont systemFontOfSize:13.0f];
     subject.backgroundColor = [UIColor clearColor];
     subject.text = subjectText;
     [bubble addSubview:subject];
 
+}
+
+//Hier wordt bepaald welke actie er wordt gedaan als de gebruiker op de shop drukt
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //Data van de betreffende row in een singleton drukken
+    Webshop *webshop = [[self fetchAllShops] objectAtIndex:indexPath.row];
+    ShopSingleton *sharedShop = [ShopSingleton shopSingleton];
+    sharedShop.shopUrl = webshop.url;
+    sharedShop.shopName = webshop.name;
+    sharedShop.username = webshop.username;
+    sharedShop.password = webshop.password;
+    NSLog(@"url: %@", sharedShop.shopUrl);
+    NSLog(@"name: %@", sharedShop.shopName);
+    NSLog(@"username: %@", sharedShop.username);
+    NSLog(@"password: %@", sharedShop.password);
+    NSLog(@"----------------------");
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Functie werkt nog niet" message:@"Je kunt deze pagina nog niet bezoeken, we zijn druk bezig :)" delegate:self cancelButtonTitle:@"Annuleer" otherButtonTitles:@"Ok", nil];
+    [alert show];
+    
+    /* Deze straks weer aan zetten!
+    DashboardVC *dashboard = [[DashboardVC alloc]init];
+    [self presentModalViewController:dashboard animated:NO];
+     */
 }
 
 //Met deze functie worden alle webshops opgehaald

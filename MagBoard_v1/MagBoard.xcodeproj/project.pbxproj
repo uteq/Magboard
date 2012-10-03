@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		954ABE5A161CAACF003AE242 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 954ABE59161CAACF003AE242 /* QuartzCore.framework */; };
+		954ABE5F161CB539003AE242 /* DashboardVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 954ABE5E161CB539003AE242 /* DashboardVC.m */; };
+		954ABE8C161CC7DB003AE242 /* ShopSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 954ABE8B161CC7DB003AE242 /* ShopSingleton.m */; };
 		955674D3161C412200F02D18 /* Webshop.m in Sources */ = {isa = PBXBuildFile; fileRef = 955674D2161C412200F02D18 /* Webshop.m */; };
 		958AF63B1611AEA700E94995 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 958AF63A1611AEA700E94995 /* UIKit.framework */; };
 		958AF63D1611AEA700E94995 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 958AF63C1611AEA700E94995 /* Foundation.framework */; };
@@ -45,6 +47,10 @@
 /* Begin PBXFileReference section */
 		7FAA1F48224F4E06A2F4AE1F /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		954ABE59161CAACF003AE242 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		954ABE5D161CB539003AE242 /* DashboardVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashboardVC.h; sourceTree = "<group>"; };
+		954ABE5E161CB539003AE242 /* DashboardVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashboardVC.m; sourceTree = "<group>"; };
+		954ABE8A161CC7DB003AE242 /* ShopSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopSingleton.h; sourceTree = "<group>"; };
+		954ABE8B161CC7DB003AE242 /* ShopSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopSingleton.m; sourceTree = "<group>"; };
 		955674C3161C3B1A00F02D18 /* Pods */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Pods; sourceTree = "<group>"; };
 		955674D1161C412200F02D18 /* Webshop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Webshop.h; sourceTree = "<group>"; };
 		955674D2161C412200F02D18 /* Webshop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Webshop.m; sourceTree = "<group>"; };
@@ -111,6 +117,15 @@
 			children = (
 			);
 			name = Plugins;
+			sourceTree = "<group>";
+		};
+		954ABE5C161CB51B003AE242 /* Webshop */ = {
+			isa = PBXGroup;
+			children = (
+				954ABE5D161CB539003AE242 /* DashboardVC.h */,
+				954ABE5E161CB539003AE242 /* DashboardVC.m */,
+			);
+			name = Webshop;
 			sourceTree = "<group>";
 		};
 		958AF62B1611AEA700E94995 = {
@@ -209,6 +224,7 @@
 		958AF67B1611AEBD00E94995 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				954ABE5C161CB51B003AE242 /* Webshop */,
 				958AF6C91611B7B800E94995 /* Home */,
 			);
 			name = Views;
@@ -262,6 +278,8 @@
 			children = (
 				955674D1161C412200F02D18 /* Webshop.h */,
 				955674D2161C412200F02D18 /* Webshop.m */,
+				954ABE8A161CC7DB003AE242 /* ShopSingleton.h */,
+				954ABE8B161CC7DB003AE242 /* ShopSingleton.m */,
 			);
 			name = Webshops;
 			sourceTree = "<group>";
@@ -398,6 +416,8 @@
 				958AF6CC1611B7F400E94995 /* InstructionsViewController.m in Sources */,
 				958AF6DA1611F28B00E94995 /* UserWebshop.xcdatamodeld in Sources */,
 				955674D3161C412200F02D18 /* Webshop.m in Sources */,
+				954ABE5F161CB539003AE242 /* DashboardVC.m in Sources */,
+				954ABE8C161CC7DB003AE242 /* ShopSingleton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
