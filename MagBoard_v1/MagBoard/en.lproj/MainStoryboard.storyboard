@@ -206,39 +206,6 @@
             <point key="canvasLocation" x="-277" y="180"/>
         </scene>
     </scenes>
-<<<<<<< HEAD
-=======
-    <classes>
-        <class className="AddShopViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AddShopViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="discardWebshop:"/>
-                <relationship kind="action" name="resignKeyboard:"/>
-                <relationship kind="action" name="savePassword:"/>
-                <relationship kind="action" name="saveWebshop:"/>
-                <relationship kind="outlet" name="nameWebshop" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="password" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="registerSuccess" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="savePassword" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="urlWebshop" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="username" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="InstructionsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/InstructionsViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="goToNextInstruction:"/>
-            </relationships>
-        </class>
-        <class className="ShopsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ShopsViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="goToAddShop:"/>
-                <relationship kind="action" name="goToInstructions:"/>
-            </relationships>
-        </class>
-    </classes>
->>>>>>> Ignore files commit
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
