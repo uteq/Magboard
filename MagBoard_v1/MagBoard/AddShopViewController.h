@@ -22,5 +22,10 @@
 @property (weak, nonatomic) IBOutlet UITextField *password;
 @property (weak, nonatomic) IBOutlet UISwitch *savePassword;
 @property (weak, nonatomic) IBOutlet UILabel *registerSuccess;
+@property (weak, nonatomic) NSString *message;
+@property (weak, nonatomic) NSString *alertTitle;
+@property BOOL empty;
+
+-(void)makeAlert:(NSString*)alertTitle message:(NSString*)alertMessage;
 
 @end

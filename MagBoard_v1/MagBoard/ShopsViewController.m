@@ -9,6 +9,7 @@
 #import "ShopsViewController.h"
 #import "ObjectiveRecord.h"
 #import "Webshop.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface ShopsViewController ()
 
@@ -44,16 +45,12 @@
     else
     {
         //Tableview toevoegen aan de view
-        UITableView *shopsTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 320)];
+        UITableView *shopsTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 350)];
         shopsTable.dataSource = self;
         shopsTable.delegate = self;
+        shopsTable.backgroundColor = [UIColor whiteColor];
+        shopsTable.separatorColor = [UIColor clearColor];
         [self.view addSubview:shopsTable];
-        
-        for(Webshop *shop in [self fetchAllShops])
-        {
-            //counter++;
-            NSLog(@"%@", shop.name);
-        }
     }
 }
 
@@ -61,6 +58,12 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [[self fetchAllShops] count];
+}
+
+// Hoogte van de cellen setten
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 85;
 }
 
 //Hier wordt de inhoud van de cel bepaald
@@ -75,14 +78,65 @@
     }
     
     [self configureCell:cell atIndexPath:indexPath];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
 }
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *label = [[[self fetchAllShops] objectAtIndex:indexPath.row] name];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@", label];
+    NSString *name = [[[self fetchAllShops] objectAtIndex:indexPath.row] name];
+    NSString *username = [[[self fetchAllShops] objectAtIndex:indexPath.row] username];
+    
+    // Setting shadow for text bubble
+    UILabel *bubbleShadow = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 20.0f, 300.0f, 60.0f)];
+    bubbleShadow.backgroundColor = [UIColor clearColor];
+    bubbleShadow.layer.shadowColor = [UIColor blackColor].CGColor;
+    bubbleShadow.layer.shadowOffset = CGSizeMake(1, 1);
+    bubbleShadow.layer.shadowOpacity = 0.4;
+    bubbleShadow.layer.shadowRadius = 1.0;
+    bubbleShadow.clipsToBounds = NO;
+    [cell addSubview:bubbleShadow];
+    
+    
+    // Setting text bubble
+    UILabel *bubble = [[UILabel alloc] initWithFrame:CGRectMake(2.0f, 2.0f, 300.0f, 58.0f)];
+    [bubble.layer setBorderColor: [[UIColor clearColor] CGColor]];
+    [bubble.layer setBorderWidth: 1.0];
+    [bubble.layer setCornerRadius: 5];
+    bubble.clipsToBounds = YES;
+    UIColor *lightGrey = [UIColor colorWithRed:227.0f/255.0f green:227.0f/255.0f blue:227.0f/255.0f alpha:1.0];
+    UIColor *whiteColor = [UIColor colorWithRed:255.0f/255.0f green:255.0f/255.0f blue:255.0f/255.0f alpha:1.0];
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    gradient.frame = [[bubble layer] bounds];
+    gradient.cornerRadius = 7;
+    gradient.colors = [NSArray arrayWithObjects:
+                       (id)whiteColor.CGColor,
+                       (id)lightGrey.CGColor,
+                       nil];
+    gradient.locations = [NSArray arrayWithObjects:
+                          [NSNumber numberWithFloat:0.0f],
+                          [NSNumber numberWithFloat:0.7],
+                          nil];
+    [[bubble layer] insertSublayer:gradient atIndex:0];
+    [bubbleShadow addSubview:bubble];
+    
+    
+    // Setting name
+    UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 0.0f, 200.0f, 30.0f)];
+    nameLabel.font = [UIFont boldSystemFontOfSize:14.0f];
+    nameLabel.text = name;
+    nameLabel.backgroundColor = [UIColor clearColor];
+    [bubble addSubview:nameLabel];
+    
+    // Setting subject
+    NSString *subjectText = [[NSString alloc] initWithFormat:@"Gebruikersnaam: %@", name];
+    UILabel *subject = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 30.0f, 270.0f, 20.0f)];
+    subject.font = [UIFont systemFontOfSize:13.0f];
+    subject.backgroundColor = [UIColor clearColor];
+    subject.text = subjectText;
+    [bubble addSubview:subject];
+
 }
 
 //Met deze functie worden alle webshops opgehaald

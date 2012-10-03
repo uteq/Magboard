@@ -21,6 +21,8 @@
 @synthesize password;
 @synthesize savePassword;
 @synthesize registerSuccess;
+@synthesize alertTitle, message;
+@synthesize empty;
 
 - (void)viewDidLoad
 {
@@ -60,11 +62,41 @@
 - (IBAction)saveWebshop:(id)sender
 {
     //Query opzetten om webshop met username op te halen
-    NSString *findQuery = [[NSString alloc] initWithFormat:@"url == '%@' AND username = '%@'", urlWebshop.text, username.text];
+    NSString *findQuery = [[NSString alloc] initWithFormat:@"url == '%@'", urlWebshop.text];
     Webshop *findShop = [Webshop where:findQuery].first;
     
+    //Checken of velden gevuld zijn
+    if([nameWebshop.text isEqualToString:@""]){
+        alertTitle = @"Geen naam";
+        message = @"U dient een naam op te geven voor uw webshop";
+        empty = TRUE;
+        [self makeAlert:alertTitle message:message];
+    } else if ([urlWebshop.text isEqualToString:@""]){
+        alertTitle = @"Geen url";
+        message = @"U dient een url op te geven voor uw webshop";
+        empty = TRUE;
+        [self makeAlert:alertTitle message:message];
+    } else if ([username.text isEqualToString:@""]){
+        alertTitle = @"Geen gebruikersnaam";
+        message = @"U dient een username op te geven voor uw webshop";
+        empty = TRUE;
+        [self makeAlert:alertTitle message:message];
+    } else if ([password.text isEqualToString:@""]){
+        alertTitle = @"Geen wachtwoord";
+        message = @"U dient een wachtwoord op te geven voor uw webshop";
+        empty = TRUE;
+        [self makeAlert:alertTitle message:message];
+    } else if (findShop != nil){
+        alertTitle = @"Account bestaat al";
+        message = @"Er bestaat al een account voor deze webshop. Probeer een andere webshop toe te voegen of ga naar het overzicht.";
+        empty = TRUE;
+        [self makeAlert:alertTitle message:message];
+    } else {
+        empty = FALSE;
+    }
+    
     //Als er geen webshops bestaan met dezelfde gegevens als opgegeven dan gegevens opslaan
-    if(findShop == nil)
+    if(empty == FALSE)
     {
         Webshop *webshop = [Webshop create];
         webshop.name = nameWebshop.text;
@@ -84,13 +116,13 @@
             [self.navigationController popViewControllerAnimated:NO];
         }
     }
-    else
-    {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Account bestaat al" message:@"Er bestaat al een account met deze url en gebruikersnaam. Probeer een andere webshop toe te voegen of ga naar het overzicht." delegate:self cancelButtonTitle:@"Annuleer" otherButtonTitles:@"Ok", nil];
-        [alert show];
+}
 
-        NSLog(@"Shop bestaat al! %@", findShop);
-    }
+//Make alert
+-(void)makeAlert:(NSString*)alertTitle message:(NSString*)alertMessage
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:alertTitle message:alertMessage delegate:self cancelButtonTitle:@"Annuleer" otherButtonTitles:@"Ok", nil];
+    [alert show];
 }
 
 //Functie voor het annuleren van het toevoegen van een webshop
