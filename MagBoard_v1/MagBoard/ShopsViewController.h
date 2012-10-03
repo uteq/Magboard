@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ShopsViewController : UIViewController
+@interface ShopsViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
 
 - (IBAction)goToAddShop:(id)sender;
 - (IBAction)goToInstructions:(id)sender;
 
 -(void)makeBackButton;
+-(NSArray*)fetchAllShops;
 
 @end

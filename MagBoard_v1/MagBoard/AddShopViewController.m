@@ -59,22 +59,45 @@
 //Functie die ervoor zorgt dat de gegevens van de webshop worden opgeslagen
 - (IBAction)saveWebshop:(id)sender
 {
-    //NSArray *shops = [Webshop where:@"name == 'John'"];
-    Webshop *webshop = [Webshop create];
-    webshop.name = nameWebshop.text;
-    webshop.url = urlWebshop.text;
-    webshop.username = username.text;
-    webshop.password = password.text;
+    //Query opzetten om webshop met username op te halen
+    NSString *findQuery = [[NSString alloc] initWithFormat:@"url == '%@' AND username = '%@'", urlWebshop.text, username.text];
+    Webshop *findShop = [Webshop where:findQuery].first;
     
-    if(webshop.save){
-        NSLog(@"shop gesaved");
+    //Als er geen webshops bestaan met dezelfde gegevens als opgegeven dan gegevens opslaan
+    if(findShop == nil)
+    {
+        Webshop *webshop = [Webshop create];
+        webshop.name = nameWebshop.text;
+        webshop.url = urlWebshop.text;
+        
+        //Als de switch op save password staat dan password ook opslaan
+        if(savePassword.on)
+        {
+            webshop.password = password.text;
+        }
+        webshop.username = username.text;
+        
+        //Als de webshop is opgeslagen terug gaan naar de main view
+        if(webshop.save)
+        {
+            NSLog(@"shop gesaved");
+            [self.navigationController popViewControllerAnimated:NO];
+        }
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Account bestaat al" message:@"Er bestaat al een account met deze url en gebruikersnaam. Probeer een andere webshop toe te voegen of ga naar het overzicht." delegate:self cancelButtonTitle:@"Annuleer" otherButtonTitles:@"Ok", nil];
+        [alert show];
+
+        NSLog(@"Shop bestaat al! %@", findShop);
     }
 }
 
 //Functie voor het annuleren van het toevoegen van een webshop
 - (IBAction)discardWebshop:(id)sender
 {
-    [self performSegueWithIdentifier:@"returnHome" sender:nil];
+    //[self performSegueWithIdentifier:@"returnHome" sender:nil];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 //Functie die het keyboard laat verdwijnen als er op return is geklikt
