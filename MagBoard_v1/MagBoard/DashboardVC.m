@@ -39,7 +39,8 @@
 
 -(void)makeConnection:(NSString *)shopUrl username:(NSString *)username password:(NSString *)password
 {
-    NSURL *url = [NSURL URLWithString:@"http://www.magboard.nl/api/rest/"];
+    NSString *makeUrl = [[NSString alloc] initWithFormat:@"http://%@/api/rest/products", shopUrl];
+    NSURL *url = [NSURL URLWithString:makeUrl];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         NSLog(@"Public Timeline: %@", JSON);
