@@ -28,6 +28,7 @@
         NSLog(@"name: %@", sharedShop.shopName);
         NSLog(@"username: %@", sharedShop.username);
         NSLog(@"password: %@", sharedShop.password);
+        NSLog(@"----------------------");
         UILabel *naam = [[UILabel alloc] initWithFrame:CGRectMake(20, 200, 280, 50)];
         naam.text = sharedShop.shopName;
         [self.view addSubview:naam];

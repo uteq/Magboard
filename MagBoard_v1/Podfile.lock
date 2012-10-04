@@ -2,13 +2,16 @@
 PODS:
 - AFNetworking (0.9.1)
 - ObjectiveRecord (1.01)
+- TPKeyboardAvoiding (0.0.1)
 
 DEPENDENCIES:
 - AFNetworking (= 0.9.1)
 - ObjectiveRecord
+- TPKeyboardAvoiding
 
 SPEC CHECKSUMS:
   AFNetworking: 081ec3c1f4768c87ae79d69a96fcc9479e232e81
   ObjectiveRecord: c4a9b7bf823d5664891f5f405a89472045756785
+  TPKeyboardAvoiding: 129e3c55ac9165d0692e66f02fd1f611d917ec1a
 
 COCOAPODS: 0.15.0

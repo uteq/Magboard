@@ -149,19 +149,9 @@
     sharedShop.shopName = webshop.name;
     sharedShop.username = webshop.username;
     sharedShop.password = webshop.password;
-    NSLog(@"url: %@", sharedShop.shopUrl);
-    NSLog(@"name: %@", sharedShop.shopName);
-    NSLog(@"username: %@", sharedShop.username);
-    NSLog(@"password: %@", sharedShop.password);
-    NSLog(@"----------------------");
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Functie werkt nog niet" message:@"Je kunt deze pagina nog niet bezoeken, we zijn druk bezig :)" delegate:self cancelButtonTitle:@"Annuleer" otherButtonTitles:@"Ok", nil];
-    [alert show];
-    
-    /* Deze straks weer aan zetten!
     DashboardVC *dashboard = [[DashboardVC alloc]init];
     [self presentModalViewController:dashboard animated:NO];
-     */
 }
 
 //Met deze functie worden alle webshops opgehaald

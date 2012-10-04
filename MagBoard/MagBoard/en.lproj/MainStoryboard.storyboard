@@ -244,6 +244,31 @@
             <point key="canvasLocation" x="241" y="55"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="AddShopTVC" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AddShopTVC.h"/>
+            <relationships>
+                <relationship kind="action" name="save:"/>
+                <relationship kind="action" name="textFieldReturn:"/>
+                <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="urlTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="usernameTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="webshopNameTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="CoreDataTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CoreDataTableViewController.h"/>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="ShopsTVC" superclassName="CoreDataTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ShopsTVC.h"/>
+            <relationships>
+                <relationship kind="action" name="pushToInfoVC:"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

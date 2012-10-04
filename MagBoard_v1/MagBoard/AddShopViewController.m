@@ -9,6 +9,7 @@
 #import "AddShopViewController.h"
 #import "ObjectiveRecord.h"
 #import "Webshop.h"
+#import "TPKeyboardAvoidingScrollView.h"
 
 @interface AddShopViewController ()
 
@@ -20,7 +21,6 @@
 @synthesize username;
 @synthesize password;
 @synthesize savePassword;
-@synthesize registerSuccess;
 @synthesize alertTitle, message;
 @synthesize empty;
 
@@ -39,7 +39,6 @@
     [self setUsername:nil];
     [self setPassword:nil];
     [self setSavePassword:nil];
-    [self setRegisterSuccess:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -51,11 +50,6 @@
     [urlWebshop resignFirstResponder];
     [username resignFirstResponder];
     [password resignFirstResponder];
-}
-
-//Functie die ervoor zorgt dat het password wordt opgeslagen
-- (IBAction)savePassword:(id)sender
-{
 }
 
 //Functie die ervoor zorgt dat de gegevens van de webshop worden opgeslagen
@@ -133,12 +127,8 @@
 }
 
 //Functie die het keyboard laat verdwijnen als er op return is geklikt
-- (BOOL)textFieldShouldReturn:(UITextField *)textfield {
-    [nameWebshop resignFirstResponder];
-    [urlWebshop resignFirstResponder];
-    [username resignFirstResponder];
-    [password resignFirstResponder];
-    return YES;
+- (IBAction)textFieldReturn:(id)sender {
+    [sender resignFirstResponder];
 }
 
 @end
