@@ -11,6 +11,7 @@
 #import "Webshop.h"
 #import "ShopSingleton.h"
 #import "DashboardVC.h"
+#import "CustomNavBar.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface ShopsViewController ()
@@ -24,20 +25,37 @@
     [super viewDidLoad];
     
     // Set text for navigationbar
-    self.navigationItem.title=@"MagBoard";
-
+    [self drawNavigationBar];
+    [[self view] setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"linnen_bg@2x.png"]]];
+    [self makeTable];
+    
 }
 
--(void)viewDidAppear:(BOOL)animated
+//Navigationbar opmaken
+-(void)drawNavigationBar
 {
+    //Gradient voor de navigationbar maken
+    [self.navigationController setValue:[[CustomNavBar alloc]init] forKeyPath:@"navigationBar"];
+    // Create your image
+    UIImage *titleImage = [UIImage imageNamed: @"logo.png"];
+    UIImageView *titleImageview = [[UIImageView alloc] initWithImage: titleImage];
     
+    // set the text view to the image view
+    self.navigationItem.titleView = titleImageview;
+}
+
+
+//Hier wordt de table geinitialiseerd
+-(void)makeTable
+{
     if([self fetchAllShops] == NULL)
     {
         // Add label for text when no shops are available
-        UILabel *noShopsText = [[UILabel alloc] initWithFrame:CGRectMake(20.0f, 150.0f, 280.0f, 70.0f)];
+        UILabel *noShopsText = [[UILabel alloc] initWithFrame:CGRectMake(20.0f, 130.0f, 280.0f, 70.0f)];
         [noShopsText setText:@"U heeft nog geen webshops toegevoegd aan MagBoard. Klik op 'Shop toevoegen' om te beginnen."];
-        [noShopsText setFont:[UIFont systemFontOfSize:13.0f]];
-        [noShopsText setTextColor:[UIColor blackColor]];
+        [noShopsText setFont:[UIFont fontWithName:@"Lobster" size:12]];
+        [noShopsText setTextColor:[UIColor whiteColor]];
+        [noShopsText setBackgroundColor:[UIColor clearColor]];
         [noShopsText setTextAlignment:UITextAlignmentCenter];
         [noShopsText setNumberOfLines:0];
         [self.view addSubview:noShopsText];
@@ -45,10 +63,10 @@
     else
     {
         //Tableview toevoegen aan de view
-        UITableView *shopsTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 350)];
+        UITableView *shopsTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 300)];
         shopsTable.dataSource = self;
         shopsTable.delegate = self;
-        shopsTable.backgroundColor = [UIColor whiteColor];
+        shopsTable.backgroundColor = [UIColor clearColor];
         shopsTable.separatorColor = [UIColor clearColor];
         [self.view addSubview:shopsTable];
     }
@@ -63,7 +81,7 @@
 // Hoogte van de cellen setten
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 85;
+    return 65;
 }
 
 //Hier wordt de inhoud van de cel bepaald
@@ -88,19 +106,9 @@
     NSString *name = [[[self fetchAllShops] objectAtIndex:indexPath.row] name];
     NSString *username = [[[self fetchAllShops] objectAtIndex:indexPath.row] username];
     
-    // Setting shadow for text bubble
-    UILabel *bubbleShadow = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 20.0f, 300.0f, 60.0f)];
-    bubbleShadow.backgroundColor = [UIColor clearColor];
-    bubbleShadow.layer.shadowColor = [UIColor blackColor].CGColor;
-    bubbleShadow.layer.shadowOffset = CGSizeMake(1, 1);
-    bubbleShadow.layer.shadowOpacity = 0.4;
-    bubbleShadow.layer.shadowRadius = 1.0;
-    bubbleShadow.clipsToBounds = NO;
-    [cell addSubview:bubbleShadow];
-    
     
     // Setting text bubble
-    UILabel *bubble = [[UILabel alloc] initWithFrame:CGRectMake(2.0f, 2.0f, 300.0f, 58.0f)];
+    UILabel *bubble = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 300.0f, 58.0f)];
     [bubble.layer setBorderColor: [[UIColor clearColor] CGColor]];
     [bubble.layer setBorderWidth: 1.0];
     [bubble.layer setCornerRadius: 5];
@@ -119,7 +127,7 @@
                           [NSNumber numberWithFloat:0.7],
                           nil];
     [[bubble layer] insertSublayer:gradient atIndex:0];
-    [bubbleShadow addSubview:bubble];
+    [cell addSubview:bubble];
     
     
     // Setting name
@@ -149,6 +157,11 @@
     sharedShop.shopName = webshop.name;
     sharedShop.username = webshop.username;
     sharedShop.password = webshop.password;
+    NSLog(@"url: %@", sharedShop.shopUrl);
+    NSLog(@"name: %@", sharedShop.shopName);
+    NSLog(@"username: %@", sharedShop.username);
+    NSLog(@"password: %@", sharedShop.password);
+    NSLog(@"----------------------");
     
     DashboardVC *dashboard = [[DashboardVC alloc]init];
     [self presentModalViewController:dashboard animated:NO];

@@ -1,17 +1,24 @@
 
 PODS:
-- AFNetworking (1.0)
+- AFNetworking (0.9.1)
+- AFOAuth2Client (0.0.1):
+  - AFNetworking (~> 0.10.0)
+- FontLabel (0.0.1)
 - ObjectiveRecord (1.01)
 - TPKeyboardAvoiding (0.0.1)
 
 DEPENDENCIES:
-- AFNetworking (= 1.0)
+- AFNetworking
+- AFOAuth2Client
+- FontLabel
 - ObjectiveRecord
 - TPKeyboardAvoiding
 
 SPEC CHECKSUMS:
-  AFNetworking: e9e0911a6afd846691672a4d832fb531e8bae72f
+  AFNetworking: 081ec3c1f4768c87ae79d69a96fcc9479e232e81
+  AFOAuth2Client: 44a608f10bf6dd02f215557d8508969b817b0772
+  FontLabel: 5f7922f69cad408bc9abc59b5044b05bf42454ed
   ObjectiveRecord: c4a9b7bf823d5664891f5f405a89472045756785
   TPKeyboardAvoiding: 129e3c55ac9165d0692e66f02fd1f611d917ec1a
 
-COCOAPODS: 0.15.0
+COCOAPODS: 0.15.1

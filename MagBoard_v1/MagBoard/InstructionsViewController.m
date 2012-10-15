@@ -20,6 +20,7 @@
 	
     // Set text for navigationbar
     self.navigationItem.title=@"Instructies";
+    [[self view] setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"linnen_bg@2x.png"]]];
     scrollMove = 320;
     [self addScrollView];
 }
@@ -81,12 +82,16 @@
                 UILabel *head = [[UILabel alloc] initWithFrame:CGRectMake((xPos * xPosDoubler) + 20, 20.0f, 280.0f, 20.0f)];
                 [head setText:title];
                 [head setFont:[UIFont boldSystemFontOfSize:16.0f]];
+                [head setTextColor:[UIColor whiteColor]];
+                [head setBackgroundColor:[UIColor clearColor]];
                 [instructionsHolder addSubview:head];
                 
                 UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake((xPos * xPosDoubler) + 20, 50.0f, 280.0f, 100.0f)];
                 [textLabel setText:text];
                 [textLabel setFont:[UIFont systemFontOfSize:13.0f]];
                 [textLabel setNumberOfLines:0];
+                [textLabel setTextColor:[UIColor whiteColor]];
+                [textLabel setBackgroundColor:[UIColor clearColor]];
                 [instructionsHolder addSubview:textLabel];
                 
                 UIImageView *imageForStep = [[UIImageView alloc] initWithFrame:CGRectMake((xPos * xPosDoubler) + 20, 150.0f, 250.0f, 200.0f)];

@@ -8,12 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AddShopViewController : UIViewController
+@interface AddShopViewController : UIViewController <UITextFieldDelegate>
 
 - (IBAction)resignKeyboard:(id)sender;
+- (IBAction)textFieldShouldReturn:(id)sender;
+- (IBAction)savePassword:(id)sender;
 - (IBAction)saveWebshop:(id)sender;
 - (IBAction)discardWebshop:(id)sender;
-- (IBAction)textFieldReturn:(id)sender;
 
 
 @property (weak, nonatomic) IBOutlet UITextField *nameWebshop;
@@ -21,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *username;
 @property (weak, nonatomic) IBOutlet UITextField *password;
 @property (weak, nonatomic) IBOutlet UISwitch *savePassword;
+@property (weak, nonatomic) IBOutlet UILabel *registerSuccess;
 @property (weak, nonatomic) NSString *message;
 @property (weak, nonatomic) NSString *alertTitle;
 @property BOOL empty;

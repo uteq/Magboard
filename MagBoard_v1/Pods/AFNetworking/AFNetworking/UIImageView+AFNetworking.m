@@ -28,8 +28,8 @@
 
 @interface AFImageCache : NSCache
 - (UIImage *)cachedImageForRequest:(NSURLRequest *)request;
-- (void)cacheImage:(UIImage *)image
-        forRequest:(NSURLRequest *)request;
+- (void)cacheImageData:(NSData *)imageData
+            forRequest:(NSURLRequest *)request;
 @end
 
 #pragma mark -
@@ -59,11 +59,10 @@ static char kAFImageRequestOperationObjectKey;
 + (NSOperationQueue *)af_sharedImageRequestOperationQueue {
     static NSOperationQueue *_af_imageRequestOperationQueue = nil;
     
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
+    if (!_af_imageRequestOperationQueue) {
         _af_imageRequestOperationQueue = [[NSOperationQueue alloc] init];
-        [_af_imageRequestOperationQueue setMaxConcurrentOperationCount:NSOperationQueueDefaultMaxConcurrentOperationCount];
-    });
+        [_af_imageRequestOperationQueue setMaxConcurrentOperationCount:8];
+    }
     
     return _af_imageRequestOperationQueue;
 }
@@ -87,10 +86,9 @@ static char kAFImageRequestOperationObjectKey;
 - (void)setImageWithURL:(NSURL *)url 
        placeholderImage:(UIImage *)placeholderImage
 {
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:30.0];
     [request setHTTPShouldHandleCookies:NO];
     [request setHTTPShouldUsePipelining:YES];
-    [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
     
     [self setImageWithURLRequest:request placeholderImage:placeholderImage success:nil failure:nil];
 }
@@ -113,29 +111,25 @@ static char kAFImageRequestOperationObjectKey;
     } else {
         self.image = placeholderImage;
         
-        AFImageRequestOperation *requestOperation = [[AFImageRequestOperation alloc] initWithRequest:urlRequest];
+        AFImageRequestOperation *requestOperation = [[[AFImageRequestOperation alloc] initWithRequest:urlRequest] autorelease];
         [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
             if ([[urlRequest URL] isEqual:[[self.af_imageRequestOperation request] URL]]) {
                 self.image = responseObject;
-                self.af_imageRequestOperation = nil;
             }
 
             if (success) {
                 success(operation.request, operation.response, responseObject);
             }
 
-            [[[self class] af_sharedImageCache] cacheImage:responseObject forRequest:urlRequest];
+            [[[self class] af_sharedImageCache] cacheImageData:operation.responseData forRequest:urlRequest];
             
-
+            self.af_imageRequestOperation = nil;
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            if ([[urlRequest URL] isEqual:[[self.af_imageRequestOperation request] URL]]) {
-                self.af_imageRequestOperation = nil;
-            }
-
             if (failure) {
                 failure(operation.request, operation.response, error);
             }
             
+            self.af_imageRequestOperation = nil;
         }];
         
         self.af_imageRequestOperation = requestOperation;
@@ -168,15 +162,18 @@ static inline NSString * AFImageCacheKeyFromURLRequest(NSURLRequest *request) {
             break;
     }
     
-	return [self objectForKey:AFImageCacheKeyFromURLRequest(request)];
+	UIImage *image = [UIImage imageWithData:[self objectForKey:AFImageCacheKeyFromURLRequest(request)]];
+	if (image) {
+		return [UIImage imageWithCGImage:[image CGImage] scale:[[UIScreen mainScreen] scale] orientation:image.imageOrientation];
+	}
+    
+    return image;
 }
 
-- (void)cacheImage:(UIImage *)image
-        forRequest:(NSURLRequest *)request
+- (void)cacheImageData:(NSData *)imageData
+            forRequest:(NSURLRequest *)request
 {
-    if (image && request) {
-        [self setObject:image forKey:AFImageCacheKeyFromURLRequest(request)];
-    }
+    [self setObject:[NSPurgeableData dataWithData:imageData] forKey:AFImageCacheKeyFromURLRequest(request)];
 }
 
 @end

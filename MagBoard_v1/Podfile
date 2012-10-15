@@ -1,5 +1,7 @@
 platform :ios
 
-pod 'AFNetworking', '1.0'
-pod 'TPKeyboardAvoiding'
+pod 'AFNetworking'
 pod 'ObjectiveRecord' 
+pod 'TPKeyboardAvoiding'
+pod 'AFOAuth2Client'
+pod 'FontLabel'
