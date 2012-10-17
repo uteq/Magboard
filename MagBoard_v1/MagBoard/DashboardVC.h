@@ -8,9 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "Webshop.h"
+#import "ShopSingleton.h"
+#import "LRResty.h"
 
-@interface DashboardVC : UIViewController<UITableViewDelegate, UITableViewDataSource>
+@interface DashboardVC : UIViewController <UITableViewDelegate, UITableViewDataSource, LRRestyClientResponseDelegate>
 
--(void)makeConnection:(NSString *)shopUrl username:(NSString *)username password:(NSString *)password;
+@property (nonatomic, retain) NSMutableDictionary* orderHolder;
+@property (nonatomic, retain) ShopSingleton* shopInfo;
+
+-(void)fetchAllOrders:(NSString *)shopUrl username:(NSString *)username password:(NSString *)password;
+-(void)makeTabel;
+-(void)drawNavigationBar;
 
 @end

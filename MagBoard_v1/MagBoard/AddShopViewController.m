@@ -9,6 +9,7 @@
 #import "AddShopViewController.h"
 #import "ObjectiveRecord.h"
 #import "Webshop.h"
+#import "UIBarButtonItem.h"
 
 @interface AddShopViewController ()
 
@@ -31,6 +32,7 @@
     // Set text for navigationbar
     self.navigationItem.title=@"Add shop";
     [[self view] setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"linnen_bg@2x.png"]]];
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTarget:self selector:@selector(backButtonTouched)];
 }
 
 - (void)viewDidUnload
@@ -54,9 +56,11 @@
     [password resignFirstResponder];
 }
 
-//Functie die ervoor zorgt dat het password wordt opgeslagen
-- (IBAction)savePassword:(id)sender
+-(void)backButtonTouched
 {
+    NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];
+    [viewControllers removeLastObject];
+    [[self navigationController] setViewControllers:viewControllers animated:YES];
 }
 
 //Functie die ervoor zorgt dat de gegevens van de webshop worden opgeslagen

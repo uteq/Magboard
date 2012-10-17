@@ -23,12 +23,20 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     // Set text for navigationbar
     [self drawNavigationBar];
     [[self view] setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"linnen_bg@2x.png"]]];
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
     [self makeTable];
-    
+}
+
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
 }
 
 //Navigationbar opmaken
@@ -66,7 +74,7 @@
         UITableView *shopsTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 300)];
         shopsTable.dataSource = self;
         shopsTable.delegate = self;
-        shopsTable.backgroundColor = [UIColor clearColor];
+        shopsTable.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"linnen_bg@2x.png"]];
         shopsTable.separatorColor = [UIColor clearColor];
         [self.view addSubview:shopsTable];
     }
@@ -108,7 +116,7 @@
     
     
     // Setting text bubble
-    UILabel *bubble = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 300.0f, 58.0f)];
+    UILabel *bubble = [[UILabel alloc] initWithFrame:CGRectMake(18.0f, 10.0f, 284.0f, 58.0f)];
     [bubble.layer setBorderColor: [[UIColor clearColor] CGColor]];
     [bubble.layer setBorderWidth: 1.0];
     [bubble.layer setCornerRadius: 5];
@@ -157,14 +165,25 @@
     sharedShop.shopName = webshop.name;
     sharedShop.username = webshop.username;
     sharedShop.password = webshop.password;
-    NSLog(@"url: %@", sharedShop.shopUrl);
-    NSLog(@"name: %@", sharedShop.shopName);
-    NSLog(@"username: %@", sharedShop.username);
-    NSLog(@"password: %@", sharedShop.password);
-    NSLog(@"----------------------");
     
-    DashboardVC *dashboard = [[DashboardVC alloc]init];
-    [self presentModalViewController:dashboard animated:NO];
+    if(sharedShop.password != nil)
+    {
+        DashboardVC *dashboard = [[DashboardVC alloc]init];
+        NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];
+        //[viewControllers removeLastObject];
+        [viewControllers addObject:dashboard];
+        [[self navigationController] setViewControllers:viewControllers animated:YES];
+    } else {
+        [self makeAlert:@"Kon niet inloggen" message:@"Kon niet inloggen omdat het wachtwoord niet is opgelagen"];
+    }
+
+}
+
+//Make alert
+-(void)makeAlert:(NSString*)alertTitle message:(NSString*)alertMessage
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:alertTitle message:alertMessage delegate:self cancelButtonTitle:@"Annuleer" otherButtonTitles:@"Ok", nil];
+    [alert show];
 }
 
 //Met deze functie worden alle webshops opgehaald
@@ -172,12 +191,6 @@
 {
     NSArray *allShops = [Webshop all];
     return allShops;
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
 }
 
 //Deze actie brengt de gebruiker naar de pagina om een webshop toe te voegen

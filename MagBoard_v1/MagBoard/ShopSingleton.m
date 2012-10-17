@@ -27,7 +27,7 @@ static ShopSingleton *sharedShop = nil;
     return sharedShop;
 }
 
-//De init functie van de speakap singleton
+//De init functie van de singleton
 - (id)init
 {
     //Roep de init functie van NSObject aan.

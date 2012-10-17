@@ -7,6 +7,7 @@
 //
 
 #import "InstructionsViewController.h"
+#import "UIBarButtonItem.h"
 
 @interface InstructionsViewController ()
 
@@ -21,6 +22,7 @@
     // Set text for navigationbar
     self.navigationItem.title=@"Instructies";
     [[self view] setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"linnen_bg@2x.png"]]];
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTarget:self selector:@selector(backButtonTouched)];
     scrollMove = 320;
     [self addScrollView];
 }
@@ -41,6 +43,13 @@
     
     [self.view addSubview:instructionsHolder];
     [self readMagboardInstructions];
+}
+
+-(void)backButtonTouched
+{
+    NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];
+    [viewControllers removeLastObject];
+    [[self navigationController] setViewControllers:viewControllers animated:YES];
 }
 
 

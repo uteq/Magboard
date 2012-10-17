@@ -26,11 +26,13 @@
 
 - (void)applyDefaultStyle {
     // add the drop shadow
-    self.layer.shadowColor = [[UIColor blackColor] CGColor];
-    self.layer.shadowOffset = CGSizeMake(0.0, 0.01);
-    self.layer.shadowOpacity = 1.0;
-    self.layer.masksToBounds = NO;
+    self.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.layer.shadowOpacity = 1;
+    self.layer.shadowOffset = CGSizeMake(0,01);
+    CGRect shadowPath = CGRectMake(self.layer.bounds.origin.x - 10, self.layer.bounds.size.height - 6, self.layer.bounds.size.width + 20, 5);
+    self.layer.shadowPath = [UIBezierPath bezierPathWithRect:shadowPath].CGPath;
     self.layer.shouldRasterize = YES;
+
 }
 
 

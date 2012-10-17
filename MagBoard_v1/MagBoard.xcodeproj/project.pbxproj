@@ -23,6 +23,12 @@
 		95536AB7162C882E00F992C3 /* input_black_full_width.png in Resources */ = {isa = PBXBuildFile; fileRef = 95536AB5162C882E00F992C3 /* input_black_full_width.png */; };
 		95536AC3162C900300F992C3 /* Lobster_1.3.otf in Resources */ = {isa = PBXBuildFile; fileRef = 95536AC2162C900300F992C3 /* Lobster_1.3.otf */; };
 		955674D3161C412200F02D18 /* Webshop.m in Sources */ = {isa = PBXBuildFile; fileRef = 955674D2161C412200F02D18 /* Webshop.m */; };
+		955C8E0E162F31AC008B1A38 /* back_button_top.png in Resources */ = {isa = PBXBuildFile; fileRef = 955C8E0C162F31AC008B1A38 /* back_button_top.png */; };
+		955C8E0F162F31AC008B1A38 /* back_button_top@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 955C8E0D162F31AC008B1A38 /* back_button_top@2x.png */; };
+		955C8E15162F3676008B1A38 /* UIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 955C8E14162F3676008B1A38 /* UIButton.m */; };
+		955C8E18162F36B7008B1A38 /* UIBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 955C8E17162F36B7008B1A38 /* UIBarButtonItem.m */; };
+		955C8E22162F3D18008B1A38 /* order_holder_pending.png in Resources */ = {isa = PBXBuildFile; fileRef = 955C8E20162F3D18008B1A38 /* order_holder_pending.png */; };
+		955C8E23162F3D18008B1A38 /* order_holder_pending@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 955C8E21162F3D18008B1A38 /* order_holder_pending@2x.png */; };
 		958AF63B1611AEA700E94995 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 958AF63A1611AEA700E94995 /* UIKit.framework */; };
 		958AF63D1611AEA700E94995 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 958AF63C1611AEA700E94995 /* Foundation.framework */; };
 		958AF63F1611AEA700E94995 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 958AF63E1611AEA700E94995 /* CoreGraphics.framework */; };
@@ -86,6 +92,14 @@
 		955674C3161C3B1A00F02D18 /* Pods */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Pods; sourceTree = "<group>"; };
 		955674D1161C412200F02D18 /* Webshop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Webshop.h; sourceTree = "<group>"; };
 		955674D2161C412200F02D18 /* Webshop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Webshop.m; sourceTree = "<group>"; };
+		955C8E0C162F31AC008B1A38 /* back_button_top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back_button_top.png; sourceTree = "<group>"; };
+		955C8E0D162F31AC008B1A38 /* back_button_top@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back_button_top@2x.png"; sourceTree = "<group>"; };
+		955C8E13162F3676008B1A38 /* UIButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIButton.h; sourceTree = "<group>"; };
+		955C8E14162F3676008B1A38 /* UIButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIButton.m; sourceTree = "<group>"; };
+		955C8E16162F36B7008B1A38 /* UIBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBarButtonItem.h; sourceTree = "<group>"; };
+		955C8E17162F36B7008B1A38 /* UIBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBarButtonItem.m; sourceTree = "<group>"; };
+		955C8E20162F3D18008B1A38 /* order_holder_pending.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = order_holder_pending.png; sourceTree = "<group>"; };
+		955C8E21162F3D18008B1A38 /* order_holder_pending@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "order_holder_pending@2x.png"; sourceTree = "<group>"; };
 		958AF6361611AEA700E94995 /* MagBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MagBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		958AF63A1611AEA700E94995 /* UIKit.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		958AF63C1611AEA700E94995 /* Foundation.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -156,6 +170,10 @@
 			children = (
 				9504AD87162C34CA0001C1C2 /* CustomNavBar.h */,
 				9504AD88162C34CA0001C1C2 /* CustomNavBar.m */,
+				955C8E13162F3676008B1A38 /* UIButton.h */,
+				955C8E14162F3676008B1A38 /* UIButton.m */,
+				955C8E16162F36B7008B1A38 /* UIBarButtonItem.h */,
+				955C8E17162F36B7008B1A38 /* UIBarButtonItem.m */,
 			);
 			name = "Custom Navbar";
 			sourceTree = "<group>";
@@ -311,6 +329,10 @@
 		958AF6D11611E81E00E94995 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				955C8E20162F3D18008B1A38 /* order_holder_pending.png */,
+				955C8E21162F3D18008B1A38 /* order_holder_pending@2x.png */,
+				955C8E0C162F31AC008B1A38 /* back_button_top.png */,
+				955C8E0D162F31AC008B1A38 /* back_button_top@2x.png */,
 				95536AB4162C882E00F992C3 /* input_black_full_width@2x.png */,
 				95536AB5162C882E00F992C3 /* input_black_full_width.png */,
 				9504ADAD162C45BE0001C1C2 /* button_half_grey.png */,
@@ -462,6 +484,10 @@
 				95536AB6162C882E00F992C3 /* input_black_full_width@2x.png in Resources */,
 				95536AB7162C882E00F992C3 /* input_black_full_width.png in Resources */,
 				95536AC3162C900300F992C3 /* Lobster_1.3.otf in Resources */,
+				955C8E0E162F31AC008B1A38 /* back_button_top.png in Resources */,
+				955C8E0F162F31AC008B1A38 /* back_button_top@2x.png in Resources */,
+				955C8E22162F3D18008B1A38 /* order_holder_pending.png in Resources */,
+				955C8E23162F3D18008B1A38 /* order_holder_pending@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -520,6 +546,8 @@
 				954ABE5F161CB539003AE242 /* DashboardVC.m in Sources */,
 				954ABE8C161CC7DB003AE242 /* ShopSingleton.m in Sources */,
 				9504AD89162C34CA0001C1C2 /* CustomNavBar.m in Sources */,
+				955C8E15162F3676008B1A38 /* UIButton.m in Sources */,
+				955C8E18162F36B7008B1A38 /* UIBarButtonItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
