@@ -26,13 +26,6 @@
         // Custom initialization
         [[self view] setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"linnen_bg@2x.png"]]];
         ShopSingleton *sharedShop = [ShopSingleton shopSingleton];
-        NSLog(@"url: %@", sharedShop.shopUrl);
-        NSLog(@"name: %@", sharedShop.shopName);
-        NSLog(@"username: %@", sharedShop.username);
-        NSLog(@"password: %@", sharedShop.password);
-        UILabel *naam = [[UILabel alloc] initWithFrame:CGRectMake(20, 200, 280, 50)];
-        naam.text = sharedShop.shopName;
-        [self.view addSubview:naam];
         [self makeConnection:sharedShop.shopUrl username:sharedShop.username password:sharedShop.password];
     }
     return self;
@@ -40,18 +33,26 @@
 
 -(void)makeConnection:(NSString *)shopUrl username:(NSString *)username password:(NSString *)password
 {
+    
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
-    [params setObject:@"firstname" forKey:@"description"];
-    [params setObject:@"status" forKey:@"entity_id"];
+    [params setObject:shopUrl forKey:@"url"];
+    [params setObject:username forKey:@"username"];
+    [params setObject:password forKey:@"password"];
     
     [[LRResty client] post:@"http://www.magboard.nl/soap.php" payload:params
                  withBlock:^(LRRestyResponse *response){
-                     if(response.status == 200) {
-                         NSLog(@"Successful response %@", [response asString]);
+                     if(response.status == 200) {;
+                         
+                         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:[response responseData] options:kNilOptions error:nil];
+                         
+                         for(NSDictionary*keys in [dict valueForKey:@"data-items"]){
+                             NSLog(@"%@", [keys valueForKey:@"customer_email"]);
+                         }
                      }
                  }];
 
 }
+
 
 - (void)viewDidLoad
 {

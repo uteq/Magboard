@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Webshop.h"
 
-@interface DashboardVC : UIViewController
+@interface DashboardVC : UIViewController<UITableViewDelegate, UITableViewDataSource>
 
 -(void)makeConnection:(NSString *)shopUrl username:(NSString *)username password:(NSString *)password;
 
