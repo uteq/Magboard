@@ -4,6 +4,9 @@ PODS:
 - AFOAuth2Client (0.0.1):
   - AFNetworking (~> 0.10.0)
 - FontLabel (0.0.1)
+- LRResty (0.11.0):
+  - NSData+Base64 (~> 1.0)
+- NSData+Base64 (1.0.0)
 - ObjectiveRecord (1.01)
 - TPKeyboardAvoiding (0.0.1)
 
@@ -11,6 +14,7 @@ DEPENDENCIES:
 - AFNetworking
 - AFOAuth2Client
 - FontLabel
+- LRResty
 - ObjectiveRecord
 - TPKeyboardAvoiding
 
@@ -18,6 +22,8 @@ SPEC CHECKSUMS:
   AFNetworking: 081ec3c1f4768c87ae79d69a96fcc9479e232e81
   AFOAuth2Client: 44a608f10bf6dd02f215557d8508969b817b0772
   FontLabel: 5f7922f69cad408bc9abc59b5044b05bf42454ed
+  LRResty: 8a51275030ac5bfc6c44775d64a16dc0f9267b8e
+  NSData+Base64: 8b910cb8a64f45daec6fb15936c36a9a911c57ca
   ObjectiveRecord: c4a9b7bf823d5664891f5f405a89472045756785
   TPKeyboardAvoiding: 129e3c55ac9165d0692e66f02fd1f611d917ec1a
 

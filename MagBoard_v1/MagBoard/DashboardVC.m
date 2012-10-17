@@ -11,11 +11,7 @@
 #import "ShopSingleton.h"
 
 //Imports for networking
-#import "AFURLConnectionOperation.h"
-#import "AFHTTPRequestOperation.h"
-#import "AFJSONRequestOperation.h"
-#import "AFOAuth2Client.h"
-#import "AFHTTPClient.h"
+#import "LRResty.h"
 
 @interface DashboardVC ()
 
@@ -44,25 +40,17 @@
 
 -(void)makeConnection:(NSString *)shopUrl username:(NSString *)username password:(NSString *)password
 {
-    /*NSString *urlString = [[NSString alloc] initWithFormat:@"http://%@/", shopUrl];
-    NSURL *url = [NSURL URLWithString:urlString];
-    AFOAuth2Client *oauthClient = [AFOAuth2Client clientWithBaseURL:url];
-    [oauthClient registerHTTPOperationClass:[AFJSONRequestOperation class]];
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setObject:@"firstname" forKey:@"description"];
+    [params setObject:@"status" forKey:@"entity_id"];
     
-    [oauthClient authenticateUvsingOAuthWithPath:@"/oauth/token"
-                                       username:username
-                                       password:password
-                                       clientID:@""
-                                          secret:@""
-                                        success:^(AFOAuthAccount *account) {
-                                            NSLog(@"Credentials: %@", credential.accessToken);
-                                            // If you are already using AFHTTPClient in your application, this would be a good place to set your `Authorization` header.
-                                            // [HTTPClient setAuthorizationHeaderWithToken:credential.accessToken];
-                                        }
-                                        failure:^(NSError *error) {
-                                            NSLog(@"Error: %@", error);
-                                        }];
-     */
+    [[LRResty client] post:@"http://www.magboard.nl/soap.php" payload:params
+                 withBlock:^(LRRestyResponse *response){
+                     if(response.status == 200) {
+                         NSLog(@"Successful response %@", [response asString]);
+                     }
+                 }];
+
 }
 
 - (void)viewDidLoad
