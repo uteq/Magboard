@@ -42,7 +42,16 @@
     //Gradient voor de navigationbar maken
     [self.navigationController setValue:[[CustomNavBar alloc]init] forKeyPath:@"navigationBar"];
     NSString* title = [[NSString alloc] initWithFormat:@"%@", [shopInfo shopName]];
-    self.navigationItem.title = title;
+    UILabel *navBarTitle = [[UILabel alloc] initWithFrame:CGRectMake(60, 3, 200, 30)];
+    navBarTitle.text = title;
+    navBarTitle.font = [UIFont boldSystemFontOfSize:16];
+    navBarTitle.textColor = [UIColor whiteColor];
+    navBarTitle.backgroundColor = [UIColor clearColor];
+    navBarTitle.textAlignment = UITextAlignmentCenter;
+    navBarTitle.shadowColor = [UIColor blackColor];
+    navBarTitle.shadowOffset = CGSizeMake(1, 1);
+    
+    self.navigationItem.titleView = navBarTitle;
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTarget:self selector:@selector(backButtonTouched)];
 
 }
@@ -104,7 +113,7 @@
     else
     {
         //Tableview toevoegen aan de view
-        UITableView *shopsTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 300)];
+        UITableView *shopsTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 410)];
         shopsTable.dataSource = self;
         shopsTable.delegate = self;
         shopsTable.backgroundColor = [UIColor clearColor];
@@ -165,12 +174,25 @@
         grandTotal = [NSString stringWithFormat:@"€ %.0f,-", value];
     }
     
-    
     //Add orderlabel image to table cell
     UILabel *orderHolderLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 20.0f, 301.0f, 53.0f)];
-    UIImage *image = [UIImage imageNamed:@"order_holder_pending"];
     orderHolderLabel.font = [UIFont boldSystemFontOfSize:14.0f];
-    orderHolderLabel.backgroundColor = [UIColor colorWithPatternImage:image];
+    //Determine the label for order status
+    if([[[[orderHolder valueForKey:@"data-items"] objectAtIndex:indexPath.row] valueForKey:@"status"] isEqualToString:@"pending"])
+    {
+        UIImage *image = [UIImage imageNamed:@"order_holder_pending"];
+        orderHolderLabel.backgroundColor = [UIColor colorWithPatternImage:image];
+    }
+    else if ([[[[orderHolder valueForKey:@"data-items"] objectAtIndex:indexPath.row] valueForKey:@"status"] isEqualToString:@"complete"])
+    {
+        UIImage *image = [UIImage imageNamed:@"order_holder_completed"];
+        orderHolderLabel.backgroundColor = [UIColor colorWithPatternImage:image];
+    }
+    else if ([[[[orderHolder valueForKey:@"data-items"] objectAtIndex:indexPath.row] valueForKey:@"status"] isEqualToString:@"processing"])
+    { 
+        UIImage *image = [UIImage imageNamed:@"order_holder_processing"];
+        orderHolderLabel.backgroundColor = [UIColor colorWithPatternImage:image];
+    }
     [cell addSubview:orderHolderLabel];
     
     //Add consumer name to order label
@@ -195,7 +217,7 @@
     orderNumberLabel.text = orderId;
     [orderHolderLabel addSubview:orderNumberLabel];
     
-    //NSLog(@"All fields: %@", [orderHolder valueForKey:@"data-items"]);
+    NSLog(@"All fields: %@", [orderHolder valueForKey:@"data-items"]);
     
 }
 

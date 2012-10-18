@@ -14,7 +14,7 @@
 + (UIBarButtonItem *)styledBackBarButtonItemWithTarget:(id)target selector:(SEL)selector;
 {
     UIImage *image = [UIImage imageNamed:@"back_button_top"];
-    image = [image stretchableImageWithLeftCapWidth:20.0f topCapHeight:20.0f];
+    //image = [image stretchableImageWithLeftCapWidth:20.0f topCapHeight:20.0f];
     
     NSString *title = NSLocalizedString(@"", nil);
     UIFont *font = [UIFont boldSystemFontOfSize:12.0f];

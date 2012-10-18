@@ -10,6 +10,7 @@
 #import "ObjectiveRecord.h"
 #import "Webshop.h"
 #import "UIBarButtonItem.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface AddShopViewController ()
 
@@ -30,7 +31,16 @@
     [super viewDidLoad];
 	
     // Set text for navigationbar
-    self.navigationItem.title=@"Add shop";
+    UILabel *navBarTitle = [[UILabel alloc] initWithFrame:CGRectMake(60, 3, 200, 30)];
+    navBarTitle.text = @"Shop toevoegen";
+    navBarTitle.font = [UIFont boldSystemFontOfSize:16];
+    navBarTitle.textColor = [UIColor whiteColor];
+    navBarTitle.backgroundColor = [UIColor clearColor];
+    navBarTitle.textAlignment = UITextAlignmentCenter;
+    navBarTitle.shadowColor = [UIColor blackColor];
+    navBarTitle.shadowOffset = CGSizeMake(1, 1);
+    
+    self.navigationItem.titleView = navBarTitle;
     [[self view] setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"linnen_bg@2x.png"]]];
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTarget:self selector:@selector(backButtonTouched)];
 }
