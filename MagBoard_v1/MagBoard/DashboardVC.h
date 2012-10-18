@@ -16,7 +16,7 @@
 @property (nonatomic, retain) NSMutableDictionary* orderHolder;
 @property (nonatomic, retain) ShopSingleton* shopInfo;
 
--(void)fetchAllOrders:(NSString *)shopUrl username:(NSString *)username password:(NSString *)password;
+-(void)fetchAllOrders:(NSString *)shopUrl username:(NSString *)username password:(NSString *)password request:(NSString *)requestFunction;
 -(void)makeTabel;
 -(void)drawNavigationBar;
 

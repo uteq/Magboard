@@ -31,7 +31,7 @@
         [[self view] setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"linnen_bg@2x.png"]]];
         shopInfo = [ShopSingleton shopSingleton];
         [self drawNavigationBar];
-        [self fetchAllOrders:[shopInfo shopUrl] username:[shopInfo username] password:[shopInfo password]];
+        [self fetchAllOrders:[shopInfo shopUrl] username:[shopInfo username] password:[shopInfo password]  requestFunction:@"salesOrderList"];
     }
     return self;
 }
@@ -54,14 +54,15 @@
     [[self navigationController] setViewControllers:viewControllers animated:YES];
 }
 
--(void)fetchAllOrders:(NSString *)shopUrl username:(NSString *)username password:(NSString *)password
+-(void)fetchAllOrders:(NSString *)shopUrl username:(NSString *)username password:(NSString *)password requestFunction:(NSString *)requestFunction
 {
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     [params setObject:shopUrl forKey:@"url"];
     [params setObject:username forKey:@"username"];
     [params setObject:password forKey:@"password"];
+    [params setObject:requestFunction forKey:@"requestFunction"];
     
-    [[LRResty client] post:@"http://www.magboard.nl/soap.php" payload:params delegate:self];
+    [[LRResty client] post:@"http://www.magboard.nl/soap2.php" payload:params delegate:self];
 }
 
 - (void)restClient:(LRRestyClient *)client receivedResponse:(LRRestyResponse *)response;
@@ -151,7 +152,19 @@
     NSString* orderId = [[NSString alloc] initWithFormat:@"%@", [[[orderHolder valueForKey:@"data-items"] objectAtIndex:indexPath.row] valueForKey:@"increment_id"]];
     
     NSString* totalName = [[NSString alloc] initWithFormat:@"%@ %@", firstName, lastName];
-    NSString* grandTotal = [[NSString alloc] initWithFormat:@"$ %@", totalValue];
+    NSString* grandTotal = [[NSString alloc] init];
+    float value = [totalValue floatValue];
+    
+    //If number only has zeros as digits behind the dot
+    NSArray *findZeros = [totalValue componentsSeparatedByString:@"."];
+    NSString *behindComma = [[NSString alloc] initWithFormat:[@"%@", findZeros objectAtIndex:1]];
+    
+    if([behindComma compare: @"0000"]){
+        grandTotal = [NSString stringWithFormat:@"€ %.2f", value];
+    } else {
+        grandTotal = [NSString stringWithFormat:@"€ %.0f,-", value];
+    }
+    
     
     //Add orderlabel image to table cell
     UILabel *orderHolderLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 20.0f, 301.0f, 53.0f)];
