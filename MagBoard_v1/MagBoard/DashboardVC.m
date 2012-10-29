@@ -102,7 +102,7 @@
     {
         // Add label for text when no shops are available
         UILabel *noShopsText = [[UILabel alloc] initWithFrame:CGRectMake(20.0f, 130.0f, 280.0f, 90.0f)];
-        [noShopsText setText:@"Er zijn nog geen orders geplaatst op uw webshop, of u heeft geen juiste logingegevens ingevoerd of de url is incorrect."];
+        [noShopsText setText:@"Er zijn nog geen orders geplaatst op uw webshop, of u heeft geen juiste logingegevens ingevoerd of de url is incorrect..."];
         [noShopsText setFont:[UIFont systemFontOfSize:12]];
         [noShopsText setTextColor:[UIColor whiteColor]];
         [noShopsText setBackgroundColor:[UIColor clearColor]];
