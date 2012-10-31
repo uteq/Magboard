@@ -17,7 +17,7 @@
 
 @implementation AllWebshopsVC
 
-@synthesize shopsTable;
+@synthesize shopsTable, noShopsLabel;
 
 - (void)viewDidLoad
 {
@@ -31,6 +31,7 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
+    [shopsTable reloadData];
     // Release any retained subviews of the main view.
 }
 
@@ -38,6 +39,7 @@
 {
     [super viewDidAppear:YES];
     [shopsTable reloadData];
+    NSLog(@"shops table did appear");
 }
 
 - (void)didReceiveMemoryWarning
@@ -70,14 +72,22 @@
     {
         NSLog(@"There are no shops");
         // Add label for text when no shops are available
-        UILabel *noShopsText = [[UILabel alloc] initWithFrame:CGRectMake(44.0f, 140.0f, 232.0f, 20.0f)];
-        [noShopsText setFont:[UIFont systemFontOfSize:14]];
-        [noShopsText setTextColor:[UIColor whiteColor]];
+        noShopsLabel = [[UILabel alloc] initWithFrame:CGRectMake(44.0f, 140.0f, 232.0f, 20.0f)];
+        [noShopsLabel setFont:[UIFont systemFontOfSize:14]];
+        [noShopsLabel setTextColor:[UIColor whiteColor]];
         UIImage *image = [UIImage imageNamed:@"no_shops_text"];
-        noShopsText.backgroundColor = [UIColor colorWithPatternImage:image];
-        [noShopsText setTextAlignment:UITextAlignmentCenter];
-        [noShopsText setNumberOfLines:0];
-        [self.view addSubview:noShopsText];
+        noShopsLabel.backgroundColor = [UIColor colorWithPatternImage:image];
+        [noShopsLabel setTextAlignment:UITextAlignmentCenter];
+        [noShopsLabel setNumberOfLines:0];
+        [self.view addSubview:noShopsLabel];
+        
+        //Tableview toevoegen aan de view
+        shopsTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 300)];
+        shopsTable.dataSource = self;
+        shopsTable.delegate = self;
+        shopsTable.backgroundColor = [UIColor clearColor];
+        shopsTable.separatorColor = [UIColor clearColor];
+        [self.view addSubview:shopsTable];
     }
     else
     {
@@ -132,6 +142,9 @@
 //Aangeven hoeveel hoeveel items er moeten worden getoond in de table
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if([[self fetchAllShops] count] > 0){
+        noShopsLabel.backgroundColor = [UIColor clearColor];
+    }
     return [[self fetchAllShops] count];
 }
 
@@ -240,10 +253,7 @@
     NSLog(@"Instructions button is pressed");
     
     InstructionsVC *instructionsView = [[InstructionsVC alloc]init];
-    NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];
-    //[viewControllers removeLastObject];
-    [viewControllers addObject:instructionsView];
-    [[self navigationController] setViewControllers:viewControllers animated:YES];
+    [[self  navigationController] pushViewController:instructionsView animated:YES];
 }
 
 -(void)goToAddShop
@@ -251,10 +261,6 @@
     NSLog(@"Add shop button is pressed");
     
     AddShopVC *addShopView = [[AddShopVC alloc]init];
-    //NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];
-    //[viewControllers removeLastObject];
-    //[viewControllers addObject:addShopView];
-    //[[self navigationController] setViewControllers:viewControllers animated:YES];
     [[self  navigationController] pushViewController:addShopView animated:YES];
 }
 

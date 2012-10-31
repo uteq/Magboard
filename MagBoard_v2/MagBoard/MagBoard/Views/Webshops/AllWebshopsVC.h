@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AllWebshopsVC : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface AllWebshopsVC : UIViewController <UITableViewDelegate, UITableViewDataSource, LRRestyClientResponseDelegate>
 
 @property (strong, nonatomic) UITableView* shopsTable;
+@property (strong, nonatomic) UILabel* noShopsLabel;
 
 -(void)drawNavigationBar;
 -(void)makeTable;

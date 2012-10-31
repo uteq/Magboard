@@ -44,11 +44,6 @@
     [[self navigationController] setViewControllers:viewControllers animated:YES];
 }
 
--(void)saveShop
-{
-    NSLog(@"Save button touched");
-}
-
 //Construct the form for adding webshop
 -(void)makeForm
 {
@@ -65,7 +60,7 @@
     shopName.placeholder = @"Naam webshop";  
     shopName.textAlignment = UITextAlignmentLeft;          
     shopName.font = [UIFont boldSystemFontOfSize:14]; 
-    shopName.adjustsFontSizeToFitWidth = YES;   
+    shopName.adjustsFontSizeToFitWidth = YES;
     shopName.textColor = [UIColor whiteColor];         
     shopName.returnKeyType = UIReturnKeyDone;
     [scrollView addSubview:shopName];
@@ -80,6 +75,7 @@
     shopUrl.textAlignment = UITextAlignmentLeft;
     shopUrl.font = [UIFont boldSystemFontOfSize:14];
     shopUrl.adjustsFontSizeToFitWidth = YES;
+    shopUrl.autocapitalizationType = UITextAutocapitalizationTypeNone;
     shopUrl.textColor = [UIColor whiteColor];
     shopUrl.returnKeyType = UIReturnKeyDone;
     [scrollView addSubview:shopUrl];
@@ -94,6 +90,7 @@
     username.textAlignment = UITextAlignmentLeft;
     username.font = [UIFont boldSystemFontOfSize:14];
     username.adjustsFontSizeToFitWidth = YES;
+    username.autocapitalizationType = UITextAutocapitalizationTypeNone;
     username.textColor = [UIColor whiteColor];
     username.returnKeyType = UIReturnKeyDone;
     [scrollView addSubview:username];
@@ -108,6 +105,8 @@
     password.textAlignment = UITextAlignmentLeft;
     password.font = [UIFont boldSystemFontOfSize:14];
     password.adjustsFontSizeToFitWidth = YES;
+    password.secureTextEntry = TRUE;
+    password.autocapitalizationType = UITextAutocapitalizationTypeNone;
     password.textColor = [UIColor whiteColor];
     password.returnKeyType = UIReturnKeyDone;
     [scrollView addSubview:password];
@@ -168,6 +167,14 @@
     [alert show];
 }
 
+//Function for validating url
+- (BOOL)validateUrl:(NSString *)candidate {
+    NSString *urlRegEx =
+    @"((www)*|([0-9]*)|([-|_])*)+([\\.|/]((\\w)*|([0-9]*)|([-|_])*))+";
+    NSPredicate *urlTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", urlRegEx];
+    return [urlTest evaluateWithObject:candidate];
+}
+
 //Functie die ervoor zorgt dat de gegevens van de webshop worden opgeslagen
 - (void)saveWebshop
 {
@@ -181,9 +188,9 @@
         message = @"U dient een naam op te geven voor uw webshop";
         empty = TRUE;
         [self makeAlert:alertTitle message:message];
-    } else if ([shopUrl.text isEqualToString:@""]){
-        alertTitle = @"Geen url";
-        message = @"U dient een url op te geven voor uw webshop";
+    } else if (![self validateUrl:shopUrl.text]){
+        alertTitle = @"Onjuiste URL";
+        message = @"U dient een correcte url op te geven voor uw webshop. Bijvoorbeeld www.uwdomein.nl";
         empty = TRUE;
         [self makeAlert:alertTitle message:message];
     } else if ([username.text isEqualToString:@""]){
