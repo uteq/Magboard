@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "Helpers.h"
+#import "AllWebshopsVC.h"
 
 @implementation AppDelegate
 
@@ -19,7 +19,18 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
+    self.window.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"linnen_bg.png"]];
+    
+    //Initialize first screen and navigationcontroller
+    AllWebshopsVC *shopsOverview = [[AllWebshopsVC alloc] init];
+	UINavigationController *localNavigation = [[UINavigationController alloc] initWithRootViewController:shopsOverview];
+	[[localNavigation navigationBar] setNeedsDisplay];
+	self.navController = localNavigation;
+    
+    //Set custom colors for navigationbar
+    [self.navController setValue:[[CustomNavBar alloc]init] forKeyPath:@"navigationBar"];
+    
+    [self.window addSubview:self.navController.view];
     [self.window makeKeyAndVisible];
     return YES;
 }

@@ -1,7 +1,0 @@
-PODS_ROOT = ${SRCROOT}/Pods
-PODS_HEADERS_SEARCH_PATHS = ${PODS_PUBLIC_HEADERS_SEARCH_PATHS}
-ALWAYS_SEARCH_USER_PATHS = YES
-OTHER_LDFLAGS = -ObjC -framework CoreData -framework SystemConfiguration
-HEADER_SEARCH_PATHS = ${PODS_HEADERS_SEARCH_PATHS}
-PODS_BUILD_HEADERS_SEARCH_PATHS = "${PODS_ROOT}/BuildHeaders" "${PODS_ROOT}/BuildHeaders/AFNetworking" "${PODS_ROOT}/BuildHeaders/AFOAuth2Client" "${PODS_ROOT}/BuildHeaders/FontLabel" "${PODS_ROOT}/BuildHeaders/LRResty" "${PODS_ROOT}/BuildHeaders/NSData+Base64" "${PODS_ROOT}/BuildHeaders/ObjectiveRecord" "${PODS_ROOT}/BuildHeaders/TPKeyboardAvoiding"
-PODS_PUBLIC_HEADERS_SEARCH_PATHS = "${PODS_ROOT}/Headers" "${PODS_ROOT}/Headers/AFNetworking" "${PODS_ROOT}/Headers/AFOAuth2Client" "${PODS_ROOT}/Headers/FontLabel" "${PODS_ROOT}/Headers/LRResty" "${PODS_ROOT}/Headers/NSData+Base64" "${PODS_ROOT}/Headers/ObjectiveRecord" "${PODS_ROOT}/Headers/TPKeyboardAvoiding"

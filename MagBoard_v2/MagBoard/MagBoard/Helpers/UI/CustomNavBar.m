@@ -34,4 +34,18 @@
     
 }
 
++(UILabel*)setNavBarTitle:(NSString*)title
+{
+    UILabel *navBarTitle = [[UILabel alloc] initWithFrame:CGRectMake(60, 3, 200, 30)];
+    navBarTitle.text = title;
+    navBarTitle.font = [UIFont boldSystemFontOfSize:16];
+    navBarTitle.textColor = [UIColor whiteColor];
+    navBarTitle.backgroundColor = [UIColor clearColor];
+    navBarTitle.textAlignment = UITextAlignmentCenter;
+    navBarTitle.shadowColor = [UIColor blackColor];
+    navBarTitle.shadowOffset = CGSizeMake(1, 1);
+    
+    return navBarTitle;
+}
+
 @end

@@ -46,6 +46,17 @@
 		957665F81641339800B68687 /* order_holder_completed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 957665EE1641339800B68687 /* order_holder_completed@2x.png */; };
 		957665F91641339800B68687 /* order_holder_pending@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 957665EF1641339800B68687 /* order_holder_pending@2x.png */; };
 		957665FA1641339800B68687 /* order_holder_processing@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 957665F01641339800B68687 /* order_holder_processing@2x.png */; };
+		957666081641368D00B68687 /* UIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 957666071641368D00B68687 /* UIButton.m */; };
+		9576660C164136E300B68687 /* UIBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9576660B164136E300B68687 /* UIBarButtonItem.m */; };
+		9576660F164138B700B68687 /* AllWebshopsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9576660E164138B700B68687 /* AllWebshopsVC.m */; };
+		9576661216413CDB00B68687 /* Webshop.m in Sources */ = {isa = PBXBuildFile; fileRef = 9576661116413CDB00B68687 /* Webshop.m */; };
+		95766615164142D700B68687 /* ShopSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 95766614164142D700B68687 /* ShopSingleton.m */; };
+		9576661B1641446F00B68687 /* OrdersVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9576661A1641446F00B68687 /* OrdersVC.m */; };
+		9576661E16414BFD00B68687 /* AddShopVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9576661D16414BFD00B68687 /* AddShopVC.m */; };
+		9576662116414C2000B68687 /* InstructionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9576662016414C2000B68687 /* InstructionsVC.m */; };
+		9576662316414D1300B68687 /* no_shops_text.png in Resources */ = {isa = PBXBuildFile; fileRef = 9576662216414D1300B68687 /* no_shops_text.png */; };
+		9576662516414D2400B68687 /* no_shops_text@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9576662416414D2400B68687 /* no_shops_text@2x.png */; };
+		95766628164156AA00B68687 /* MagboardInstructions.plist in Resources */ = {isa = PBXBuildFile; fileRef = 95766627164156AA00B68687 /* MagboardInstructions.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +116,25 @@
 		957665EE1641339800B68687 /* order_holder_completed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "order_holder_completed@2x.png"; path = "Resources/Images/Retina/order_holder_completed@2x.png"; sourceTree = "<group>"; };
 		957665EF1641339800B68687 /* order_holder_pending@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "order_holder_pending@2x.png"; path = "Resources/Images/Retina/order_holder_pending@2x.png"; sourceTree = "<group>"; };
 		957665F01641339800B68687 /* order_holder_processing@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "order_holder_processing@2x.png"; path = "Resources/Images/Retina/order_holder_processing@2x.png"; sourceTree = "<group>"; };
+		957666061641368D00B68687 /* UIButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIButton.h; path = Helpers/UI/UIButton.h; sourceTree = "<group>"; };
+		957666071641368D00B68687 /* UIButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIButton.m; path = Helpers/UI/UIButton.m; sourceTree = "<group>"; };
+		9576660A164136E300B68687 /* UIBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIBarButtonItem.h; path = Helpers/UI/UIBarButtonItem.h; sourceTree = "<group>"; };
+		9576660B164136E300B68687 /* UIBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIBarButtonItem.m; path = Helpers/UI/UIBarButtonItem.m; sourceTree = "<group>"; };
+		9576660D164138B700B68687 /* AllWebshopsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AllWebshopsVC.h; path = Views/Webshops/AllWebshopsVC.h; sourceTree = "<group>"; };
+		9576660E164138B700B68687 /* AllWebshopsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AllWebshopsVC.m; path = Views/Webshops/AllWebshopsVC.m; sourceTree = "<group>"; };
+		9576661016413CDB00B68687 /* Webshop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Webshop.h; path = Models/Webshop/Webshop.h; sourceTree = "<group>"; };
+		9576661116413CDB00B68687 /* Webshop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Webshop.m; path = Models/Webshop/Webshop.m; sourceTree = "<group>"; };
+		95766613164142D600B68687 /* ShopSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShopSingleton.h; path = Models/Webshop/ShopSingleton.h; sourceTree = "<group>"; };
+		95766614164142D700B68687 /* ShopSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShopSingleton.m; path = Models/Webshop/ShopSingleton.m; sourceTree = "<group>"; };
+		957666191641446F00B68687 /* OrdersVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrdersVC.h; path = Views/Orders/OrdersVC.h; sourceTree = "<group>"; };
+		9576661A1641446F00B68687 /* OrdersVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrdersVC.m; path = Views/Orders/OrdersVC.m; sourceTree = "<group>"; };
+		9576661C16414BFC00B68687 /* AddShopVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddShopVC.h; path = Views/Webshops/AddShopVC.h; sourceTree = "<group>"; };
+		9576661D16414BFD00B68687 /* AddShopVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddShopVC.m; path = Views/Webshops/AddShopVC.m; sourceTree = "<group>"; };
+		9576661F16414C2000B68687 /* InstructionsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InstructionsVC.h; path = Views/Instructions/InstructionsVC.h; sourceTree = "<group>"; };
+		9576662016414C2000B68687 /* InstructionsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InstructionsVC.m; path = Views/Instructions/InstructionsVC.m; sourceTree = "<group>"; };
+		9576662216414D1300B68687 /* no_shops_text.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = no_shops_text.png; path = "Resources/Images/Non-retina/no_shops_text.png"; sourceTree = "<group>"; };
+		9576662416414D2400B68687 /* no_shops_text@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "no_shops_text@2x.png"; path = "Resources/Images/Retina/no_shops_text@2x.png"; sourceTree = "<group>"; };
+		95766627164156AA00B68687 /* MagboardInstructions.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = MagboardInstructions.plist; path = Resources/Plists/MagboardInstructions.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -271,6 +301,7 @@
 		957665BD16412EEE00B68687 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				957666261641569D00B68687 /* Plist */,
 				957665BF16412EFB00B68687 /* Non-retina */,
 				957665BE16412EF400B68687 /* Retina */,
 			);
@@ -280,6 +311,7 @@
 		957665BE16412EF400B68687 /* Retina */ = {
 			isa = PBXGroup;
 			children = (
+				9576662416414D2400B68687 /* no_shops_text@2x.png */,
 				957665E71641339800B68687 /* back_button_top@2x.png */,
 				957665E81641339800B68687 /* button_full_width_grey@2x.png */,
 				957665E91641339800B68687 /* button_half_grey@2x.png */,
@@ -297,6 +329,7 @@
 		957665BF16412EFB00B68687 /* Non-retina */ = {
 			isa = PBXGroup;
 			children = (
+				9576662216414D1300B68687 /* no_shops_text.png */,
 				957665D51641338800B68687 /* back_button_top.png */,
 				957665D61641338800B68687 /* button_full_width_grey.png */,
 				957665D71641338800B68687 /* button_half_grey.png */,
@@ -341,6 +374,8 @@
 		957665C416412F8100B68687 /* Instructions */ = {
 			isa = PBXGroup;
 			children = (
+				9576661F16414C2000B68687 /* InstructionsVC.h */,
+				9576662016414C2000B68687 /* InstructionsVC.m */,
 			);
 			name = Instructions;
 			sourceTree = "<group>";
@@ -355,6 +390,8 @@
 		957665C616412F8C00B68687 /* Orders */ = {
 			isa = PBXGroup;
 			children = (
+				957666191641446F00B68687 /* OrdersVC.h */,
+				9576661A1641446F00B68687 /* OrdersVC.m */,
 			);
 			name = Orders;
 			sourceTree = "<group>";
@@ -362,6 +399,10 @@
 		957665C716412F9000B68687 /* Webshops */ = {
 			isa = PBXGroup;
 			children = (
+				9576660D164138B700B68687 /* AllWebshopsVC.h */,
+				9576660E164138B700B68687 /* AllWebshopsVC.m */,
+				9576661C16414BFC00B68687 /* AddShopVC.h */,
+				9576661D16414BFD00B68687 /* AddShopVC.m */,
 			);
 			name = Webshops;
 			sourceTree = "<group>";
@@ -383,6 +424,10 @@
 		957665CA16412FC500B68687 /* Webshops */ = {
 			isa = PBXGroup;
 			children = (
+				9576661016413CDB00B68687 /* Webshop.h */,
+				9576661116413CDB00B68687 /* Webshop.m */,
+				95766613164142D600B68687 /* ShopSingleton.h */,
+				95766614164142D700B68687 /* ShopSingleton.m */,
 			);
 			name = Webshops;
 			sourceTree = "<group>";
@@ -399,8 +444,20 @@
 			children = (
 				957665D21641328900B68687 /* CustomNavBar.h */,
 				957665D31641328900B68687 /* CustomNavBar.m */,
+				957666061641368D00B68687 /* UIButton.h */,
+				957666071641368D00B68687 /* UIButton.m */,
+				9576660A164136E300B68687 /* UIBarButtonItem.h */,
+				9576660B164136E300B68687 /* UIBarButtonItem.m */,
 			);
 			name = "User interface";
+			sourceTree = "<group>";
+		};
+		957666261641569D00B68687 /* Plist */ = {
+			isa = PBXGroup;
+			children = (
+				95766627164156AA00B68687 /* MagboardInstructions.plist */,
+			);
+			name = Plist;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -498,6 +555,9 @@
 				957665F81641339800B68687 /* order_holder_completed@2x.png in Resources */,
 				957665F91641339800B68687 /* order_holder_pending@2x.png in Resources */,
 				957665FA1641339800B68687 /* order_holder_processing@2x.png in Resources */,
+				9576662316414D1300B68687 /* no_shops_text.png in Resources */,
+				9576662516414D2400B68687 /* no_shops_text@2x.png in Resources */,
+				95766628164156AA00B68687 /* MagboardInstructions.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -550,6 +610,14 @@
 				95766579164125B400B68687 /* AppDelegate.m in Sources */,
 				95766582164125B400B68687 /* MagBoard.xcdatamodeld in Sources */,
 				957665D41641328900B68687 /* CustomNavBar.m in Sources */,
+				957666081641368D00B68687 /* UIButton.m in Sources */,
+				9576660C164136E300B68687 /* UIBarButtonItem.m in Sources */,
+				9576660F164138B700B68687 /* AllWebshopsVC.m in Sources */,
+				9576661216413CDB00B68687 /* Webshop.m in Sources */,
+				95766615164142D700B68687 /* ShopSingleton.m in Sources */,
+				9576661B1641446F00B68687 /* OrdersVC.m in Sources */,
+				9576661E16414BFD00B68687 /* AddShopVC.m in Sources */,
+				9576662116414C2000B68687 /* InstructionsVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

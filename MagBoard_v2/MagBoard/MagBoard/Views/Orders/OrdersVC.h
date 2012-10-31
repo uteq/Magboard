@@ -1,5 +1,5 @@
 //
-//  CustomNavBar.h
+//  OrdersVC.h
 //  MagBoard
 //
 //  Created by Dennis de Jong on 31-10-12.
@@ -8,9 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CustomNavBar : UINavigationBar
-
--(void)applyDefaultStyle;
-+(UILabel*)setNavBarTitle:(NSString*)title;
+@interface OrdersVC : UIViewController
 
 @end

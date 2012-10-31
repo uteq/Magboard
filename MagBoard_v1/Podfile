@@ -1,8 +1,0 @@
-platform :ios
-
-pod 'AFNetworking'
-pod 'ObjectiveRecord' 
-pod 'TPKeyboardAvoiding'
-pod 'AFOAuth2Client'
-pod 'FontLabel'
-pod 'LRResty'
