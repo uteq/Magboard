@@ -1,0 +1,748 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		183EDE67F4614EA7B821087D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C53D467431945D9A56F0FD1 /* libPods.a */; };
+		95766567164125B400B68687 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95766566164125B400B68687 /* UIKit.framework */; };
+		95766569164125B400B68687 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95766568164125B400B68687 /* Foundation.framework */; };
+		9576656B164125B400B68687 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9576656A164125B400B68687 /* CoreGraphics.framework */; };
+		9576656D164125B400B68687 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9576656C164125B400B68687 /* CoreData.framework */; };
+		95766573164125B400B68687 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 95766571164125B400B68687 /* InfoPlist.strings */; };
+		95766575164125B400B68687 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 95766574164125B400B68687 /* main.m */; };
+		95766579164125B400B68687 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 95766578164125B400B68687 /* AppDelegate.m */; };
+		9576657B164125B400B68687 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 9576657A164125B400B68687 /* Default.png */; };
+		9576657D164125B400B68687 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9576657C164125B400B68687 /* Default@2x.png */; };
+		9576657F164125B400B68687 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9576657E164125B400B68687 /* Default-568h@2x.png */; };
+		95766582164125B400B68687 /* MagBoard.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 95766580164125B400B68687 /* MagBoard.xcdatamodeld */; };
+		9576658A164125B400B68687 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95766589164125B400B68687 /* SenTestingKit.framework */; };
+		9576658B164125B400B68687 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95766566164125B400B68687 /* UIKit.framework */; };
+		9576658C164125B400B68687 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95766568164125B400B68687 /* Foundation.framework */; };
+		9576658D164125B400B68687 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9576656C164125B400B68687 /* CoreData.framework */; };
+		95766595164125B400B68687 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 95766593164125B400B68687 /* InfoPlist.strings */; };
+		95766598164125B400B68687 /* MagBoardTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 95766597164125B400B68687 /* MagBoardTests.m */; };
+		957665D11641314800B68687 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 957665D01641314800B68687 /* QuartzCore.framework */; };
+		957665D41641328900B68687 /* CustomNavBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 957665D31641328900B68687 /* CustomNavBar.m */; };
+		957665DE1641338800B68687 /* back_button_top.png in Resources */ = {isa = PBXBuildFile; fileRef = 957665D51641338800B68687 /* back_button_top.png */; };
+		957665DF1641338800B68687 /* button_full_width_grey.png in Resources */ = {isa = PBXBuildFile; fileRef = 957665D61641338800B68687 /* button_full_width_grey.png */; };
+		957665E01641338800B68687 /* button_half_grey.png in Resources */ = {isa = PBXBuildFile; fileRef = 957665D71641338800B68687 /* button_half_grey.png */; };
+		957665E11641338800B68687 /* input_black_full_width.png in Resources */ = {isa = PBXBuildFile; fileRef = 957665D81641338800B68687 /* input_black_full_width.png */; };
+		957665E21641338800B68687 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 957665D91641338800B68687 /* logo.png */; };
+		957665E31641338800B68687 /* navbar.png in Resources */ = {isa = PBXBuildFile; fileRef = 957665DA1641338800B68687 /* navbar.png */; };
+		957665E41641338800B68687 /* order_holder_completed.png in Resources */ = {isa = PBXBuildFile; fileRef = 957665DB1641338800B68687 /* order_holder_completed.png */; };
+		957665E51641338800B68687 /* order_holder_pending.png in Resources */ = {isa = PBXBuildFile; fileRef = 957665DC1641338800B68687 /* order_holder_pending.png */; };
+		957665E61641338800B68687 /* order_holder_processing.png in Resources */ = {isa = PBXBuildFile; fileRef = 957665DD1641338800B68687 /* order_holder_processing.png */; };
+		957665F11641339800B68687 /* back_button_top@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 957665E71641339800B68687 /* back_button_top@2x.png */; };
+		957665F21641339800B68687 /* button_full_width_grey@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 957665E81641339800B68687 /* button_full_width_grey@2x.png */; };
+		957665F31641339800B68687 /* button_half_grey@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 957665E91641339800B68687 /* button_half_grey@2x.png */; };
+		957665F41641339800B68687 /* input_black_full_width@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 957665EA1641339800B68687 /* input_black_full_width@2x.png */; };
+		957665F51641339800B68687 /* linnen_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 957665EB1641339800B68687 /* linnen_bg@2x.png */; };
+		957665F61641339800B68687 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 957665EC1641339800B68687 /* logo@2x.png */; };
+		957665F71641339800B68687 /* navbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 957665ED1641339800B68687 /* navbar@2x.png */; };
+		957665F81641339800B68687 /* order_holder_completed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 957665EE1641339800B68687 /* order_holder_completed@2x.png */; };
+		957665F91641339800B68687 /* order_holder_pending@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 957665EF1641339800B68687 /* order_holder_pending@2x.png */; };
+		957665FA1641339800B68687 /* order_holder_processing@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 957665F01641339800B68687 /* order_holder_processing@2x.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9576658E164125B400B68687 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 95766559164125B400B68687 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 95766561164125B400B68687;
+			remoteInfo = MagBoard;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0C53D467431945D9A56F0FD1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8886B73E60E04F26BDA416E3 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		95766562164125B400B68687 /* MagBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MagBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		95766566164125B400B68687 /* UIKit.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		95766568164125B400B68687 /* Foundation.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		9576656A164125B400B68687 /* CoreGraphics.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		9576656C164125B400B68687 /* CoreData.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		95766570164125B400B68687 /* MagBoard-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MagBoard-Info.plist"; sourceTree = "<group>"; };
+		95766572164125B400B68687 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		95766574164125B400B68687 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		95766576164125B400B68687 /* MagBoard-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MagBoard-Prefix.pch"; sourceTree = "<group>"; };
+		95766577164125B400B68687 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		95766578164125B400B68687 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		9576657A164125B400B68687 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		9576657C164125B400B68687 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		9576657E164125B400B68687 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		95766581164125B400B68687 /* MagBoard.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MagBoard.xcdatamodel; sourceTree = "<group>"; };
+		95766588164125B400B68687 /* MagBoardTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MagBoardTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		95766589164125B400B68687 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		95766592164125B400B68687 /* MagBoardTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MagBoardTests-Info.plist"; sourceTree = "<group>"; };
+		95766594164125B400B68687 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		95766596164125B400B68687 /* MagBoardTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MagBoardTests.h; sourceTree = "<group>"; };
+		95766597164125B400B68687 /* MagBoardTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MagBoardTests.m; sourceTree = "<group>"; };
+		957665CD1641308A00B68687 /* Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Helpers.h; path = Helpers/Helpers.h; sourceTree = "<group>"; };
+		957665D01641314800B68687 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		957665D21641328900B68687 /* CustomNavBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomNavBar.h; path = Helpers/UI/CustomNavBar.h; sourceTree = "<group>"; };
+		957665D31641328900B68687 /* CustomNavBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomNavBar.m; path = Helpers/UI/CustomNavBar.m; sourceTree = "<group>"; };
+		957665D51641338800B68687 /* back_button_top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = back_button_top.png; path = "Resources/Images/Non-retina/back_button_top.png"; sourceTree = "<group>"; };
+		957665D61641338800B68687 /* button_full_width_grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button_full_width_grey.png; path = "Resources/Images/Non-retina/button_full_width_grey.png"; sourceTree = "<group>"; };
+		957665D71641338800B68687 /* button_half_grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button_half_grey.png; path = "Resources/Images/Non-retina/button_half_grey.png"; sourceTree = "<group>"; };
+		957665D81641338800B68687 /* input_black_full_width.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = input_black_full_width.png; path = "Resources/Images/Non-retina/input_black_full_width.png"; sourceTree = "<group>"; };
+		957665D91641338800B68687 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo.png; path = "Resources/Images/Non-retina/logo.png"; sourceTree = "<group>"; };
+		957665DA1641338800B68687 /* navbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = navbar.png; path = "Resources/Images/Non-retina/navbar.png"; sourceTree = "<group>"; };
+		957665DB1641338800B68687 /* order_holder_completed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = order_holder_completed.png; path = "Resources/Images/Non-retina/order_holder_completed.png"; sourceTree = "<group>"; };
+		957665DC1641338800B68687 /* order_holder_pending.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = order_holder_pending.png; path = "Resources/Images/Non-retina/order_holder_pending.png"; sourceTree = "<group>"; };
+		957665DD1641338800B68687 /* order_holder_processing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = order_holder_processing.png; path = "Resources/Images/Non-retina/order_holder_processing.png"; sourceTree = "<group>"; };
+		957665E71641339800B68687 /* back_button_top@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "back_button_top@2x.png"; path = "Resources/Images/Retina/back_button_top@2x.png"; sourceTree = "<group>"; };
+		957665E81641339800B68687 /* button_full_width_grey@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "button_full_width_grey@2x.png"; path = "Resources/Images/Retina/button_full_width_grey@2x.png"; sourceTree = "<group>"; };
+		957665E91641339800B68687 /* button_half_grey@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "button_half_grey@2x.png"; path = "Resources/Images/Retina/button_half_grey@2x.png"; sourceTree = "<group>"; };
+		957665EA1641339800B68687 /* input_black_full_width@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "input_black_full_width@2x.png"; path = "Resources/Images/Retina/input_black_full_width@2x.png"; sourceTree = "<group>"; };
+		957665EB1641339800B68687 /* linnen_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "linnen_bg@2x.png"; path = "Resources/Images/Retina/linnen_bg@2x.png"; sourceTree = "<group>"; };
+		957665EC1641339800B68687 /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "logo@2x.png"; path = "Resources/Images/Retina/logo@2x.png"; sourceTree = "<group>"; };
+		957665ED1641339800B68687 /* navbar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "navbar@2x.png"; path = "Resources/Images/Retina/navbar@2x.png"; sourceTree = "<group>"; };
+		957665EE1641339800B68687 /* order_holder_completed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "order_holder_completed@2x.png"; path = "Resources/Images/Retina/order_holder_completed@2x.png"; sourceTree = "<group>"; };
+		957665EF1641339800B68687 /* order_holder_pending@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "order_holder_pending@2x.png"; path = "Resources/Images/Retina/order_holder_pending@2x.png"; sourceTree = "<group>"; };
+		957665F01641339800B68687 /* order_holder_processing@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "order_holder_processing@2x.png"; path = "Resources/Images/Retina/order_holder_processing@2x.png"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9576655F164125B400B68687 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				957665D11641314800B68687 /* QuartzCore.framework in Frameworks */,
+				95766567164125B400B68687 /* UIKit.framework in Frameworks */,
+				95766569164125B400B68687 /* Foundation.framework in Frameworks */,
+				9576656B164125B400B68687 /* CoreGraphics.framework in Frameworks */,
+				9576656D164125B400B68687 /* CoreData.framework in Frameworks */,
+				183EDE67F4614EA7B821087D /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		95766584164125B400B68687 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9576658A164125B400B68687 /* SenTestingKit.framework in Frameworks */,
+				9576658B164125B400B68687 /* UIKit.framework in Frameworks */,
+				9576658C164125B400B68687 /* Foundation.framework in Frameworks */,
+				9576658D164125B400B68687 /* CoreData.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		95766557164125B400B68687 = {
+			isa = PBXGroup;
+			children = (
+				9576656E164125B400B68687 /* MagBoard */,
+				95766590164125B400B68687 /* MagBoardTests */,
+				95766565164125B400B68687 /* Frameworks */,
+				95766563164125B400B68687 /* Products */,
+				8886B73E60E04F26BDA416E3 /* Pods.xcconfig */,
+			);
+			sourceTree = "<group>";
+		};
+		95766563164125B400B68687 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				95766562164125B400B68687 /* MagBoard.app */,
+				95766588164125B400B68687 /* MagBoardTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		95766565164125B400B68687 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				957665D01641314800B68687 /* QuartzCore.framework */,
+				95766566164125B400B68687 /* UIKit.framework */,
+				95766568164125B400B68687 /* Foundation.framework */,
+				9576656A164125B400B68687 /* CoreGraphics.framework */,
+				9576656C164125B400B68687 /* CoreData.framework */,
+				95766589164125B400B68687 /* SenTestingKit.framework */,
+				0C53D467431945D9A56F0FD1 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9576656E164125B400B68687 /* MagBoard */ = {
+			isa = PBXGroup;
+			children = (
+				957665BD16412EEE00B68687 /* Resources */,
+				957665BC16412ECE00B68687 /* Helpers */,
+				957665BB16412EC200B68687 /* Core data */,
+				957665BA16412EA900B68687 /* Controllers */,
+				957665B916412EA200B68687 /* Views */,
+				957665B716412E9B00B68687 /* Models */,
+				95766577164125B400B68687 /* AppDelegate.h */,
+				95766578164125B400B68687 /* AppDelegate.m */,
+				9576656F164125B400B68687 /* Supporting Files */,
+			);
+			path = MagBoard;
+			sourceTree = "<group>";
+		};
+		9576656F164125B400B68687 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				95766570164125B400B68687 /* MagBoard-Info.plist */,
+				95766571164125B400B68687 /* InfoPlist.strings */,
+				95766574164125B400B68687 /* main.m */,
+				95766576164125B400B68687 /* MagBoard-Prefix.pch */,
+				9576657A164125B400B68687 /* Default.png */,
+				9576657C164125B400B68687 /* Default@2x.png */,
+				9576657E164125B400B68687 /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		95766590164125B400B68687 /* MagBoardTests */ = {
+			isa = PBXGroup;
+			children = (
+				95766596164125B400B68687 /* MagBoardTests.h */,
+				95766597164125B400B68687 /* MagBoardTests.m */,
+				95766591164125B400B68687 /* Supporting Files */,
+			);
+			path = MagBoardTests;
+			sourceTree = "<group>";
+		};
+		95766591164125B400B68687 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				95766592164125B400B68687 /* MagBoardTests-Info.plist */,
+				95766593164125B400B68687 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		957665B716412E9B00B68687 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				957665CB16412FCF00B68687 /* Instructions */,
+				957665CA16412FC500B68687 /* Webshops */,
+				957665C916412FC000B68687 /* Orders */,
+				957665C816412FB600B68687 /* Invoices */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		957665B916412EA200B68687 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				957665C416412F8100B68687 /* Instructions */,
+				957665C716412F9000B68687 /* Webshops */,
+				957665C616412F8C00B68687 /* Orders */,
+				957665C516412F8600B68687 /* Invoices */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		957665BA16412EA900B68687 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				957665C316412F3D00B68687 /* Instructions */,
+				957665C016412F1F00B68687 /* Webshops */,
+				957665C116412F2A00B68687 /* Orders */,
+				957665C216412F2F00B68687 /* Invoices */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		957665BB16412EC200B68687 /* Core data */ = {
+			isa = PBXGroup;
+			children = (
+				95766580164125B400B68687 /* MagBoard.xcdatamodeld */,
+			);
+			name = "Core data";
+			sourceTree = "<group>";
+		};
+		957665BC16412ECE00B68687 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				957665CC16412FE100B68687 /* User interface */,
+				957665CD1641308A00B68687 /* Helpers.h */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		957665BD16412EEE00B68687 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				957665BF16412EFB00B68687 /* Non-retina */,
+				957665BE16412EF400B68687 /* Retina */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		957665BE16412EF400B68687 /* Retina */ = {
+			isa = PBXGroup;
+			children = (
+				957665E71641339800B68687 /* back_button_top@2x.png */,
+				957665E81641339800B68687 /* button_full_width_grey@2x.png */,
+				957665E91641339800B68687 /* button_half_grey@2x.png */,
+				957665EA1641339800B68687 /* input_black_full_width@2x.png */,
+				957665EB1641339800B68687 /* linnen_bg@2x.png */,
+				957665EC1641339800B68687 /* logo@2x.png */,
+				957665ED1641339800B68687 /* navbar@2x.png */,
+				957665EE1641339800B68687 /* order_holder_completed@2x.png */,
+				957665EF1641339800B68687 /* order_holder_pending@2x.png */,
+				957665F01641339800B68687 /* order_holder_processing@2x.png */,
+			);
+			name = Retina;
+			sourceTree = "<group>";
+		};
+		957665BF16412EFB00B68687 /* Non-retina */ = {
+			isa = PBXGroup;
+			children = (
+				957665D51641338800B68687 /* back_button_top.png */,
+				957665D61641338800B68687 /* button_full_width_grey.png */,
+				957665D71641338800B68687 /* button_half_grey.png */,
+				957665D81641338800B68687 /* input_black_full_width.png */,
+				957665D91641338800B68687 /* logo.png */,
+				957665DA1641338800B68687 /* navbar.png */,
+				957665DB1641338800B68687 /* order_holder_completed.png */,
+				957665DC1641338800B68687 /* order_holder_pending.png */,
+				957665DD1641338800B68687 /* order_holder_processing.png */,
+			);
+			name = "Non-retina";
+			sourceTree = "<group>";
+		};
+		957665C016412F1F00B68687 /* Webshops */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Webshops;
+			sourceTree = "<group>";
+		};
+		957665C116412F2A00B68687 /* Orders */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Orders;
+			sourceTree = "<group>";
+		};
+		957665C216412F2F00B68687 /* Invoices */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Invoices;
+			sourceTree = "<group>";
+		};
+		957665C316412F3D00B68687 /* Instructions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Instructions;
+			sourceTree = "<group>";
+		};
+		957665C416412F8100B68687 /* Instructions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Instructions;
+			sourceTree = "<group>";
+		};
+		957665C516412F8600B68687 /* Invoices */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Invoices;
+			sourceTree = "<group>";
+		};
+		957665C616412F8C00B68687 /* Orders */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Orders;
+			sourceTree = "<group>";
+		};
+		957665C716412F9000B68687 /* Webshops */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Webshops;
+			sourceTree = "<group>";
+		};
+		957665C816412FB600B68687 /* Invoices */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Invoices;
+			sourceTree = "<group>";
+		};
+		957665C916412FC000B68687 /* Orders */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Orders;
+			sourceTree = "<group>";
+		};
+		957665CA16412FC500B68687 /* Webshops */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Webshops;
+			sourceTree = "<group>";
+		};
+		957665CB16412FCF00B68687 /* Instructions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Instructions;
+			sourceTree = "<group>";
+		};
+		957665CC16412FE100B68687 /* User interface */ = {
+			isa = PBXGroup;
+			children = (
+				957665D21641328900B68687 /* CustomNavBar.h */,
+				957665D31641328900B68687 /* CustomNavBar.m */,
+			);
+			name = "User interface";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		95766561164125B400B68687 /* MagBoard */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9576659B164125B400B68687 /* Build configuration list for PBXNativeTarget "MagBoard" */;
+			buildPhases = (
+				9576655E164125B400B68687 /* Sources */,
+				9576655F164125B400B68687 /* Frameworks */,
+				95766560164125B400B68687 /* Resources */,
+				BA5A63AB14B74E23BB32FC08 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MagBoard;
+			productName = MagBoard;
+			productReference = 95766562164125B400B68687 /* MagBoard.app */;
+			productType = "com.apple.product-type.application";
+		};
+		95766587164125B400B68687 /* MagBoardTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9576659E164125B400B68687 /* Build configuration list for PBXNativeTarget "MagBoardTests" */;
+			buildPhases = (
+				95766583164125B400B68687 /* Sources */,
+				95766584164125B400B68687 /* Frameworks */,
+				95766585164125B400B68687 /* Resources */,
+				95766586164125B400B68687 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9576658F164125B400B68687 /* PBXTargetDependency */,
+			);
+			name = MagBoardTests;
+			productName = MagBoardTests;
+			productReference = 95766588164125B400B68687 /* MagBoardTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		95766559164125B400B68687 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = "Dennis de Jong";
+			};
+			buildConfigurationList = 9576655C164125B400B68687 /* Build configuration list for PBXProject "MagBoard" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 95766557164125B400B68687;
+			productRefGroup = 95766563164125B400B68687 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				95766561164125B400B68687 /* MagBoard */,
+				95766587164125B400B68687 /* MagBoardTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		95766560164125B400B68687 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				95766573164125B400B68687 /* InfoPlist.strings in Resources */,
+				9576657B164125B400B68687 /* Default.png in Resources */,
+				9576657D164125B400B68687 /* Default@2x.png in Resources */,
+				9576657F164125B400B68687 /* Default-568h@2x.png in Resources */,
+				957665DE1641338800B68687 /* back_button_top.png in Resources */,
+				957665DF1641338800B68687 /* button_full_width_grey.png in Resources */,
+				957665E01641338800B68687 /* button_half_grey.png in Resources */,
+				957665E11641338800B68687 /* input_black_full_width.png in Resources */,
+				957665E21641338800B68687 /* logo.png in Resources */,
+				957665E31641338800B68687 /* navbar.png in Resources */,
+				957665E41641338800B68687 /* order_holder_completed.png in Resources */,
+				957665E51641338800B68687 /* order_holder_pending.png in Resources */,
+				957665E61641338800B68687 /* order_holder_processing.png in Resources */,
+				957665F11641339800B68687 /* back_button_top@2x.png in Resources */,
+				957665F21641339800B68687 /* button_full_width_grey@2x.png in Resources */,
+				957665F31641339800B68687 /* button_half_grey@2x.png in Resources */,
+				957665F41641339800B68687 /* input_black_full_width@2x.png in Resources */,
+				957665F51641339800B68687 /* linnen_bg@2x.png in Resources */,
+				957665F61641339800B68687 /* logo@2x.png in Resources */,
+				957665F71641339800B68687 /* navbar@2x.png in Resources */,
+				957665F81641339800B68687 /* order_holder_completed@2x.png in Resources */,
+				957665F91641339800B68687 /* order_holder_pending@2x.png in Resources */,
+				957665FA1641339800B68687 /* order_holder_processing@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		95766585164125B400B68687 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				95766595164125B400B68687 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		95766586164125B400B68687 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+		BA5A63AB14B74E23BB32FC08 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9576655E164125B400B68687 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				95766575164125B400B68687 /* main.m in Sources */,
+				95766579164125B400B68687 /* AppDelegate.m in Sources */,
+				95766582164125B400B68687 /* MagBoard.xcdatamodeld in Sources */,
+				957665D41641328900B68687 /* CustomNavBar.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		95766583164125B400B68687 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				95766598164125B400B68687 /* MagBoardTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9576658F164125B400B68687 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 95766561164125B400B68687 /* MagBoard */;
+			targetProxy = 9576658E164125B400B68687 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		95766571164125B400B68687 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				95766572164125B400B68687 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		95766593164125B400B68687 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				95766594164125B400B68687 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		95766599164125B400B68687 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		9576659A164125B400B68687 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		9576659C164125B400B68687 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8886B73E60E04F26BDA416E3 /* Pods.xcconfig */;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MagBoard/MagBoard-Prefix.pch";
+				INFOPLIST_FILE = "MagBoard/MagBoard-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		9576659D164125B400B68687 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8886B73E60E04F26BDA416E3 /* Pods.xcconfig */;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MagBoard/MagBoard-Prefix.pch";
+				INFOPLIST_FILE = "MagBoard/MagBoard-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		9576659F164125B400B68687 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MagBoard.app/MagBoard";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MagBoard/MagBoard-Prefix.pch";
+				INFOPLIST_FILE = "MagBoardTests/MagBoardTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		957665A0164125B400B68687 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MagBoard.app/MagBoard";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MagBoard/MagBoard-Prefix.pch";
+				INFOPLIST_FILE = "MagBoardTests/MagBoardTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9576655C164125B400B68687 /* Build configuration list for PBXProject "MagBoard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				95766599164125B400B68687 /* Debug */,
+				9576659A164125B400B68687 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9576659B164125B400B68687 /* Build configuration list for PBXNativeTarget "MagBoard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9576659C164125B400B68687 /* Debug */,
+				9576659D164125B400B68687 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9576659E164125B400B68687 /* Build configuration list for PBXNativeTarget "MagBoardTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9576659F164125B400B68687 /* Debug */,
+				957665A0164125B400B68687 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		95766580164125B400B68687 /* MagBoard.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				95766581164125B400B68687 /* MagBoard.xcdatamodel */,
+			);
+			currentVersion = 95766581164125B400B68687 /* MagBoard.xcdatamodel */;
+			path = MagBoard.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 95766559164125B400B68687 /* Project object */;
+}
