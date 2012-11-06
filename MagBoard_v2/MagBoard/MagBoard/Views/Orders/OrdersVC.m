@@ -7,6 +7,7 @@
 //
 
 #import "OrdersVC.h"
+#import "OrderInfoVC.h"
 
 @interface OrdersVC ()
 
@@ -19,9 +20,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
-    [self constructHeader];
     shopInfo = [ShopSingleton shopSingleton];
+    // Do any additional setup after loading the view.
+    [self constructHeader];
     [self loginRequest:[shopInfo shopUrl] username:[shopInfo username] password:[shopInfo password]  requestFunction:@"salesOrderList"];
     [self loadingRequest];
 }
@@ -34,7 +35,7 @@
 
 -(void)constructHeader
 {
-    UILabel* navBarTitle = [CustomNavBar setNavBarTitle:@"Shop toevoegen"];
+    UILabel* navBarTitle = [CustomNavBar setNavBarTitle:[shopInfo shopName]];
     self.navigationItem.titleView = navBarTitle;
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTarget:self selector:@selector(backButtonTouched)];
 }
@@ -215,4 +216,30 @@
     
 }
 
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //Data van de betreffende row in een singleton drukken
+    NSString* orderId = [[NSString alloc] initWithFormat:@"%@", [[[orderHolder valueForKey:@"data-items"] objectAtIndex:indexPath.row] valueForKey:@"increment_id"]];
+    
+    OrderSingleton *sharedOrder = [OrderSingleton orderSingleton];
+    sharedOrder.orderId = orderId;
+    
+    if(sharedOrder.orderId != nil)
+    {
+        OrderInfoVC *dashboard = [[OrderInfoVC alloc]init];
+        NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];
+        [viewControllers addObject:dashboard];
+        [[self navigationController] setViewControllers:viewControllers animated:YES];
+    } else {
+        [self makeAlert:@"Geen Order ID" message:@"Kon de order niet inladen omdat er geen order id is."];
+    }
+    
+}
+
+-(void)makeAlert:(NSString*)alertTitle message:(NSString*)alertMessage
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:alertTitle message:alertMessage delegate:self cancelButtonTitle:@"Annuleer" otherButtonTitles:@"Ok", nil];
+    [alert show];
+}
 @end

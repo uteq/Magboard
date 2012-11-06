@@ -57,6 +57,8 @@
 		9576662316414D1300B68687 /* no_shops_text.png in Resources */ = {isa = PBXBuildFile; fileRef = 9576662216414D1300B68687 /* no_shops_text.png */; };
 		9576662516414D2400B68687 /* no_shops_text@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9576662416414D2400B68687 /* no_shops_text@2x.png */; };
 		95766628164156AA00B68687 /* MagboardInstructions.plist in Resources */ = {isa = PBXBuildFile; fileRef = 95766627164156AA00B68687 /* MagboardInstructions.plist */; };
+		CE8585881647DE3100F94506 /* OrderSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8585871647DE3100F94506 /* OrderSingleton.m */; };
+		CEC8C3F51647C17B0086A96E /* OrderInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC8C3F41647C17B0086A96E /* OrderInfoVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -135,6 +137,10 @@
 		9576662216414D1300B68687 /* no_shops_text.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = no_shops_text.png; path = "Resources/Images/Non-retina/no_shops_text.png"; sourceTree = "<group>"; };
 		9576662416414D2400B68687 /* no_shops_text@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "no_shops_text@2x.png"; path = "Resources/Images/Retina/no_shops_text@2x.png"; sourceTree = "<group>"; };
 		95766627164156AA00B68687 /* MagboardInstructions.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = MagboardInstructions.plist; path = Resources/Plists/MagboardInstructions.plist; sourceTree = "<group>"; };
+		CE8585861647DE3100F94506 /* OrderSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrderSingleton.h; path = Models/Orders/OrderSingleton.h; sourceTree = "<group>"; };
+		CE8585871647DE3100F94506 /* OrderSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrderSingleton.m; path = Models/Orders/OrderSingleton.m; sourceTree = "<group>"; };
+		CEC8C3F31647C17B0086A96E /* OrderInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrderInfoVC.h; path = Views/Orders/OrderInfoVC.h; sourceTree = "<group>"; };
+		CEC8C3F41647C17B0086A96E /* OrderInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrderInfoVC.m; path = Views/Orders/OrderInfoVC.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -392,6 +398,8 @@
 			children = (
 				957666191641446F00B68687 /* OrdersVC.h */,
 				9576661A1641446F00B68687 /* OrdersVC.m */,
+				CEC8C3F31647C17B0086A96E /* OrderInfoVC.h */,
+				CEC8C3F41647C17B0086A96E /* OrderInfoVC.m */,
 			);
 			name = Orders;
 			sourceTree = "<group>";
@@ -417,6 +425,8 @@
 		957665C916412FC000B68687 /* Orders */ = {
 			isa = PBXGroup;
 			children = (
+				CE8585861647DE3100F94506 /* OrderSingleton.h */,
+				CE8585871647DE3100F94506 /* OrderSingleton.m */,
 			);
 			name = Orders;
 			sourceTree = "<group>";
@@ -618,6 +628,8 @@
 				9576661B1641446F00B68687 /* OrdersVC.m in Sources */,
 				9576661E16414BFD00B68687 /* AddShopVC.m in Sources */,
 				9576662116414C2000B68687 /* InstructionsVC.m in Sources */,
+				CEC8C3F51647C17B0086A96E /* OrderInfoVC.m in Sources */,
+				CE8585881647DE3100F94506 /* OrderSingleton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

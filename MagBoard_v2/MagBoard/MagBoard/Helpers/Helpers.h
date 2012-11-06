@@ -23,3 +23,4 @@
 //Importing models
 #import "Webshop.h"
 #import "ShopSingleton.h"
+#import "OrderSingleton.h"
