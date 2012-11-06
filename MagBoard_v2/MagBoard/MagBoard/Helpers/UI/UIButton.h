@@ -11,5 +11,6 @@
 @interface UIButton (UIButton_StyledButton)
 
 + (UIButton *)styledButtonWithBackgroundImage:(UIImage *)image font:(UIFont *)font title:(NSString *)title target:(id)target selector:(SEL)selector;
++ (UIButton *)styledSettingsWithBackgroundImage:(UIImage *)image font:(UIFont *)font title:(NSString *)title target:(id)target selector:(SEL)selector;
 
 @end

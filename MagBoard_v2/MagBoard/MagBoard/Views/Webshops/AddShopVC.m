@@ -161,10 +161,28 @@
 }
 
 //Make alert
--(void)makeAlert:(NSString*)alertTitle message:(NSString*)alertMessage
+-(void)makeAlert:(NSString*)alertTitle message:(NSString*)alertMessage button:(NSString *)buttonTitle
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:alertTitle message:alertMessage delegate:self cancelButtonTitle:@"Annuleer" otherButtonTitles:@"Ok", nil];
+    
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle:alertTitle
+                          message:alertMessage
+                          delegate:self
+                          cancelButtonTitle:@"Annuleren"
+                          otherButtonTitles:buttonTitle, nil];
+    
+    //Set special tag for delete alert
+    if([buttonTitle isEqualToString:@"Verwijder"]){
+        [alert setTag:666];
+    }
+    
     [alert show];
+}
+
+//Check which button is clicked
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    
 }
 
 //Function for validating url
@@ -187,27 +205,27 @@
         alertTitle = @"Geen naam";
         message = @"U dient een naam op te geven voor uw webshop";
         empty = TRUE;
-        [self makeAlert:alertTitle message:message];
+        [self makeAlert:alertTitle message:message button:@"Ok"];
     } else if (![self validateUrl:shopUrl.text]){
         alertTitle = @"Onjuiste URL";
         message = @"U dient een correcte url op te geven voor uw webshop. Bijvoorbeeld www.uwdomein.nl";
         empty = TRUE;
-        [self makeAlert:alertTitle message:message];
+        [self makeAlert:alertTitle message:message button:@"Ok"];
     } else if ([username.text isEqualToString:@""]){
         alertTitle = @"Geen gebruikersnaam";
         message = @"U dient een username op te geven voor uw webshop";
         empty = TRUE;
-        [self makeAlert:alertTitle message:message];
+        [self makeAlert:alertTitle message:message button:@"Ok"];
     } else if ([password.text isEqualToString:@""]){
         alertTitle = @"Geen wachtwoord";
         message = @"U dient een wachtwoord op te geven voor uw webshop";
         empty = TRUE;
-        [self makeAlert:alertTitle message:message];
+        [self makeAlert:alertTitle message:message button:@"Ok"];
     } else if (findShop != nil){
         alertTitle = @"Account bestaat al";
         message = @"Er bestaat al een account voor deze webshop. Probeer een andere webshop toe te voegen of ga naar het overzicht.";
         empty = TRUE;
-        [self makeAlert:alertTitle message:message];
+        [self makeAlert:alertTitle message:message button:@"Ok"];
     } else {
         empty = FALSE;
     }

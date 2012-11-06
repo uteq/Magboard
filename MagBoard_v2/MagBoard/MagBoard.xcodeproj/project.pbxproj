@@ -59,6 +59,13 @@
 		95766628164156AA00B68687 /* MagboardInstructions.plist in Resources */ = {isa = PBXBuildFile; fileRef = 95766627164156AA00B68687 /* MagboardInstructions.plist */; };
 		CE8585881647DE3100F94506 /* OrderSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8585871647DE3100F94506 /* OrderSingleton.m */; };
 		CEC8C3F51647C17B0086A96E /* OrderInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC8C3F41647C17B0086A96E /* OrderInfoVC.m */; };
+		959963F916483FC100DBB279 /* settings_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 959963F816483FC100DBB279 /* settings_button.png */; };
+		959963FC16483FD100DBB279 /* settings_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 959963FB16483FD100DBB279 /* settings_button@2x.png */; };
+		9599640516491B7100DBB279 /* screenshot_webshop.png in Resources */ = {isa = PBXBuildFile; fileRef = 9599640416491B7100DBB279 /* screenshot_webshop.png */; };
+		9599640816491B7C00DBB279 /* screenshot_webshop@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9599640716491B7B00DBB279 /* screenshot_webshop@2x.png */; };
+		9599640B1649396400DBB279 /* EditShopVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9599640A1649396400DBB279 /* EditShopVC.m */; };
+		95B0B9EA1649ABD100061DD2 /* bar_button_empty.png in Resources */ = {isa = PBXBuildFile; fileRef = 95B0B9E91649ABD100061DD2 /* bar_button_empty.png */; };
+		95B0B9ED1649ABDC00061DD2 /* bar_button_empty@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 95B0B9EC1649ABDC00061DD2 /* bar_button_empty@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -141,6 +148,14 @@
 		CE8585871647DE3100F94506 /* OrderSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrderSingleton.m; path = Models/Orders/OrderSingleton.m; sourceTree = "<group>"; };
 		CEC8C3F31647C17B0086A96E /* OrderInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrderInfoVC.h; path = Views/Orders/OrderInfoVC.h; sourceTree = "<group>"; };
 		CEC8C3F41647C17B0086A96E /* OrderInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrderInfoVC.m; path = Views/Orders/OrderInfoVC.m; sourceTree = "<group>"; };
+		959963F816483FC100DBB279 /* settings_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = settings_button.png; path = "Resources/Images/Non-retina/settings_button.png"; sourceTree = "<group>"; };
+		959963FB16483FD100DBB279 /* settings_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "settings_button@2x.png"; path = "Resources/Images/Retina/settings_button@2x.png"; sourceTree = "<group>"; };
+		9599640416491B7100DBB279 /* screenshot_webshop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = screenshot_webshop.png; path = "Resources/Images/Non-retina/screenshot_webshop.png"; sourceTree = "<group>"; };
+		9599640716491B7B00DBB279 /* screenshot_webshop@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "screenshot_webshop@2x.png"; path = "Resources/Images/Retina/screenshot_webshop@2x.png"; sourceTree = "<group>"; };
+		959964091649396400DBB279 /* EditShopVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditShopVC.h; path = Views/Webshops/EditShopVC.h; sourceTree = "<group>"; };
+		9599640A1649396400DBB279 /* EditShopVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditShopVC.m; path = Views/Webshops/EditShopVC.m; sourceTree = "<group>"; };
+		95B0B9E91649ABD100061DD2 /* bar_button_empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bar_button_empty.png; path = "Resources/Images/Non-retina/bar_button_empty.png"; sourceTree = "<group>"; };
+		95B0B9EC1649ABDC00061DD2 /* bar_button_empty@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bar_button_empty@2x.png"; path = "Resources/Images/Retina/bar_button_empty@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -317,6 +332,9 @@
 		957665BE16412EF400B68687 /* Retina */ = {
 			isa = PBXGroup;
 			children = (
+				95B0B9EC1649ABDC00061DD2 /* bar_button_empty@2x.png */,
+				9599640716491B7B00DBB279 /* screenshot_webshop@2x.png */,
+				959963FB16483FD100DBB279 /* settings_button@2x.png */,
 				9576662416414D2400B68687 /* no_shops_text@2x.png */,
 				957665E71641339800B68687 /* back_button_top@2x.png */,
 				957665E81641339800B68687 /* button_full_width_grey@2x.png */,
@@ -335,6 +353,9 @@
 		957665BF16412EFB00B68687 /* Non-retina */ = {
 			isa = PBXGroup;
 			children = (
+				95B0B9E91649ABD100061DD2 /* bar_button_empty.png */,
+				9599640416491B7100DBB279 /* screenshot_webshop.png */,
+				959963F816483FC100DBB279 /* settings_button.png */,
 				9576662216414D1300B68687 /* no_shops_text.png */,
 				957665D51641338800B68687 /* back_button_top.png */,
 				957665D61641338800B68687 /* button_full_width_grey.png */,
@@ -411,6 +432,8 @@
 				9576660E164138B700B68687 /* AllWebshopsVC.m */,
 				9576661C16414BFC00B68687 /* AddShopVC.h */,
 				9576661D16414BFD00B68687 /* AddShopVC.m */,
+				959964091649396400DBB279 /* EditShopVC.h */,
+				9599640A1649396400DBB279 /* EditShopVC.m */,
 			);
 			name = Webshops;
 			sourceTree = "<group>";
@@ -568,6 +591,12 @@
 				9576662316414D1300B68687 /* no_shops_text.png in Resources */,
 				9576662516414D2400B68687 /* no_shops_text@2x.png in Resources */,
 				95766628164156AA00B68687 /* MagboardInstructions.plist in Resources */,
+				959963F916483FC100DBB279 /* settings_button.png in Resources */,
+				959963FC16483FD100DBB279 /* settings_button@2x.png in Resources */,
+				9599640516491B7100DBB279 /* screenshot_webshop.png in Resources */,
+				9599640816491B7C00DBB279 /* screenshot_webshop@2x.png in Resources */,
+				95B0B9EA1649ABD100061DD2 /* bar_button_empty.png in Resources */,
+				95B0B9ED1649ABDC00061DD2 /* bar_button_empty@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -630,6 +659,7 @@
 				9576662116414C2000B68687 /* InstructionsVC.m in Sources */,
 				CEC8C3F51647C17B0086A96E /* OrderInfoVC.m in Sources */,
 				CE8585881647DE3100F94506 /* OrderSingleton.m in Sources */,
+				9599640B1649396400DBB279 /* EditShopVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

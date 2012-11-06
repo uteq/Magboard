@@ -11,6 +11,8 @@
 #import "ObjectiveRecord.h"
 #import "TPKeyboardAvoidingScrollView.h"
 #import "TPKeyboardAvoidingTableView.h"
+#import "BlockAlertView.h"
+#import "BlockTextPromptAlertView.h"
 
 //Importing Frameworks
 #import <QuartzCore/QuartzCore.h>

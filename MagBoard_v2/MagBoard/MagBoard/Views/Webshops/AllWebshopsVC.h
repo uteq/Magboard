@@ -8,14 +8,26 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AllWebshopsVC : UIViewController <UITableViewDelegate, UITableViewDataSource, LRRestyClientResponseDelegate>
+@interface AllWebshopsVC : UIViewController <UIScrollViewDelegate>
 
-@property (strong, nonatomic) UITableView* shopsTable;
+@property (strong, nonatomic) UIScrollView* shopsScroller;
 @property (strong, nonatomic) UILabel* noShopsLabel;
+@property (strong, nonatomic) NSArray* allShops;            //For holding the shops from database
+@property (assign, nonatomic) int scrollerAtIndex;          //For saving the index for the scrollview
+@property (strong, nonatomic) UIPageControl * pageControl;  //For making the pagination dots
 
+//Make up interface
 -(void)drawNavigationBar;
--(void)makeTable;
+-(void)makeScrollview;
+-(void)addShopsToScrollview;
 -(void)makeButtons;
+-(void)makeAlert;
 -(NSArray*)fetchAllShops;
+
+//Actions for buttons
+-(void)goToInstructions;
+-(void)goToAddShop;
+-(void)settingsButtonTouched;
+-(void)goToOrdersPage;
 
 @end
