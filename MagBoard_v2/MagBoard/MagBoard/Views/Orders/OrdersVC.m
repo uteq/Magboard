@@ -150,23 +150,10 @@
 {
     NSString* firstName = [[NSString alloc] initWithFormat:@"%@", [[[orderHolder valueForKey:@"data-items"] objectAtIndex:indexPath.row] valueForKey:@"firstname"]];
     NSString* lastName = [[NSString alloc] initWithFormat:@"%@", [[[orderHolder valueForKey:@"data-items"] objectAtIndex:indexPath.row] valueForKey:@"lastname"]];
-    NSString* totalValue = [[NSString alloc] initWithFormat:@"%@", [[[orderHolder valueForKey:@"data-items"] objectAtIndex:indexPath.row] valueForKey:@"base_grand_total"]];
+    NSString* grandTotal = [[NSString alloc] initWithFormat:@"%@", [[[orderHolder valueForKey:@"data-items"] objectAtIndex:indexPath.row] valueForKey:@"grand_total"]];
     NSString* orderId = [[NSString alloc] initWithFormat:@"%@", [[[orderHolder valueForKey:@"data-items"] objectAtIndex:indexPath.row] valueForKey:@"increment_id"]];
     
     NSString* totalName = [[NSString alloc] initWithFormat:@"%@ %@", firstName, lastName];
-    NSString* grandTotal = [[NSString alloc] init];
-    float value = [totalValue floatValue];
-    
-    //If number only has zeros as digits behind the dot
-    NSArray *findZeros = [totalValue componentsSeparatedByString:@"."];
-    NSString *behindComma = [[NSString alloc] initWithFormat:[@"%@", findZeros objectAtIndex:1]];
-    
-    if([behindComma compare: @"0000"]){
-        grandTotal = [NSString stringWithFormat:@"€ %.2f", value];
-    } else {
-        grandTotal = [NSString stringWithFormat:@"€ %.0f,-", value];
-    }
-    
     //Add orderlabel image to table cell
     UILabel *orderHolderLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 301.0f, 53.0f)];
     orderHolderLabel.font = [UIFont boldSystemFontOfSize:14.0f];
