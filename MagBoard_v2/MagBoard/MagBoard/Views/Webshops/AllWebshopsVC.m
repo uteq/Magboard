@@ -276,8 +276,6 @@
                                            textField:&passwordField];
         
         [alert setCancelButtonWithTitle:@"Annuleren" block:^{
-            // Do something or nothing.... This block can even be nil!
-            NSLog(@"Cancel clicked");
         }];
         
         [alert addButtonWithTitle:@"Inloggen" block:^{

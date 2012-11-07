@@ -16,15 +16,6 @@
 
 @synthesize shopInfo, orderInfoHolder, orderInfo, header, createInvoice;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -36,6 +27,7 @@
     [self loginRequest:[shopInfo shopUrl] username:[shopInfo username] password:[shopInfo password] request:@"salesOrderInfo" requestParams:[orderInfo orderId]];
     //[self loadingRequest];
 }
+
 -(void)constructHeader
 {
     NSString *barTitle = [NSString stringWithFormat:@"Order: %@", [orderInfo orderId]];
@@ -44,6 +36,7 @@
     self.navigationItem.titleView = navBarTitle;
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTarget:self selector:@selector(backButtonTouched) title:@"Terug"];
 }
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -144,7 +137,7 @@
 {
     NSLog(@"Creating Header");
     header = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 00.0f, 320.0f, 40.0f)];
-    header.backgroundColor = [UIColor purpleColor];
+    header.backgroundColor = [UIColor blackColor];
     [self.view addSubview:header];
     
      NSString *statusText = [[NSString alloc] initWithFormat:@"Status: %@", [[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"status"]];
@@ -164,21 +157,32 @@
     scrollViewHeight += (110 + 10);
     
     UIView *orderStatisticsHolder = [[UIView alloc] initWithFrame:CGRectMake(10.0f, 20.0f, 301.0f, 110.0f)];
-    orderStatisticsHolder.backgroundColor = [UIColor whiteColor];
-    
-    //The statistics main view
+    orderStatisticsHolder.backgroundColor = [UIColor colorWithRed:225.0f/255.0f green:224.0f/255.0f blue:225.0f/255.0f alpha:1.0f];
+    orderStatisticsHolder.layer.cornerRadius = 5.0f;
+    orderStatisticsHolder.layer.masksToBounds = YES;
     [orderInfoScrollView addSubview:orderStatisticsHolder];
     
-    //Create Header and Title
+    //Create header for the statistics holder
+    UIView *statisticsHeader = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 301, 30)];
+    UIView *borderBottom = [[UIView alloc] initWithFrame:CGRectMake(0, 30, 301, 5)];
+    statisticsHeader.backgroundColor = [UIColor colorWithRed:184.0f/255.0f green:199.0f/255.0f blue:221.0f/255.0f alpha:1.0f];
+    borderBottom.backgroundColor = [UIColor blackColor];
+    [orderStatisticsHolder addSubview:statisticsHeader];
+    [orderStatisticsHolder addSubview:borderBottom];
+    
+    //Create Title
     NSString* orderId = [[NSString alloc] initWithFormat:@"Order: #%@", [[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"increment_id"]];
-    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(5.0f, 0.0f, 301.0f, 25.0f)];
-    title.backgroundColor = [UIColor grayColor];
-    title.font = [UIFont systemFontOfSize:12.0f];
+    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 3.0f, 301.0f, 25.0f)];
+    title.backgroundColor = [UIColor clearColor];
+    title.font = [UIFont boldSystemFontOfSize:14.0f];
+    title.textColor = [UIColor colorWithRed:87.0f/255.0f green:83.0f/255.0f blue:89.0f/255.0f alpha:1.0f];
+    title.shadowColor = [UIColor whiteColor];
+    title.shadowOffset = CGSizeMake(0, 1);
     title.text = orderId;
-    [orderStatisticsHolder addSubview:title];
+    [statisticsHeader addSubview:title];
     
     //Create body
-    UIView *orderStatisticsBody = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 25.0f, 301.0f, 85.0f)];
+    UIView *orderStatisticsBody = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 30.0f, 301.0f, 85.0f)];
     orderStatisticsBody.backgroundColor = [UIColor whiteColor];
     [orderStatisticsHolder addSubview:orderStatisticsBody];
     

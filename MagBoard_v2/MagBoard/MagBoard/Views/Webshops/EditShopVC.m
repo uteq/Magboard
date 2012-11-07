@@ -172,28 +172,36 @@
 //Make alert
 -(void)makeAlert:(NSString*)alertTitle message:(NSString*)alertMessage button:(NSString *)buttonTitle
 {
-    
-    UIAlertView *alert = [[UIAlertView alloc]
-                          initWithTitle:alertTitle
-                          message:alertMessage
-                          delegate:self
-                          cancelButtonTitle:@"Annuleren"
-                          otherButtonTitles:buttonTitle, nil];
-    
-    //Set special tag for delete alert
-    if([buttonTitle isEqualToString:@"Verwijder"]){
-        [alert setTag:666];
+    if([buttonTitle isEqualToString:@"Verwijderen"])
+    {
+        BlockAlertView *alert = [BlockAlertView
+                                 alertWithTitle:alertTitle
+                                 message:alertMessage];
+        
+        [alert setCancelButtonWithTitle:@"Ok" block:^{
+        }];
+        
+        [alert setDestructiveButtonWithTitle:buttonTitle block:^{
+            [self deleteShop];
+        }];
+        
+        [alert show];
+    }
+    else {
+        
+        BlockAlertView *alert = [BlockAlertView
+                                 alertWithTitle:alertTitle
+                                 message:alertMessage];
+        
+        [alert setCancelButtonWithTitle:@"Ok" block:^{
+        }];
+        
+        [alert addButtonWithTitle:buttonTitle block:^{
+        }];
+        
+        [alert show];
     }
     
-    [alert show];
-}
-
-//Check which button is clicked
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex  
-{
-    if(alertView.tag == 666 && buttonIndex == 1){
-        [self deleteShop];
-    }
 }
 
 //Function for validating url
@@ -259,7 +267,7 @@
 -(void)deleteButtonTouched
 {
     NSLog(@"Delete shop touched");
-    [self makeAlert:@"Webshop verwijderen" message:@"Weet u zeker dat u deze webshop uit de applicatie wilt verwijderen?" button:@"Verwijder"];
+    [self makeAlert:@"Webshop verwijderen" message:@"Weet u zeker dat u deze webshop uit de applicatie wilt verwijderen?" button:@"Verwijderen"];
 }
 
 -(void)deleteShop

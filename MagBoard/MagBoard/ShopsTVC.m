@@ -79,8 +79,10 @@
     {
         Webshop *webshop = [self.fetchedResultsController objectAtIndexPath:indexPath];
         cell.textLabel.text = webshop.name;
+         NSLog(@"JAAAAAAAP");
     } else {
         cell.textLabel.text = @"Er zijn helaas geen webshops beschikbaar, klik op het + tekentje bovenin de applicatie om een shop toe te voegen.";
+         NSLog(@"JAAAAAAAP");
     }
     
     return cell;

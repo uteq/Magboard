@@ -130,15 +130,17 @@
 //Hier wordt de inhoud van de cel bepaald
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *webshopCell = @"OrderCell";
+    static NSString *orderCell = @"OrderCell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:webshopCell];
+    //Check for reusable cell first
+    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:orderCell];
     
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:webshopCell];
+    //If there is no reusable cell of this type create a new cell
+    if(cell == nil)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:orderCell];
+        [self configureCell:cell atIndexPath:indexPath];
     }
-    
-    [self configureCell:cell atIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
@@ -166,7 +168,7 @@
     }
     
     //Add orderlabel image to table cell
-    UILabel *orderHolderLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 20.0f, 301.0f, 53.0f)];
+    UILabel *orderHolderLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 301.0f, 53.0f)];
     orderHolderLabel.font = [UIFont boldSystemFontOfSize:14.0f];
     //Determine the label for order status
     if([[[[orderHolder valueForKey:@"data-items"] objectAtIndex:indexPath.row] valueForKey:@"status"] isEqualToString:@"pending"])
@@ -182,6 +184,11 @@
     else if ([[[[orderHolder valueForKey:@"data-items"] objectAtIndex:indexPath.row] valueForKey:@"status"] isEqualToString:@"processing"])
     {
         UIImage *image = [UIImage imageNamed:@"order_holder_processing"];
+        orderHolderLabel.backgroundColor = [UIColor colorWithPatternImage:image];
+    }
+    else if ([[[[orderHolder valueForKey:@"data-items"] objectAtIndex:indexPath.row] valueForKey:@"status"] isEqualToString:@"canceled"])
+    {
+        UIImage *image = [UIImage imageNamed:@"order_holder_canceled"];
         orderHolderLabel.backgroundColor = [UIColor colorWithPatternImage:image];
     }
     [cell addSubview:orderHolderLabel];
@@ -208,7 +215,7 @@
     orderNumberLabel.text = orderId;
     [orderHolderLabel addSubview:orderNumberLabel];
     
-    NSLog(@"All fields: %@", [orderHolder valueForKey:@"data-items"]);
+    //NSLog(@"All fields: %@", [orderHolder valueForKey:@"data-items"]);
     
 }
 
@@ -259,6 +266,6 @@
         
         [alert show];
     }
-    
 }
+
 @end
