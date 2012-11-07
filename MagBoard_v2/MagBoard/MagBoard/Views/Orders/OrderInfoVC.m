@@ -64,10 +64,10 @@
     NSMutableString* requestParams = [NSMutableString string];
     [requestParams appendString:[orderInfo orderId] ];
     for (int i = 0; i < itemsCount; i++){
-        NSString *qtyText = [[NSString alloc] initWithFormat:@"%@", [[[[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"items" ] objectAtIndex:i] valueForKey:@"qty_ordered"]];
         NSString *itemId = [[NSString alloc] initWithFormat:@"%@", [[[[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"items" ] objectAtIndex:i] valueForKey:@"item_id"]];
+        NSString *qtyText = [[NSString alloc] initWithFormat:@"%@", [[[[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"items" ] objectAtIndex:i] valueForKey:@"qty_ordered"]];
         
-        [requestParams appendString:[NSString stringWithFormat:@"|%@ . %@", qtyText, itemId] ];
+        [requestParams appendString:[NSString stringWithFormat:@"|%@ . %@", itemId, qtyText] ];
     }
     NSLog(@"Created product string: %@", requestParams);
     [self loginRequest:[shopInfo shopUrl] username:[shopInfo username] password:[shopInfo password] request:@"salesOrderInvoiceCreate" requestParams:requestParams];
@@ -97,6 +97,7 @@
            
             NSLog(@"Status: %@", [orderInfoHolder valueForKey:@"session"]);
             NSLog(@"Code: %@", [orderInfoHolder valueForKey:@"message"]);
+             NSLog(@"Data items: %@", [orderInfoHolder valueForKey:@"data-items"]);
             //NSLog(@"Data-items: %@", [orderInfoHolder valueForKey:@"data-items"]);
             //Check what type of data is given back (1002 is orderInfo, 1003 is invoiceCreate)
             if([[orderInfoHolder valueForKey:@"message"] isEqualToString: @"1002"]){
@@ -146,12 +147,15 @@
     header.backgroundColor = [UIColor purpleColor];
     [self.view addSubview:header];
     
-    createInvoice = [[UIButton alloc] initWithFrame:CGRectMake(10.0f, 5.0f, 90.0f, 30.0f)];
-    [createInvoice setBackgroundColor: [UIColor whiteColor]];
-    [createInvoice setTitle:@"Factuur" forState:UIControlStateNormal];
-    [createInvoice setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [createInvoice addTarget:self action:@selector(createInvoice) forControlEvents:UIControlEventTouchDown];
-    [header addSubview:createInvoice];
+     NSString *statusText = [[NSString alloc] initWithFormat:@"Status: %@", [[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"status"]];
+    if([statusText isEqualToString:@"pending"]){
+        createInvoice = [[UIButton alloc] initWithFrame:CGRectMake(10.0f, 5.0f, 90.0f, 30.0f)];
+        [createInvoice setBackgroundColor: [UIColor whiteColor]];
+        [createInvoice setTitle:@"Factuur" forState:UIControlStateNormal];
+        [createInvoice setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [createInvoice addTarget:self action:@selector(createInvoice) forControlEvents:UIControlEventTouchDown];
+        [header addSubview:createInvoice];
+    }
 }
 
 -(void)orderStatisticsHolder{
