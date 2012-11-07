@@ -37,7 +37,7 @@
 {
     UILabel* navBarTitle = [CustomNavBar setNavBarTitle:@"Shop wijzigen"];
     self.navigationItem.titleView = navBarTitle;
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTarget:self selector:@selector(backButtonTouched)];
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTarget:self selector:@selector(backButtonTouched) title:@"Terug"];
 }
 
 -(void)backButtonTouched
@@ -212,7 +212,7 @@
     Webshop *findShop = [Webshop where:findQuery].first;
     
     //Checken of velden gevuld zijn
-    if([shopName.text isEqualToString:@""]){
+    if([shopName.text isEqualToString:@""] || shopName.text == nil){
         alertTitle = @"Geen naam";
         message = @"U dient een naam op te geven voor uw webshop";
         empty = TRUE;
@@ -222,14 +222,9 @@
         message = @"U dient een correcte url op te geven voor uw webshop. Bijvoorbeeld www.uwdomein.nl";
         empty = TRUE;
         [self makeAlert:alertTitle message:message button:@"Ok"];
-    } else if ([username.text isEqualToString:@""]){
+    } else if ([username.text isEqualToString:@""] || username.text == nil){
         alertTitle = @"Geen gebruikersnaam";
         message = @"U dient een username op te geven voor uw webshop";
-        empty = TRUE;
-        [self makeAlert:alertTitle message:message button:@"Ok"];
-    } else if ([password.text isEqualToString:@""]){
-        alertTitle = @"Geen wachtwoord";
-        message = @"U dient een wachtwoord op te geven voor uw webshop";
         empty = TRUE;
         [self makeAlert:alertTitle message:message button:@"Ok"];
     } else {

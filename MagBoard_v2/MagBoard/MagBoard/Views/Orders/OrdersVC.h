@@ -19,5 +19,6 @@
 -(void)makeTabel;
 -(void)constructHeader;
 -(void)loadingRequest;
+-(void)alertForIncorrectLogin;
 
 @end

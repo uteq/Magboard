@@ -37,7 +37,7 @@
 {
     UILabel* navBarTitle = [CustomNavBar setNavBarTitle:[shopInfo shopName]];
     self.navigationItem.titleView = navBarTitle;
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTarget:self selector:@selector(backButtonTouched)];
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTarget:self selector:@selector(backButtonTouched) title:@"Logout"];
 }
 
 -(void)backButtonTouched
@@ -47,15 +47,17 @@
     [[self navigationController] setViewControllers:viewControllers animated:YES];
 }
 
+//While doing request show loading icon
 -(void)loadingRequest
 {
-    loadingIcon = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-	loadingIcon.frame = CGRectMake(0.0, 0.0, 40.0, 40.0);
+    loadingIcon = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+	loadingIcon.frame = CGRectMake(0.0, 0.0, 320.0, 440.0);
 	loadingIcon.center = self.view.center;
     [loadingIcon startAnimating];
 	[self.view addSubview: loadingIcon];
 }
 
+//Make request for logging in en fetching orders
 -(void)loginRequest:(NSString *)shopUrl username:(NSString *)username password:(NSString *)password requestFunction:(NSString *)requestFunction
 {
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
@@ -67,56 +69,50 @@
     [[LRResty client] post:@"http://www.magboard.nl/api/index.php" payload:params delegate:self];
 }
 
+//Catch response for request
 - (void)restClient:(LRRestyClient *)client receivedResponse:(LRRestyResponse *)response;
 {
     // do something with the response
     if(response.status == 200) {
         
         orderHolder = [NSJSONSerialization JSONObjectWithData:[response responseData] options:kNilOptions error:nil];
-        NSLog(@"Status: %@", [orderHolder valueForKey:@"session"]);
         
-        if([orderHolder valueForKey:@"session"] == NULL)
+        //If incorrect login
+        if([[orderHolder valueForKey:@"message"] isEqualToString:@"607"])
         {
-            //[self backButtonTouched];
+            [self makeAlert:@"Incorrect login" message:@"De combinatie tussen gebruikersnaam en wachtwoord komt niet overeen. Probeer het nogmaals." button:@"607"];
+        }
+        //if incorrect url
+        else if([[orderHolder valueForKey:@"message"] isEqualToString:@"608"]) {
+            [self makeAlert:@"Onjuiste URL" message:@"Er bestaat geen Magento webshop op dit domein. Controleer de url op eventuele fouten en probeer het nogmaals." button:@"608"];
+        }
+        //if all is ok
+        else {
+            [loadingIcon stopAnimating];
+            [self makeTable];
         }
     }
     else
     {
         NSLog(@"Er ging iets mis %d", [response status]);
+        [self backButtonTouched];
     }
     
-    [loadingIcon stopAnimating];
-    [self makeTable];
+    NSLog(@"Status: %@", [orderHolder valueForKey:@"session"]);
+    NSLog(@"Code: %@", [orderHolder valueForKey:@"message"]);
+    
 }
 
 //Hier wordt de table geinitialiseerd
 -(void)makeTable
 {
-    
-    if(orderHolder == NULL)
-    {
-        // Add label for text when no shops are available
-        UILabel *noShopsText = [[UILabel alloc] initWithFrame:CGRectMake(20.0f, 130.0f, 280.0f, 90.0f)];
-        [noShopsText setText:@"Er zijn nog geen orders geplaatst op uw webshop, of u heeft geen juiste logingegevens ingevoerd of de url is incorrect..."];
-        [noShopsText setFont:[UIFont systemFontOfSize:12]];
-        [noShopsText setTextColor:[UIColor whiteColor]];
-        [noShopsText setBackgroundColor:[UIColor clearColor]];
-        [noShopsText setTextAlignment:UITextAlignmentCenter];
-        [noShopsText setNumberOfLines:0];
-        [self.view addSubview:noShopsText];
-    }
-    else
-    {
-        //Tableview toevoegen aan de view
-        ordersTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 410)];
-        ordersTable.dataSource = self;
-        ordersTable.delegate = self;
-        ordersTable.backgroundColor = [UIColor clearColor];
-        ordersTable.separatorColor = [UIColor clearColor];
-        [self.view addSubview:ordersTable];
-    }
-    NSLog(@"Number of orders: %d", [[orderHolder valueForKey:@"data-items"] count]);
-    
+    //Tableview toevoegen aan de view
+    ordersTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 410)];
+    ordersTable.dataSource = self;
+    ordersTable.delegate = self;
+    ordersTable.backgroundColor = [UIColor clearColor];
+    ordersTable.separatorColor = [UIColor clearColor];
+    [self.view addSubview:ordersTable];
 }
 
 //Aangeven hoeveel hoeveel items er moeten worden getoond in de table
@@ -232,14 +228,37 @@
         [viewControllers addObject:dashboard];
         [[self navigationController] setViewControllers:viewControllers animated:YES];
     } else {
-        [self makeAlert:@"Geen Order ID" message:@"Kon de order niet inladen omdat er geen order id is."];
+        [self makeAlert:@"Geen Order ID" message:@"Kon de order niet inladen omdat er geen order id is." button:@"Ok"];
     }
     
 }
 
--(void)makeAlert:(NSString*)alertTitle message:(NSString*)alertMessage
+//Make alert
+-(void)makeAlert:(NSString*)alertTitle message:(NSString*)alertMessage button:(NSString *)buttonTitle
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:alertTitle message:alertMessage delegate:self cancelButtonTitle:@"Annuleer" otherButtonTitles:@"Ok", nil];
-    [alert show];
+    if([buttonTitle isEqualToString:@"607"] || [buttonTitle isEqualToString:@"608"])
+    {
+        BlockAlertView *alert = [BlockAlertView
+                                 alertWithTitle:alertTitle
+                                           message:alertMessage];
+        
+        [alert setCancelButtonWithTitle:@"Ok" block:^{
+        }];
+        
+        [self backButtonTouched];
+        [alert show];
+    }
+    else {
+    
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle:alertTitle
+                              message:alertMessage
+                              delegate:self
+                              cancelButtonTitle:@"Annuleren"
+                              otherButtonTitles:buttonTitle, nil];
+        
+        [alert show];
+    }
+    
 }
 @end

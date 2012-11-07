@@ -39,7 +39,7 @@
 #define kAlertViewTitleShadowColor      [UIColor blackColor]
 #define kAlertViewTitleShadowOffset     CGSizeMake(0, -1)
 
-#define kAlertViewMessageFont           [UIFont systemFontOfSize:18]
+#define kAlertViewMessageFont           [UIFont systemFontOfSize:15]
 #define kAlertViewMessageTextColor      [UIColor colorWithWhite:244.0/255.0 alpha:1.0]
 #define kAlertViewMessageShadowColor    [UIColor blackColor]
 #define kAlertViewMessageShadowOffset   CGSizeMake(0, -1)

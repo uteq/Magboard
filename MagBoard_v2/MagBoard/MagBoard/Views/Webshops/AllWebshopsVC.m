@@ -69,7 +69,7 @@
     UIImageView *titleImageview = [[UIImageView alloc] initWithImage: titleImage];
     if([allShops count] != 0)
     {
-        self.navigationItem.rightBarButtonItem = [UIBarButtonItem styledCancelBarButtonItemWithTarget:self selector:@selector(settingsButtonTouched)];
+        self.navigationItem.rightBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTarget:self selector:@selector(settingsButtonTouched) title:@"Wijzig"];
     }
     
     // set the text view to the image view

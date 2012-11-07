@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface InstructionsVC : UIViewController <UIScrollViewDelegate>
-{
-    UIScrollView *instructionsHolder;
-    int scrollMove;
-}
+
+@property (strong, nonatomic) UIScrollView* instructionsScroller;
+@property (assign, nonatomic) int scrollerAtIndex;          //For saving the index for the scrollview
+@property (strong, nonatomic) UIPageControl * pageControl;  //For making the pagination dots
 
 -(void)addScrollView;
 -(void)constructHeader;

@@ -14,12 +14,14 @@
 
 @implementation InstructionsVC
 
+@synthesize pageControl, scrollerAtIndex, instructionsScroller;
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     [self constructHeader];
-    scrollMove = 320;
+    [self shopsControlDots];
     [self addScrollView];
 }
 
@@ -33,7 +35,26 @@
 {
     UILabel* navBarTitle = [CustomNavBar setNavBarTitle:@"Instructies"];
     self.navigationItem.titleView = navBarTitle;
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTarget:self selector:@selector(backButtonTouched)];
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTarget:self selector:@selector(backButtonTouched) title:@"Terug"];
+}
+
+//Draw dots for scroller
+-(void)shopsControlDots
+{
+    pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(20.0f, 370.0f, 280.0f, 40.0f)];
+    [pageControl setNumberOfPages:6];
+    [pageControl setCurrentPage:0];
+    [pageControl setBackgroundColor:[UIColor clearColor]];
+    [self.view addSubview:pageControl];
+}
+
+//Change dots for scroller
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    int newOffset = scrollView.contentOffset.x;
+    scrollerAtIndex = (int)(newOffset/(scrollView.frame.size.width));
+    [pageControl setCurrentPage:scrollerAtIndex];
+    NSLog(@"scroll changed to %d", scrollerAtIndex);
 }
 
 -(void)backButtonTouched
@@ -46,12 +67,13 @@
 //Deze functie voegt een UIScrollView toe aan de instructies pagina
 -(void)addScrollView
 {
-    instructionsHolder = [[UIScrollView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 440.0f)];
-    [instructionsHolder setContentSize:CGSizeMake(1920, 320)];
-    instructionsHolder.showsHorizontalScrollIndicator = YES;
-    instructionsHolder.pagingEnabled = YES;
+    instructionsScroller = [[UIScrollView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 440.0f)];
+    [instructionsScroller setContentSize:CGSizeMake(1920, 320)];
+    instructionsScroller.showsHorizontalScrollIndicator = YES;
+    instructionsScroller.delegate = self;
+    instructionsScroller.pagingEnabled = YES;
     
-    [self.view addSubview:instructionsHolder];
+    [self.view addSubview:instructionsScroller];
     [self readMagboardInstructions];
 }
 
@@ -85,7 +107,7 @@
                 [head setFont:[UIFont boldSystemFontOfSize:16.0f]];
                 [head setTextColor:[UIColor whiteColor]];
                 [head setBackgroundColor:[UIColor clearColor]];
-                [instructionsHolder addSubview:head];
+                [instructionsScroller addSubview:head];
                 
                 UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake((xPos * xPosDoubler) + 20, 50.0f, 280.0f, 100.0f)];
                 [textLabel setText:text];
@@ -93,11 +115,11 @@
                 [textLabel setNumberOfLines:0];
                 [textLabel setTextColor:[UIColor whiteColor]];
                 [textLabel setBackgroundColor:[UIColor clearColor]];
-                [instructionsHolder addSubview:textLabel];
+                [instructionsScroller addSubview:textLabel];
                 
                 UIImageView *imageForStep = [[UIImageView alloc] initWithFrame:CGRectMake((xPos * xPosDoubler) + 20, 150.0f, 250.0f, 200.0f)];
                 [imageForStep setImage:[UIImage imageNamed:image]];
-                [instructionsHolder addSubview:imageForStep];
+                [instructionsScroller addSubview:imageForStep];
                 
                 /* Next button, but doesn't work properly
                  UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake((xPos * xPosDoubler) + 20, 280.0f, 50.0f, 50.0f)];

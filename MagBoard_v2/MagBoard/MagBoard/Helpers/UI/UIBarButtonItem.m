@@ -56,12 +56,12 @@
     return [[UIBarButtonItem alloc] initWithCustomView:button];
 }
 
-+ (UIBarButtonItem *)styledCancelBarButtonItemWithTarget:(id)target selector:(SEL)selector;
++ (UIBarButtonItem *)styledBarButtonItemWithTarget:(id)target selector:(SEL)selector title:(NSString *)buttonTitle;
 {
     UIImage *image = [UIImage imageNamed:@"bar_button_empty"];
     image = [image stretchableImageWithLeftCapWidth:20.0f topCapHeight:20.0f];
     
-    NSString *title = NSLocalizedString(@"Wijzig", nil);
+    NSString *title = NSLocalizedString(buttonTitle, nil);
     UIFont *font = [UIFont boldSystemFontOfSize:12.0f];
     
     UIButton *button = [UIButton styledButtonWithBackgroundImage:image font:font title:title target:target selector:selector];
