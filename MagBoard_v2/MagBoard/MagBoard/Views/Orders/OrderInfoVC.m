@@ -160,9 +160,6 @@
     orderStatisticsHolder.backgroundColor = [UIColor colorWithRed:225.0f/255.0f green:224.0f/255.0f blue:225.0f/255.0f alpha:1.0f];
     orderStatisticsHolder.layer.cornerRadius = 5.0f;
     orderStatisticsHolder.layer.masksToBounds = YES;
-    orderStatisticsHolder.layer.shadowOffset = CGSizeMake(-15, 20);
-    orderStatisticsHolder.layer.shadowRadius = 5;
-    orderStatisticsHolder.layer.shadowOpacity = 0.5;
     [orderInfoScrollView addSubview:orderStatisticsHolder];
     
     //Create header for the statistics holder
@@ -227,9 +224,6 @@
     orderStatisticsHolder.backgroundColor = [UIColor colorWithRed:225.0f/255.0f green:224.0f/255.0f blue:225.0f/255.0f alpha:1.0f];
     orderStatisticsHolder.layer.cornerRadius = 5.0f;
     orderStatisticsHolder.layer.masksToBounds = YES;
-    orderStatisticsHolder.layer.shadowOffset = CGSizeMake(-15, 20);
-    orderStatisticsHolder.layer.shadowRadius = 5;
-    orderStatisticsHolder.layer.shadowOpacity = 0.5;
     [orderInfoScrollView addSubview:orderStatisticsHolder];
     
     //Create header for the statistics holder
@@ -318,9 +312,6 @@
     orderStatisticsHolder.backgroundColor = [UIColor colorWithRed:225.0f/255.0f green:224.0f/255.0f blue:225.0f/255.0f alpha:1.0f];
     orderStatisticsHolder.layer.cornerRadius = 5.0f;
     orderStatisticsHolder.layer.masksToBounds = YES;
-    orderStatisticsHolder.layer.shadowOffset = CGSizeMake(-15, 20);
-    orderStatisticsHolder.layer.shadowRadius = 5;
-    orderStatisticsHolder.layer.shadowOpacity = 0.5;
     [orderInfoScrollView addSubview:orderStatisticsHolder];
     
     //Create header for the statistics holder
@@ -398,9 +389,6 @@
     orderStatisticsHolder.backgroundColor = [UIColor colorWithRed:225.0f/255.0f green:224.0f/255.0f blue:225.0f/255.0f alpha:1.0f];
     orderStatisticsHolder.layer.cornerRadius = 5.0f;
     orderStatisticsHolder.layer.masksToBounds = YES;
-    orderStatisticsHolder.layer.shadowOffset = CGSizeMake(-15, 20);
-    orderStatisticsHolder.layer.shadowRadius = 5;
-    orderStatisticsHolder.layer.shadowOpacity = 0.5;
     [orderInfoScrollView addSubview:orderStatisticsHolder];
     
     //Create header for the statistics holder
