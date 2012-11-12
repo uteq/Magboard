@@ -140,8 +140,8 @@
     header.backgroundColor = [UIColor blackColor];
     [self.view addSubview:header];
     
-     NSString *statusText = [[NSString alloc] initWithFormat:@"Status: %@", [[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"status"]];
-    if([statusText isEqualToString:@"pending"]){
+     NSString *statusText = [[NSString alloc] initWithFormat:@"%@", [[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"status"]];
+    if([statusText isEqualToString:@"Pending"]){
         createInvoice = [[UIButton alloc] initWithFrame:CGRectMake(10.0f, 5.0f, 90.0f, 30.0f)];
         [createInvoice setBackgroundColor: [UIColor whiteColor]];
         [createInvoice setTitle:@"Factuur" forState:UIControlStateNormal];
