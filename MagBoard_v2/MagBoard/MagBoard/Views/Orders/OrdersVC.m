@@ -131,9 +131,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *orderCell = @"OrderCell";
-    
+    NSString *cellIdentifier = [NSString stringWithFormat:@"S%1dR%1d",indexPath.section,indexPath.row];
     //Check for reusable cell first
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:orderCell];
+    UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
     //If there is no reusable cell of this type create a new cell
     if(cell == nil)
