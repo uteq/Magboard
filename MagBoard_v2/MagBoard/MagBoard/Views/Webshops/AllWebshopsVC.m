@@ -50,18 +50,40 @@
     [self fetchAllShops];
     [self makeScrollview];
     
+    //Check for edited webshop
+    [self scrollToWebshop];
+    
     //Refresh scrollnav
     [[self pageControl] removeFromSuperview];
     [self shopsControlDots];
-    
-    //Reset value for scrollindex
-    scrollerAtIndex = 0;
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)scrollToWebshop
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSInteger scrollPosition = 0;
+    
+    if([[defaults objectForKey:@"referer"] isEqualToString:@"editShop"]){
+        
+        scrollPosition = [[defaults objectForKey:@"lastShop"] integerValue];
+        NSLog(@"referer = editshop");
+        
+    } else if ([[defaults objectForKey:@"referer"] isEqualToString:@"addShop"]){
+    
+        scrollPosition = [[defaults objectForKey:@"totalNumberOfShops"] integerValue];
+        NSLog(@"referer = addshop %d", scrollPosition);
+    }
+    
+    CGRect frame = shopsScroller.frame;
+    frame.origin.x = frame.size.width * scrollPosition;
+    frame.origin.y = 0;
+    [shopsScroller scrollRectToVisible:frame animated:NO];
 }
 
 //Navigationbar opmaken
@@ -166,9 +188,21 @@
 //Draw dots for scroller
 -(void)shopsControlDots
 {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSInteger scrollPosition = 0;
+    
+    if([[defaults objectForKey:@"referer"] isEqualToString:@"editShop"]){
+        
+        scrollPosition = [[defaults objectForKey:@"lastShop"] integerValue];
+        
+    } else if ([[defaults objectForKey:@"referer"] isEqualToString:@"addShop"]){
+        
+        scrollPosition = [[defaults objectForKey:@"totalNumberOfShops"] integerValue];
+    }
+    
     pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(20.0f, 250.0f, 280.0f, 40.0f)];
     [pageControl setNumberOfPages:[allShops count]];
-    [pageControl setCurrentPage:0];
+    [pageControl setCurrentPage:scrollPosition];
     [pageControl setBackgroundColor:[UIColor clearColor]];
     [self.view addSubview:pageControl];
 }
@@ -179,6 +213,7 @@
     int newOffset = scrollView.contentOffset.x;
     scrollerAtIndex = (int)(newOffset/(scrollView.frame.size.width));
     [pageControl setCurrentPage:scrollerAtIndex];
+    
     NSLog(@"scroll changed to %d", scrollerAtIndex);
 }
 
@@ -229,16 +264,28 @@
 
 -(void)goToAddShop
 {
+    //Setting referer for returning to right position of homescreen
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:@"addShop" forKey:@"referer"];
+    [defaults setInteger:[allShops count] forKey:@"totalNumberOfShops"];
+    [defaults synchronize];
+    
     NSLog(@"Add shop button is pressed");
     
     AddShopVC *addShopView = [[AddShopVC alloc]init];
     [[self  navigationController] pushViewController:addShopView animated:YES];
 }
 
-//Handle
+//Handle settings button action
 -(void)settingsButtonTouched
 {
-    NSLog(@"Settings button for %d is pressed", scrollerAtIndex);
+    //Setting referer for returning to right position of homescreen
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:@"editShop" forKey:@"referer"];
+    [defaults setInteger:scrollerAtIndex forKey:@"lastShop"];
+    [defaults synchronize];
+    NSInteger webshopId = [[defaults objectForKey:@"lastShop"] integerValue];
+    NSLog(@"Settings button for %d is pressed", webshopId);
     
     //Data van de betreffende row in een singleton drukken
     Webshop *webshop = [allShops objectAtIndex:scrollerAtIndex];

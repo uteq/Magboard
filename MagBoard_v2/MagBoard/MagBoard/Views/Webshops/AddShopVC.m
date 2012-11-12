@@ -40,6 +40,11 @@
 
 -(void)backButtonTouched
 {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:@"editShop" forKey:@"referer"];
+    [defaults setInteger:0 forKey:@"lastShop"];
+    [defaults synchronize];
+    
     NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];
     [viewControllers removeLastObject];
     [[self navigationController] setViewControllers:viewControllers animated:YES];
@@ -123,6 +128,7 @@
     [scrollView addSubview:labelForSwitch];
     
     passwordSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(230.0, 240.0, 50.0, 30.0)];
+    passwordSwitch.on = YES;
     [scrollView addSubview:passwordSwitch];
     
     // Make cancel button
@@ -182,11 +188,22 @@
 }
 
 //Function for validating url
-- (BOOL)validateUrl:(NSString *)candidate {
-    NSString *urlRegEx =
-    @"((www)*|([0-9]*)|([-|_])*)+([\\.|/]((\\w)*|([0-9]*)|([-|_])*))+";
-    NSPredicate *urlTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", urlRegEx];
-    return [urlTest evaluateWithObject:candidate];
+- (BOOL)validateUrl:(NSString *)givenUrl {
+    
+    NSPredicate *urlTest = [[NSPredicate alloc] init];
+    NSString *urlRegEx = [[NSString alloc] init];
+    
+    if ([givenUrl rangeOfString:@"http"].location != NSNotFound) {
+        urlRegEx =
+        @"(http|https)://((\\w)*|([0-9]*)|([-|_])*)+([\\.|/]((\\w)*|([0-9]*)|([-|_])*))+";
+        urlTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", urlRegEx];
+    } else {
+        urlRegEx =
+        @"((www)*|([0-9]*)|([-|_])*)+([\\.|/]((\\w)*|([0-9]*)|([-|_])*))+";
+        urlTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", urlRegEx];
+    }
+    
+    return [urlTest evaluateWithObject:givenUrl];
 }
 
 //Functie die ervoor zorgt dat de gegevens van de webshop worden opgeslagen
