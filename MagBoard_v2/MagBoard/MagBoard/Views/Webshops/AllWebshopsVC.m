@@ -29,8 +29,6 @@
         [self goToInstructions];
     }
     [self drawNavigationBar];
-    [self makeScrollview];
-    [self shopsControlDots];
     [self makeButtons];
 }
 
@@ -64,6 +62,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+//Function for returning to last edited or visited webshop
 -(void)scrollToWebshop
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -72,12 +71,11 @@
     if([[defaults objectForKey:@"referer"] isEqualToString:@"editShop"]){
         
         scrollPosition = [[defaults objectForKey:@"lastShop"] integerValue];
-        NSLog(@"referer = editshop");
         
     } else if ([[defaults objectForKey:@"referer"] isEqualToString:@"addShop"]){
     
         scrollPosition = [[defaults objectForKey:@"totalNumberOfShops"] integerValue];
-        NSLog(@"referer = addshop %d", scrollPosition);
+        
     }
     
     CGRect frame = shopsScroller.frame;
@@ -345,6 +343,12 @@
 
 -(void)goToOrdersPage
 {
+    //Set referer
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:@"editShop" forKey:@"referer"];
+    [defaults setInteger:scrollerAtIndex forKey:@"lastShop"];
+    [defaults synchronize];
+    
     OrdersVC *dashboard = [[OrdersVC alloc]init];
     NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];
     //[viewControllers removeLastObject];

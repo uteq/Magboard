@@ -14,7 +14,7 @@
 
 @implementation EditShopVC
 
-@synthesize shopName, shopUrl,username, password, passwordSwitch, message, alertTitle, empty, sharedShop;
+@synthesize shopName, shopUrl,username, password, passwordSwitch, message, alertTitle, empty, sharedShop, editShop;
 
 - (void)viewDidLoad
 {
@@ -25,6 +25,10 @@
 	// Do any additional setup after loading the view.
     [self constructHeader];
     [self makeForm];
+    
+    //Query opzetten om webshop met username op te halen
+    NSString *findQuery = [[NSString alloc] initWithFormat:@"url == '%@'", shopUrl.text];
+    editShop = [Webshop where:findQuery].first;
 }
 
 - (void)didReceiveMemoryWarning
@@ -67,6 +71,7 @@
     shopName.adjustsFontSizeToFitWidth = YES;
     shopName.textColor = [UIColor whiteColor];
     shopName.returnKeyType = UIReturnKeyDone;
+    shopName.delegate = self;
     [scrollView addSubview:shopName];
     
     //Input field for shop url
@@ -82,6 +87,7 @@
     shopUrl.autocapitalizationType = UITextAutocapitalizationTypeNone;
     shopUrl.textColor = [UIColor whiteColor];
     shopUrl.returnKeyType = UIReturnKeyDone;
+    shopUrl.delegate = self;
     [scrollView addSubview:shopUrl];
     
     //Input field for username
@@ -97,6 +103,7 @@
     username.autocapitalizationType = UITextAutocapitalizationTypeNone;
     username.textColor = [UIColor whiteColor];
     username.returnKeyType = UIReturnKeyDone;
+    username.delegate = self;
     [scrollView addSubview:username];
     
     //Input field for password
@@ -113,6 +120,7 @@
     password.autocapitalizationType = UITextAutocapitalizationTypeNone;
     password.textColor = [UIColor whiteColor];
     password.returnKeyType = UIReturnKeyDone;
+    password.delegate = self;
     [scrollView addSubview:password];
     
     //Switch for saving password
@@ -178,7 +186,7 @@
                                  alertWithTitle:alertTitle
                                  message:alertMessage];
         
-        [alert setCancelButtonWithTitle:@"Ok" block:^{
+        [alert setCancelButtonWithTitle:@"Annuleren" block:^{
         }];
         
         [alert setDestructiveButtonWithTitle:buttonTitle block:^{
@@ -226,10 +234,6 @@
 //Functie die ervoor zorgt dat de gegevens van de webshop worden opgeslagen
 - (void)saveWebshop
 {
-    //Query opzetten om webshop met username op te halen
-    NSString *findQuery = [[NSString alloc] initWithFormat:@"url == '%@'", shopUrl.text];
-    Webshop *findShop = [Webshop where:findQuery].first;
-    
     //Checken of velden gevuld zijn
     if([shopName.text isEqualToString:@""] || shopName.text == nil){
         alertTitle = @"Geen naam";
@@ -253,21 +257,20 @@
     //Als er geen webshops bestaan met dezelfde gegevens als opgegeven dan gegevens opslaan
     if(empty == FALSE)
     {
-        findShop.name = shopName.text;
-        findShop.url = shopUrl.text;
+        editShop.name = shopName.text;
+        editShop.url = shopUrl.text;
+        editShop.username = username.text;
         
         //Als de switch op save password staat dan password ook opslaan
         if(passwordSwitch.on)
         {
-            findShop.password = password.text;
+            editShop.password = password.text;
         } else {
-            findShop.password = @"";
+            editShop.password = @"";
         }
         
-        findShop.username = username.text;
-        
         //Als de webshop is opgeslagen terug gaan naar de main view
-        if(findShop.save)
+        if(editShop.save)
         {
             NSLog(@"shop gesaved");
             [self backButtonTouched];
@@ -277,6 +280,10 @@
 
 -(void)deleteButtonTouched
 {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:@"editShop" forKey:@"referer"];
+    [defaults setInteger:0 forKey:@"lastShop"];
+    [defaults synchronize];
     NSLog(@"Delete shop touched");
     [self makeAlert:@"Webshop verwijderen" message:@"Weet u zeker dat u deze webshop uit de applicatie wilt verwijderen?" button:@"Verwijderen"];
 }
@@ -288,6 +295,11 @@
     Webshop *findShop = [Webshop where:findQuery].first;
     [findShop delete];
     [self backButtonTouched];
+}
+
+//For hiding keyboard when done is tapped
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
 }
 
 @end

@@ -23,6 +23,7 @@
 -(void)makeButtons;
 -(void)makeAlert;
 -(NSArray*)fetchAllShops;
+-(void)scrollToWebshop;
 
 //Actions for buttons
 -(void)goToInstructions;

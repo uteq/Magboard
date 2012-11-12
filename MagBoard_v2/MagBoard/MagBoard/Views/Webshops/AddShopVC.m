@@ -69,6 +69,7 @@
     shopName.adjustsFontSizeToFitWidth = YES;
     shopName.textColor = [UIColor whiteColor];         
     shopName.returnKeyType = UIReturnKeyDone;
+    shopName.delegate = self;
     [scrollView addSubview:shopName];
     
     //Input field for shop url
@@ -84,6 +85,7 @@
     shopUrl.autocapitalizationType = UITextAutocapitalizationTypeNone;
     shopUrl.textColor = [UIColor whiteColor];
     shopUrl.returnKeyType = UIReturnKeyDone;
+    shopUrl.delegate = self;
     [scrollView addSubview:shopUrl];
     
     //Input field for username
@@ -99,6 +101,7 @@
     username.autocapitalizationType = UITextAutocapitalizationTypeNone;
     username.textColor = [UIColor whiteColor];
     username.returnKeyType = UIReturnKeyDone;
+    username.delegate = self;
     [scrollView addSubview:username];
     
     //Input field for password
@@ -115,6 +118,7 @@
     password.autocapitalizationType = UITextAutocapitalizationTypeNone;
     password.textColor = [UIColor whiteColor];
     password.returnKeyType = UIReturnKeyDone;
+    password.delegate = self;
     [scrollView addSubview:password];
     
     //Switch for saving password
@@ -268,6 +272,11 @@
     [viewControllers removeAllObjects];
     [[self  navigationController] popToRootViewControllerAnimated:YES];
     
+}
+
+//For hiding keyboard when done is tapped
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
 }
 
 @end

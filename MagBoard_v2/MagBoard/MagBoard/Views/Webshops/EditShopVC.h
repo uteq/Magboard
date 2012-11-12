@@ -25,5 +25,6 @@
 @property (weak, nonatomic) NSString *alertTitle;
 @property (strong, nonatomic) ShopSingleton * sharedShop;
 @property BOOL empty;
+@property (strong, nonatomic) Webshop *editShop;
 
 @end

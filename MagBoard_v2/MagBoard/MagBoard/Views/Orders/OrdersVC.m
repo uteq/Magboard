@@ -83,7 +83,7 @@
             [self makeAlert:@"Incorrect login" message:@"De combinatie tussen gebruikersnaam en wachtwoord komt niet overeen. Probeer het nogmaals." button:@"607"];
         }
         //if incorrect url
-        else if([[orderHolder valueForKey:@"message"] isEqualToString:@"608"]) {
+        else if([[orderHolder valueForKey:@"message"] isEqualToString:@"608"] || [[orderHolder valueForKey:@"message"] isEqualToString:@"1000"]) {
             [self makeAlert:@"Onjuiste URL" message:@"Er bestaat geen Magento webshop op dit domein. Controleer de url op eventuele fouten en probeer het nogmaals." button:@"608"];
         }
         //if all is ok
@@ -118,7 +118,7 @@
 //Aangeven hoeveel hoeveel items er moeten worden getoond in de table
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[orderHolder valueForKey:@"data-items"] count];
+    return [[orderHolder valueForKey:@"data-items"] count]; 
 }
 
 // Hoogte van de cellen setten
@@ -237,9 +237,9 @@
                                            message:alertMessage];
         
         [alert setCancelButtonWithTitle:@"Ok" block:^{
+            [self backButtonTouched];
         }];
         
-        [self backButtonTouched];
         [alert show];
     }
     else {
