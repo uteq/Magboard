@@ -7,7 +7,7 @@
 		<key>id</key>
 		<integer>1</integer>
 		<key>text</key>
-		<string>Om Magboard te kunnen gebruiken zijn een paar instellingen in Magento vereist. Er moet een API account worden aangemaakt, dit account moet tevens bevoegdheden hebben om bestellingen te kunnen opvragen.</string>
+		<string>Magboard is de ideale app om de orders van uw website beheren. Om Magboard te kunnen gebruiken zijn wel een paar instellingen in Magento vereist. Er moet een API account worden aangemaakt, dit account moet tevens bevoegdheden hebben om bestellingen te kunnen opvragen.</string>
 		<key>title</key>
 		<string>1.Magboard</string>
 		<key>image</key>
@@ -62,9 +62,9 @@
 		<key>id</key>
 		<integer>6</integer>
 		<key>text</key>
-		<string>Als u de gebruikersgegevens hebt ingevuld in Magento, kunt u Magboard instellen. Bij shop toevoegen kunt u uw eigen webshopnaam toevoegen, de url naar de webshop en de gebruikersnaam en wachtwoord van uw Magento account (aangemaakt in stap 5)</string>
+		<string>Als u de gebruikersgegevens hebt ingevuld in Magento, kunt u Magboard instellen. Bij shop toevoegen kunt u uw eigen webshopnaam toevoegen, de url naar de webshop en de gebruikersnaam en wachtwoord van uw Magento account (aangemaakt in stap 5). Als dit is ingesteld kunt u uw orders beheren via de app!</string>
 		<key>title</key>
-		<string>6. Magboard shop toevoegen</string>
+		<string>6. Aan de slag!</string>
 		<key>instructions-6</key>
 		<string>instructions-6.png</string>
 	</dict>

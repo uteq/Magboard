@@ -7,6 +7,7 @@
 //
 
 #import "AddShopVC.h"
+#import "AllWebshopsVC.h"
 
 @interface AddShopVC ()
 
@@ -86,7 +87,7 @@
     [scrollView addSubview:backgroundForUsername];
     
     username = [[UITextField alloc] initWithFrame:CGRectMake(20, 140, 277, 38)];
-    username.placeholder = @"Gebruikersnaam";
+    username.placeholder = @"Magento API gebruikersnaam";
     username.textAlignment = UITextAlignmentLeft;
     username.font = [UIFont boldSystemFontOfSize:14];
     username.adjustsFontSizeToFitWidth = YES;
@@ -101,7 +102,7 @@
     [scrollView addSubview:backgroundForPassword];
     
     password = [[UITextField alloc] initWithFrame:CGRectMake(20, 190, 277, 38)];
-    password.placeholder = @"Wachtwoord";
+    password.placeholder = @"Magento API wachtwoord";
     password.textAlignment = UITextAlignmentLeft;
     password.font = [UIFont boldSystemFontOfSize:14];
     password.adjustsFontSizeToFitWidth = YES;
@@ -208,12 +209,12 @@
         [self makeAlert:alertTitle message:message button:@"Ok"];
     } else if ([username.text isEqualToString:@""] || username.text == nil){
         alertTitle = @"Geen gebruikersnaam";
-        message = @"U dient een username op te geven voor uw webshop";
+        message = @"U dient een gebruikersnaam op te geven voor uw webshop";
         empty = TRUE;
         [self makeAlert:alertTitle message:message button:@"Ok"];
     } else if (findShop != nil){
         alertTitle = @"Account bestaat al";
-        message = @"Er bestaat al een account voor deze webshop. Probeer een andere webshop toe te voegen of ga naar het overzicht.";
+        message = @"Er bestaat al een webshop met dezelfde naam. Probeer een andere webshop toe te voegen of ga naar het overzicht.";
         empty = TRUE;
         [self makeAlert:alertTitle message:message button:@"Ok"];
     } else {
@@ -238,9 +239,18 @@
         if(webshop.save)
         {
             NSLog(@"shop gesaved");
-            [self backButtonTouched];
+            [self backToHome];
         }
     }
+}
+
+-(void)backToHome
+{
+    
+    NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];
+    [viewControllers removeAllObjects];
+    [[self  navigationController] popToRootViewControllerAnimated:YES];
+    
 }
 
 @end

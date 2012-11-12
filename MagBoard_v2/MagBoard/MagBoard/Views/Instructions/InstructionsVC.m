@@ -7,6 +7,7 @@
 //
 
 #import "InstructionsVC.h"
+#import "AddShopVC.h"
 
 @interface InstructionsVC ()
 
@@ -85,7 +86,7 @@
     NSString *finalPath = [path stringByAppendingPathComponent:@"MagboardInstructions.plist"];
     NSDictionary *dict = [[NSDictionary alloc] initWithContentsOfFile:finalPath];
     NSArray *sortedArray = [[dict allKeys] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
-    
+    int lastInstruction = [dict count];
     //First defining the values of the dictionaries within the dicationary
     //Then count how much dictionaries
     //If dictionary id is same as i then echo the content and put it in the right position of the scrollview
@@ -96,6 +97,7 @@
         NSString *image = [tempDict valueForKey:@"image"];
         NSString *shopId = [tempDict valueForKey:@"id"];
         
+
         int shopIdInt = [shopId intValue];
         for(int i = 0; i < [dict count] + 1; i++){
             
@@ -109,7 +111,7 @@
                 [head setBackgroundColor:[UIColor clearColor]];
                 [instructionsScroller addSubview:head];
                 
-                UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake((xPos * xPosDoubler) + 20, 50.0f, 280.0f, 100.0f)];
+                UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake((xPos * xPosDoubler) + 20, 50.0f, 280.0f, 150.0f)];
                 [textLabel setText:text];
                 [textLabel setFont:[UIFont systemFontOfSize:13.0f]];
                 [textLabel setNumberOfLines:0];
@@ -120,6 +122,25 @@
                 UIImageView *imageForStep = [[UIImageView alloc] initWithFrame:CGRectMake((xPos * xPosDoubler) + 20, 150.0f, 250.0f, 200.0f)];
                 [imageForStep setImage:[UIImage imageNamed:image]];
                 [instructionsScroller addSubview:imageForStep];
+                
+                NSLog(@"%d", i);
+                if(i == lastInstruction){
+                    UIButton *addShopButton = [UIButton buttonWithType:UIButtonTypeCustom];
+                    addShopButton.frame = CGRectMake((xPos * xPosDoubler) + 20, 200.0, 290.0, 43.0);
+                    [addShopButton setTitle:@"Voeg een webshop toe" forState:UIControlStateNormal];
+                    [addShopButton.titleLabel setFont:[UIFont boldSystemFontOfSize:14]];
+                    addShopButton.backgroundColor = [UIColor clearColor];
+                    [addShopButton setTitleColor:[UIColor colorWithRed:42.0/255.0 green:43.0/255.0 blue:53.0/255.0 alpha:1.0] forState:UIControlStateNormal ];
+                    addShopButton.titleLabel.shadowColor = [UIColor whiteColor];
+                    addShopButton.titleLabel.shadowOffset = CGSizeMake(0, 0);
+                    
+                    UIImage *addShopButtonImageNormal = [UIImage imageNamed:@"button_full_width_grey.png"];
+                    [addShopButton setBackgroundImage:addShopButtonImageNormal forState:UIControlStateNormal];
+                    
+                    [addShopButton addTarget:self action:@selector(goToAddShop) forControlEvents:UIControlEventTouchUpInside];
+                    
+                    [instructionsScroller addSubview:addShopButton];
+                }
                 
                 /* Next button, but doesn't work properly
                  UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake((xPos * xPosDoubler) + 20, 280.0f, 50.0f, 50.0f)];
@@ -134,6 +155,16 @@
         }
         
     }
+    
+
 }
 
+-(void)goToAddShop
+{
+    NSLog(@"Go to add shop");
+    NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];
+    [viewControllers removeLastObject];
+    AddShopVC *addShopView = [[AddShopVC alloc]init];
+    [[self  navigationController] pushViewController:addShopView animated:YES];
+}
 @end

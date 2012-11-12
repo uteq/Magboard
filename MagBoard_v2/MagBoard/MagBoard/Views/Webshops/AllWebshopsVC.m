@@ -25,6 +25,9 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     [self fetchAllShops];
+    if(allShops == nil){
+        [self goToInstructions];
+    }
     [self drawNavigationBar];
     [self makeScrollview];
     [self shopsControlDots];
@@ -301,5 +304,4 @@
     [viewControllers addObject:dashboard];
     [[self navigationController] setViewControllers:viewControllers animated:YES];
 }
-
 @end
