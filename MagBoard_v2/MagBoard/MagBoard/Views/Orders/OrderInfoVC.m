@@ -14,7 +14,7 @@
 
 @implementation OrderInfoVC
 
-@synthesize shopInfo, orderInfoHolder, orderInfo, header, createInvoice;
+@synthesize shopInfo, orderInfoHolder, orderInfo, subHeader, createInvoice, headerColor;
 
 - (void)viewDidLoad
 {
@@ -25,7 +25,6 @@
     [self constructHeader];
     NSLog(@"%@", [orderInfo orderId]);
     [self loginRequest:[shopInfo shopUrl] username:[shopInfo username] password:[shopInfo password] request:@"salesOrderInfo" requestParams:[orderInfo orderId]];
-    //[self loadingRequest];
 }
 
 -(void)constructHeader
@@ -35,6 +34,34 @@
     UILabel* navBarTitle = [CustomNavBar setNavBarTitle:barTitle];
     self.navigationItem.titleView = navBarTitle;
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTarget:self selector:@selector(backButtonTouched) title:@"Terug"];
+}
+
+//Function for generating color for header
+-(void)generateHeaderColor
+{
+    NSLog(@"STATUS:%@",[[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"status"]);
+    
+    if([[[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"status"] isEqualToString:@"Pending"]){
+        
+        headerColor = [UIColor colorWithRed:78.0f/255.0f green:123.0f/255.0f blue:185.0f/255.0f alpha:1.0f];
+        
+    } else if ([[[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"status"] isEqualToString:@"Processing"]){
+        
+        headerColor = [UIColor colorWithRed:206.0f/255.0f green:141.0f/255.0f blue:56.0f/255.0f alpha:1.0f];
+        
+    } else if ([[[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"status"] isEqualToString:@"Canceled"]){
+        
+        headerColor = [UIColor colorWithRed:172.0f/255.0f green:67.0f/255.0f blue:67.0f/255.0f alpha:1.0f];
+        
+    } else if ([[[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"status"] isEqualToString:@"Complete"]){
+        
+        headerColor = [UIColor colorWithRed:123.0f/255.0f green:180.0f/255.0f blue:112.0f/255.0f alpha:1.0f];
+        
+    } else if ([[[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"status"] isEqualToString:@"Holded"]){
+        
+        headerColor = [UIColor colorWithRed:106.0f/255.0f green:109.0f/255.0f blue:124.0f/255.0f alpha:1.0f];
+        
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -52,18 +79,22 @@
 
 //If the 'Invoice' button is pressed
 -(void)createInvoice{
+    
     NSLog(@"Creating Invoice initiated");
     int itemsCount = [[[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"items" ] count];
     NSMutableString* requestParams = [NSMutableString string];
     [requestParams appendString:[orderInfo orderId] ];
+    
     for (int i = 0; i < itemsCount; i++){
         NSString *itemId = [[NSString alloc] initWithFormat:@"%@", [[[[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"items" ] objectAtIndex:i] valueForKey:@"item_id"]];
         NSString *qtyText = [[NSString alloc] initWithFormat:@"%@", [[[[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"items" ] objectAtIndex:i] valueForKey:@"qty_ordered"]];
         
         [requestParams appendString:[NSString stringWithFormat:@"|%@ . %@", itemId, qtyText] ];
     }
+    
     NSLog(@"Created product string: %@", requestParams);
     [self loginRequest:[shopInfo shopUrl] username:[shopInfo username] password:[shopInfo password] request:@"salesOrderInvoiceCreate" requestParams:requestParams];
+    
 }
 
 -(void)loginRequest:(NSString *)shopUrl username:(NSString *)username password:(NSString *)password request:(NSString *)requestFunction requestParams:(NSString *)requestParams
@@ -117,8 +148,11 @@
 - (void)makeBlocks
 {
     NSLog(@"Making blocks");
-    orderInfoScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0.0f, 40.0f, 320.0f, 440.0f)];
+    orderInfoScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 440.0f)];
     [self.view addSubview:orderInfoScrollView];
+    
+    //Set color for headers
+    [self generateHeaderColor];
 
     [self orderInfoHeader];
     [self orderStatisticsHolder];
@@ -133,22 +167,60 @@
     NSLog(@"Factuur is aangemaakt");
     [createInvoice removeFromSuperview];
 }
+
+//Function for making subheader
 -(void) orderInfoHeader
 {
     NSLog(@"Creating Header");
-    header = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 00.0f, 320.0f, 40.0f)];
-    header.backgroundColor = [UIColor blackColor];
-    [self.view addSubview:header];
     
-     NSString *statusText = [[NSString alloc] initWithFormat:@"%@", [[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"status"]];
-    if([statusText isEqualToString:@"Pending"]){
-        createInvoice = [[UIButton alloc] initWithFrame:CGRectMake(10.0f, 5.0f, 90.0f, 30.0f)];
-        [createInvoice setBackgroundColor: [UIColor whiteColor]];
-        [createInvoice setTitle:@"Factuur" forState:UIControlStateNormal];
-        [createInvoice setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [createInvoice addTarget:self action:@selector(createInvoice) forControlEvents:UIControlEventTouchDown];
-        [header addSubview:createInvoice];
-    }
+    //Make subheader holder
+    subHeader = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 00.0f, 320.0f, 50.0f)];
+    UIColor *lightGrey = [UIColor colorWithRed:55.0f/255.0f green:53.0f/255.0f blue:61.0f/255.0f alpha:1.0];
+    UIColor *darkGrey = [UIColor colorWithRed:47.0f/255.0f green:46.0f/255.0f blue:53.0f/255.0f alpha:1.0];
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    gradient.frame = [[subHeader layer] bounds];
+    gradient.colors = [NSArray arrayWithObjects:
+                       (id)lightGrey.CGColor,
+                       (id)darkGrey.CGColor,
+                       nil];
+    gradient.locations = [NSArray arrayWithObjects:
+                          [NSNumber numberWithFloat:0.0f],
+                          [NSNumber numberWithFloat:0.7],
+                          nil];
+    [[subHeader layer] insertSublayer:gradient atIndex:0];
+    subHeader.layer.shadowColor = [UIColor blackColor].CGColor;
+    subHeader.layer.shadowOpacity = 0.3f;
+    subHeader.layer.shadowOffset = CGSizeMake(0,01);
+    CGRect shadowPath = CGRectMake(subHeader.layer.bounds.origin.x - 10, subHeader.layer.bounds.size.height - 6, subHeader.layer.bounds.size.width + 20, 5);
+    subHeader.layer.shadowPath = [UIBezierPath bezierPathWithRect:shadowPath].CGPath;
+    subHeader.layer.shouldRasterize = YES;
+    [orderInfoScrollView addSubview:subHeader];
+    
+    //Make status buttons
+    UIButton *holdButton = [UIBarButtonItem styledSubHeaderButtonWithTarget:self selector:@selector(setOrderOnHold) name:@"hold"];
+    UIButton *cancelButton = [UIBarButtonItem styledSubHeaderButtonWithTarget:self selector:@selector(setOrderCancel) name:@"cancel"];
+    UIButton *invoiceButton = [UIBarButtonItem styledSubHeaderButtonWithTarget:self selector:@selector(setOrderInvoice) name:@"invoice"];
+    [subHeader addSubview:holdButton];
+    [subHeader addSubview:cancelButton];
+    [subHeader addSubview:invoiceButton];
+}
+
+//Handle action for hold button
+-(void)setOrderOnHold
+{
+    NSLog(@"Hold button pressed");
+}
+
+//Handle action for cancel button
+-(void)setOrderCancel
+{
+    NSLog(@"Cancel button pressed");
+}
+
+//Handle action for invoice button
+-(void)setOrderInvoice
+{
+    NSLog(@"Invoice button pressed");
 }
 
 -(void)orderStatisticsHolder{
@@ -156,7 +228,7 @@
     //Add to Scroll View Height
     scrollViewHeight += (110 + 10);
     
-    UIView *orderStatisticsHolder = [[UIView alloc] initWithFrame:CGRectMake(10.0f, 20.0f, 301.0f, 110.0f)];
+    UIView *orderStatisticsHolder = [[UIView alloc] initWithFrame:CGRectMake(10.0f, 60.0f, 301.0f, 110.0f)];
     orderStatisticsHolder.backgroundColor = [UIColor colorWithRed:225.0f/255.0f green:224.0f/255.0f blue:225.0f/255.0f alpha:1.0f];
     orderStatisticsHolder.layer.cornerRadius = 5.0f;
     orderStatisticsHolder.layer.masksToBounds = YES;
@@ -165,8 +237,8 @@
     //Create header for the statistics holder
     UIView *statisticsHeader = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 301, 30)];
     UIView *borderBottom = [[UIView alloc] initWithFrame:CGRectMake(0, 30, 301, 1)];
-    statisticsHeader.backgroundColor = [UIColor colorWithRed:184.0f/255.0f green:199.0f/255.0f blue:221.0f/255.0f alpha:1.0f];
-    borderBottom.backgroundColor = [UIColor colorWithRed:147.0f/255.0f green:149.0f/255.0f blue:149.0f/255.0f alpha:1.0f];
+    statisticsHeader.backgroundColor = headerColor;
+    borderBottom.backgroundColor = [UIColor clearColor];
     [orderStatisticsHolder addSubview:statisticsHeader];
     [orderStatisticsHolder addSubview:borderBottom];
     
@@ -175,9 +247,9 @@
     UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 3.0f, 301.0f, 25.0f)];
     title.backgroundColor = [UIColor clearColor];
     title.font = [UIFont boldSystemFontOfSize:14.0f];
-    title.textColor = [UIColor colorWithRed:87.0f/255.0f green:83.0f/255.0f blue:89.0f/255.0f alpha:1.0f];
-    title.shadowColor = [UIColor whiteColor];
-    title.shadowOffset = CGSizeMake(0, 1);
+    title.textColor = [UIColor whiteColor];
+    //title.shadowColor = [UIColor whiteColor];
+    //title.shadowOffset = CGSizeMake(0, 1);
     title.text = orderId;
     [statisticsHeader addSubview:title];
     
@@ -220,7 +292,7 @@
     //Add to Scroll View Height
     scrollViewHeight += (150 + 10);
     
-    UIView *orderStatisticsHolder = [[UIView alloc] initWithFrame:CGRectMake(10.0f, 150.0f, 301.0f, 150.0f)];
+    UIView *orderStatisticsHolder = [[UIView alloc] initWithFrame:CGRectMake(10.0f, 190.0f, 301.0f, 150.0f)];
     orderStatisticsHolder.backgroundColor = [UIColor colorWithRed:225.0f/255.0f green:224.0f/255.0f blue:225.0f/255.0f alpha:1.0f];
     orderStatisticsHolder.layer.cornerRadius = 5.0f;
     orderStatisticsHolder.layer.masksToBounds = YES;
@@ -229,8 +301,8 @@
     //Create header for the statistics holder
     UIView *statisticsHeader = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 301, 30)];
     UIView *borderBottom = [[UIView alloc] initWithFrame:CGRectMake(0, 30, 301, 1)];
-    statisticsHeader.backgroundColor = [UIColor colorWithRed:184.0f/255.0f green:199.0f/255.0f blue:221.0f/255.0f alpha:1.0f];
-    borderBottom.backgroundColor = [UIColor colorWithRed:147.0f/255.0f green:149.0f/255.0f blue:149.0f/255.0f alpha:1.0f];
+    statisticsHeader.backgroundColor = headerColor;
+    borderBottom.backgroundColor = [UIColor clearColor];
     [orderStatisticsHolder addSubview:statisticsHeader];
     [orderStatisticsHolder addSubview:borderBottom];
     
@@ -238,9 +310,9 @@
     UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 3.0f, 301.0f, 25.0f)];
     title.backgroundColor = [UIColor clearColor];
     title.font = [UIFont boldSystemFontOfSize:14.0f];
-    title.textColor = [UIColor colorWithRed:87.0f/255.0f green:83.0f/255.0f blue:89.0f/255.0f alpha:1.0f];
-    title.shadowColor = [UIColor whiteColor];
-    title.shadowOffset = CGSizeMake(0, 1);
+    title.textColor = [UIColor whiteColor];
+    //title.shadowColor = [UIColor whiteColor];
+    //title.shadowOffset = CGSizeMake(0, 1);
     title.text = @"Factuuradres";
     [statisticsHeader addSubview:title];
     
@@ -308,7 +380,7 @@
     //Add to Scroll View Height
     scrollViewHeight += (productsHolderHeight + 10);
     
-    UIView *orderStatisticsHolder = [[UIView alloc] initWithFrame:CGRectMake(10.0f, 320.0f, 301.0f, productsHolderHeight)];
+    UIView *orderStatisticsHolder = [[UIView alloc] initWithFrame:CGRectMake(10.0f, 360.0f, 301.0f, productsHolderHeight)];
     orderStatisticsHolder.backgroundColor = [UIColor colorWithRed:225.0f/255.0f green:224.0f/255.0f blue:225.0f/255.0f alpha:1.0f];
     orderStatisticsHolder.layer.cornerRadius = 5.0f;
     orderStatisticsHolder.layer.masksToBounds = YES;
@@ -317,8 +389,8 @@
     //Create header for the statistics holder
     UIView *statisticsHeader = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 301, 30)];
     UIView *borderBottom = [[UIView alloc] initWithFrame:CGRectMake(0, 30, 301, 1)];
-    statisticsHeader.backgroundColor = [UIColor colorWithRed:184.0f/255.0f green:199.0f/255.0f blue:221.0f/255.0f alpha:1.0f];
-    borderBottom.backgroundColor = [UIColor colorWithRed:147.0f/255.0f green:149.0f/255.0f blue:149.0f/255.0f alpha:1.0f];
+    statisticsHeader.backgroundColor = headerColor;
+    borderBottom.backgroundColor = [UIColor clearColor];
     [orderStatisticsHolder addSubview:statisticsHeader];
     [orderStatisticsHolder addSubview:borderBottom];
     
@@ -326,16 +398,16 @@
     UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 3.0f, 301.0f, 25.0f)];
     title.backgroundColor = [UIColor clearColor];
     title.font = [UIFont boldSystemFontOfSize:14.0f];
-    title.textColor = [UIColor colorWithRed:87.0f/255.0f green:83.0f/255.0f blue:89.0f/255.0f alpha:1.0f];
-    title.shadowColor = [UIColor whiteColor];
-    title.shadowOffset = CGSizeMake(0, 1);
+    title.textColor = [UIColor whiteColor];
+    //title.shadowColor = [UIColor whiteColor];
+    //title.shadowOffset = CGSizeMake(0, 1);
     title.text = @"Bestelde producten";
     [statisticsHeader addSubview:title];
     
     
     //The body for all the ordered products
     
-    UIView *orderProductsBody = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 30.0f, 301.0f, (61 * itemsCount))];
+    UIView *orderProductsBody = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 30.0f, 301.0f, (60 * itemsCount))];
     orderProductsBody.backgroundColor = [UIColor clearColor];
     [orderStatisticsHolder addSubview:orderProductsBody];
    
@@ -344,12 +416,16 @@
     {
         // For each product his own container
         UIView *orderProductContainer = [[UIView alloc] initWithFrame:CGRectMake(0.0f, (60 * i), 296.0f, 30.0f)];
-        UIView *orderBorder = [[UIView alloc] initWithFrame:CGRectMake(0, (61 * i), 301.0f, 1)];
+        UIView *orderBorder = [[UIView alloc] initWithFrame:CGRectMake(0, 59, 301.0f, 1)];
         orderBorder.backgroundColor = [UIColor colorWithRed:147.0f/255.0f green:149.0f/255.0f blue:149.0f/255.0f alpha:1.0f];
         orderProductContainer.backgroundColor = [UIColor clearColor];
-        [orderProductsBody addSubview:orderBorder];
         [orderProductsBody addSubview:orderProductContainer];
         
+        //No border for last item
+        if((i + 1) != itemsCount){
+            [orderProductContainer addSubview:orderBorder];
+        }
+            
         NSString *productNameText = [[NSString alloc] initWithFormat:@"%@", [[[[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"items" ] objectAtIndex:i] valueForKey:@"name"]];
         NSMutableString *qtyText = [[NSMutableString alloc] initWithFormat:@"%@", [[[[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"items" ] objectAtIndex:i] valueForKey:@"qty_ordered"]];
         [qtyText appendString:@" stuk(s)"];
@@ -385,7 +461,7 @@
     //Add to Scroll View Height
     scrollViewHeight += (210 + 10);
     
-    UIView *orderStatisticsHolder = [[UIView alloc] initWithFrame:CGRectMake(10.0f, productsHolderHeight + 340, 301.0f, 210.0)];
+    UIView *orderStatisticsHolder = [[UIView alloc] initWithFrame:CGRectMake(10.0f, productsHolderHeight + 380, 301.0f, 210.0)];
     orderStatisticsHolder.backgroundColor = [UIColor colorWithRed:225.0f/255.0f green:224.0f/255.0f blue:225.0f/255.0f alpha:1.0f];
     orderStatisticsHolder.layer.cornerRadius = 5.0f;
     orderStatisticsHolder.layer.masksToBounds = YES;
@@ -394,8 +470,8 @@
     //Create header for the statistics holder
     UIView *statisticsHeader = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 301, 30)];
     UIView *borderBottom = [[UIView alloc] initWithFrame:CGRectMake(0, 30, 301, 1)];
-    statisticsHeader.backgroundColor = [UIColor colorWithRed:184.0f/255.0f green:199.0f/255.0f blue:221.0f/255.0f alpha:1.0f];
-    borderBottom.backgroundColor = [UIColor colorWithRed:147.0f/255.0f green:149.0f/255.0f blue:149.0f/255.0f alpha:1.0f];
+    statisticsHeader.backgroundColor = headerColor;
+    borderBottom.backgroundColor = [UIColor clearColor];
     [orderStatisticsHolder addSubview:statisticsHeader];
     [orderStatisticsHolder addSubview:borderBottom];
     
@@ -403,9 +479,9 @@
     UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 3.0f, 301.0f, 25.0f)];
     title.backgroundColor = [UIColor clearColor];
     title.font = [UIFont boldSystemFontOfSize:14.0f];
-    title.textColor = [UIColor colorWithRed:87.0f/255.0f green:83.0f/255.0f blue:89.0f/255.0f alpha:1.0f];
-    title.shadowColor = [UIColor whiteColor];
-    title.shadowOffset = CGSizeMake(0, 1);
+    title.textColor = [UIColor whiteColor];
+    //title.shadowColor = [UIColor whiteColor];
+    //title.shadowOffset = CGSizeMake(0, 1);
     title.text = @"Totalen";
     [statisticsHeader addSubview:title];
     

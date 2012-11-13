@@ -37,7 +37,7 @@
 {
     UILabel* navBarTitle = [CustomNavBar setNavBarTitle:[shopInfo shopName]];
     self.navigationItem.titleView = navBarTitle;
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTarget:self selector:@selector(backButtonTouched) title:@"Logout"];
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTarget:self selector:@selector(backButtonTouched) title:@"Terug"];
 }
 
 -(void)backButtonTouched
@@ -176,6 +176,11 @@
     else if ([[[[orderHolder valueForKey:@"data-items"] objectAtIndex:indexPath.row] valueForKey:@"status"] isEqualToString:@"canceled"])
     {
         UIImage *image = [UIImage imageNamed:@"order_holder_canceled"];
+        orderHolderLabel.backgroundColor = [UIColor colorWithPatternImage:image];
+    }
+    else if ([[[[orderHolder valueForKey:@"data-items"] objectAtIndex:indexPath.row] valueForKey:@"status"] isEqualToString:@"holded"])
+    {
+        UIImage *image = [UIImage imageNamed:@"order_holder_holded"];
         orderHolderLabel.backgroundColor = [UIColor colorWithPatternImage:image];
     }
     [cell addSubview:orderHolderLabel];

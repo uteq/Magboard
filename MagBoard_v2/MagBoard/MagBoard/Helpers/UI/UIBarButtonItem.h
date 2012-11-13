@@ -10,9 +10,8 @@
 
 @interface UIBarButtonItem (StyledButton)
 
-+ (UIBarButtonItem *)styledBackBarButtonItemWithTarget:(id)target selector:(SEL)selector;
 + (UIBarButtonItem *)styledBarButtonItemWithTarget:(id)target selector:(SEL)selector title:(NSString *)buttonTitle;
 + (UIBarButtonItem *)styledSettingsButtonItemWithTarget:(id)target selector:(SEL)selector;
-+ (UIBarButtonItem *)styledSubmitBarButtonItemWithTitle:(NSString *)title target:(id)target selector:(SEL)selector;
++ (UIButton *)styledSubHeaderButtonWithTarget:(id)target selector:(SEL)selector name:(NSString*)name;
 
 @end
