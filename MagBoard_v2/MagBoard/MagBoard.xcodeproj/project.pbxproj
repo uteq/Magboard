@@ -74,6 +74,7 @@
 		95E54ACF16526E8200229695 /* invoice_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 95E54ACC16526E8200229695 /* invoice_button.png */; };
 		95E54AD1165276AF00229695 /* order_holder_holded@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 95E54AD0165276AF00229695 /* order_holder_holded@2x.png */; };
 		95E54AD3165276B800229695 /* order_holder_holded.png in Resources */ = {isa = PBXBuildFile; fileRef = 95E54AD2165276B800229695 /* order_holder_holded.png */; };
+		CE216C151652629700AF3DA3 /* Lobster_1.3.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE216C141652629700AF3DA3 /* Lobster_1.3.otf */; };
 		CE8585881647DE3100F94506 /* OrderSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8585871647DE3100F94506 /* OrderSingleton.m */; };
 		CEC8C3F51647C17B0086A96E /* OrderInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC8C3F41647C17B0086A96E /* OrderInfoVC.m */; };
 /* End PBXBuildFile section */
@@ -163,8 +164,7 @@
 		959964091649396400DBB279 /* EditShopVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditShopVC.h; path = Views/Webshops/EditShopVC.h; sourceTree = "<group>"; };
 		9599640A1649396400DBB279 /* EditShopVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditShopVC.m; path = Views/Webshops/EditShopVC.m; sourceTree = "<group>"; };
 		95B0B9E91649ABD100061DD2 /* bar_button_empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bar_button_empty.png; path = "Resources/Images/Non-retina/bar_button_empty.png"; sourceTree = "<group>"; };
-		95B0B9EC1649ABDC00061DD2 /* bar_button_empty@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bar_button_empty@2x.png"; path = "Resources/Images/Retina/bar_button_empty@2x.png"; sourceTree = "<group>"; };
-		95E54AC41652601A00229695 /* cancel_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "cancel_button@2x.png"; path = "Resources/Images/Retina/cancel_button@2x.png"; sourceTree = "<group>"; };
+		95B0B9EC1649ABDC00061DD2 /* bar_button_empty@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bar_button_empty@2x.png"; path = "Resources/Images/Retina/bar_button_empty@2x.png"; sourceTree = "<group>"; };		95E54AC41652601A00229695 /* cancel_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "cancel_button@2x.png"; path = "Resources/Images/Retina/cancel_button@2x.png"; sourceTree = "<group>"; };
 		95E54AC51652601A00229695 /* hold_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "hold_button@2x.png"; path = "Resources/Images/Retina/hold_button@2x.png"; sourceTree = "<group>"; };
 		95E54AC61652601A00229695 /* invoice_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "invoice_button@2x.png"; path = "Resources/Images/Retina/invoice_button@2x.png"; sourceTree = "<group>"; };
 		95E54ACA16526E8200229695 /* cancel_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cancel_button.png; path = "Resources/Images/Non-retina/cancel_button.png"; sourceTree = "<group>"; };
@@ -172,6 +172,7 @@
 		95E54ACC16526E8200229695 /* invoice_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = invoice_button.png; path = "Resources/Images/Non-retina/invoice_button.png"; sourceTree = "<group>"; };
 		95E54AD0165276AF00229695 /* order_holder_holded@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "order_holder_holded@2x.png"; path = "Resources/Images/Retina/order_holder_holded@2x.png"; sourceTree = "<group>"; };
 		95E54AD2165276B800229695 /* order_holder_holded.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = order_holder_holded.png; path = "Resources/Images/Non-retina/order_holder_holded.png"; sourceTree = "<group>"; };
+		CE216C141652629700AF3DA3 /* Lobster_1.3.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Lobster_1.3.otf; path = Resources/Fonts/Lobster_1.3.otf; sourceTree = "<group>"; };
 		CE8585861647DE3100F94506 /* OrderSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrderSingleton.h; path = Models/Orders/OrderSingleton.h; sourceTree = "<group>"; };
 		CE8585871647DE3100F94506 /* OrderSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrderSingleton.m; path = Models/Orders/OrderSingleton.m; sourceTree = "<group>"; };
 		CEC8C3F31647C17B0086A96E /* OrderInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrderInfoVC.h; path = Views/Orders/OrderInfoVC.h; sourceTree = "<group>"; };
@@ -342,6 +343,7 @@
 		957665BD16412EEE00B68687 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CE216C121652621200AF3DA3 /* Fonts */,
 				957666261641569D00B68687 /* Plist */,
 				957665BF16412EFB00B68687 /* Non-retina */,
 				957665BE16412EF400B68687 /* Retina */,
@@ -523,6 +525,14 @@
 			name = Plist;
 			sourceTree = "<group>";
 		};
+		CE216C121652621200AF3DA3 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				CE216C141652629700AF3DA3 /* Lobster_1.3.otf */,
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -637,6 +647,7 @@
 				95E54ACF16526E8200229695 /* invoice_button.png in Resources */,
 				95E54AD1165276AF00229695 /* order_holder_holded@2x.png in Resources */,
 				95E54AD3165276B800229695 /* order_holder_holded.png in Resources */,
+				CE216C151652629700AF3DA3 /* Lobster_1.3.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
