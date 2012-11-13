@@ -24,5 +24,6 @@
 -(void)constructHeader;
 -(void)loadingRequest;
 -(void)alertForIncorrectLogin;
+-(void)constructTabBar;
 
 @end
