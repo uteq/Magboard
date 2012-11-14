@@ -13,10 +13,11 @@
     int sections;
 }
 
-@property (nonatomic, retain) NSMutableDictionary* orderHolder;
-@property (nonatomic, retain) ShopSingleton* shopInfo;
-@property (nonatomic, retain) UIActivityIndicatorView* loadingIcon;
-@property (nonatomic, strong) UITableView* ordersTable;
+@property (nonatomic, retain) NSMutableDictionary *orderHolder;
+@property (nonatomic, retain) ShopSingleton *shopInfo;
+@property (nonatomic, retain) UIActivityIndicatorView *loadingIcon;
+@property (nonatomic, strong) UITableView *ordersTable;
+@property (nonatomic, strong) UIView *loadingHolder;
 
 
 -(void)loginRequest:(NSString *)shopUrl username:(NSString *)username password:(NSString *)password request:(NSString *)requestFunction requestParams:(NSString *)requestParams;

@@ -21,6 +21,8 @@
 @property (nonatomic, retain) UIView *subHeader;
 @property (nonatomic, retain) UIButton *createInvoice;
 @property (nonatomic, retain) UIColor *headerColor;
+@property (nonatomic, retain) UIActivityIndicatorView *loadingIcon;
+@property (nonatomic, strong) UIView *loadingHolder;
 
 //For making request for order details
 -(void)loginRequest:(NSString *)shopUrl username:(NSString *)username password:(NSString *)password request:(NSString *)requestFunction requestParams:(NSString *)requestParams;
@@ -31,6 +33,7 @@
 -(void)setOrderInvoice;
 -(void)requestInvoice;
 -(void)requestHold:(NSString*)type;
+-(void)loadingRequest:(NSString*)message;
 
 
 @end

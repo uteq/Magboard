@@ -15,7 +15,7 @@
 
 @implementation OrdersVC
 
-@synthesize shopInfo, orderHolder, loadingIcon, ordersTable;
+@synthesize shopInfo, orderHolder,loadingHolder, loadingIcon, ordersTable;
 
 - (void)viewDidLoad
 {
@@ -106,11 +106,26 @@
 //While doing request show loading icon
 -(void)loadingRequest
 {
+    loadingHolder = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 350)];
+    loadingHolder.backgroundColor = [UIColor clearColor];
+    
+    UILabel *loadingText = [[UILabel alloc] initWithFrame:CGRectMake(20, 160, 280, 100)];
+    UIFont *font = [UIFont fontWithName:@"Lobster 1.3" size:16.0f];
+    loadingText.backgroundColor = [UIColor clearColor];
+    loadingText.textColor = [UIColor whiteColor];
+    loadingText.font = font;
+    loadingText.textAlignment = UITextAlignmentCenter;
+    loadingText.shadowColor = [UIColor blackColor];
+    loadingText.shadowOffset = CGSizeMake(0, 1);
+    loadingText.text = @"Orders laden...";
+    
     loadingIcon = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-	loadingIcon.frame = CGRectMake(0.0, 0.0, 40.0, 40.0);
-	loadingIcon.center = self.view.center;
+	loadingIcon.center = loadingHolder.center;
     [loadingIcon startAnimating];
-	[self.view addSubview: loadingIcon];
+    
+    [self.view addSubview:loadingHolder];
+	[loadingHolder addSubview: loadingIcon];
+    [loadingHolder addSubview:loadingText];
 }
 
 //Make request for logging in en fetching orders
@@ -146,6 +161,7 @@
         //if all is ok
         else {
             [loadingIcon stopAnimating];
+            [loadingHolder removeFromSuperview];
             [self makeTable];
         }
     }

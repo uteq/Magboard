@@ -14,7 +14,7 @@
 
 @implementation OrderInfoVC
 
-@synthesize shopInfo, orderInfoHolder, orderInfo, subHeader, createInvoice, headerColor;
+@synthesize shopInfo, orderInfoHolder, orderInfo, subHeader, createInvoice, headerColor, loadingHolder, loadingIcon;
 
 - (void)viewDidLoad
 {
@@ -29,12 +29,18 @@
               password:[shopInfo password]
                request:@"salesOrderInfo"
                 requestParams:[orderInfo orderId]];
+    [self loadingRequest:@"Order ophalen..."];
 }
 
 -(void)reloadScrollview
 {
-    NSLog(@"Scrollview reloading");
+    //Remove scrollview
     [orderInfoScrollView removeFromSuperview];
+    
+    //Show loading view
+    [self loadingRequest:@"Status wijzigen..."];
+    
+    //Reload scrollview
     [self loginRequest:[shopInfo shopUrl]
               username:[shopInfo username]
               password:[shopInfo password]
@@ -49,6 +55,31 @@
     UILabel* navBarTitle = [CustomNavBar setNavBarTitle:barTitle];
     self.navigationItem.titleView = navBarTitle;
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTarget:self selector:@selector(backButtonTouched) title:@"Terug"];
+}
+
+//While doing request show loading icon
+-(void)loadingRequest:(NSString*)message
+{
+    loadingHolder = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 350)];
+    loadingHolder.backgroundColor = [UIColor clearColor];
+    
+    UILabel *loadingText = [[UILabel alloc] initWithFrame:CGRectMake(20, 160, 280, 100)];
+    UIFont *font = [UIFont fontWithName:@"Lobster 1.3" size:16.0f];
+    loadingText.backgroundColor = [UIColor clearColor];
+    loadingText.textColor = [UIColor whiteColor];
+    loadingText.font = font;
+    loadingText.textAlignment = UITextAlignmentCenter;
+    loadingText.shadowColor = [UIColor blackColor];
+    loadingText.shadowOffset = CGSizeMake(0, 1);
+    loadingText.text = message;
+    
+    loadingIcon = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+	loadingIcon.center = loadingHolder.center;
+    [loadingIcon startAnimating];
+    
+    [self.view addSubview:loadingHolder];
+	[loadingHolder addSubview: loadingIcon];
+    [loadingHolder addSubview:loadingText];
 }
 
 //Function for generating color for header
@@ -121,10 +152,14 @@
             if([[orderInfoHolder valueForKey:@"message"] isEqualToString: @"1002"]){
                 orderInfo.orderStatus = [[orderInfoHolder objectForKey:@"data-items"] objectForKey:@"status"];
                 [self makeBlocks];
+                [loadingIcon stopAnimating];
+                [loadingHolder removeFromSuperview];
             }else if([[orderInfoHolder valueForKey:@"message"] isEqualToString: @"1003"]){
                 NSLog(@"Invoice succesfully created");
             } else {
                  NSLog(@"Message: %@", [orderInfoHolder valueForKey:@"data-items"]);
+                [loadingIcon stopAnimating];
+                [loadingHolder removeFromSuperview];
             }
         
         } else
@@ -134,9 +169,6 @@
     } else {
         NSLog(@"Er ging iets mis %d", [response status]);
     }
-    
-   // NSLog(@"OrderInfo: %@", [orderInfoHolder valueForKey:@"data-items"]);
-    //[loadingIcon stopAnimating];
     
 }
 
@@ -203,11 +235,8 @@
     if([[orderInfo orderStatus] isEqualToString:@"Pending"] || [[orderInfo orderStatus] isEqualToString:@"Processing"]){
         
         BlockAlertView *alertInvoice = [BlockAlertView alertWithTitle:@"Order on hold" message:@"Weet u zeker dat u deze order op hold wilt zetten?"];
-        [alertInvoice setCancelButtonWithTitle:@"Nee" block:^{
-            NSLog(@"Cancel button pressed");
-        }];
+        [alertInvoice setCancelButtonWithTitle:@"Nee" block:nil];
         [alertInvoice addButtonWithTitle:@"Ja" block:^{
-            NSLog(@"Hold button pressed");
             [self requestHold:@"salesOrderHold"];
         }];
         [alertInvoice show];
@@ -215,11 +244,8 @@
     } else if([[orderInfo orderStatus] isEqualToString:@"Holded"]) {
     
         BlockAlertView *alertInvoice = [BlockAlertView alertWithTitle:@"Order activeren" message:@"Weet u zeker dat u deze order wilt activeren?"];
-        [alertInvoice setCancelButtonWithTitle:@"Nee" block:^{
-            NSLog(@"Cancel button pressed");
-        }];
+        [alertInvoice setCancelButtonWithTitle:@"Nee" block:nil];
         [alertInvoice addButtonWithTitle:@"Ja" block:^{
-            NSLog(@"Hold button pressed");
             [self requestHold:@"salesOrderUnhold"];
         }];
         [alertInvoice show];
@@ -227,9 +253,7 @@
     }else {
         
         BlockAlertView *alertInvoice = [BlockAlertView alertWithTitle:@"Order on hold" message:@"U kunt deze order niet op hold zetten."];
-        [alertInvoice addButtonWithTitle:@"Ok" block:^{
-            NSLog(@"Ok button pressed");
-        }];
+        [alertInvoice addButtonWithTitle:@"Ok" block:nil];
         [alertInvoice show];
         
     }
@@ -248,11 +272,8 @@
     if([[orderInfo orderStatus] isEqualToString:@"Pending"]){
         
         BlockAlertView *alertInvoice = [BlockAlertView alertWithTitle:@"Factuur verzenden" message:@"Weet u zeker dat u een factuur voor deze bestelling wilt verzenden?"];
-        [alertInvoice setCancelButtonWithTitle:@"Nee" block:^{
-            NSLog(@"Cancel button pressed");
-        }];
+        [alertInvoice setCancelButtonWithTitle:@"Nee" block:nil];
         [alertInvoice addButtonWithTitle:@"Ja" block:^{
-            NSLog(@"Verzenden button pressed");
             [self requestInvoice];
         }];
         [alertInvoice show];
@@ -260,9 +281,7 @@
     } else {
         
         BlockAlertView *alertInvoice = [BlockAlertView alertWithTitle:@"Factuur verzenden" message:@"U kunt geen factuur voor deze order verzenden."];
-        [alertInvoice addButtonWithTitle:@"Ok" block:^{
-            NSLog(@"Ok button pressed");
-        }];
+        [alertInvoice addButtonWithTitle:@"Ok" block:nil];
         [alertInvoice show];
         
     }

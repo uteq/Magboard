@@ -84,7 +84,6 @@
     UIButton *button = [[UIButton alloc] initWithFrame:buttonSize];
     [button addTarget:target action:selector forControlEvents:UIControlEventTouchUpInside];
     [button setBackgroundImage:image forState:UIControlStateNormal];
-    button.layer.shouldRasterize = NO;
     
     return button;
 }
