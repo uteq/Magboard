@@ -165,9 +165,9 @@
         screenshotHolder.image = screenshot;
         [screenshotHolder.layer setBorderColor: [[UIColor whiteColor] CGColor]];
         [screenshotHolder.layer setBorderWidth: 7.0];
-        screenshotHolder.layer.shadowColor = [UIColor blackColor].CGColor;
-        screenshotHolder.layer.shadowOffset = CGSizeMake(0, 2);
-        screenshotHolder.layer.shadowOpacity = 0.8;
+//        screenshotHolder.layer.shadowColor = [UIColor blackColor].CGColor;
+//        screenshotHolder.layer.shadowOffset = CGSizeMake(0, 2);
+//        screenshotHolder.layer.shadowOpacity = 0.8;
         [shopHolder addSubview:screenshotHolder];
         
         //Add shop name

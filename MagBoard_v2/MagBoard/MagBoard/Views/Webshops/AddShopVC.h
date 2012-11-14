@@ -22,5 +22,7 @@
 @property (weak, nonatomic) NSString *message;
 @property (weak, nonatomic) NSString *alertTitle;
 @property BOOL empty;
+@property (weak, nonatomic) NSPredicate *urlTest;
+@property (weak, nonatomic) NSString *urlRegEx;
 
 @end

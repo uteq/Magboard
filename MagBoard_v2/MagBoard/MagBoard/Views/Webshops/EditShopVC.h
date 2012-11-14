@@ -26,5 +26,7 @@
 @property (strong, nonatomic) ShopSingleton * sharedShop;
 @property BOOL empty;
 @property (strong, nonatomic) Webshop *editShop;
+@property (weak, nonatomic) NSPredicate *urlTest;
+@property (weak, nonatomic) NSString *urlRegEx;
 
 @end

@@ -15,7 +15,7 @@
 
 @implementation AddShopVC
 
-@synthesize shopName, shopUrl,username, password, passwordSwitch, message, alertTitle, empty;
+@synthesize shopName, shopUrl,username, password, passwordSwitch, message, alertTitle, empty, urlRegEx, urlTest;
 
 - (void)viewDidLoad
 {
@@ -193,9 +193,6 @@
 
 //Function for validating url
 - (BOOL)validateUrl:(NSString *)givenUrl {
-    
-    NSPredicate *urlTest = [[NSPredicate alloc] init];
-    NSString *urlRegEx = [[NSString alloc] init];
     
     if ([givenUrl rangeOfString:@"http"].location != NSNotFound) {
         urlRegEx =
