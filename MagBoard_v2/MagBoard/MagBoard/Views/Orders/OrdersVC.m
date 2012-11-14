@@ -23,8 +23,20 @@
     shopInfo = [ShopSingleton shopSingleton];
     // Do any additional setup after loading the view.
     [self constructHeader];
+    [self constructTabBar];
     [self loginRequest:[shopInfo shopUrl] username:[shopInfo username] password:[shopInfo password]  request:@"salesOrderList" requestParams:@"dateSorted"];
     [self loadingRequest];
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:YES];
+    if(ordersTable){
+        [ordersTable removeFromSuperview];
+        [self loginRequest:[shopInfo shopUrl] username:[shopInfo username] password:[shopInfo password]  request:@"salesOrderList" requestParams:@"dateSorted"];
+        [self loadingRequest];
+    }
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -40,6 +52,45 @@
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTarget:self selector:@selector(backButtonTouched) title:@"Terug"];
 }
 
+-(void)constructTabBar
+{
+
+    //Make holder for tabbar
+    UIView *tabBar = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 365.0f, 320.0f, 54.0f)];
+    UIView *borderTop = [[UIView alloc] initWithFrame:CGRectMake(0, 1.0f, 320.0f, 1.0f)];
+    UIView *borderTopBlack = [[UIView alloc] initWithFrame:CGRectMake(0, 0.0f, 320.0f, 1.0f)];
+    UIView *deviderBlack = [[UIView alloc] initWithFrame:CGRectMake(159, 0.0f, 1.0f, 54.0f)];
+    UIView *deviderLight = [[UIView alloc] initWithFrame:CGRectMake(160, 1.0f, 1.0f, 53.0f)];
+    borderTop.backgroundColor = [UIColor colorWithRed:75.0f/255.0f green:74.0f/255.0f blue:80.0f/255.0f alpha:1.0];
+    borderTopBlack.backgroundColor =[UIColor blackColor];
+    deviderBlack.backgroundColor = [UIColor blackColor];
+    deviderLight.backgroundColor = [UIColor colorWithRed:75.0f/255.0f green:74.0f/255.0f blue:80.0f/255.0f alpha:1.0];
+    UIColor *lightGrey = [UIColor colorWithRed:55.0f/255.0f green:53.0f/255.0f blue:61.0f/255.0f alpha:1.0];
+    UIColor *darkGrey = [UIColor colorWithRed:47.0f/255.0f green:46.0f/255.0f blue:53.0f/255.0f alpha:1.0];
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    gradient.frame = [[tabBar layer] bounds];
+    gradient.colors = [NSArray arrayWithObjects:
+                       (id)lightGrey.CGColor,
+                       (id)darkGrey.CGColor,
+                       nil];
+    gradient.locations = [NSArray arrayWithObjects:
+                          [NSNumber numberWithFloat:0.0f],
+                          [NSNumber numberWithFloat:0.7],
+                          nil];
+    [[tabBar layer] insertSublayer:gradient atIndex:0];
+    [self.view addSubview:tabBar];
+    [tabBar addSubview:borderTopBlack];
+    [tabBar addSubview:borderTop];
+    [tabBar addSubview:deviderBlack];
+    [tabBar addSubview:deviderLight];
+    
+    //Make buttons for tabbar
+    UIButton *dashboardButton = [UIBarButtonItem styledSubHeaderButtonWithTarget:self selector:@selector(goToDashboard) name:@"dashboard"];
+    UIButton *ordersButton = [UIBarButtonItem styledSubHeaderButtonWithTarget:self selector:nil name:@"ordersSelected"];
+    [tabBar addSubview:dashboardButton];
+    [tabBar addSubview:ordersButton];
+}
+
 -(void)backButtonTouched
 {
     NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];
@@ -47,11 +98,16 @@
     [[self navigationController] setViewControllers:viewControllers animated:YES];
 }
 
+-(void)goToDashboard
+{
+    NSLog(@"Dashboard button pressed");
+}
+
 //While doing request show loading icon
 -(void)loadingRequest
 {
-    loadingIcon = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-	loadingIcon.frame = CGRectMake(0.0, 0.0, 320.0, 440.0);
+    loadingIcon = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+	loadingIcon.frame = CGRectMake(0.0, 0.0, 40.0, 40.0);
 	loadingIcon.center = self.view.center;
     [loadingIcon startAnimating];
 	[self.view addSubview: loadingIcon];
@@ -108,7 +164,7 @@
 -(void)makeTable
 {
     //Add view to tableview
-    ordersTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 410)];
+    ordersTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 365)];
     ordersTable.dataSource = self;
     ordersTable.delegate = self;
     ordersTable.backgroundColor = [UIColor clearColor];
@@ -253,10 +309,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //Put data from row into the designated singleton
-    NSString* orderId = [[NSString alloc] initWithFormat:@"%@", [[[[orderHolder valueForKey:@"data-items"] objectAtIndex:indexPath.section]objectAtIndex:indexPath.row] valueForKey:@"increment_id"]];
+    NSString *orderId = [[NSString alloc] initWithFormat:@"%@", [[[[orderHolder valueForKey:@"data-items"] objectAtIndex:indexPath.section]objectAtIndex:indexPath.row] valueForKey:@"increment_id"]];
+    NSString *orderStatus = [[NSString alloc] initWithFormat:@"%@", [[[[orderHolder valueForKey:@"data-items"] objectAtIndex:indexPath.section]objectAtIndex:indexPath.row] valueForKey:@"status"]];
     
     OrderSingleton *sharedOrder = [OrderSingleton orderSingleton];
     sharedOrder.orderId = orderId;
+    sharedOrder.orderStatus = orderStatus;
     
     if(sharedOrder.orderId != nil)
     {

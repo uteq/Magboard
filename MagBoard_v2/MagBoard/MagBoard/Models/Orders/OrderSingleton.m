@@ -11,7 +11,7 @@ static OrderSingleton *sharedOrder = nil;
 
 @implementation OrderSingleton
 
-@synthesize orderId;
+@synthesize orderId, orderStatus;
 
 + (id)orderSingleton
 {
@@ -33,6 +33,7 @@ static OrderSingleton *sharedOrder = nil;
     if (self = [super init])
     {
         orderId = [self orderId];
+        orderStatus = [self orderStatus];
     }
     return self;
 }

@@ -25,5 +25,6 @@
 -(void)loadingRequest;
 -(void)alertForIncorrectLogin;
 -(void)constructTabBar;
+-(void)goToDashboard;
 
 @end

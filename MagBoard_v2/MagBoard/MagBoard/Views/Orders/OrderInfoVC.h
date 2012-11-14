@@ -29,6 +29,8 @@
 -(void)setOrderOnHold;
 -(void)setOrderCancel;
 -(void)setOrderInvoice;
+-(void)requestInvoice;
+-(void)requestHold:(NSString*)type;
 
 
 @end

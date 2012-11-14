@@ -11,9 +11,11 @@
 @interface OrderSingleton : NSObject
 {
     NSString *orderId;
+    NSString *orderStatus;
 }
 
 @property (nonatomic, retain) NSString *orderId;
+@property (nonatomic, retain) NSString *orderStatus;
 
 + (id)orderSingleton;
 @end

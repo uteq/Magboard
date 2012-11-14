@@ -67,6 +67,18 @@
     } else if ([name isEqualToString:@"invoice"]){
         image = [UIImage imageNamed:@"invoice_button.png"];
         buttonSize = CGRectMake(220.0f, 8.0f, 92.0f, 34.0f);
+    } else if ([name isEqualToString:@"dashboard"]){
+        image = [UIImage imageNamed:@"tabbar_dashboard.png"];
+        buttonSize = CGRectMake(0.0f, 2.0f, 160.0f, 45.0f);
+    } else if ([name isEqualToString:@"dashboardSelected"]){
+        image = [UIImage imageNamed:@"tabbar_dashboard_active.png"];
+        buttonSize = CGRectMake(0.0f, 2.0f, 160.0f, 45.0f);
+    } else if ([name isEqualToString:@"orders"]){
+        image = [UIImage imageNamed:@"tabbar_orders.png"];
+        buttonSize = CGRectMake(160.0f, 1.0f, 159.0f, 45.0f);
+    } else if ([name isEqualToString:@"ordersSelected"]){
+        image = [UIImage imageNamed:@"tabbar_orders_active.png"];
+        buttonSize = CGRectMake(161.0f, 1.0f, 159.0f, 45.0f);
     }
     
     UIButton *button = [[UIButton alloc] initWithFrame:buttonSize];
