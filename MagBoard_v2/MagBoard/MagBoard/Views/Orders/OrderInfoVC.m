@@ -175,16 +175,14 @@
 - (void)makeBlocks
 {
     NSLog(@"Making blocks");
-    orderInfoScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 440.0f)];
+    orderInfoScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, [constants getScreenHeight] - 40)];
     [self.view addSubview:orderInfoScrollView];
     
     //Set color for headers
     [self generateHeaderColor];
     
     //Initialize subheader
-    if(![[orderInfo orderStatus] isEqualToString:@"Completed"] && ![[orderInfo orderStatus] isEqualToString:@"Canceled"]){
-        [self orderInfoHeader];
-    }
+    [self orderInfoHeader];
     
     [self orderStatisticsHolder];
     [self orderShippingHolder];
@@ -262,8 +260,34 @@
 //Handle action for cancel button
 -(void)setOrderCancel
 {
-    NSLog(@"Cancel button pressed");
-    //[self reloadScrollview];
+    if([[orderInfo orderStatus] isEqualToString:@"Canceled"]){
+        
+        BlockAlertView *alertInvoice = [BlockAlertView alertWithTitle:@"Order annuleren" message:@"U kunt deze order niet annuleren omdat hij al is geannuleerd."];
+        [alertInvoice setCancelButtonWithTitle:@"Ok" block:nil];
+        [alertInvoice show];
+        
+    } else if([[orderInfo orderStatus] isEqualToString:@"Complete"]) {
+        
+        BlockAlertView *alertInvoice = [BlockAlertView alertWithTitle:@"Order annuleren" message:@"U kunt deze order niet annuleren omdat hij al is afgehandeld."];
+        [alertInvoice setCancelButtonWithTitle:@"Ok" block:nil];
+        [alertInvoice show];
+    
+    }  else if([[orderInfo orderStatus] isEqualToString:@"Processing"]) {
+        
+        BlockAlertView *alertInvoice = [BlockAlertView alertWithTitle:@"Order annuleren" message:@"U kunt deze order niet annuleren omdat hij in behandeling is."];
+        [alertInvoice setCancelButtonWithTitle:@"Ok" block:nil];
+        [alertInvoice show];
+        
+    }else {
+        
+        BlockAlertView *alertInvoice = [BlockAlertView alertWithTitle:@"Order annuleren" message:@"Weet u zeker dat u deze order wilt annuleren?"];
+        [alertInvoice setCancelButtonWithTitle:@"Nee" block:nil];
+        [alertInvoice addButtonWithTitle:@"Ja" block:^{
+            [self requestHold:@"salesOrderCancel"];
+        }];
+        [alertInvoice show];
+    
+    }
 }
 
 //Handle action for invoice button
@@ -316,6 +340,20 @@
     [requestParams appendString:[orderInfo orderId]];
     
     NSLog(@"Created product string: %@", requestParams);
+    [self loginRequest:[shopInfo shopUrl] username:[shopInfo username] password:[shopInfo password] request:type requestParams:requestParams];
+    
+    //Scrollview reloaden
+    scrollViewHeight = 0;
+    [self reloadScrollview];
+}
+
+//If the 'Cancel' button is pressed
+-(void)requestCancel:(NSString*)type{
+    
+    NSLog(@"Cancel order request initiated");
+    NSMutableString* requestParams = [NSMutableString string];
+    [requestParams appendString:[orderInfo orderId]];
+    
     [self loginRequest:[shopInfo shopUrl] username:[shopInfo username] password:[shopInfo password] request:type requestParams:requestParams];
     
     //Scrollview reloaden

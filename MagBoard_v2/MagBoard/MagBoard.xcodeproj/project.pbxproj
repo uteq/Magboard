@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		183EDE67F4614EA7B821087D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C53D467431945D9A56F0FD1 /* libPods.a */; };
+		952B76741653DBC700346AF9 /* constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 952B76731653DBC700346AF9 /* constants.m */; };
 		954233BB1652885800F2C310 /* tabbar_dashboard_active.png in Resources */ = {isa = PBXBuildFile; fileRef = 954233B71652885800F2C310 /* tabbar_dashboard_active.png */; };
 		954233BC1652885800F2C310 /* tabbar_dashboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 954233B81652885800F2C310 /* tabbar_dashboard.png */; };
 		954233BD1652885800F2C310 /* tabbar_orders_active.png in Resources */ = {isa = PBXBuildFile; fileRef = 954233B91652885800F2C310 /* tabbar_orders_active.png */; };
@@ -100,6 +101,8 @@
 /* Begin PBXFileReference section */
 		0C53D467431945D9A56F0FD1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8886B73E60E04F26BDA416E3 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		952B76721653DBC700346AF9 /* constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = constants.h; path = Helpers/constants.h; sourceTree = "<group>"; };
+		952B76731653DBC700346AF9 /* constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = constants.m; path = Helpers/constants.m; sourceTree = "<group>"; };
 		954233B71652885800F2C310 /* tabbar_dashboard_active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tabbar_dashboard_active.png; path = "Resources/Images/Non-retina/tabbar_dashboard_active.png"; sourceTree = "<group>"; };
 		954233B81652885800F2C310 /* tabbar_dashboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tabbar_dashboard.png; path = "Resources/Images/Non-retina/tabbar_dashboard.png"; sourceTree = "<group>"; };
 		954233B91652885800F2C310 /* tabbar_orders_active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tabbar_orders_active.png; path = "Resources/Images/Non-retina/tabbar_orders_active.png"; sourceTree = "<group>"; };
@@ -353,6 +356,8 @@
 			children = (
 				957665CC16412FE100B68687 /* User interface */,
 				957665CD1641308A00B68687 /* Helpers.h */,
+				952B76721653DBC700346AF9 /* constants.h */,
+				952B76731653DBC700346AF9 /* constants.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -744,6 +749,7 @@
 				CEC8C3F51647C17B0086A96E /* OrderInfoVC.m in Sources */,
 				CE8585881647DE3100F94506 /* OrderSingleton.m in Sources */,
 				9599640B1649396400DBB279 /* EditShopVC.m in Sources */,
+				952B76741653DBC700346AF9 /* constants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

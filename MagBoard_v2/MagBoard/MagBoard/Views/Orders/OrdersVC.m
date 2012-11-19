@@ -32,9 +32,7 @@
 {
     [super viewDidAppear:YES];
     if(ordersTable){
-        [ordersTable removeFromSuperview];
         [self loginRequest:[shopInfo shopUrl] username:[shopInfo username] password:[shopInfo password]  request:@"salesOrderList" requestParams:@"dateSorted"];
-        [self loadingRequest];
     }
 
 }
@@ -56,7 +54,7 @@
 {
 
     //Make holder for tabbar
-    UIView *tabBar = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 365.0f, 320.0f, 54.0f)];
+    UIView *tabBar = [[UIView alloc] initWithFrame:CGRectMake(0.0f, [constants getScreenHeight] - 110, 320.0f, 54.0f)];
     UIView *borderTop = [[UIView alloc] initWithFrame:CGRectMake(0, 1.0f, 320.0f, 1.0f)];
     UIView *borderTopBlack = [[UIView alloc] initWithFrame:CGRectMake(0, 0.0f, 320.0f, 1.0f)];
     UIView *deviderBlack = [[UIView alloc] initWithFrame:CGRectMake(159, 0.0f, 1.0f, 54.0f)];
@@ -162,7 +160,12 @@
         else {
             [loadingIcon stopAnimating];
             [loadingHolder removeFromSuperview];
-            [self makeTable];
+            
+            if(ordersTable){
+                [ordersTable reloadData];
+            } else {
+                [self makeTable];
+            }
         }
     }
     else
@@ -180,7 +183,7 @@
 -(void)makeTable
 {
     //Add view to tableview
-    ordersTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 365)];
+    ordersTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, [constants getScreenHeight] - 110)];
     ordersTable.dataSource = self;
     ordersTable.delegate = self;
     ordersTable.backgroundColor = [UIColor clearColor];
