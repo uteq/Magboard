@@ -42,7 +42,7 @@
 //Draw dots for scroller
 -(void)shopsControlDots
 {
-    pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(20.0f, [constants getScreenHeight] - 110, 280.0f, 40.0f)];
+    pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(20.0f, 370.0f, 280.0f, 40.0f)];
     [pageControl setNumberOfPages:6];
     [pageControl setCurrentPage:0];
     [pageControl setBackgroundColor:[UIColor clearColor]];
@@ -68,7 +68,7 @@
 //Deze functie voegt een UIScrollView toe aan de instructies pagina
 -(void)addScrollView
 {
-    instructionsScroller = [[UIScrollView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, [constants getScreenHeight] - 40)];
+    instructionsScroller = [[UIScrollView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 440.0f)];
     [instructionsScroller setContentSize:CGSizeMake(1920, 320)];
     instructionsScroller.showsHorizontalScrollIndicator = YES;
     instructionsScroller.delegate = self;
