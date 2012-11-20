@@ -35,8 +35,11 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:YES];
-    
-    [self loginRequest:[shopInfo shopUrl] username:[shopInfo username] password:[shopInfo password]  request:@"salesOrderList" requestParams:@"dateSorted"];
+    if(ordersTable){
+        [ordersTable removeFromSuperview];
+        [self loginRequest:[shopInfo shopUrl] username:[shopInfo username] password:[shopInfo password]  request:@"salesOrderList" requestParams:@"dateSorted"];
+        [self loadingRequest];
+    }
 
 }
 
@@ -163,13 +166,9 @@
         }
         //if all is ok
         else {
-            if(ordersTable){
-                [ordersTable reloadData];
-            } else {
-                [loadingIcon stopAnimating];
-                [loadingHolder removeFromSuperview];
-                [self makeTable];
-            }
+            [loadingIcon stopAnimating];
+            [loadingHolder removeFromSuperview];
+            [self makeTable];
         }
     }
     else
