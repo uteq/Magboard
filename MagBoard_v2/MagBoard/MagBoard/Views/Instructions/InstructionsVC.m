@@ -111,15 +111,15 @@
                 [head setBackgroundColor:[UIColor clearColor]];
                 [instructionsScroller addSubview:head];
                 
-                UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake((xPos * xPosDoubler) + 20, 50.0f, 280.0f, 150.0f)];
+                UITextView *textLabel = [[UITextView alloc] initWithFrame:CGRectMake((xPos * xPosDoubler) + 20, 50.0f, 280.0f, 150.0f)];
+                textLabel.userInteractionEnabled = NO;
                 [textLabel setText:text];
                 [textLabel setFont:[UIFont systemFontOfSize:13.0f]];
-                [textLabel setNumberOfLines:0];
                 [textLabel setTextColor:[UIColor whiteColor]];
                 [textLabel setBackgroundColor:[UIColor clearColor]];
                 [instructionsScroller addSubview:textLabel];
                 
-                UIImageView *imageForStep = [[UIImageView alloc] initWithFrame:CGRectMake((xPos * xPosDoubler) + 20, 150.0f, 250.0f, 200.0f)];
+                UIImageView *imageForStep = [[UIImageView alloc] initWithFrame:CGRectMake((xPos * xPosDoubler) + 40, 150.0f, 250.0f, 200.0f)];
                 [imageForStep setImage:[UIImage imageNamed:image]];
                 [instructionsScroller addSubview:imageForStep];
                 

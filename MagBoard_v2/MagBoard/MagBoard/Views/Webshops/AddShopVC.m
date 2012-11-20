@@ -122,10 +122,10 @@
     [scrollView addSubview:password];
     
     //Switch for saving password
-    UILabel* labelForSwitch = [[UILabel alloc] initWithFrame:CGRectMake(11.0, 240.0, 150.0, 30.0)];
+    UILabel* labelForSwitch = [[UILabel alloc] initWithFrame:CGRectMake(11.0, 240.0, 170.0, 30.0)];
     labelForSwitch.backgroundColor = [UIColor clearColor];
     labelForSwitch.font = [UIFont boldSystemFontOfSize:14];
-    labelForSwitch.text = @"Wachtwoord opslaan";
+    labelForSwitch.text = @"Wachtwoord onthouden";
     labelForSwitch.textColor = [UIColor whiteColor];
     labelForSwitch.shadowColor = [UIColor blackColor];
     labelForSwitch.shadowOffset = CGSizeMake(1, 1);
