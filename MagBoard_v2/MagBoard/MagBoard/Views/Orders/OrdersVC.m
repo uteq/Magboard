@@ -225,6 +225,19 @@
     [self searchTableView];
 }
 
+-(void)doneSearching
+{
+    searchBar.text = @"";
+    [searchBar resignFirstResponder];
+    
+    letUserSelectRow = YES;
+    searching = NO;
+    self.navigationItem.rightBarButtonItem = nil;
+    ordersTable.scrollEnabled = YES;
+    
+    [ordersTable reloadData];
+}
+
 //Search logic 
 - (void) searchTableView {
     
@@ -268,15 +281,22 @@
 
 // Checking the total of sections
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return [[orderHolder valueForKey:@"data-items"] count];
+    if(searching){
+        return 1;
+    } else {
+        return [[orderHolder valueForKey:@"data-items"] count];
+    }
 }
 
 
 //Checking the total of rows in the section
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-
-    return [[[orderHolder valueForKey:@"data-items"] objectAtIndex:section] count];
+    if(searching){
+        return [copyListOfOrders count];
+    } else {
+        return [[[orderHolder valueForKey:@"data-items"] objectAtIndex:section] count];
+    }
 }
 
 // Height of the cells
