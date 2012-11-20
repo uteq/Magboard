@@ -15,7 +15,7 @@
 
 @implementation OrdersVC
 
-@synthesize shopInfo, orderHolder,loadingHolder, loadingIcon, ordersTable, searchBar;
+@synthesize shopInfo, orderHolder,loadingHolder, loadingIcon, ordersTable, searchBar, searching, letUserSelectRow, searchOverlay;
 
 - (void)viewDidLoad
 {
@@ -126,6 +126,12 @@
     ordersTable.scrollEnabled = YES;
     
     [ordersTable reloadData];
+    
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0];
+    ordersTable.frame = CGRectMake(0, 0, 320, 365);
+    [UIView commitAnimations];
+    [searchOverlay removeFromSuperview];
 }
 
 
@@ -178,12 +184,6 @@
     if(response.status == 200) {
         
         orderHolder = [NSJSONSerialization JSONObjectWithData:[response responseData] options:kNilOptions error:nil];
-        listOfOrders = [[NSMutableArray alloc] init];
-        
-        //Fill an array with the orders for the search function
-        for (int i = 0; i < [[orderHolder valueForKey:@"data-items"] count]; i++) {
-            [listOfOrders addObject:[[[orderHolder objectForKey:@"data-items"] objectAtIndex:i] objectAtIndex:1]];
-        }
         
         //If incorrect login
         if([[orderHolder valueForKey:@"message"] isEqualToString:@"607"])
@@ -235,10 +235,10 @@
         [self searchTableView];
     }
     else {
-        
         searching = NO;
         letUserSelectRow = NO;
         ordersTable.scrollEnabled = NO;
+        [self makeSearchOverlay];
     }
     
     [ordersTable reloadData];
@@ -253,6 +253,12 @@
     
     //Add the done button.
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTarget:self selector:@selector(doneSearching) title:@"Klaar"];
+    
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0];
+    ordersTable.frame = CGRectMake(0, 0, 320, 365 - 165);
+    [UIView commitAnimations];
+    [self makeSearchOverlay];
 }
 
 - (void) searchBarSearchButtonClicked:(UISearchBar *)theSearchBar {
@@ -260,11 +266,25 @@
     [self searchTableView];
 }
 
+-(void)makeSearchOverlay
+{
+    UITapGestureRecognizer *singleFingerTap =
+    [[UITapGestureRecognizer alloc] initWithTarget:self
+                                            action:@selector(doneSearching)];
+    
+    searchOverlay = [[UIView alloc] initWithFrame:CGRectMake(0, 45, 320, 200)];
+    searchOverlay.backgroundColor = [UIColor colorWithRed:0/255 green:0/255 blue:0/255 alpha:0.8f];
+    [searchOverlay addGestureRecognizer:singleFingerTap];
+    [self.view addSubview:searchOverlay];
+}
+
 //Search logic 
 - (void) searchTableView {
     
     NSString *searchText = searchBar.text;
-    copyListOfOrders = [[NSMutableDictionary alloc] initWithDictionary:orderHolder];
+    copyListOfOrders = [[NSMutableArray alloc] init];
+    
+    //[copyListOfOrders setObject:[copyListOfOrders objectForKey:@"data-items"] forKey:@"data-items"];
     
     for (int i = 0; i < [[orderHolder objectForKey:@"data-items"] count]; i++) {
         
@@ -274,10 +294,8 @@
         
         NSRange titleResultsRange = [totalName rangeOfString:searchText options:NSCaseInsensitiveSearch];
         if(titleResultsRange.length > 0){
-            [copyListOfOrders removeObjectForKey:@"data-items"];
-            [copyListOfOrders setObject:[[orderHolder objectForKey:@"data-items"] objectAtIndex:i] forKey:@"data-items"];
-            NSLog(@"Created at: %@", [[copyListOfOrders objectForKey:@"data-items"] objectAtIndex:0]);
-            NSLog(@"Content: %@", [copyListOfOrders objectForKey:@"data-items"]);
+            [copyListOfOrders addObject:[[[orderHolder objectForKey:@"data-items"] objectAtIndex:i] objectAtIndex:1]];
+            [searchOverlay removeFromSuperview];
         }
         
     }
@@ -308,10 +326,10 @@
 
 // Checking the total of sections
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    if(searching){
-        return [[copyListOfOrders valueForKey:@"data-items"] count];
-    } else {
+    if(!searching){
         return [[orderHolder valueForKey:@"data-items"] count];
+    } else {
+        return 1;
     }
 }
 
@@ -319,11 +337,11 @@
 //Checking the total of rows in the section
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSLog(@"Section #### %d", section);
-    if(searching){
-        return [[[copyListOfOrders valueForKey:@"data-items"] objectAtIndex:section] count];
-    } else {
+    if(!searching){
         return [[[orderHolder valueForKey:@"data-items"] objectAtIndex:section] count];
+    } else {
+        NSLog(@"Section #!!# %d", section);
+        return [copyListOfOrders count];
     }
 }
 
@@ -331,7 +349,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //The date row (indexPath.row = 0) has smaller height then the other order cells
-    if(indexPath.row == 0){
+    if(!searching && indexPath.row == 0){
         return 30;
     } else {
         return 65;
@@ -350,7 +368,6 @@
     if(cell == nil)
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:orderCell];
-        
         if(!searching){
             [self configureCell:cell atIndexPath:indexPath];
         } else {
@@ -360,7 +377,7 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     //For the date no interaction
-    if(indexPath.row == 0){
+    if(!searching && indexPath.row == 0){
         cell.userInteractionEnabled = NO;
     }
     
@@ -454,88 +471,71 @@
 
 - (void)configureCellForSearch:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"Sections = %d", indexPath.section);
-    NSLog(@"Row = %d", indexPath.row);
     //The first item from the section is always the date, the others are the orders
-    if(indexPath.row == 0){
-        
-        NSString* date = [[NSString alloc] initWithFormat:@"%@", [[[[orderHolder valueForKey:@"data-items"] objectAtIndex:indexPath.section]objectAtIndex:indexPath.row ] valueForKey:@"date"]];
-        
-        UILabel * dateTitle = [[UILabel alloc] initWithFrame:CGRectMake(12.0f, 15.0f, 301.0f, 20.0f)];
-        
-        UIFont *font = [UIFont fontWithName:@"Lobster 1.3" size:16.0f];
-        dateTitle.font = font;
-        dateTitle.textColor = [UIColor whiteColor];
-        dateTitle.text = date;
-        dateTitle.backgroundColor = [UIColor clearColor];
-        [cell addSubview:dateTitle];
-        
-    } else {
-        
-        NSString* firstName = [[NSString alloc] initWithFormat:@"%@", [[[[copyListOfOrders valueForKey:@"data-items"] objectAtIndex:indexPath.section]objectAtIndex:indexPath.row ] valueForKey:@"firstname"]];
-        NSString* lastName = [[NSString alloc] initWithFormat:@"%@", [[[[copyListOfOrders valueForKey:@"data-items"] objectAtIndex:indexPath.section]objectAtIndex:indexPath.row ] valueForKey:@"lastname"]];
-        NSString* grandTotal = [[NSString alloc] initWithFormat:@"%@", [[[[copyListOfOrders valueForKey:@"data-items"] objectAtIndex:indexPath.section]objectAtIndex:indexPath.row ] valueForKey:@"grand_total"]];
-        NSString* orderId = [[NSString alloc] initWithFormat:@"%@", [[[[copyListOfOrders valueForKey:@"data-items"] objectAtIndex:indexPath.section]objectAtIndex:indexPath.row ] valueForKey:@"increment_id"]];
-        NSString* status = [[NSString alloc] initWithFormat:@"%@", [[[[copyListOfOrders valueForKey:@"data-items"] objectAtIndex:indexPath.section]objectAtIndex:indexPath.row ] valueForKey:@"status"]];
-        
-        
-        NSString* totalName = [[NSString alloc] initWithFormat:@"%@ %@", firstName, lastName];
-        //Add orderlabel image to table cell
-        UILabel *orderHolderLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 301.0f, 53.0f)];
-        orderHolderLabel.font = [UIFont boldSystemFontOfSize:14.0f];
-        //Determine the label for order status
-        
-        if([status isEqualToString:@"pending"])
-        {
-            UIImage *image = [UIImage imageNamed:@"order_holder_pending"];
-            orderHolderLabel.backgroundColor = [UIColor colorWithPatternImage:image];
-        }
-        else if ([status isEqualToString:@"complete"])
-        {
-            UIImage *image = [UIImage imageNamed:@"order_holder_completed"];
-            orderHolderLabel.backgroundColor = [UIColor colorWithPatternImage:image];
-        }
-        else if ([status isEqualToString:@"processing"])
-        {
-            UIImage *image = [UIImage imageNamed:@"order_holder_processing"];
-            orderHolderLabel.backgroundColor = [UIColor colorWithPatternImage:image];
-        }
-        else if ([status isEqualToString:@"canceled"])
-        {
-            UIImage *image = [UIImage imageNamed:@"order_holder_canceled"];
-            orderHolderLabel.backgroundColor = [UIColor colorWithPatternImage:image];
-        }
-        else if ([status isEqualToString:@"holded"])
-        {
-            UIImage *image = [UIImage imageNamed:@"order_holder_holded"];
-            orderHolderLabel.backgroundColor = [UIColor colorWithPatternImage:image];
-        }
-        [cell addSubview:orderHolderLabel];
-        
-        //Add consumer name to order label
-        UILabel *orderName = [[UILabel alloc] initWithFrame:CGRectMake(20, 7, 200, 20)];
-        orderName.font = [UIFont boldSystemFontOfSize:12.0f];
-        orderName.backgroundColor = [UIColor clearColor];
-        orderName.text = totalName;
-        [orderHolderLabel addSubview:orderName];
-        
-        //Add grandtotal to order label
-        UILabel *grandTotalLabel = [[UILabel alloc] initWithFrame:CGRectMake(200, 7, 80, 20)];
-        grandTotalLabel.font = [UIFont boldSystemFontOfSize:12.0f];
-        grandTotalLabel.backgroundColor = [UIColor clearColor];
-        grandTotalLabel.text = grandTotal;
-        grandTotalLabel.textAlignment = UITextAlignmentRight;
-        [orderHolderLabel addSubview:grandTotalLabel];
-        
-        //Add ordernumber to order label
-        UILabel *orderNumberLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 23, 100, 20)];
-        orderNumberLabel.font = [UIFont systemFontOfSize:11.0f];
-        orderNumberLabel.backgroundColor = [UIColor clearColor];
-        orderNumberLabel.text = orderId;
-        [orderHolderLabel addSubview:orderNumberLabel];
-        
-        //NSLog(@"All fields: %@", [orderHolder valueForKey:@"data-items"]);
+
+    NSString* firstName = [[NSString alloc] initWithFormat:@"%@", [[copyListOfOrders objectAtIndex:indexPath.row] valueForKey:@"firstname"]];
+    NSString* lastName = [[NSString alloc] initWithFormat:@"%@", [[copyListOfOrders objectAtIndex:indexPath.row] valueForKey:@"lastname"]];
+    NSString* grandTotal = [[NSString alloc] initWithFormat:@"%@", [[copyListOfOrders objectAtIndex:indexPath.row] valueForKey:@"grand_total"]];
+    NSString* orderId = [[NSString alloc] initWithFormat:@"%@", [[copyListOfOrders objectAtIndex:indexPath.row] valueForKey:@"increment_id"]];
+    NSString* status = [[NSString alloc] initWithFormat:@"%@", [[copyListOfOrders objectAtIndex:indexPath.row] valueForKey:@"status"]];
+    
+    
+    NSString* totalName = [[NSString alloc] initWithFormat:@"%@ %@", firstName, lastName];
+    //Add orderlabel image to table cell
+    UILabel *orderHolderLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 301.0f, 53.0f)];
+    orderHolderLabel.font = [UIFont boldSystemFontOfSize:14.0f];
+    //Determine the label for order status
+    
+    if([status isEqualToString:@"pending"])
+    {
+        UIImage *image = [UIImage imageNamed:@"order_holder_pending"];
+        orderHolderLabel.backgroundColor = [UIColor colorWithPatternImage:image];
     }
+    else if ([status isEqualToString:@"complete"])
+    {
+        UIImage *image = [UIImage imageNamed:@"order_holder_completed"];
+        orderHolderLabel.backgroundColor = [UIColor colorWithPatternImage:image];
+    }
+    else if ([status isEqualToString:@"processing"])
+    {
+        UIImage *image = [UIImage imageNamed:@"order_holder_processing"];
+        orderHolderLabel.backgroundColor = [UIColor colorWithPatternImage:image];
+    }
+    else if ([status isEqualToString:@"canceled"])
+    {
+        UIImage *image = [UIImage imageNamed:@"order_holder_canceled"];
+        orderHolderLabel.backgroundColor = [UIColor colorWithPatternImage:image];
+    }
+    else if ([status isEqualToString:@"holded"])
+    {
+        UIImage *image = [UIImage imageNamed:@"order_holder_holded"];
+        orderHolderLabel.backgroundColor = [UIColor colorWithPatternImage:image];
+    }
+    [cell addSubview:orderHolderLabel];
+    
+    //Add consumer name to order label
+    UILabel *orderName = [[UILabel alloc] initWithFrame:CGRectMake(20, 7, 200, 20)];
+    orderName.font = [UIFont boldSystemFontOfSize:12.0f];
+    orderName.backgroundColor = [UIColor clearColor];
+    orderName.text = totalName;
+    [orderHolderLabel addSubview:orderName];
+    
+    //Add grandtotal to order label
+    UILabel *grandTotalLabel = [[UILabel alloc] initWithFrame:CGRectMake(200, 7, 80, 20)];
+    grandTotalLabel.font = [UIFont boldSystemFontOfSize:12.0f];
+    grandTotalLabel.backgroundColor = [UIColor clearColor];
+    grandTotalLabel.text = grandTotal;
+    grandTotalLabel.textAlignment = UITextAlignmentRight;
+    [orderHolderLabel addSubview:grandTotalLabel];
+    
+    //Add ordernumber to order label
+    UILabel *orderNumberLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 23, 100, 20)];
+    orderNumberLabel.font = [UIFont systemFontOfSize:11.0f];
+    orderNumberLabel.backgroundColor = [UIColor clearColor];
+    orderNumberLabel.text = orderId;
+    [orderHolderLabel addSubview:orderNumberLabel];
+    
+    //NSLog(@"All fields: %@", [orderHolder valueForKey:@"data-items"]);
 
 }
 
@@ -543,8 +543,16 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //Put data from row into the designated singleton
-    NSString *orderId = [[NSString alloc] initWithFormat:@"%@", [[[[orderHolder valueForKey:@"data-items"] objectAtIndex:indexPath.section]objectAtIndex:indexPath.row] valueForKey:@"increment_id"]];
-    NSString *orderStatus = [[NSString alloc] initWithFormat:@"%@", [[[[orderHolder valueForKey:@"data-items"] objectAtIndex:indexPath.section]objectAtIndex:indexPath.row] valueForKey:@"status"]];
+    NSString *orderId = [[NSString alloc]init];
+    NSString *orderStatus = [[NSString alloc] init];
+    
+    if(!searching){
+        orderId = [[NSString alloc] initWithFormat:@"%@", [[[[orderHolder valueForKey:@"data-items"] objectAtIndex:indexPath.section]objectAtIndex:indexPath.row] valueForKey:@"increment_id"]];
+        orderStatus = [[NSString alloc] initWithFormat:@"%@", [[[[orderHolder valueForKey:@"data-items"] objectAtIndex:indexPath.section]objectAtIndex:indexPath.row] valueForKey:@"status"]];
+    } else {
+        orderId = [[NSString alloc] initWithFormat:@"%@", [[copyListOfOrders objectAtIndex:indexPath.row] valueForKey:@"increment_id"]];
+        orderStatus = [[NSString alloc] initWithFormat:@"%@", [[copyListOfOrders objectAtIndex:indexPath.row] valueForKey:@"status"]];
+    }
     
     OrderSingleton *sharedOrder = [OrderSingleton orderSingleton];
     sharedOrder.orderId = orderId;
