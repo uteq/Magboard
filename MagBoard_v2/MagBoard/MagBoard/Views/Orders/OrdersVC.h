@@ -14,7 +14,7 @@
     BOOL searching;
     BOOL letUserSelectRow;
     NSMutableArray *listOfOrders;
-    NSMutableArray *copyListOfOrders;
+    NSMutableDictionary *copyListOfOrders;
 }
 
 @property (nonatomic, retain) NSMutableDictionary *orderHolder;

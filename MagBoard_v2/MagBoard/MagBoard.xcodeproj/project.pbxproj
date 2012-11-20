@@ -17,6 +17,7 @@
 		954233C61652886B00F2C310 /* tabbar_orders_active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 954233C21652886B00F2C310 /* tabbar_orders_active@2x.png */; };
 		954233C71652886B00F2C310 /* tabbar_orders@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 954233C31652886B00F2C310 /* tabbar_orders@2x.png */; };
 		954233C916528FB200F2C310 /* bar_button_empty@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 954233C816528FB200F2C310 /* bar_button_empty@2x.png */; };
+		954EB60F165B928B004A9DBD /* SearchOrdersController.m in Sources */ = {isa = PBXBuildFile; fileRef = 954EB60E165B928B004A9DBD /* SearchOrdersController.m */; };
 		95766567164125B400B68687 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95766566164125B400B68687 /* UIKit.framework */; };
 		95766569164125B400B68687 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95766568164125B400B68687 /* Foundation.framework */; };
 		9576656B164125B400B68687 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9576656A164125B400B68687 /* CoreGraphics.framework */; };
@@ -110,6 +111,8 @@
 		954233C21652886B00F2C310 /* tabbar_orders_active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tabbar_orders_active@2x.png"; path = "Resources/Images/Retina/tabbar_orders_active@2x.png"; sourceTree = "<group>"; };
 		954233C31652886B00F2C310 /* tabbar_orders@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tabbar_orders@2x.png"; path = "Resources/Images/Retina/tabbar_orders@2x.png"; sourceTree = "<group>"; };
 		954233C816528FB200F2C310 /* bar_button_empty@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bar_button_empty@2x.png"; path = "Resources/Images/Retina/bar_button_empty@2x.png"; sourceTree = "<group>"; };
+		954EB60D165B928B004A9DBD /* SearchOrdersController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchOrdersController.h; path = Controllers/Orders/SearchOrdersController.h; sourceTree = "<group>"; };
+		954EB60E165B928B004A9DBD /* SearchOrdersController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchOrdersController.m; path = Controllers/Orders/SearchOrdersController.m; sourceTree = "<group>"; };
 		95766562164125B400B68687 /* MagBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MagBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95766566164125B400B68687 /* UIKit.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		95766568164125B400B68687 /* Foundation.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -440,6 +443,8 @@
 		957665C116412F2A00B68687 /* Orders */ = {
 			isa = PBXGroup;
 			children = (
+				954EB60D165B928B004A9DBD /* SearchOrdersController.h */,
+				954EB60E165B928B004A9DBD /* SearchOrdersController.m */,
 			);
 			name = Orders;
 			sourceTree = "<group>";
@@ -749,8 +754,8 @@
 				CEC8C3F51647C17B0086A96E /* OrderInfoVC.m in Sources */,
 				CE8585881647DE3100F94506 /* OrderSingleton.m in Sources */,
 				9599640B1649396400DBB279 /* EditShopVC.m in Sources */,
-				952B76741653DBC700346AF9 /* constants.m in Sources */,
 				95E9E644165A5219002C2A91 /* orderStatusPopoverVC.m in Sources */,
+				954EB60F165B928B004A9DBD /* SearchOrdersController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
