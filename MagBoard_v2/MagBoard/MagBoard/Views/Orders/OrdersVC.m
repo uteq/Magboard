@@ -15,7 +15,7 @@
 
 @implementation OrdersVC
 
-@synthesize shopInfo, orderHolder,loadingHolder, loadingIcon, ordersTable;
+@synthesize shopInfo, orderHolder,loadingHolder, loadingIcon, ordersTable, searchBar;
 
 - (void)viewDidLoad
 {
@@ -24,6 +24,10 @@
     // Do any additional setup after loading the view.
     [self constructHeader];
     [self constructTabBar];
+    
+    searching = NO;
+    letUserSelectRow = YES;
+    
     [self loginRequest:[shopInfo shopUrl] username:[shopInfo username] password:[shopInfo password]  request:@"salesOrderList" requestParams:@"dateSorted"];
     [self loadingRequest];
 }
@@ -59,6 +63,7 @@
     UIView *borderTopBlack = [[UIView alloc] initWithFrame:CGRectMake(0, 0.0f, 320.0f, 1.0f)];
     UIView *deviderBlack = [[UIView alloc] initWithFrame:CGRectMake(159, 0.0f, 1.0f, 54.0f)];
     UIView *deviderLight = [[UIView alloc] initWithFrame:CGRectMake(160, 1.0f, 1.0f, 53.0f)];
+    
     borderTop.backgroundColor = [UIColor colorWithRed:75.0f/255.0f green:74.0f/255.0f blue:80.0f/255.0f alpha:1.0];
     borderTopBlack.backgroundColor =[UIColor blackColor];
     deviderBlack.backgroundColor = [UIColor blackColor];
@@ -76,6 +81,7 @@
                           [NSNumber numberWithFloat:0.7],
                           nil];
     [[tabBar layer] insertSublayer:gradient atIndex:0];
+    
     [self.view addSubview:tabBar];
     [tabBar addSubview:borderTopBlack];
     [tabBar addSubview:borderTop];
@@ -179,6 +185,70 @@
     
 }
 
+//For handling action when user types an other letter
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    NSLog(@"Search text changed");
+    //Remove all objects first.
+    [copyListOfOrders removeAllObjects];
+    
+    if([searchText length] <= 0) {
+        
+        searching = YES;
+        letUserSelectRow = YES;
+        ordersTable.scrollEnabled = YES;
+        [self searchTableView];
+    }
+    else {
+        
+        searching = NO;
+        letUserSelectRow = NO;
+        ordersTable.scrollEnabled = NO;
+    }
+    
+    [ordersTable reloadData];
+}
+
+//For handling action when user begins editing the searchbar
+-(void)searchBarTextDidBeginEditing:(UISearchBar *)theSearchBar {
+    
+    searching = YES;
+    letUserSelectRow = NO;
+    ordersTable.scrollEnabled = NO;
+    
+    //Add the done button.
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTarget:self selector:@selector(doneSearching) title:@"Klaar"];
+}
+
+- (void) searchBarSearchButtonClicked:(UISearchBar *)theSearchBar {
+    NSLog(@"Search button clicked");
+    [self searchTableView];
+}
+
+//Search logic 
+- (void) searchTableView {
+    
+    NSString *searchText = searchBar.text;
+    NSMutableArray *searchArray = [[NSMutableArray alloc] init];
+    
+    for (NSDictionary *dictionary in listOfOrders)
+    {
+        NSArray *array = [dictionary objectForKey:@"data-items"];
+        [searchArray addObjectsFromArray:array];
+    }
+    
+    for (NSString *sTemp in searchArray)
+    {
+        NSRange titleResultsRange = [sTemp rangeOfString:searchText options:NSCaseInsensitiveSearch];
+        
+        if (titleResultsRange.length > 0)
+            [copyListOfOrders addObject:sTemp];
+    }
+    
+    searchArray = nil;
+}
+
+
 //Initializing table
 -(void)makeTable
 {
@@ -189,6 +259,11 @@
     ordersTable.backgroundColor = [UIColor clearColor];
     ordersTable.separatorColor = [UIColor clearColor];
     [self.view addSubview:ordersTable];
+    
+    //Add searchbar
+    searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0,70,320,44)];
+    searchBar.delegate = self;
+    [ordersTable setTableHeaderView:searchBar];
 }
 
 // Checking the total of sections
@@ -324,7 +399,7 @@
 
 }
 
-
+//For handling action when user selects row
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //Put data from row into the designated singleton
@@ -346,6 +421,16 @@
     }
     
 }
+
+//For preventing user from selecting row when searching
+- (NSIndexPath *)tableView :(UITableView *)theTableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if(letUserSelectRow){
+        return indexPath;
+    } else {
+        return nil;
+    }
+} 
 
 //Make alert
 -(void)makeAlert:(NSString*)alertTitle message:(NSString*)alertMessage button:(NSString *)buttonTitle

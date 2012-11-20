@@ -8,9 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface OrdersVC : UIViewController <UITableViewDelegate, UITableViewDataSource, LRRestyClientResponseDelegate>
+@interface OrdersVC : UIViewController <UITableViewDelegate, UITableViewDataSource, LRRestyClientResponseDelegate, UISearchBarDelegate>
 {
     int sections;
+    BOOL searching;
+    BOOL letUserSelectRow;
+    NSMutableArray *listOfOrders;
+    NSMutableArray *copyListOfOrders;
 }
 
 @property (nonatomic, retain) NSMutableDictionary *orderHolder;
@@ -18,7 +22,7 @@
 @property (nonatomic, retain) UIActivityIndicatorView *loadingIcon;
 @property (nonatomic, strong) UITableView *ordersTable;
 @property (nonatomic, strong) UIView *loadingHolder;
-
+@property (nonatomic, strong) UISearchBar *searchBar;
 
 -(void)loginRequest:(NSString *)shopUrl username:(NSString *)username password:(NSString *)password request:(NSString *)requestFunction requestParams:(NSString *)requestParams;
 -(void)makeTabel;
@@ -27,5 +31,6 @@
 -(void)alertForIncorrectLogin;
 -(void)constructTabBar;
 -(void)goToDashboard;
+-(void)doneSearching;
 
 @end

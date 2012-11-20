@@ -7,6 +7,7 @@
 //
 
 #import "OrderInfoVC.h"
+#import "orderStatusPopoverVC.h"
 
 @interface OrderInfoVC ()
 
@@ -55,6 +56,7 @@
     UILabel* navBarTitle = [CustomNavBar setNavBarTitle:barTitle];
     self.navigationItem.titleView = navBarTitle;
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTarget:self selector:@selector(backButtonTouched) title:@"Terug"];
+    //self.navigationItem.rightBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTarget:self selector:@selector(openStatusPopover) title:@"Status"];
 }
 
 //While doing request show loading icon
@@ -121,6 +123,11 @@
     NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];
     [viewControllers removeLastObject];
     [[self navigationController] setViewControllers:viewControllers animated:YES];
+}
+
+-(void)openStatusPopover
+{
+    
 }
 
 

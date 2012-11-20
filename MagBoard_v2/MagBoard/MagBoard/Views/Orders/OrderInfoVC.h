@@ -34,6 +34,7 @@
 -(void)requestInvoice;
 -(void)requestHold:(NSString*)type;
 -(void)loadingRequest:(NSString*)message;
+-(void)openStatusPopover;
 
 
 @end
