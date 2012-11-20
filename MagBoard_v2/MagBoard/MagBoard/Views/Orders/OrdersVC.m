@@ -131,6 +131,7 @@
     [UIView setAnimationDuration:0];
     ordersTable.frame = CGRectMake(0, 0, 320, 365);
     [UIView commitAnimations];
+    
     [searchOverlay removeFromSuperview];
 }
 
@@ -223,7 +224,6 @@
 //For handling action when user types an other letter
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
-    NSLog(@"Search text changed");
     //Remove all objects first.
     [copyListOfOrders removeAllObjects];
     
@@ -238,6 +238,13 @@
         searching = NO;
         letUserSelectRow = NO;
         ordersTable.scrollEnabled = NO;
+    }
+    
+    //Show or hide search overlay
+    if([copyListOfOrders count] != 0){
+        [searchOverlay removeFromSuperview];
+    } else {
+        [searchOverlay removeFromSuperview];
         [self makeSearchOverlay];
     }
     
@@ -258,11 +265,11 @@
     [UIView setAnimationDuration:0];
     ordersTable.frame = CGRectMake(0, 0, 320, 365 - 165);
     [UIView commitAnimations];
+    
     [self makeSearchOverlay];
 }
 
 - (void) searchBarSearchButtonClicked:(UISearchBar *)theSearchBar {
-    NSLog(@"Search button clicked");
     [self searchTableView];
 }
 
@@ -283,8 +290,6 @@
     
     NSString *searchText = searchBar.text;
     copyListOfOrders = [[NSMutableArray alloc] init];
-    
-    //[copyListOfOrders setObject:[copyListOfOrders objectForKey:@"data-items"] forKey:@"data-items"];
     
     for (int i = 0; i < [[orderHolder objectForKey:@"data-items"] count]; i++) {
         
@@ -340,7 +345,6 @@
     if(!searching){
         return [[[orderHolder valueForKey:@"data-items"] objectAtIndex:section] count];
     } else {
-        NSLog(@"Section #!!# %d", section);
         return [copyListOfOrders count];
     }
 }
