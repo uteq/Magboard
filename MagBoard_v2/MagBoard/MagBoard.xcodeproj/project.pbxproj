@@ -17,6 +17,7 @@
 		954233C61652886B00F2C310 /* tabbar_orders_active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 954233C21652886B00F2C310 /* tabbar_orders_active@2x.png */; };
 		954233C71652886B00F2C310 /* tabbar_orders@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 954233C31652886B00F2C310 /* tabbar_orders@2x.png */; };
 		954233C916528FB200F2C310 /* bar_button_empty@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 954233C816528FB200F2C310 /* bar_button_empty@2x.png */; };
+		95485C92165CD30C002F1985 /* constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 95485C91165CD30C002F1985 /* constants.m */; };
 		95766567164125B400B68687 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95766566164125B400B68687 /* UIKit.framework */; };
 		95766569164125B400B68687 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95766568164125B400B68687 /* Foundation.framework */; };
 		9576656B164125B400B68687 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9576656A164125B400B68687 /* CoreGraphics.framework */; };
@@ -120,6 +121,8 @@
 		954233C21652886B00F2C310 /* tabbar_orders_active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tabbar_orders_active@2x.png"; path = "Resources/Images/Retina/tabbar_orders_active@2x.png"; sourceTree = "<group>"; };
 		954233C31652886B00F2C310 /* tabbar_orders@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tabbar_orders@2x.png"; path = "Resources/Images/Retina/tabbar_orders@2x.png"; sourceTree = "<group>"; };
 		954233C816528FB200F2C310 /* bar_button_empty@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bar_button_empty@2x.png"; path = "Resources/Images/Retina/bar_button_empty@2x.png"; sourceTree = "<group>"; };
+		95485C90165CD30C002F1985 /* constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = constants.h; path = Helpers/constants.h; sourceTree = "<group>"; };
+		95485C91165CD30C002F1985 /* constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = constants.m; path = Helpers/constants.m; sourceTree = "<group>"; };
 		95766562164125B400B68687 /* MagBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MagBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95766566164125B400B68687 /* UIKit.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		95766568164125B400B68687 /* Foundation.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -374,6 +377,8 @@
 		957665BC16412ECE00B68687 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				95485C90165CD30C002F1985 /* constants.h */,
+				95485C91165CD30C002F1985 /* constants.m */,
 				957665CC16412FE100B68687 /* User interface */,
 				957665CD1641308A00B68687 /* Helpers.h */,
 			);
@@ -806,6 +811,7 @@
 				CE8585881647DE3100F94506 /* OrderSingleton.m in Sources */,
 				9599640B1649396400DBB279 /* EditShopVC.m in Sources */,
 				95E9E644165A5219002C2A91 /* orderStatusPopoverVC.m in Sources */,
+				95485C92165CD30C002F1985 /* constants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

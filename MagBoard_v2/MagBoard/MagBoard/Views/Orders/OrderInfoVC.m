@@ -189,7 +189,7 @@
 - (void)makeBlocks
 {
     NSLog(@"Making blocks");
-    orderInfoScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 440.0f)];
+    orderInfoScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, [constants getScreenHeight] - 40)];
     [self.view addSubview:orderInfoScrollView];
     
     //Set color for headers

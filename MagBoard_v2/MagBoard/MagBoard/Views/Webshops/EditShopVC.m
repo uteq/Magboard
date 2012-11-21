@@ -56,7 +56,7 @@
 {
     
     //Make scroll holder for automatic input focus
-    UIScrollView* scrollView = [[TPKeyboardAvoidingScrollView alloc] initWithFrame:CGRectMake(0, 0, 320.0, 440.0)];
+    UIScrollView* scrollView = [[TPKeyboardAvoidingScrollView alloc] initWithFrame:CGRectMake(0, 0, 320.0, [constants getScreenHeight])];
     [self.view addSubview:scrollView];
     
     //Input field for shop name
@@ -143,7 +143,7 @@
     
     // Make cancel button
     UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    cancelButton.frame = CGRectMake(11.0, 360.0, 145.0, 43.0);
+    cancelButton.frame = CGRectMake(11.0, [constants getScreenHeight] - 120, 145.0, 43.0);
     [cancelButton setTitle:@"Verwijderen" forState:UIControlStateNormal];
     [cancelButton setFont:[UIFont boldSystemFontOfSize:14]];
     cancelButton.backgroundColor = [UIColor clearColor];
@@ -160,7 +160,7 @@
     
     //Make Save button
     UIButton *addShopButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    addShopButton.frame = CGRectMake(165.0, 360.0, 145.0, 43.0);
+    addShopButton.frame = CGRectMake(165.0, [constants getScreenHeight] - 120, 145.0, 43.0);
     [addShopButton setTitle:@"Opslaan" forState:UIControlStateNormal];
     [addShopButton setFont:[UIFont boldSystemFontOfSize:14]];
     addShopButton.backgroundColor = [UIColor clearColor];

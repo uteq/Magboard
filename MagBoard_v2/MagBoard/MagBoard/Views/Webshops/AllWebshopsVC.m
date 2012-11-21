@@ -127,7 +127,7 @@
         int numberOfShops = [allShops count];
         int widthOfScreen = 320;
         float scrollerWidth = numberOfShops * widthOfScreen;
-        shopsScroller = [[UIScrollView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 300.0f)];
+        shopsScroller = [[UIScrollView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, [constants getScreenHeight] -180)];
         [shopsScroller setContentSize:CGSizeMake(scrollerWidth, 300.0f)];
         shopsScroller.showsHorizontalScrollIndicator = NO;
         shopsScroller.pagingEnabled = YES;
@@ -219,7 +219,7 @@
 {
     // Make instructions button
     UIButton *instructionsButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    instructionsButton.frame = CGRectMake(15.0, 310.0, 290.0, 43.0);
+    instructionsButton.frame = CGRectMake(15.0, [constants getScreenHeight] - 170.0, 290.0, 43.0);
     [instructionsButton setTitle:@"Instructies" forState:UIControlStateNormal];
     [instructionsButton.titleLabel setFont:[UIFont boldSystemFontOfSize:14]];
     instructionsButton.backgroundColor = [UIColor clearColor];
@@ -236,7 +236,7 @@
     
     //Make add shop button
     UIButton *addShopButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    addShopButton.frame = CGRectMake(15.0, 360.0, 290.0, 43.0);
+    addShopButton.frame = CGRectMake(15.0, [constants getScreenHeight] - 118.0, 290.0, 43.0);
     [addShopButton setTitle:@"Webshop toevoegen" forState:UIControlStateNormal];
     [addShopButton.titleLabel setFont:[UIFont boldSystemFontOfSize:14]];
     addShopButton.backgroundColor = [UIColor clearColor];

@@ -36,8 +36,9 @@
 {
     [super viewDidAppear:YES];
     
-    [self loginRequest:[shopInfo shopUrl] username:[shopInfo username] password:[shopInfo password]  request:@"salesOrderList" requestParams:@"dateSorted"];
-
+    if(ordersTable){
+        [self loginRequest:[shopInfo shopUrl] username:[shopInfo username] password:[shopInfo password]  request:@"salesOrderList" requestParams:@"dateSorted"];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -62,7 +63,7 @@
 {
 
     //Make holder for tabbar
-    UIView *tabBar = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 365.0f, 320.0f, 54.0f)];
+    UIView *tabBar = [[UIView alloc] initWithFrame:CGRectMake(0.0f, [constants getScreenHeight] - 110, 320.0f, 54.0f)];
     UIView *borderTop = [[UIView alloc] initWithFrame:CGRectMake(0, 1.0f, 320.0f, 1.0f)];
     UIView *borderTopBlack = [[UIView alloc] initWithFrame:CGRectMake(0, 0.0f, 320.0f, 1.0f)];
     UIView *deviderBlack = [[UIView alloc] initWithFrame:CGRectMake(159, 0.0f, 1.0f, 54.0f)];
@@ -263,7 +264,7 @@
     
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0];
-    ordersTable.frame = CGRectMake(0, 0, 320, 365 - 165);
+    ordersTable.frame = CGRectMake(0, 0, 320, [constants getScreenHeight] - 280);
     [UIView commitAnimations];
     
     [self makeSearchOverlay];
@@ -279,7 +280,7 @@
     [[UITapGestureRecognizer alloc] initWithTarget:self
                                             action:@selector(doneSearching)];
     
-    searchOverlay = [[UIView alloc] initWithFrame:CGRectMake(0, 45, 320, 200)];
+    searchOverlay = [[UIView alloc] initWithFrame:CGRectMake(0, 45, 320, [constants getScreenHeight] - 320)];
     searchOverlay.backgroundColor = [UIColor colorWithRed:0/255 green:0/255 blue:0/255 alpha:0.8f];
     [searchOverlay addGestureRecognizer:singleFingerTap];
     [self.view addSubview:searchOverlay];
@@ -316,7 +317,7 @@
 -(void)makeTable
 {
     //Add view to tableview
-    ordersTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 365)];
+    ordersTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, [constants getScreenHeight] - 110)];
     ordersTable.dataSource = self;
     ordersTable.delegate = self;
     ordersTable.backgroundColor = [UIColor clearColor];
