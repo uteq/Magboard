@@ -280,7 +280,7 @@
     [[UITapGestureRecognizer alloc] initWithTarget:self
                                             action:@selector(doneSearching)];
     
-    searchOverlay = [[UIView alloc] initWithFrame:CGRectMake(0, 45, 320, [constants getScreenHeight] - 320)];
+    searchOverlay = [[UIView alloc] initWithFrame:CGRectMake(0, 44, 320, [constants getScreenHeight] - 320)];
     searchOverlay.backgroundColor = [UIColor colorWithRed:0/255 green:0/255 blue:0/255 alpha:0.8f];
     [searchOverlay addGestureRecognizer:singleFingerTap];
     [self.view addSubview:searchOverlay];
@@ -294,12 +294,17 @@
     
     for (int i = 0; i < [[orderHolder objectForKey:@"data-items"] count]; i++) {
         
+        //For searching on first- & lastname
         NSString *firstName = [[NSString alloc] initWithFormat:@"%@", [[[[orderHolder objectForKey:@"data-items"] objectAtIndex:i] objectAtIndex:1] objectForKey:@"firstname"]];
         NSString *lastName = [[NSString alloc] initWithFormat:@"%@", [[[[orderHolder objectForKey:@"data-items"] objectAtIndex:i] objectAtIndex:1] objectForKey:@"lastname"]];
         NSString *totalName = [[NSString alloc] initWithFormat:@"%@ %@", firstName, lastName];
-        
         NSRange titleResultsRange = [totalName rangeOfString:searchText options:NSCaseInsensitiveSearch];
-        if(titleResultsRange.length > 0){
+        
+        //For searching on ordernumber
+        NSString *orderNumber = [[NSString alloc] initWithFormat:@"%@", [[[[orderHolder objectForKey:@"data-items"] objectAtIndex:i] objectAtIndex:1] objectForKey:@"increment_id"]];
+        NSRange orderNumberResultsRange = [orderNumber rangeOfString:searchText options:NSCaseInsensitiveSearch];
+        
+        if(titleResultsRange.length > 0 || orderNumberResultsRange.length > 0){
             [copyListOfOrders addObject:[[[orderHolder objectForKey:@"data-items"] objectAtIndex:i] objectAtIndex:1]];
             [searchOverlay removeFromSuperview];
         }
@@ -327,6 +332,7 @@
     //Add searchbar
     searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0,70,320,44)];
     searchBar.delegate = self;
+    searchBar.tintColor = [UIColor colorWithRed:0/255 green:0/255 blue:0/255 alpha:1.0];
     [ordersTable setTableHeaderView:searchBar];
 }
 
