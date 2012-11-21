@@ -15,7 +15,7 @@
 
 @implementation OrdersVC
 
-@synthesize shopInfo, orderHolder,loadingHolder, loadingIcon, ordersTable, searchBar, searching, letUserSelectRow, searchOverlay;
+@synthesize shopInfo, orderHolder,loadingHolder, loadingIcon, ordersTable, searchBar, searching, letUserSelectRow, searchOverlay, sortingPicker, pickerShown, sorting, pickerSelected;
 
 - (void)viewDidLoad
 {
@@ -26,6 +26,8 @@
     [self constructTabBar];
     
     searching = NO;
+    pickerShown = NO;
+    sorting = NO;
     letUserSelectRow = YES;
     
     [self loginRequest:[shopInfo shopUrl] username:[shopInfo username] password:[shopInfo password]  request:@"salesOrderList" requestParams:@"dateSorted"];
@@ -35,7 +37,7 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:YES];
-    
+    sorting = NO;
     if(ordersTable){
         [self loginRequest:[shopInfo shopUrl] username:[shopInfo username] password:[shopInfo password]  request:@"salesOrderList" requestParams:@"dateSorted"];
     }
@@ -56,7 +58,8 @@
 {
     UILabel* navBarTitle = [CustomNavBar setNavBarTitle:[shopInfo shopName]];
     self.navigationItem.titleView = navBarTitle;
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTarget:self selector:@selector(backButtonTouched) title:@"Terug"];
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTarget:self selector:@selector(backButtonTouched) title:@"Shops"];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTarget:self selector:@selector(showSortPicker) title:@"Filter"];
 }
 
 -(void)constructTabBar
@@ -124,6 +127,7 @@
     letUserSelectRow = YES;
     searching = NO;
     self.navigationItem.rightBarButtonItem = nil;
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTarget:self selector:@selector(showSortPicker) title:@"Filter"];
     ordersTable.scrollEnabled = YES;
     
     [ordersTable reloadData];
@@ -218,6 +222,139 @@
     
 }
 
+#pragma  mark pickerview
+
+///////////////////////////////////////////////////////
+////////////////   Pickerview   ///////////////////////
+///////////////////////////////////////////////////////
+
+-(void)showSortPicker
+{
+    if(!pickerShown){
+        
+        sortingPicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 245, 320, 200)];
+        sortingPicker.delegate = self;
+        sortingPicker.showsSelectionIndicator = YES;
+        [sortingPicker selectRow:pickerSelected inComponent:0 animated:YES];
+        [self.view addSubview:sortingPicker];
+        pickerShown = YES;
+        
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDuration:0];
+        ordersTable.frame = CGRectMake(0, 0, 320, [constants getScreenHeight] - 230);
+        [UIView commitAnimations];
+        
+    } else {
+        
+        [sortingPicker removeFromSuperview];
+        pickerShown = NO;
+        
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDuration:0];
+        ordersTable.frame = CGRectMake(0, 0, 320, [constants getScreenHeight] - 105);
+        [UIView commitAnimations];
+        
+    }
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow: (NSInteger)row inComponent:(NSInteger)component {
+    
+    if(row <= 0){
+        pickerSelected = 0;
+        sorting = NO;
+        [ordersTable reloadData];
+    } else if (row == 1){
+        pickerSelected = 1;
+        [self sortTableView:@"pending"];
+    } else if (row == 2){
+        pickerSelected = 2;
+        [self sortTableView:@"processing"];
+    } else if (row == 3){
+        pickerSelected = 3;
+        [self sortTableView:@"complete"];
+    } else if (row == 4){
+        pickerSelected = 4;
+        [self sortTableView:@"holded"];
+    } else if (row == 5){
+        pickerSelected = 5;
+        [self sortTableView:@"canceled"];
+    }
+
+}
+
+// tell the picker how many rows are available for a given component
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    NSUInteger numRows = 6;
+    
+    return numRows;
+}
+
+// tell the picker how many components it will have
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 1;
+}
+
+// tell the picker the title for a given component
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    NSString *title;
+    
+    if(row == 0){
+        title = @"Alle orders";
+    } else if (row == 1){
+        title = @"Pending orders";
+    } else if (row == 2){
+        title = @"Processing orders";
+    } else if (row == 3){
+        title = @"Completed orders";
+    } else if (row == 4){
+        title = @"Holded orders";
+    } else if (row == 5){
+        title = @"Canceled orders";
+    }
+    
+    
+    return title;
+}
+
+// tell the picker the width of each row for a given component
+- (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component {
+    int sectionWidth = 300;
+    
+    return sectionWidth;
+}
+
+//Sort logic
+- (void) sortTableView:(NSString*)status {
+    
+    NSLog(@"%@", status);
+    
+    copyListOfOrders = [[NSMutableArray alloc] init];
+    
+    for (int i = 0; i < [[orderHolder objectForKey:@"data-items"] count]; i++) {
+        
+        for(int u = 0; u < [[[orderHolder objectForKey:@"data-items"] objectAtIndex:i] count]; u++){
+            
+            if(u != 0){
+                
+                //For searching on first- & lastname
+                NSString *ordersStatus = [[NSString alloc] initWithFormat:@"%@", [[[[orderHolder objectForKey:@"data-items"] objectAtIndex:i] objectAtIndex:u] objectForKey:@"status"]];
+                NSRange statusResultsRange = [ordersStatus rangeOfString:status options:NSCaseInsensitiveSearch];
+                
+                if(statusResultsRange.length > 0){
+                    [copyListOfOrders addObject:[[[orderHolder objectForKey:@"data-items"] objectAtIndex:i] objectAtIndex:u]];
+                }
+                
+            }
+            
+        }
+        
+    }
+    
+    sorting = YES;
+    [ordersTable reloadData];
+}
+
+
 ///////////////////////////////////////////////////////
 //////////////// Search orders  ///////////////////////
 ///////////////////////////////////////////////////////
@@ -292,8 +429,6 @@
     NSString *searchText = searchBar.text;
     copyListOfOrders = [[NSMutableArray alloc] init];
     
-    NSLog(@"Aantal items: %d", [[orderHolder objectForKey:@"data-items"] count]);
-    
     for (int i = 0; i < [[orderHolder objectForKey:@"data-items"] count]; i++) {
         
         for(int u = 0; u < [[[orderHolder objectForKey:@"data-items"] objectAtIndex:i] count]; u++){
@@ -348,7 +483,7 @@
 
 // Checking the total of sections
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    if(!searching){
+    if(!searching && !sorting){
         return [[orderHolder valueForKey:@"data-items"] count];
     } else {
         return 1;
@@ -359,7 +494,7 @@
 //Checking the total of rows in the section
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if(!searching){
+    if(!searching && !sorting){
         return [[[orderHolder valueForKey:@"data-items"] objectAtIndex:section] count];
     } else {
         return [copyListOfOrders count];
@@ -370,7 +505,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //The date row (indexPath.row = 0) has smaller height then the other order cells
-    if(!searching && indexPath.row == 0){
+    if(!searching && !sorting && indexPath.row == 0){
         return 30;
     } else {
         return 65;
@@ -389,7 +524,7 @@
     if(cell == nil)
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:orderCell];
-        if(!searching){
+        if(!searching && ! sorting){
             [self configureCell:cell atIndexPath:indexPath];
         } else {
             [self configureCellForSearch:cell atIndexPath:indexPath];
