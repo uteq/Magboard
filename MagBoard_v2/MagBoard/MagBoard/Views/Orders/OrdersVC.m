@@ -198,7 +198,15 @@
         }
         //if incorrect url
         else if([[orderHolder valueForKey:@"message"] isEqualToString:@"608"] || [[orderHolder valueForKey:@"message"] isEqualToString:@"1000"]) {
-            [self makeAlert:@"Onjuiste URL" message:@"Er bestaat geen Magento webshop op dit domein. Controleer de url op eventuele fouten en probeer het nogmaals." button:@"608"];
+            [self makeAlert:@"Onjuiste URL" message:@"Er bestaat geen Magento webshop op dit domein. Controleer de website url op eventuele fouten en probeer het opnieuw." button:@"608"];
+        }
+        //if the soap can't be loaded
+        else if([[orderHolder valueForKey:@"message"] isEqualToString:@"621"]){
+            BlockAlertView *alertSOAPError = [BlockAlertView alertWithTitle:@"Magento Server Probleem" message:@"Er ging iets mis bij het laden van de bestellingen van je website. SOAP moet geïnstalleerd en geactiveerd zijn op je Magento Server om de app te kunnen gebruiken."];
+            [alertSOAPError addButtonWithTitle:@"Ok" block:^{
+                [self backButtonTouched];
+            }];
+            [alertSOAPError show];
         }
         //if all is ok
         else {
