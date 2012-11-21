@@ -292,21 +292,31 @@
     NSString *searchText = searchBar.text;
     copyListOfOrders = [[NSMutableArray alloc] init];
     
+    NSLog(@"Aantal items: %d", [[orderHolder objectForKey:@"data-items"] count]);
+    
     for (int i = 0; i < [[orderHolder objectForKey:@"data-items"] count]; i++) {
         
-        //For searching on first- & lastname
-        NSString *firstName = [[NSString alloc] initWithFormat:@"%@", [[[[orderHolder objectForKey:@"data-items"] objectAtIndex:i] objectAtIndex:1] objectForKey:@"firstname"]];
-        NSString *lastName = [[NSString alloc] initWithFormat:@"%@", [[[[orderHolder objectForKey:@"data-items"] objectAtIndex:i] objectAtIndex:1] objectForKey:@"lastname"]];
-        NSString *totalName = [[NSString alloc] initWithFormat:@"%@ %@", firstName, lastName];
-        NSRange titleResultsRange = [totalName rangeOfString:searchText options:NSCaseInsensitiveSearch];
+        for(int u = 0; u < [[[orderHolder objectForKey:@"data-items"] objectAtIndex:i] count]; u++){
         
-        //For searching on ordernumber
-        NSString *orderNumber = [[NSString alloc] initWithFormat:@"%@", [[[[orderHolder objectForKey:@"data-items"] objectAtIndex:i] objectAtIndex:1] objectForKey:@"increment_id"]];
-        NSRange orderNumberResultsRange = [orderNumber rangeOfString:searchText options:NSCaseInsensitiveSearch];
-        
-        if(titleResultsRange.length > 0 || orderNumberResultsRange.length > 0){
-            [copyListOfOrders addObject:[[[orderHolder objectForKey:@"data-items"] objectAtIndex:i] objectAtIndex:1]];
-            [searchOverlay removeFromSuperview];
+            if(u != 0){
+                
+                //For searching on first- & lastname
+                NSString *firstName = [[NSString alloc] initWithFormat:@"%@", [[[[orderHolder objectForKey:@"data-items"] objectAtIndex:i] objectAtIndex:u] objectForKey:@"firstname"]];
+                NSString *lastName = [[NSString alloc] initWithFormat:@"%@", [[[[orderHolder objectForKey:@"data-items"] objectAtIndex:i] objectAtIndex:u] objectForKey:@"lastname"]];
+                NSString *totalName = [[NSString alloc] initWithFormat:@"%@ %@", firstName, lastName];
+                NSRange titleResultsRange = [totalName rangeOfString:searchText options:NSCaseInsensitiveSearch];
+                
+                //For searching on ordernumber
+                NSString *orderNumber = [[NSString alloc] initWithFormat:@"%@", [[[[orderHolder objectForKey:@"data-items"] objectAtIndex:i] objectAtIndex:u] objectForKey:@"increment_id"]];
+                NSRange orderNumberResultsRange = [orderNumber rangeOfString:searchText options:NSCaseInsensitiveSearch];
+                
+                if(titleResultsRange.length > 0 || orderNumberResultsRange.length > 0){
+                    [copyListOfOrders addObject:[[[orderHolder objectForKey:@"data-items"] objectAtIndex:i] objectAtIndex:u]];
+                    [searchOverlay removeFromSuperview];
+                }
+                
+            }
+            
         }
         
     }
@@ -332,7 +342,7 @@
     //Add searchbar
     searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0,70,320,44)];
     searchBar.delegate = self;
-    searchBar.tintColor = [UIColor colorWithRed:0/255 green:0/255 blue:0/255 alpha:1.0];
+    searchBar.tintColor = [UIColor colorWithRed:48/255 green:47/255 blue:54/255 alpha:1.0];
     [ordersTable setTableHeaderView:searchBar];
 }
 
@@ -397,6 +407,7 @@
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
+    
     //The first item from the section is always the date, the others are the orders
     if(indexPath.row == 0){
         NSString* date = [[NSString alloc] initWithFormat:@"%@", [[[[orderHolder valueForKey:@"data-items"] objectAtIndex:indexPath.section]objectAtIndex:indexPath.row ] valueForKey:@"date"]];
@@ -411,6 +422,7 @@
         [cell addSubview:dateTitle];
         
     } else {
+        
         NSString* firstName = [[NSString alloc] initWithFormat:@"%@", [[[[orderHolder valueForKey:@"data-items"] objectAtIndex:indexPath.section]objectAtIndex:indexPath.row ] valueForKey:@"firstname"]];
         NSString* lastName = [[NSString alloc] initWithFormat:@"%@", [[[[orderHolder valueForKey:@"data-items"] objectAtIndex:indexPath.section]objectAtIndex:indexPath.row ] valueForKey:@"lastname"]];
         NSString* grandTotal = [[NSString alloc] initWithFormat:@"%@", [[[[orderHolder valueForKey:@"data-items"] objectAtIndex:indexPath.section]objectAtIndex:indexPath.row ] valueForKey:@"grand_total"]];
