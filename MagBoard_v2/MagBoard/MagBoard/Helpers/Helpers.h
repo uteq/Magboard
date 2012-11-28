@@ -22,6 +22,7 @@
 #import "UIButton.h"
 #import "UIBarButtonItem.h"
 #import "constants.h"
+#import "Alert.h"
 
 //Importing models
 #import "Webshop.h"

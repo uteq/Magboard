@@ -8,6 +8,7 @@
 
 #import "OrdersVC.h"
 #import "OrderInfoVC.h"
+#import "Alert.h"
 
 @interface OrdersVC ()
 
@@ -49,6 +50,8 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark construct view
+
 ///////////////////////////////////////////////////////
 //////////////// Construct view ///////////////////////
 ///////////////////////////////////////////////////////
@@ -59,7 +62,6 @@
     UILabel* navBarTitle = [CustomNavBar setNavBarTitle:[shopInfo shopName]];
     self.navigationItem.titleView = navBarTitle;
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTarget:self selector:@selector(backButtonTouched) title:@"Shops"];
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTarget:self selector:@selector(showSortPicker) title:@"Filter"];
 }
 
 -(void)constructTabBar
@@ -103,6 +105,8 @@
     [tabBar addSubview:ordersButton];
 }
 
+#pragma mark Button actions
+
 ///////////////////////////////////////////////////////
 //////////////// Button actions ///////////////////////
 ///////////////////////////////////////////////////////
@@ -140,6 +144,7 @@
     [searchOverlay removeFromSuperview];
 }
 
+#pragma mark Requests
 
 ///////////////////////////////////////////////////////
 //////////////// Request to API ///////////////////////
@@ -216,6 +221,7 @@
                 [loadingIcon stopAnimating];
                 [loadingHolder removeFromSuperview];
                 [self makeTable];
+                self.navigationItem.rightBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTarget:self selector:@selector(showSortPicker) title:@"Filter"];
             }
         }
     }
@@ -230,7 +236,7 @@
     
 }
 
-#pragma  mark pickerview
+#pragma mark pickerview
 
 ///////////////////////////////////////////////////////
 ////////////////   Pickerview   ///////////////////////
@@ -362,6 +368,7 @@
     [ordersTable reloadData];
 }
 
+#pragma mark Search orders
 
 ///////////////////////////////////////////////////////
 //////////////// Search orders  ///////////////////////
@@ -466,6 +473,7 @@
     
 }
 
+#pragma mark Make tableview
 
 ///////////////////////////////////////////////////////
 //////////////// Make tableview ///////////////////////
@@ -541,8 +549,10 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     //For the date no interaction
-    if(!searching && indexPath.row == 0){
+    if(!sorting && !searching && indexPath.row == 0){
         cell.userInteractionEnabled = NO;
+    } else if (sorting && indexPath.row == 0){
+        cell.userInteractionEnabled = YES;
     }
     
     return cell;

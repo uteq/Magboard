@@ -54,6 +54,12 @@
     //Refresh scrollnav
     [[self pageControl] removeFromSuperview];
     [self shopsControlDots];
+    
+    //Refresh header
+    if([allShops count] != 0)
+    {
+        self.navigationItem.rightBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTarget:self selector:@selector(settingsButtonTouched) title:@"Wijzig"];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -90,10 +96,6 @@
     // Create image for custom title
     UIImage *titleImage = [UIImage imageNamed: @"logo.png"];
     UIImageView *titleImageview = [[UIImageView alloc] initWithImage: titleImage];
-    if([allShops count] != 0)
-    {
-        self.navigationItem.rightBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTarget:self selector:@selector(settingsButtonTouched) title:@"Wijzig"];
-    }
     
     // set the text view to the image view
     self.navigationItem.titleView = titleImageview;
