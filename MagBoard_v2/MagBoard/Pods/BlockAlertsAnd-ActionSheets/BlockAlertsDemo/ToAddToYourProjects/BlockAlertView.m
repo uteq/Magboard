@@ -216,8 +216,13 @@ static UIFont *buttonFont = nil;
         button.tag = i+1;
         
         [button setBackgroundImage:image forState:UIControlStateNormal];
-        [button setTitleColor:kAlertViewButtonTextColor forState:UIControlStateNormal];
-        [button setTitleShadowColor:kAlertViewButtonShadowColor forState:UIControlStateNormal];
+        if(![color isEqualToString:@"red"]){
+            [button setTitleColor:kAlertViewButtonTextColor forState:UIControlStateNormal];
+            [button setTitleShadowColor:kAlertViewButtonShadowColor forState:UIControlStateNormal];
+        } else {
+            [button setTitleColor:kAlertViewButtonRedTextColor forState:UIControlStateNormal];
+            [button setTitleShadowColor:kAlertViewButtonRedShadowColor forState:UIControlStateNormal];
+        }
         [button setTitle:title forState:UIControlStateNormal];
         button.accessibilityLabel = title;
         

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface OrdersVC : UIViewController <UITableViewDelegate, UITableViewDataSource, LRRestyClientResponseDelegate, UISearchBarDelegate, UIPickerViewDelegate>
+@interface OrdersVC : UIViewController <UITableViewDelegate, UITableViewDataSource, LRRestyClientResponseDelegate, UISearchBarDelegate, UIPickerViewDelegate, UITextFieldDelegate>
 {
     int sections;
     NSMutableArray *copyListOfOrders;
@@ -27,11 +27,8 @@
 @property BOOL searching;
 @property BOOL letUserSelectRow;
 
-//For pickerview
-@property (nonatomic, strong) UIPickerView *sortingPicker;
-@property BOOL pickerShown;
+//For filter
 @property BOOL sorting;
-@property int pickerSelected;
 
 -(void)sortTableView:(NSString*)status;
 

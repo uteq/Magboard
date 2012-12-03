@@ -18,5 +18,6 @@
 -(void)constructHeader;
 -(void)backButtonTouched;
 -(void)readMagboardInstructions;
+-(void)goToAddShop;
 
 @end

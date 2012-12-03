@@ -12,6 +12,7 @@
 #import "TPKeyboardAvoidingScrollView.h"
 #import "TPKeyboardAvoidingTableView.h"
 #import "BlockAlertView.h"
+#import "BlockActionSheet.h"
 #import "BlockTextPromptAlertView.h"
 
 //Importing Frameworks

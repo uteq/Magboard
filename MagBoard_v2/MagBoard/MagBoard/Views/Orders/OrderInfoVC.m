@@ -49,6 +49,8 @@
          requestParams:[orderInfo orderId]];
 }
 
+#pragma mark Construct view
+
 -(void)constructHeader
 {
     NSString *barTitle = [NSString stringWithFormat:@"Order: %@", [orderInfo orderId]];
@@ -56,7 +58,6 @@
     UILabel* navBarTitle = [CustomNavBar setNavBarTitle:barTitle];
     self.navigationItem.titleView = navBarTitle;
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTarget:self selector:@selector(backButtonTouched) title:@"Terug"];
-    //self.navigationItem.rightBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTarget:self selector:@selector(openStatusPopover) title:@"Status"];
 }
 
 //While doing request show loading icon
@@ -112,80 +113,6 @@
     }
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
--(void)backButtonTouched
-{
-    NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];
-    [viewControllers removeLastObject];
-    [[self navigationController] setViewControllers:viewControllers animated:YES];
-}
-
--(void)openStatusPopover
-{
-    
-}
-
-
--(void)loginRequest:(NSString *)shopUrl username:(NSString *)username password:(NSString *)password request:(NSString *)requestFunction requestParams:(NSString *)requestParams
-{
-    NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
-    [params setObject:shopUrl forKey:@"url"];
-    [params setObject:username forKey:@"username"];
-    [params setObject:password forKey:@"password"];
-    [params setObject:requestFunction forKey:@"requestFunction"];
-    [params setObject:requestParams forKey:@"requestParams"];
-    NSLog(@"Shop %@ with username %@", shopUrl, username);
-    NSLog(@"Executing %@ with params %@", requestFunction, requestParams);
-    [[LRResty client] post:@"http://www.magboard.nl/api/index.php" payload:params delegate:self];
-}
-
-- (void)restClient:(LRRestyClient *)client receivedResponse:(LRRestyResponse *)response;
-{
-    // do something with the response
-    if(response.status == 200) {
-        orderInfoHolder = [NSJSONSerialization JSONObjectWithData:[response responseData] options:kNilOptions error:nil];
-        if([orderInfoHolder valueForKey:@"message"] != NULL)
-        {
-           
-            NSLog(@"Status: %@", [orderInfoHolder valueForKey:@"session"]);
-            NSLog(@"Code: %@", [orderInfoHolder valueForKey:@"message"]);
-            //NSLog(@"Data-items: %@", [orderInfoHolder valueForKey:@"data-items"]);
-            //Check what type of data is given back (1002 is orderInfo, 1003 is invoiceCreate)
-            if([[orderInfoHolder valueForKey:@"message"] isEqualToString: @"1002"]){
-                orderInfo.orderStatus = [[orderInfoHolder objectForKey:@"data-items"] objectForKey:@"status"];
-                [self makeBlocks];
-                [loadingHolder removeFromSuperview];
-            }else if([[orderInfoHolder valueForKey:@"message"] isEqualToString: @"1003"]){
-                NSLog(@"Order has been put on hold");
-                [self reloadScrollview];
-                
-            } else if([[orderInfoHolder valueForKey:@"message"] isEqualToString: @"1004"]){
-                NSLog(@"Order has been unholded");
-                [self reloadScrollview];
-            } else if([[orderInfoHolder valueForKey:@"message"] isEqualToString: @"1005"]){
-                NSLog(@"Order has been canceled");
-                [self reloadScrollview];
-            }else {
-                 NSLog(@"Message: %@", [orderInfoHolder valueForKey:@"data-items"]);
-                [loadingIcon stopAnimating];
-                [loadingHolder removeFromSuperview];
-            }
-        
-        } else
-        {
-            NSLog(@"Something went wrong in the API");
-        }
-    } else {
-        NSLog(@"Er ging iets mis %d", [response status]);
-    }
-    
-}
-
 - (void)makeBlocks
 {
     NSLog(@"Making blocks");
@@ -196,9 +123,7 @@
     [self generateHeaderColor];
     
     //Initialize subheader
-    if(![[orderInfo orderStatus] isEqualToString:@"Complete"] && ![[orderInfo orderStatus] isEqualToString:@"Canceled"]){
-        [self orderInfoHeader];
-    }
+    [self subHeader];
     
     [self orderStatisticsHolder];
     [self orderShippingHolder];
@@ -208,10 +133,8 @@
 }
 
 //Function for making subheader
--(void) orderInfoHeader
-{
-    NSLog(@"Creating Header");
-    
+-(void) subHeader
+{    
     //Make subheader holder
     subHeader = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 00.0f, 320.0f, 50.0f)];
     UIColor *lightGrey = [UIColor colorWithRed:55.0f/255.0f green:53.0f/255.0f blue:61.0f/255.0f alpha:1.0];
@@ -243,120 +166,8 @@
     [subHeader addSubview:invoiceButton];
 }
 
-//Handle action for hold button
--(void)setOrderOnHold
-{
-    if([[orderInfo orderStatus] isEqualToString:@"Pending"] || [[orderInfo orderStatus] isEqualToString:@"Processing"]){
-        
-        BlockAlertView *alertInvoice = [BlockAlertView alertWithTitle:@"Order on hold" message:@"Weet u zeker dat u deze bestelling stop wilt zetten?"];
-        [alertInvoice setCancelButtonWithTitle:@"Nee" block:nil];
-        [alertInvoice addButtonWithTitle:@"Ja" block:^{
-            [self requestHold:@"salesOrderHold"];
-        }];
-        [alertInvoice show];
-        
-    } else if([[orderInfo orderStatus] isEqualToString:@"Holded"]) {
-    
-        BlockAlertView *alertInvoice = [BlockAlertView alertWithTitle:@"Order activeren" message:@"Weet u zeker dat u deze bestelling wilt voortzetten?"];
-        [alertInvoice setCancelButtonWithTitle:@"Nee" block:nil];
-        [alertInvoice addButtonWithTitle:@"Ja" block:^{
-            [self requestHold:@"salesOrderUnhold"];
-        }];
-        [alertInvoice show];
-    }else {
-        
-        BlockAlertView *alertInvoice = [BlockAlertView alertWithTitle:@"Order on hold" message:@"U kunt deze order niet stopzetten."];
-        [alertInvoice addButtonWithTitle:@"Ok" block:nil];
-        [alertInvoice show];
-        
-    }
-}
-
-//Handle action for cancel button
--(void)setOrderCancel
-{
-    int invoiced = [[[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"order_invoiced"]intValue ];
-    if([[orderInfo orderStatus] isEqualToString:@"Holded"]){
-        NSLog(@"Order on hold, unable to cancel");
-        BlockAlertView *alertInvoice = [BlockAlertView alertWithTitle:@"Bestelling annuleren" message:@"De bestelling is al stopgezet, het is daarom onmogelijk om de bestelling te annuleren."];
-        [alertInvoice addButtonWithTitle:@"Ok" block:nil];
-        [alertInvoice show];
-    }else if(invoiced == false){
-        NSLog(@"Order not invoiced, able to cancel");
-        [self loginRequest:[shopInfo shopUrl] username:[shopInfo username] password:[shopInfo password] request:@"salesOrderCancel" requestParams:[orderInfo orderId]];
-        
-    } else if(invoiced == true) {
-        NSLog(@"Order already invoiced, unable to cancel");
-        BlockAlertView *alertInvoice = [BlockAlertView alertWithTitle:@"Bestelling annuleren" message:@"De bestelling is al gefactureerd, het is daarom onmogelijk om de bestelling te annuleren."];
-        [alertInvoice addButtonWithTitle:@"Ok" block:nil];
-        [alertInvoice show];
-    }   
-}
-
-//Handle action for invoice button
--(void)setOrderInvoice
-{
-    int invoiced = [[[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"order_invoiced"]intValue ];
-    if([[orderInfo orderStatus] isEqualToString:@"Pending"]){
-        
-        BlockAlertView *alertInvoice = [BlockAlertView alertWithTitle:@"Factuur verzenden" message:@"Weet u zeker dat u een factuur voor alle bestelde producten wilt aanmaken?"];
-        [alertInvoice setCancelButtonWithTitle:@"Nee" block:nil];
-        [alertInvoice addButtonWithTitle:@"Ja" block:^{
-            [self requestInvoice];
-        }];
-        [alertInvoice show];
-        
-    } else if(invoiced == true) {
-        BlockAlertView *alertInvoice = [BlockAlertView alertWithTitle:@"Factuur verzenden" message:@"Alle bestelde producten zijn al gefactureerd, u kunt daarom geen factuur meer aanmaken."];
-        [alertInvoice addButtonWithTitle:@"Ok" block:nil];
-        [alertInvoice show];
-        
-    } else if(invoiced == false){
-        BlockAlertView *alertInvoice = [BlockAlertView alertWithTitle:@"Factuur verzenden" message:@"Weet u zeker dat u een factuur voor deze bestelling wilt aanmaken?"];
-        [alertInvoice setCancelButtonWithTitle:@"Nee" block:nil];
-        [alertInvoice addButtonWithTitle:@"Ja" block:^{
-            [self requestInvoice];
-        }];
-        [alertInvoice show];
-    }
-}
-
-//If the 'Invoice' button is pressed
--(void)requestInvoice{
-    
-    NSLog(@"Creating Invoice initiated");
-    int itemsCount = [[[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"items" ] count];
-    NSMutableString* requestParams = [NSMutableString string];
-    [requestParams appendString:[orderInfo orderId] ];
-    
-    for (int i = 0; i < itemsCount; i++){
-        NSString *itemId = [[NSString alloc] initWithFormat:@"%@", [[[[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"items" ] objectAtIndex:i] valueForKey:@"item_id"]];
-        NSString *qtyText = [[NSString alloc] initWithFormat:@"%@", [[[[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"items" ] objectAtIndex:i] valueForKey:@"qty_not_invoiced"]];
-        
-        [requestParams appendString:[NSString stringWithFormat:@"|%@ . %@", itemId, qtyText] ];
-    }
-    
-    NSLog(@"Created product string: %@", requestParams);
-    [self loginRequest:[shopInfo shopUrl] username:[shopInfo username] password:[shopInfo password] request:@"salesOrderInvoiceCreate" requestParams:requestParams];
-    scrollViewHeight = 0;
-}
-
-//If the 'Hold' button is pressed
--(void)requestHold:(NSString*)type{
-    
-    NSLog(@"Hold order request initiated");
-    NSMutableString* requestParams = [NSMutableString string];
-    [requestParams appendString:[orderInfo orderId]];
-    
-    NSLog(@"Created product string: %@", requestParams);
-    [self loginRequest:[shopInfo shopUrl] username:[shopInfo username] password:[shopInfo password] request:type requestParams:requestParams];
-    
-    //Scrollview reloaden
-    scrollViewHeight = 0;
-}
-
 -(void)orderStatisticsHolder{
-     NSLog(@"Creating block Statistics");
+    NSLog(@"Creating block Statistics");
     //Add to Scroll View Height
     scrollViewHeight += (110 + 10);
     
@@ -452,7 +263,7 @@
     UIView *orderShippingBody = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 31.0f, 301.0f, 110.0f)];
     orderShippingBody.backgroundColor = [UIColor clearColor];
     [orderStatisticsHolder addSubview:orderShippingBody];
-   
+    
     //First and lastname
     NSString *firstLastNameText = [[NSString alloc] initWithFormat:@"%@ %@", [[[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"shipping_address"] valueForKey:@"firstname" ], [[[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"shipping_address"] valueForKey:@"lastname" ]];
     UILabel *firstLastName = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 5.0f, 301.0f, 25.0f)];
@@ -542,7 +353,7 @@
     UIView *orderProductsBody = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 30.0f, 301.0f, (60 * itemsCount))];
     orderProductsBody.backgroundColor = [UIColor clearColor];
     [orderStatisticsHolder addSubview:orderProductsBody];
-   
+    
     //Loop through all ordered products
     for (int i = 0; i < itemsCount; i++)
     {
@@ -557,7 +368,7 @@
         if((i + 1) != itemsCount){
             [orderProductContainer addSubview:orderBorder];
         }
-            
+        
         NSString *productNameText = [[NSString alloc] initWithFormat:@"%@", [[[[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"items" ] objectAtIndex:i] valueForKey:@"name"]];
         NSMutableString *qtyText = [[NSMutableString alloc] initWithFormat:@"%@", [[[[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"items" ] objectAtIndex:i] valueForKey:@"qty_ordered"]];
         [qtyText appendString:@" stuk(s)"];
@@ -585,7 +396,7 @@
         price.text = priceText;
         [orderProductContainer addSubview:price];
     }
-   
+    
 }
 
 -(void)orderTotals{
@@ -674,7 +485,7 @@
     shippingAmountContent.textColor = [UIColor colorWithRed:87.0f/255.0f green:83.0f/255.0f blue:89.0f/255.0f alpha:1.0f];
     shippingAmountContent.text = shippingAmountValue;
     [orderTotalsBody addSubview:shippingAmountContent];
-
+    
     //Grand total
     NSString *grandTotalText = @"Totaal:";
     UILabel *grandTotal = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 70.0f, 301.0f, 25.0f)];
@@ -755,4 +566,187 @@
     [orderInfoScrollView setContentSize:CGSizeMake(320, scrollViewHeight + 120)];
     
 }
+
+
+#pragma mark Button actions
+
+-(void)backButtonTouched
+{
+    NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];
+    [viewControllers removeLastObject];
+    [[self navigationController] setViewControllers:viewControllers animated:YES];
+}
+
+//Handle action for hold button
+-(void)setOrderOnHold
+{
+    if([[orderInfo orderStatus] isEqualToString:@"Pending"] || [[orderInfo orderStatus] isEqualToString:@"Processing"]){
+        
+        BlockAlertView *alertInvoice = [BlockAlertView alertWithTitle:@"Order on hold" message:@"Weet u zeker dat u deze bestelling stop wilt zetten?"];
+        [alertInvoice setCancelButtonWithTitle:@"Nee" block:nil];
+        [alertInvoice setCancelButtonWithTitle:@"Ja" block:^{
+            [self requestHold:@"salesOrderHold"];
+        }];
+        [alertInvoice show];
+        
+    } else if([[orderInfo orderStatus] isEqualToString:@"Holded"]) {
+        
+        BlockAlertView *alertInvoice = [BlockAlertView alertWithTitle:@"Order activeren" message:@"Weet u zeker dat u deze bestelling wilt voortzetten?"];
+        [alertInvoice setCancelButtonWithTitle:@"Nee" block:nil];
+        [alertInvoice setCancelButtonWithTitle:@"Ja" block:^{
+            [self requestHold:@"salesOrderUnhold"];
+        }];
+        [alertInvoice show];
+    }else {
+        
+        BlockAlertView *alertInvoice = [BlockAlertView alertWithTitle:@"Order on hold" message:@"U kunt deze order niet stopzetten."];
+        [alertInvoice setCancelButtonWithTitle:@"Ok" block:nil];
+        [alertInvoice show];
+        
+    }
+}
+
+//Handle action for cancel button
+-(void)setOrderCancel
+{
+    int invoiced = [[[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"order_invoiced"]intValue ];
+    if([[orderInfo orderStatus] isEqualToString:@"Holded"]){
+        NSLog(@"Order on hold, unable to cancel");
+        BlockAlertView *alertInvoice = [BlockAlertView alertWithTitle:@"Bestelling annuleren" message:@"De bestelling is al stopgezet, het is daarom onmogelijk om de bestelling te annuleren."];
+        [alertInvoice setCancelButtonWithTitle:@"Ok" block:nil];
+        [alertInvoice show];
+    }else if(invoiced == false){
+        NSLog(@"Order not invoiced, able to cancel");
+        [self loginRequest:[shopInfo shopUrl] username:[shopInfo username] password:[shopInfo password] request:@"salesOrderCancel" requestParams:[orderInfo orderId]];
+        
+    } else if(invoiced == true) {
+        NSLog(@"Order already invoiced, unable to cancel");
+        BlockAlertView *alertInvoice = [BlockAlertView alertWithTitle:@"Bestelling annuleren" message:@"De bestelling is al gefactureerd, het is daarom onmogelijk om de bestelling te annuleren."];
+        [alertInvoice setCancelButtonWithTitle:@"Ok" block:nil];
+        [alertInvoice show];
+    }
+}
+
+//Handle action for invoice button
+-(void)setOrderInvoice
+{
+    int invoiced = [[[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"order_invoiced"]intValue ];
+    if([[orderInfo orderStatus] isEqualToString:@"Pending"]){
+        
+        BlockAlertView *alertInvoice = [BlockAlertView alertWithTitle:@"Factuur verzenden" message:@"Weet u zeker dat u een factuur voor alle bestelde producten wilt aanmaken?"];
+        [alertInvoice setCancelButtonWithTitle:@"Nee" block:nil];
+        [alertInvoice setCancelButtonWithTitle:@"Ja" block:^{
+            [self requestInvoice];
+        }];
+        [alertInvoice show];
+        
+    } else if(invoiced == true) {
+        BlockAlertView *alertInvoice = [BlockAlertView alertWithTitle:@"Factuur verzenden" message:@"Alle bestelde producten zijn al gefactureerd, u kunt daarom geen factuur meer aanmaken."];
+        [alertInvoice setCancelButtonWithTitle:@"Ok" block:nil];
+        [alertInvoice show];
+        
+    } else if(invoiced == false){
+        BlockAlertView *alertInvoice = [BlockAlertView alertWithTitle:@"Factuur verzenden" message:@"Weet u zeker dat u een factuur voor deze bestelling wilt aanmaken?"];
+        [alertInvoice setCancelButtonWithTitle:@"Nee" block:nil];
+        [alertInvoice setCancelButtonWithTitle:@"Ja" block:^{
+            [self requestInvoice];
+        }];
+        [alertInvoice show];
+    }
+}
+
+//If the 'Invoice' button is pressed
+-(void)requestInvoice{
+    
+    NSLog(@"Creating Invoice initiated");
+    int itemsCount = [[[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"items" ] count];
+    NSMutableString* requestParams = [NSMutableString string];
+    [requestParams appendString:[orderInfo orderId] ];
+    
+    for (int i = 0; i < itemsCount; i++){
+        NSString *itemId = [[NSString alloc] initWithFormat:@"%@", [[[[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"items" ] objectAtIndex:i] valueForKey:@"item_id"]];
+        NSString *qtyText = [[NSString alloc] initWithFormat:@"%@", [[[[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"items" ] objectAtIndex:i] valueForKey:@"qty_not_invoiced"]];
+        
+        [requestParams appendString:[NSString stringWithFormat:@"|%@ . %@", itemId, qtyText] ];
+    }
+    
+    NSLog(@"Created product string: %@", requestParams);
+    [self loginRequest:[shopInfo shopUrl] username:[shopInfo username] password:[shopInfo password] request:@"salesOrderInvoiceCreate" requestParams:requestParams];
+    scrollViewHeight = 0;
+}
+
+//If the 'Hold' button is pressed
+-(void)requestHold:(NSString*)type{
+    
+    NSLog(@"Hold order request initiated");
+    NSMutableString* requestParams = [NSMutableString string];
+    [requestParams appendString:[orderInfo orderId]];
+    
+    NSLog(@"Created product string: %@", requestParams);
+    [self loginRequest:[shopInfo shopUrl] username:[shopInfo username] password:[shopInfo password] request:type requestParams:requestParams];
+    
+    //Scrollview reloaden
+    scrollViewHeight = 0;
+}
+
+
+#pragma mark Requests
+
+-(void)loginRequest:(NSString *)shopUrl username:(NSString *)username password:(NSString *)password request:(NSString *)requestFunction requestParams:(NSString *)requestParams
+{
+    NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
+    [params setObject:shopUrl forKey:@"url"];
+    [params setObject:username forKey:@"username"];
+    [params setObject:password forKey:@"password"];
+    [params setObject:requestFunction forKey:@"requestFunction"];
+    [params setObject:requestParams forKey:@"requestParams"];
+    NSLog(@"Shop %@ with username %@", shopUrl, username);
+    NSLog(@"Executing %@ with params %@", requestFunction, requestParams);
+    [[LRResty client] post:@"http://www.magboard.nl/api/index.php" payload:params delegate:self];
+}
+
+- (void)restClient:(LRRestyClient *)client receivedResponse:(LRRestyResponse *)response;
+{
+    // do something with the response
+    if(response.status == 200) {
+        orderInfoHolder = [NSJSONSerialization JSONObjectWithData:[response responseData] options:kNilOptions error:nil];
+        if([orderInfoHolder valueForKey:@"message"] != NULL)
+        {
+           
+            NSLog(@"Status: %@", [orderInfoHolder valueForKey:@"session"]);
+            NSLog(@"Code: %@", [orderInfoHolder valueForKey:@"message"]);
+            //NSLog(@"Data-items: %@", [orderInfoHolder valueForKey:@"data-items"]);
+            //Check what type of data is given back (1002 is orderInfo, 1003 is invoiceCreate)
+            if([[orderInfoHolder valueForKey:@"message"] isEqualToString: @"1002"]){
+                orderInfo.orderStatus = [[orderInfoHolder objectForKey:@"data-items"] objectForKey:@"status"];
+                [self makeBlocks];
+                [loadingHolder removeFromSuperview];
+            }else if([[orderInfoHolder valueForKey:@"message"] isEqualToString: @"1003"]){
+                NSLog(@"Order has been put on hold");
+                [self reloadScrollview];
+                
+            } else if([[orderInfoHolder valueForKey:@"message"] isEqualToString: @"1004"]){
+                NSLog(@"Order has been unholded");
+                [self reloadScrollview];
+            } else if([[orderInfoHolder valueForKey:@"message"] isEqualToString: @"1005"]){
+                NSLog(@"Order has been canceled");
+                [self reloadScrollview];
+            }else {
+                 NSLog(@"Message: %@", [orderInfoHolder valueForKey:@"data-items"]);
+                [loadingIcon stopAnimating];
+                [loadingHolder removeFromSuperview];
+            }
+        
+        } else
+        {
+            NSLog(@"Something went wrong in the API");
+        }
+    } else {
+        NSLog(@"Er ging iets mis %d", [response status]);
+    }
+    
+}
+
+
+
 @end
