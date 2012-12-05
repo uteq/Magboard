@@ -162,9 +162,25 @@
     [orderInfoScrollView addSubview:subHeader];
     
     //Make status buttons
-    UIButton *holdButton = [UIBarButtonItem styledSubHeaderButtonWithTarget:self selector:@selector(setOrderOnHold) name:@"hold" disabled:NO];
-    UIButton *cancelButton = [UIBarButtonItem styledSubHeaderButtonWithTarget:self selector:@selector(setOrderCancel) name:@"cancel" disabled:YES];
-    UIButton *invoiceButton = [UIBarButtonItem styledSubHeaderButtonWithTarget:self selector:@selector(setOrderInvoice) name:@"invoice" disabled:NO];
+    bool disableHold = NO;
+    bool disableCancel = NO;
+    bool disableInvoice = NO;
+    
+    if([[[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"allow_hold"]intValue] == false){
+        disableHold = YES;
+    }
+    
+    if([[[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"allow_cancel"]intValue] == false){
+        disableCancel = YES;
+    }
+    
+    if([[[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"allow_invoice"]intValue] == false){
+        disableInvoice = YES;
+    }
+    
+    UIButton *holdButton = [UIBarButtonItem styledSubHeaderButtonWithTarget:self selector:@selector(setOrderOnHold) name:@"hold" disabled:disableHold];
+    UIButton *cancelButton = [UIBarButtonItem styledSubHeaderButtonWithTarget:self selector:@selector(setOrderCancel) name:@"cancel" disabled:disableCancel];
+    UIButton *invoiceButton = [UIBarButtonItem styledSubHeaderButtonWithTarget:self selector:@selector(setOrderInvoice) name:@"invoice" disabled:disableInvoice];
     [subHeader addSubview:holdButton];
     [subHeader addSubview:cancelButton];
     [subHeader addSubview:invoiceButton];
@@ -807,6 +823,9 @@
         }
     } else {
         NSLog(@"Er ging iets mis %d", [response status]);
+        if(firstRun == YES){
+            [self backButtonTouched];
+        }
     }
     
 }

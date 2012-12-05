@@ -11,6 +11,7 @@
 @interface OrdersVC : UIViewController <UITableViewDelegate, UITableViewDataSource, LRRestyClientResponseDelegate, UISearchBarDelegate, UIPickerViewDelegate, UITextFieldDelegate>
 {
     int sections;
+    int lastOrderIncrementalId;
     NSMutableArray *copyListOfOrders;
     bool firstRun;
 }

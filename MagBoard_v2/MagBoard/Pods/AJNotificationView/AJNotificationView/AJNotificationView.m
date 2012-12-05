@@ -25,17 +25,26 @@
 @interface AJNotificationView ()
 
 @property (nonatomic,strong) UILabel *titleLabel;
+@property (nonatomic, strong) UIButton *detailDisclosureButton;
 @property (nonatomic) AJNotificationType notificationType;
 @property (nonatomic) AJLinedBackgroundType backgroundType;
 @property (nonatomic,assign) NSTimer* animationTimer;
 @property (nonatomic, assign) float moveFactor;
 @property(nonatomic,assign) BOOL linedBackground;
+@property (nonatomic, copy) void (^responseBlock)(void);
+@property (nonatomic, strong) UIView *parentView;
+@property (nonatomic, assign) float offset;
+@property (nonatomic, assign) NSTimeInterval hideInterval;
+@property (nonatomic, assign) BOOL showDetailDisclosure;
 
 - (void)_drawBackgroundInRect:(CGRect)rect;
+- (void) showAfterDelay:(NSTimeInterval)delayInterval;
 
 @end
 
-#define PANELHEIGHT  45.0f
+#define PANELHEIGHT  50.0f
+
+static NSMutableArray *notificationQueue = nil;       // Global notification queue
 
 @implementation AJNotificationView
 
@@ -45,22 +54,36 @@
 
 - (id)initWithFrame:(CGRect)frame
 {
+    return [self initWithFrame:frame andResponseBlock:nil];
+}
+
+- (id)initWithFrame:(CGRect)frame andResponseBlock:(void (^)(void))response
+{
     self = [super initWithFrame:frame];
     if (self) {
         self.alpha = 0.0f;
         _notificationType = AJNotificationTypeDefault;
         _linedBackground = YES;
+        _responseBlock = response;
         self.animationTimer = nil;
-
+        
         //Title Label
         _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0, 0, self.bounds.size.width -10, PANELHEIGHT)];
         _titleLabel.textColor = [UIColor colorWithWhite:0.2f alpha:1.0f];
-        _titleLabel.font = [UIFont fontWithName:@"Helvetica Neue"size:14];
-        _titleLabel.font = [UIFont boldSystemFontOfSize:14.0];
-        _titleLabel.lineBreakMode = UILineBreakModeWordWrap;
+        _titleLabel.font = [UIFont fontWithName:@"Helvetica Neue"size:15];
+        _titleLabel.font = [UIFont boldSystemFontOfSize:15.0];
+        _titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
         _titleLabel.numberOfLines = 0;
+        _titleLabel.alpha = 0.0;
         _titleLabel.backgroundColor = [UIColor clearColor];
         [self addSubview:_titleLabel];
+        
+        // Button
+        _detailDisclosureButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        _detailDisclosureButton.frame = CGRectMake(self.bounds.size.width - 10.0 - _detailDisclosureButton.frame.size.width, (PANELHEIGHT - _detailDisclosureButton.frame.size.height) / 2, _detailDisclosureButton.frame.size.width, _detailDisclosureButton.frame.size.height);
+        _detailDisclosureButton.hidden = YES;
+        [_detailDisclosureButton addTarget:self action:@selector(detailDisclosureButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:_detailDisclosureButton];
     }
     return self;
 }
@@ -71,78 +94,137 @@
     [self _drawBackgroundInRect:(CGRect)rect];
 }
 
+- (void)detailDisclosureButtonPressed:(id)sender
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"detail_disclosure_button_pressed" object:self];
+    [self hide];
+}
+
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Show
 ////////////////////////////////////////////////////////////////////////
 
-+ (void)showNoticeInView:(UIView *)view title:(NSString *)title{
++ (AJNotificationView *)showNoticeInView:(UIView *)view title:(NSString *)title{
     //Use default notification type (gray)
-    [self showNoticeInView:view type:AJNotificationTypeDefault title:title hideAfter:2.5f];
+    return [self showNoticeInView:view type:AJNotificationTypeDefault title:title hideAfter:2.5f];
 }
 
-+ (void)showNoticeInView:(UIView *)view title:(NSString *)title hideAfter:(NSTimeInterval)hideInterval{
++ (AJNotificationView *)showNoticeInView:(UIView *)view title:(NSString *)title hideAfter:(NSTimeInterval)hideInterval{
     //Use default notification type (gray)
-    [self showNoticeInView:view type:AJNotificationTypeDefault title:title hideAfter:hideInterval];
+    return [self showNoticeInView:view type:AJNotificationTypeDefault title:title hideAfter:hideInterval];
 }
 
-+ (void)showNoticeInView:(UIView *)view type:(AJNotificationType)type title:(NSString *)title hideAfter:(NSTimeInterval)hideInterval{
-    [self showNoticeInView:view type:type title:title linedBackground:AJLinedBackgroundTypeStatic hideAfter:hideInterval];
++ (AJNotificationView *)showNoticeInView:(UIView *)view type:(AJNotificationType)type title:(NSString *)title hideAfter:(NSTimeInterval)hideInterval{
+    return [self showNoticeInView:view type:type title:title linedBackground:AJLinedBackgroundTypeStatic hideAfter:hideInterval];
 }
 
-+ (void)showNoticeInView:(UIView *)view type:(AJNotificationType)type title:(NSString *)title linedBackground:(AJLinedBackgroundType)backgroundType hideAfter:(NSTimeInterval)hideInterval{
++ (AJNotificationView *)showNoticeInView:(UIView *)view type:(AJNotificationType)type title:(NSString *)title linedBackground:(AJLinedBackgroundType)backgroundType hideAfter:(NSTimeInterval)hideInterval{
+    return [self showNoticeInView:view type:type title:title linedBackground:backgroundType hideAfter:hideInterval response:nil];
+}
+
++ (AJNotificationView *)showNoticeInView:(UIView *)view type:(AJNotificationType)type title:(NSString *)title linedBackground:(AJLinedBackgroundType)backgroundType hideAfter:(NSTimeInterval)hideInterval detailDisclosure:(BOOL)show {
+    return [self showNoticeInView:view type:type title:title linedBackground:backgroundType hideAfter:hideInterval offset:0.0 delay:0.0 detailDisclosure:show response:nil];
+}
+
++ (AJNotificationView *)showNoticeInView:(UIView *)view type:(AJNotificationType)type title:(NSString *)title linedBackground:(AJLinedBackgroundType)backgroundType hideAfter:(NSTimeInterval)hideInterval response:(void (^)(void))response {
     
-    AJNotificationView *noticeView = [[self alloc] initWithFrame:CGRectMake(0, -60, view.bounds.size.width, PANELHEIGHT)];
+    return [self showNoticeInView:view type:type title:title linedBackground:backgroundType hideAfter:hideInterval offset:0.0 delay:0.0 detailDisclosure:NO response:response];
+}
+
++ (AJNotificationView *)showNoticeInView:(UIView *)view type:(AJNotificationType)type title:(NSString *)title linedBackground:(AJLinedBackgroundType)backgroundType hideAfter:(NSTimeInterval)hideInterval offset:(float)offset {
+    
+    return [self showNoticeInView:view type:type title:title linedBackground:backgroundType hideAfter:hideInterval offset:offset delay:0.0 detailDisclosure:NO response:nil];
+}
+
++ (AJNotificationView *)showNoticeInView:(UIView *)view type:(AJNotificationType)type title:(NSString *)title linedBackground:(AJLinedBackgroundType)backgroundType hideAfter:(NSTimeInterval)hideInterval offset:(float)offset delay:(NSTimeInterval)delayInterval response:(void (^)(void))response {
+    
+    return [self showNoticeInView:view type:type title:title linedBackground:backgroundType hideAfter:hideInterval offset:offset delay:delayInterval detailDisclosure:NO response:nil];
+}
+
+
++ (AJNotificationView *)showNoticeInView:(UIView *)view type:(AJNotificationType)type title:(NSString *)title linedBackground:(AJLinedBackgroundType)backgroundType hideAfter:(NSTimeInterval)hideInterval offset:(float)offset delay:(NSTimeInterval)delayInterval detailDisclosure:(BOOL)show response:(void (^)(void))response {
+    
+    AJNotificationView *noticeView = [[self alloc] initWithFrame:CGRectMake(0, 0, view.bounds.size.width, 1) andResponseBlock:response];
     noticeView.notificationType = type;
     noticeView.titleLabel.text = title;
-    noticeView.titleLabel.textAlignment = UITextAlignmentCenter;
-    noticeView.titleLabel.shadowColor = [UIColor colorWithRed:255/255 green:255/255 blue:255/255 alpha:0.8f];
-    noticeView.titleLabel.shadowOffset = CGSizeMake(1, 1);
     noticeView.linedBackground = backgroundType == AJLinedBackgroundTypeDisabled ? NO : YES;
-    [view addSubview:noticeView];
+    noticeView.parentView = view;
+    noticeView.backgroundType = backgroundType;
+    noticeView.offset = offset;
+    noticeView.hideInterval = hideInterval;
+    noticeView.showDetailDisclosure = show;
     
-    [noticeView setNeedsDisplay];
+    if(notificationQueue == nil) {
+        
+        notificationQueue = [[NSMutableArray alloc] init];
+    }
     
-    BOOL animated = backgroundType == AJLinedBackgroundTypeAnimated ? YES : NO;
+    [notificationQueue addObject:noticeView];
+    
+    if([notificationQueue count] == 1) {
+        
+        // Since this notification is the only one in the queue, it can be shown and its delay interval can be honored.
+        [noticeView showAfterDelay:delayInterval];
+    }
+    
+    return noticeView;
+}
+
+- (void) showAfterDelay:(NSTimeInterval)delayInterval {
+    
+    [self.parentView addSubview:self];
+    
+    [self setNeedsDisplay];
+    
+    BOOL animated = self.backgroundType == AJLinedBackgroundTypeAnimated ? YES : NO;
     
     if (animated){
-        if (nil == noticeView.animationTimer)
+        if (nil == self.animationTimer)
         {
-            noticeView.animationTimer = [NSTimer scheduledTimerWithTimeInterval:1.0/30
-                                                                   target:noticeView
+            self.animationTimer = [NSTimer scheduledTimerWithTimeInterval:1.0/30
+                                                                   target:self
                                                                  selector:@selector(setNeedsDisplay)
                                                                  userInfo:nil
                                                                   repeats:YES];
         }
     }
     else{
-        if (noticeView.animationTimer && noticeView.animationTimer.isValid)
-            [noticeView.animationTimer invalidate];
+        if (self.animationTimer && self.animationTimer.isValid)
+            [self.animationTimer invalidate];
         
-        noticeView.animationTimer = nil;
+        self.animationTimer = nil;
     }
     
-    //if view is a UIWindow, check if the status bar is showing (and offset the view accordingly)
-    float statusBarOffset = [view isKindOfClass:[UIWindow class]] && [[UIApplication sharedApplication] isStatusBarHidden] ? 0.0 : [[UIApplication sharedApplication] statusBarFrame].size.height;
+    //if parent view is a UIWindow, check if the status bar is showing (and offset the view accordingly)
+    double statusBarOffset = ([self.parentView isKindOfClass:[UIWindow class]] && (! [[UIApplication sharedApplication] isStatusBarHidden])) ? [[UIApplication sharedApplication] statusBarFrame].size.height : 0.0;
     
-    if ([view isKindOfClass:[UIView class]] && ![view isKindOfClass:[UIWindow class]])
+    if ([self.parentView isKindOfClass:[UIView class]] && ![self.parentView isKindOfClass:[UIWindow class]]) {
+        
         statusBarOffset = 0.0;
+    }
+    self.offset = fmax(self.offset, statusBarOffset);
     
     //Animation
     [UIView animateWithDuration:0.5f
-                          delay:0.0
+                          delay:delayInterval
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^{
-                         noticeView.alpha = 1.0;
-                         noticeView.frame = CGRectMake(0.0,
-                                                       0.0 + statusBarOffset,
-                                                       noticeView.frame.size.width,
-                                                       noticeView.frame.size.height);
+                         self.alpha = 1.0;
+                         self.frame = CGRectMake(0.0,
+                                                 0.0 + self.offset,
+                                                 self.frame.size.width,
+                                                 PANELHEIGHT);
+                         self.titleLabel.alpha = 1.0;
                      }
                      completion:^(BOOL finished) {
                          if (finished){
+                             if (self.showDetailDisclosure) {
+                                 self.detailDisclosureButton.hidden = !self.showDetailDisclosure;
+                             }
+                             
                              //Hide
-                             if (hideInterval != 0)
-                                 [noticeView performSelector:@selector(hide) withObject:view afterDelay:hideInterval];
+                             if (self.hideInterval > 0)
+                                 [self performSelector:@selector(hide) withObject:self.parentView afterDelay:self.hideInterval];
                          }
                      }];
 }
@@ -152,19 +234,35 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (void)hide{
-    [UIView animateWithDuration:0.3f
+    if ([self.animationTimer isValid]){
+        [self.animationTimer invalidate];
+        self.animationTimer = nil;
+    }
+    
+    [UIView animateWithDuration:0.4f
                           delay:0.0
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^{
                          self.alpha = 0.0;
                          self.frame = CGRectMake(0.0,
-                                                 -self.frame.size.height,
+                                                 0.0,
                                                  self.frame.size.width,
-                                                 self.frame.size.height);
+                                                 1.0);
+                         self.titleLabel.alpha = 0.0;
                      }
                      completion:^(BOOL finished) {
                          if (finished){
                              [self performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:0.1f];
+                             
+                             // Remove this notification from the queue
+                             [notificationQueue removeObjectIdenticalTo:self];
+                             
+                             // Show the next notification in the queue
+                             if([notificationQueue count] > 0) {
+                                 
+                                 AJNotificationView *nextNotification = [notificationQueue objectAtIndex:0];
+                                 [nextNotification showAfterDelay:0];
+                             }
                          }
                      }];
 }
@@ -175,6 +273,9 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     [self hide];
+    if(self.responseBlock != nil) {
+        self.responseBlock();
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -184,7 +285,7 @@
 - (void)_drawBackgroundInRect:(CGRect)rect{
     
     self.moveFactor = self.moveFactor > 14.0f ? 0.0f : ++self.moveFactor;
-
+    
     UIColor *firstColor = nil;
     UIColor *secondColor = nil;
     UIColor *toplineColor = nil;
@@ -197,9 +298,9 @@
             break;
         }
         case AJNotificationTypeBlue: { //Blue
-            firstColor = RGBA(86, 136, 204, 1.0);
-            secondColor = RGBA(76, 121, 182, 1.0);
-            toplineColor = RGBA(10, 44, 90, 1.0);
+            firstColor = RGBA(0, 193, 254, 1.0);
+            secondColor = RGBA(0, 129, 182, 1.0);
+            toplineColor = RGBA(20, 230, 255, 1.0);
             self.titleLabel.textColor = [UIColor whiteColor];
             break;
         }
@@ -258,7 +359,7 @@
         green = components[1];
         blue = components[2];
         alpha = components[3];
-    }    
+    }
     CGContextSaveGState(ctx);
     CGContextSetRGBFillColor(ctx, 0.9f, 0.9f, 0.9f, 1.0f);
     CGContextFillRect(ctx, CGRectMake(0, 0, self.bounds.size.width, 1));
@@ -270,17 +371,17 @@
     CGContextStrokePath(ctx);
     CGContextRestoreGState(ctx);
     
-//    //bottom line
-//    CGContextSaveGState(ctx);
-//    CGContextSetRGBFillColor(ctx, 0.1f, 0.1f, 0.1f, 1.0f);
-//    CGContextFillRect(ctx, CGRectMake(0, PANELHEIGHT, self.bounds.size.width, 1));
-//    CGContextSetLineWidth(ctx, 1.5f);
-//    CGContextSetRGBStrokeColor(ctx, 0.4f, 0.4f, 0.4f, 1.0f);
-//    CGContextBeginPath(ctx);
-//    CGContextMoveToPoint(ctx, 0, PANELHEIGHT);
-//    CGContextAddLineToPoint(ctx, rect.size.width, PANELHEIGHT);
-//    CGContextStrokePath(ctx);
-//    CGContextRestoreGState(ctx);
+    //bottom line
+    CGContextSaveGState(ctx);
+    CGContextSetRGBFillColor(ctx, 0.1f, 0.1f, 0.1f, 1.0f);
+    CGContextFillRect(ctx, CGRectMake(0, PANELHEIGHT, self.bounds.size.width, 1));
+    CGContextSetLineWidth(ctx, 1.5f);
+    CGContextSetRGBStrokeColor(ctx, 0.4f, 0.4f, 0.4f, 1.0f);
+    CGContextBeginPath(ctx);
+    CGContextMoveToPoint(ctx, 0, PANELHEIGHT);
+    CGContextAddLineToPoint(ctx, rect.size.width, PANELHEIGHT);
+    CGContextStrokePath(ctx);
+    CGContextRestoreGState(ctx);
     
     //shadow
     self.layer.shadowColor = [UIColor blackColor].CGColor;
@@ -291,7 +392,7 @@
     
     if (self.linedBackground){
         //Lines
-        CGContextSaveGState(ctx); 
+        CGContextSaveGState(ctx);
         CGContextClipToRect(ctx, self.bounds);
         CGMutablePathRef path = CGPathCreateMutable();
         int lines = (self.bounds.size.width/16.0f + self.bounds.size.height);

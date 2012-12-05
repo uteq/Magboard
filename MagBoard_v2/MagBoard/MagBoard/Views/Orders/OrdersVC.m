@@ -26,6 +26,7 @@
     [self constructHeader];
     [self constructTabBar];
     
+    lastOrderIncrementalId = 0;
     firstRun = YES;
     searching = NO;
     sorting = NO;
@@ -212,9 +213,10 @@
 {
     // do something with the response
     if(response.status == 200) {
-        
+       
         orderHolder = [NSJSONSerialization JSONObjectWithData:[response responseData] options:kNilOptions error:nil];
-        
+
+    
         //If incorrect login
         if([[orderHolder valueForKey:@"message"] isEqualToString:@"607"])
         {
@@ -233,13 +235,15 @@
             [alertSOAPError show];
         }
         //if all is ok
-        else if([orderHolder valueForKey:@"data-items"]){
+        else {
             if(ordersTable){
                 [ordersTable reloadData];
+                [self checkNewOrders];
             } else {
                 [loadingIcon stopAnimating];
                 [loadingHolder removeFromSuperview];
                 [self makeTable];
+                [self checkNewOrders];
                 self.navigationItem.rightBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTarget:self selector:@selector(showSortFilter) title:@"Filter"];
             }
             if(firstRun == YES){
@@ -251,12 +255,63 @@
     else
     {
         NSLog(@"Er ging iets mis %d", [response status]);
-        [self backButtonTouched];
+
+        if(firstRun == YES){
+           [self backButtonTouched]; 
+        }
     }
     
     NSLog(@"Status: %@", [orderHolder valueForKey:@"session"]);
     NSLog(@"Code: %@", [orderHolder valueForKey:@"message"]);
     
+}
+                 
+-(void)checkNewOrders
+{
+    if(lastOrderIncrementalId){
+        int newestOrderIncrementalId = [[[[[orderHolder valueForKey:@"data-items"] objectAtIndex:0] objectAtIndex:1] valueForKey:@"increment_id"]intValue];
+        
+        int newOrders = newestOrderIncrementalId - lastOrderIncrementalId;
+        if(newOrders != 0){
+            if(newOrders == 1){
+                NSString *notificationText = [[NSString alloc] initWithFormat:@"Er is 1 nieuwe bestelling."];
+                [AJNotificationView showNoticeInView:self.view
+                                                type:AJNotificationTypeDefault
+                                               title:notificationText
+                                     linedBackground:AJLinedBackgroundTypeDisabled
+                                           hideAfter:2.5f
+                                              offset:0.0f
+                                               delay:0.0f
+                                            response:^{[self titleTap];}
+                 ];
+
+            
+            
+            } else {
+                NSString *notificationText = [[NSString alloc] initWithFormat:@"Er zijn %d nieuwe bestellingen.", newOrders];
+                [AJNotificationView showNoticeInView:self.view
+                                                type:AJNotificationTypeDefault
+                                               title:notificationText
+                                     linedBackground:AJLinedBackgroundTypeDisabled
+                                           hideAfter:2.5f
+                                              offset:0.0f
+                                               delay:0.0f
+                                            response:^{
+                                                NSLog(@"User tap in the notification");
+                                            }
+                 ];
+            }
+             
+        } else {
+           
+            
+        }
+       
+        
+        lastOrderIncrementalId = newestOrderIncrementalId;
+    } else {
+        lastOrderIncrementalId = [[[[[orderHolder valueForKey:@"data-items"] objectAtIndex:0] objectAtIndex:1]valueForKey:@"increment_id"]intValue];
+    }
 }
 -(void)updateOrders
 {
