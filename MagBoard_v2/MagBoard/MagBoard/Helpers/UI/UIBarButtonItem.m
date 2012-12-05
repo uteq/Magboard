@@ -53,7 +53,7 @@
 
 //Buttons for subheader
 
-+ (UIButton *)styledSubHeaderButtonWithTarget:(id)target selector:(SEL)selector name:(NSString*)name;
++ (UIButton *)styledSubHeaderButtonWithTarget:(id)target selector:(SEL)selector name:(NSString*)name disabled:(BOOL)state;
 {
     UIImage *image = [[UIImage alloc] init];
     CGRect buttonSize = CGRectMake(10.0f, 10.0f, 92.0f, 34.0f);
@@ -84,6 +84,10 @@
     UIButton *button = [[UIButton alloc] initWithFrame:buttonSize];
     [button addTarget:target action:selector forControlEvents:UIControlEventTouchUpInside];
     [button setBackgroundImage:image forState:UIControlStateNormal];
+    
+    if(state == YES){
+        [button setAlpha:0.5f];
+    }
     
     return button;
 }

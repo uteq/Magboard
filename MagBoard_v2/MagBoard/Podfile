@@ -1,8 +1,8 @@
 platform :ios
 
-pod 'AFNetworking', '0.9.1'
-pod 'ObjectiveRecord'
+pod 'ObjectiveRecord', '1.0'
 pod 'TPKeyboardAvoiding'
 pod 'FontLabel'
 pod 'LRResty'
 pod 'BlockAlertsAnd-ActionSheets'
+pod 'AJNotificationView'

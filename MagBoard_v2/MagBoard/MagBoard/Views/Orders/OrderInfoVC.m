@@ -163,9 +163,9 @@
     [orderInfoScrollView addSubview:subHeader];
     
     //Make status buttons
-    UIButton *holdButton = [UIBarButtonItem styledSubHeaderButtonWithTarget:self selector:@selector(setOrderOnHold) name:@"hold"];
-    UIButton *cancelButton = [UIBarButtonItem styledSubHeaderButtonWithTarget:self selector:@selector(setOrderCancel) name:@"cancel"];
-    UIButton *invoiceButton = [UIBarButtonItem styledSubHeaderButtonWithTarget:self selector:@selector(setOrderInvoice) name:@"invoice"];
+    UIButton *holdButton = [UIBarButtonItem styledSubHeaderButtonWithTarget:self selector:@selector(setOrderOnHold) name:@"hold" disabled:NO];
+    UIButton *cancelButton = [UIBarButtonItem styledSubHeaderButtonWithTarget:self selector:@selector(setOrderCancel) name:@"cancel" disabled:YES];
+    UIButton *invoiceButton = [UIBarButtonItem styledSubHeaderButtonWithTarget:self selector:@selector(setOrderInvoice) name:@"invoice" disabled:NO];
     [subHeader addSubview:holdButton];
     [subHeader addSubview:cancelButton];
     [subHeader addSubview:invoiceButton];
@@ -207,7 +207,7 @@
     [orderStatisticsHolder addSubview:orderStatisticsBody];
     
     //Date
-    NSString *dateText = [[NSString alloc] initWithFormat:@"Date: %@", [[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"created_at"]];
+    NSString *dateText = [[NSString alloc] initWithFormat:@"Date:"];
     UILabel *date = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 5.0f, 301.0f, 25.0f)];
     date.backgroundColor = [UIColor clearColor];
     date.font = [UIFont systemFontOfSize:14.0f];
@@ -215,8 +215,17 @@
     date.text = dateText;
     [orderStatisticsBody addSubview:date];
     
+    NSString *dateContent = [[NSString alloc] initWithFormat:@"%@", [[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"created_at"]];
+    UILabel *dateHolder = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 5.0f, 281.0f, 25.0f)];
+    dateHolder.backgroundColor = [UIColor clearColor];
+    dateHolder.font = [UIFont systemFontOfSize:14.0f];
+    dateHolder.textAlignment = UITextAlignmentRight;
+    dateHolder.textColor = [UIColor colorWithRed:87.0f/255.0f green:83.0f/255.0f blue:89.0f/255.0f alpha:1.0f];
+    dateHolder.text = dateContent;
+    [orderStatisticsBody addSubview:dateHolder];
+    
     //Status
-    NSString *statusText = [[NSString alloc] initWithFormat:@"Status: %@", [[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"status"]];
+    NSString *statusText = [[NSString alloc] initWithFormat:@"Status:"];
     UILabel *status = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 25.0f, 301.0f, 25.0f)];
     status.backgroundColor = [UIColor clearColor];
     status.font = [UIFont systemFontOfSize:14.0f];
@@ -224,14 +233,32 @@
     status.text = statusText;
     [orderStatisticsBody addSubview:status];
     
+    NSString *statusContent = [[NSString alloc] initWithFormat:@"%@", [[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"status"]];
+    UILabel *statusHolder = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 25.0f, 281.0f, 25.0f)];
+    statusHolder.backgroundColor = [UIColor clearColor];
+    statusHolder.font = [UIFont systemFontOfSize:14.0f];
+    statusHolder.textAlignment = UITextAlignmentRight;
+    statusHolder.textColor = [UIColor colorWithRed:87.0f/255.0f green:83.0f/255.0f blue:89.0f/255.0f alpha:1.0f];
+    statusHolder.text = statusContent;
+    [orderStatisticsBody addSubview:statusHolder];
+    
     //Store
-    NSString *storeText = [[NSString alloc] initWithFormat:@"Orderwaarde: €%@", [[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"grand_total"]];
+    NSString *storeText = [[NSString alloc] initWithFormat:@"Orderwaarde:"];
     UILabel *store = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 45.0f, 301.0f, 25.0f)];
     store.backgroundColor = [UIColor clearColor];
     store.font = [UIFont systemFontOfSize:14.0f];
     store.textColor = [UIColor colorWithRed:87.0f/255.0f green:83.0f/255.0f blue:89.0f/255.0f alpha:1.0f];
     store.text = storeText;
     [orderStatisticsBody addSubview:store];
+    
+    NSString *totalContent = [[NSString alloc] initWithFormat:@"€%@", [[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"grand_total"]];
+    UILabel *totalHolder = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 45.0f, 281.0f, 25.0f)];
+    totalHolder.backgroundColor = [UIColor clearColor];
+    totalHolder.font = [UIFont systemFontOfSize:14.0f];
+    totalHolder.textAlignment = UITextAlignmentRight;
+    totalHolder.textColor = [UIColor colorWithRed:87.0f/255.0f green:83.0f/255.0f blue:89.0f/255.0f alpha:1.0f];
+    totalHolder.text = totalContent;
+    [orderStatisticsBody addSubview:totalHolder];
 }
 
 -(void)orderShippingHolder
@@ -379,7 +406,7 @@
         [qtyText appendString:@" stuk(s)"];
         NSString *priceText = [[NSString alloc] initWithFormat:@"€%@", [[[[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"items" ] objectAtIndex:i] valueForKey:@"price"]];
         
-        UILabel *productName = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 296.0f, 20.0f)];
+        UILabel *productName = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 230.0f, 20.0f)];
         productName.font = [UIFont systemFontOfSize:14.0f];
         productName.textColor = [UIColor colorWithRed:87.0f/255.0f green:83.0f/255.0f blue:89.0f/255.0f alpha:1.0f];
         productName.backgroundColor = [UIColor clearColor];

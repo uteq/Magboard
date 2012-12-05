@@ -37,9 +37,10 @@ NSArray *people = [Person where:@{ @"age" : @18,
                   @"state" : @"NY"
                   }];
 ```
-
-### Custom ManagedObjectContext
-
+<br><br>
+#### Custom ManagedObjectContext
+You can also use your own ManagedObjectContext while fetching.
+This is great if you have to do lots of changes, but don't want to notify anyone observing the default context until all the changes are made.
 ``` objc
 NSManagedObjectContext *newContext = [NSManagedObjectContext new];
 
@@ -56,10 +57,10 @@ static NSString *CUSTOM_MODEL_NAME = @"Database";
 static NSString *CUSTOM_DATABASE_NAME = nil;
 ```
 
-#### NSArray additions
+#### NSArray helpers
 
 ``` objc
-NSArray *array; // assume it's full of objects
+NSArray array; // assume it's full of objects
 
 [array each:^(id object) {
     
@@ -71,8 +72,8 @@ NSArray *array; // assume it's full of objects
     NSLog(@"Object: %@ idx: %i", object, index); 
 }];
 
-id object = array.first;
-id object = array.last;
+array.first
+array.last
 ```
 
 
@@ -82,12 +83,12 @@ id object = array.last;
 // find
 [[Person all] each:^(Person *person) {
     
-    person.member = @NO;
+    person.isMember = @NO;
 }];
 
 for(Person *person in [Person all]) {
   
-    person.member = @YES;
+    person.isMember = @YES;
 }
 
 // create / save
@@ -97,9 +98,9 @@ john.surname = @"Wayne";
 john.save;
 
 // find / delete
-[[Person where: @{ "member" : @NO }] each:^(Person *person) {
+[[Person where: @{ isMember : @NO }] each:^(Person *person) {
   
-  [person delete];
+  person.delete;
 }];
 ```
 

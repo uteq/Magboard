@@ -162,7 +162,7 @@
         [shopHolder addSubview:loginButton];
         
         //Add screenshot holder
-        UIImage * screenshot = [UIImage imageNamed:@"screenshot_webshop"];
+        UIImage * screenshot = [UIImage imageNamed:@"screenshot_placeholder"];
         UIImageView * screenshotHolder = [[UIImageView alloc] initWithFrame:CGRectMake(23.0f, 10.0f, 234.0f, 154.0f)];
         screenshotHolder.image = screenshot;
         [screenshotHolder.layer setBorderColor: [[UIColor whiteColor] CGColor]];

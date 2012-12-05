@@ -1,29 +1,29 @@
 
 PODS:
-- AFNetworking (0.9.1)
+- AJNotificationView (0.0.1)
 - BlockAlertsAnd-ActionSheets (1.0.0)
 - FontLabel (0.0.1)
 - LRResty (0.11.0):
   - NSData+Base64 (~> 1.0)
 - NSData+Base64 (1.0.0)
-- ObjectiveRecord (1.01)
+- ObjectiveRecord (1.0)
 - TPKeyboardAvoiding (0.0.1)
 
 DEPENDENCIES:
-- AFNetworking (= 0.9.1)
+- AJNotificationView
 - BlockAlertsAnd-ActionSheets
 - FontLabel
 - LRResty
-- ObjectiveRecord
+- ObjectiveRecord (= 1.0)
 - TPKeyboardAvoiding
 
 SPEC CHECKSUMS:
-  AFNetworking: 081ec3c1f4768c87ae79d69a96fcc9479e232e81
+  AJNotificationView: 5fa81cca61259f6501143b31ce2bbe211150ec7e
   BlockAlertsAnd-ActionSheets: cb6379caff86c068616d112b8bfb862b0ec932a6
   FontLabel: 5f7922f69cad408bc9abc59b5044b05bf42454ed
   LRResty: 8a51275030ac5bfc6c44775d64a16dc0f9267b8e
   NSData+Base64: 8b910cb8a64f45daec6fb15936c36a9a911c57ca
-  ObjectiveRecord: c4a9b7bf823d5664891f5f405a89472045756785
+  ObjectiveRecord: d96681e61d28251e80772cc37ceea93dcb168363
   TPKeyboardAvoiding: 129e3c55ac9165d0692e66f02fd1f611d917ec1a
 
 COCOAPODS: 0.15.1

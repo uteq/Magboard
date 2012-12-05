@@ -12,6 +12,6 @@
 
 + (UIBarButtonItem *)styledBarButtonItemWithTarget:(id)target selector:(SEL)selector title:(NSString *)buttonTitle;
 + (UIBarButtonItem *)styledSettingsButtonItemWithTarget:(id)target selector:(SEL)selector;
-+ (UIButton *)styledSubHeaderButtonWithTarget:(id)target selector:(SEL)selector name:(NSString*)name;
++ (UIButton *)styledSubHeaderButtonWithTarget:(id)target selector:(SEL)selector name:(NSString*)name disabled:(BOOL)state;
 
 @end

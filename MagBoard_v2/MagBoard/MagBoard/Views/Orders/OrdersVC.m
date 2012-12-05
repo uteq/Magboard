@@ -98,8 +98,8 @@
     [tabBar addSubview:deviderLight];
     
     //Make buttons for tabbar
-    UIButton *dashboardButton = [UIBarButtonItem styledSubHeaderButtonWithTarget:self selector:@selector(goToDashboard) name:@"dashboard"];
-    UIButton *ordersButton = [UIBarButtonItem styledSubHeaderButtonWithTarget:self selector:nil name:@"ordersSelected"];
+    UIButton *dashboardButton = [UIBarButtonItem styledSubHeaderButtonWithTarget:self selector:@selector(goToDashboard) name:@"dashboard" disabled:NO];
+    UIButton *ordersButton = [UIBarButtonItem styledSubHeaderButtonWithTarget:self selector:nil name:@"ordersSelected" disabled:NO];
     [tabBar addSubview:dashboardButton];
     [tabBar addSubview:ordersButton];
 }
@@ -191,7 +191,7 @@
     } else {
         [params setObject:@"0" forKey:@"update"];
     }
-    
+
     [[LRResty client] post:@"http://www.leoflapper.nl/api2/index.php" payload:params delegate:self];
 }
 
@@ -314,10 +314,24 @@
     
         sorting = YES;
         [ordersTable reloadData];
+        
+        NSString *notificationText = [[NSString alloc] initWithFormat:@"Gefilterd op %@", status];
+        [AJNotificationView showNoticeInView:self.view
+                                        type:AJNotificationTypeDefault
+                                       title:notificationText
+                             linedBackground:AJLinedBackgroundTypeDisabled
+                                   hideAfter:1.0f];
     } else {
         
         sorting = NO;
         [ordersTable reloadData];
+        
+        NSString *notificationText = [[NSString alloc] initWithFormat:@"Gefilterd op %@", status];
+        [AJNotificationView showNoticeInView:self.view
+                                        type:AJNotificationTypeDefault
+                                       title:notificationText
+                             linedBackground:AJLinedBackgroundTypeDisabled
+                                   hideAfter:1.0f];
         
     }
 }
@@ -373,6 +387,7 @@
     ordersTable.frame = CGRectMake(0, 0, 320, [constants getScreenHeight] - 280);
     [UIView commitAnimations];
     
+    [searchOverlay removeFromSuperview];
     [self makeSearchOverlay];
 }
 
@@ -390,6 +405,7 @@
     //Update the header button
     self.navigationItem.rightBarButtonItem = nil;
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTarget:self selector:@selector(showSortFilter) title:@"Filter"];
+    [searchOverlay removeFromSuperview];
 }
 
 
@@ -402,6 +418,7 @@
     searchOverlay = [[UIView alloc] initWithFrame:CGRectMake(0, 44, 320, [constants getScreenHeight] - 320)];
     searchOverlay.backgroundColor = [UIColor colorWithRed:0/255 green:0/255 blue:0/255 alpha:0.8f];
     [searchOverlay addGestureRecognizer:singleFingerTap];
+    [searchOverlay removeFromSuperview];
     [self.view addSubview:searchOverlay];
 }
 
@@ -460,6 +477,7 @@
     //Add searchbar
     searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0,70,320,44)];
     searchBar.delegate = self;
+    searchBar.placeholder = @"Zoeken in alle orders";
     searchBar.tintColor = [UIColor colorWithRed:48/255 green:47/255 blue:54/255 alpha:1.0];
     [ordersTable setTableHeaderView:searchBar];
 }
@@ -686,9 +704,13 @@
         //NSLog(@"All fields: %@", [orderHolder valueForKey:@"data-items"]);
     } else {
     
-        UILabel *orderName = [[UILabel alloc] initWithFrame:CGRectMake(20, 7, 200, 20)];
+        UIFont *font = [UIFont fontWithName:@"Lobster 1.3" size:18.0f];
+        UILabel *orderName = [[UILabel alloc] initWithFrame:CGRectMake(20, 30, 280, 20)];
         orderName.font = [UIFont boldSystemFontOfSize:12.0f];
         orderName.backgroundColor = [UIColor clearColor];
+        orderName.font = font;
+        orderName.textAlignment = UITextAlignmentCenter;
+        orderName.textColor = [UIColor whiteColor];
         orderName.text = @"Er zijn geen orders voor deze status";
         [cell addSubview:orderName];
     

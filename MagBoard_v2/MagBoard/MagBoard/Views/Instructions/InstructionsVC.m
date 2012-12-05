@@ -42,7 +42,7 @@
 //Draw dots for scroller
 -(void)shopsControlDots
 {
-    pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(20.0f, [constants getScreenHeight] - 110, 280.0f, 40.0f)];
+    pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(20.0f, [constants getScreenHeight] - 103, 280.0f, 40.0f)];
     [pageControl setNumberOfPages:6];
     [pageControl setCurrentPage:0];
     [pageControl setBackgroundColor:[UIColor clearColor]];
