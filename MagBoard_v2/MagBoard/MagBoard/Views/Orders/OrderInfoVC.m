@@ -7,7 +7,6 @@
 //
 
 #import "OrderInfoVC.h"
-#import "orderStatusPopoverVC.h"
 
 @interface OrderInfoVC ()
 
@@ -590,12 +589,29 @@
     totalDueContent.text = totalDueValue;
     [orderTotalsBody addSubview:totalDueContent];
     
+    //Make send order button
+    UIButton *sendOrderButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    sendOrderButton.frame = CGRectMake(9.0, productsHolderHeight + 605, 303.0, 43.0);
+    [sendOrderButton setTitle:@"Order verzenden" forState:UIControlStateNormal];
+    [sendOrderButton.titleLabel setFont:[UIFont boldSystemFontOfSize:14]];
+    sendOrderButton.backgroundColor = [UIColor clearColor];
+    [sendOrderButton setTitleColor:[UIColor colorWithRed:42.0/255.0 green:43.0/255.0 blue:53.0/255.0 alpha:1.0] forState:UIControlStateNormal ];
+    sendOrderButton.titleLabel.shadowColor = [UIColor whiteColor];
+    sendOrderButton.titleLabel.shadowOffset = CGSizeMake(0, 0);
+    
+    UIImage *addShopButtonImageNormal = [UIImage imageNamed:@"button_full_width_grey.png"];
+    [sendOrderButton setBackgroundImage:addShopButtonImageNormal forState:UIControlStateNormal];
+    
+    [sendOrderButton addTarget:self action:@selector(sendOrder) forControlEvents:UIControlEventTouchUpInside];
+    
+    [orderInfoScrollView addSubview:sendOrderButton];
+    
 }
 
 -(void)orderInfoScrollView
 {
     NSLog(@"Setting height of scrollview");
-    [orderInfoScrollView setContentSize:CGSizeMake(320, scrollViewHeight + 120)];
+    [orderInfoScrollView setContentSize:CGSizeMake(320, scrollViewHeight + 180)];
     
 }
 
@@ -607,6 +623,11 @@
     NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];
     [viewControllers removeLastObject];
     [[self navigationController] setViewControllers:viewControllers animated:YES];
+}
+
+-(void)sendOrder
+{
+    NSLog(@"Order verzonden knop ingedrukt");
 }
 
 //Handle action for hold button
@@ -761,19 +782,18 @@
                 if(firstRun == YES){
                     [self updateOrderInfo];
                     firstRun = NO;
+                } else {
+                    [orderInfoScrollView removeFromSuperview];
                 }
             }else if([[orderInfoHolder valueForKey:@"message"] isEqualToString: @"1003"]){
                 NSLog(@"Order has been put on hold");
-                [self reloadScrollview];
                 [self updateOrderInfo];
                 
             } else if([[orderInfoHolder valueForKey:@"message"] isEqualToString: @"1004"]){
                 NSLog(@"Order has been unholded");
-                [self reloadScrollview];
                 [self updateOrderInfo];
             } else if([[orderInfoHolder valueForKey:@"message"] isEqualToString: @"1005"]){
                 NSLog(@"Order has been canceled");
-                [self reloadScrollview];
                 [self updateOrderInfo];
             }else {
                  NSLog(@"Message: %@", [orderInfoHolder valueForKey:@"data-items"]);
@@ -793,7 +813,9 @@
 
 -(void)updateOrderInfo
 {
+    
     [self loginRequest:[shopInfo shopUrl] username:[shopInfo username] password:[shopInfo password]  request:@"salesOrderInfo" requestParams:[orderInfo orderId] update:YES];
+    
 }
 
 @end

@@ -58,9 +58,21 @@
 
 -(void)constructHeader
 {
-    UILabel* navBarTitle = [CustomNavBar setNavBarTitle:[shopInfo shopName]];
-    self.navigationItem.titleView = navBarTitle;
+    //UILabel* navBarTitle = [CustomNavBar setNavBarTitle:[shopInfo shopName]];
+    UIButton *titleLabel = [UIButton buttonWithType:UIButtonTypeCustom];
+    [titleLabel setTitle:[shopInfo shopName] forState:UIControlStateNormal];
+    titleLabel.frame = CGRectMake(0, 0, 200, 44);
+    titleLabel.font = [UIFont boldSystemFontOfSize:16];
+    titleLabel.titleLabel.shadowColor = [UIColor blackColor];
+    titleLabel.titleLabel.shadowOffset = CGSizeMake(1, 1);
+    [titleLabel addTarget:self action:@selector(titleTap) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.titleView = titleLabel;
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTarget:self selector:@selector(backButtonTouched) title:@"Shops"];
+}
+
+-(void)titleTap
+{
+    [ordersTable scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
 }
 
 -(void)constructTabBar
