@@ -13,6 +13,7 @@
     UIScrollView *orderInfoScrollView;
     int productsHolderHeight;
     int scrollViewHeight;
+    bool firstRun;
 }
 
 @property (nonatomic, retain) NSMutableDictionary* orderInfoHolder;
@@ -25,8 +26,8 @@
 @property (nonatomic, strong) UIView *loadingHolder;
 
 //For making request for order details
--(void)loginRequest:(NSString *)shopUrl username:(NSString *)username password:(NSString *)password request:(NSString *)requestFunction requestParams:(NSString *)requestParams;
-
+-(void)loginRequest:(NSString *)shopUrl username:(NSString *)username password:(NSString *)password request:(NSString *)requestFunction requestParams:(NSString *)requestParams update:(bool)update;
+-(void)updateOrderInfo;
 //For changing status of order
 -(void)setOrderOnHold;
 -(void)setOrderCancel;

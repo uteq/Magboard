@@ -12,6 +12,7 @@
 {
     int sections;
     NSMutableArray *copyListOfOrders;
+    bool firstRun;
 }
 
 //For order table view
@@ -31,8 +32,8 @@
 @property BOOL sorting;
 
 -(void)sortTableView:(NSString*)status;
-
--(void)loginRequest:(NSString *)shopUrl username:(NSString *)username password:(NSString *)password request:(NSString *)requestFunction requestParams:(NSString *)requestParams;
+-(void)updateOrders;
+-(void)loginRequest:(NSString *)shopUrl username:(NSString *)username password:(NSString *)password request:(NSString *)requestFunction requestParams:(NSString *)requestParams update:(bool)update;
 -(void)makeTabel;
 -(void)constructHeader;
 -(void)loadingRequest;

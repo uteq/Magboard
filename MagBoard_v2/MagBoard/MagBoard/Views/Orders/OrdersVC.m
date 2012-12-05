@@ -26,11 +26,12 @@
     [self constructHeader];
     [self constructTabBar];
     
+    firstRun = YES;
     searching = NO;
     sorting = NO;
     letUserSelectRow = YES;
     
-    [self loginRequest:[shopInfo shopUrl] username:[shopInfo username] password:[shopInfo password]  request:@"salesOrderList" requestParams:@"dateSorted"];
+    [self loginRequest:[shopInfo shopUrl] username:[shopInfo username] password:[shopInfo password]  request:@"salesOrderList" requestParams:nil update:NO];
     [self loadingRequest];
 }
 
@@ -38,7 +39,7 @@
 {
     [super viewDidAppear:YES];
     if(ordersTable){
-        [self loginRequest:[shopInfo shopUrl] username:[shopInfo username] password:[shopInfo password]  request:@"salesOrderList" requestParams:@"dateSorted"];
+        [self loginRequest:[shopInfo shopUrl] username:[shopInfo username] password:[shopInfo password]  request:@"salesOrderList" requestParams:nil update:YES];
     }
 }
 
@@ -175,16 +176,23 @@
 }
 
 //Make request for logging in en fetching orders
--(void)loginRequest:(NSString *)shopUrl username:(NSString *)username password:(NSString *)password request:(NSString *)requestFunction requestParams:(NSString *)requestParams
+-(void)loginRequest:(NSString *)shopUrl username:(NSString *)username password:(NSString *)password request:(NSString *)requestFunction requestParams:(NSString *)requestParams update:(bool)update
 {
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     [params setObject:shopUrl forKey:@"url"];
     [params setObject:username forKey:@"username"];
     [params setObject:password forKey:@"password"];
     [params setObject:requestFunction forKey:@"requestFunction"];
-    [params setObject:requestParams forKey:@"requestParams"];
+    if(requestParams){
+        [params setObject:requestParams forKey:@"requestParams"];    
+    }
+    if(update == YES){
+        [params setObject:@"1" forKey:@"update"];
+    } else {
+        [params setObject:@"0" forKey:@"update"];
+    }
     
-    [[LRResty client] post:@"http://www.magboard.nl/api/index.php" payload:params delegate:self];
+    [[LRResty client] post:@"http://www.leoflapper.nl/api2/index.php" payload:params delegate:self];
 }
 
 //Catch response for request
@@ -213,7 +221,7 @@
             [alertSOAPError show];
         }
         //if all is ok
-        else {
+        else if([orderHolder valueForKey:@"data-items"]){
             if(ordersTable){
                 [ordersTable reloadData];
             } else {
@@ -221,6 +229,10 @@
                 [loadingHolder removeFromSuperview];
                 [self makeTable];
                 self.navigationItem.rightBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTarget:self selector:@selector(showSortFilter) title:@"Filter"];
+            }
+            if(firstRun == YES){
+                [self updateOrders];
+                firstRun = NO;
             }
         }
     }
@@ -234,7 +246,10 @@
     NSLog(@"Code: %@", [orderHolder valueForKey:@"message"]);
     
 }
-
+-(void)updateOrders
+{
+    [self loginRequest:[shopInfo shopUrl] username:[shopInfo username] password:[shopInfo password]  request:@"salesOrderList" requestParams:nil update:YES];
+}
 #pragma mark Filter
 
 -(void)showSortFilter

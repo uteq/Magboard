@@ -25,11 +25,14 @@
     orderInfo = [OrderSingleton orderSingleton];
     [self constructHeader];
     //NSLog(@"%@", [orderInfo orderId]);
+    firstRun = YES;
     [self loginRequest:[shopInfo shopUrl]
               username:[shopInfo username]
               password:[shopInfo password]
                request:@"salesOrderInfo"
-                requestParams:[orderInfo orderId]];
+                requestParams:[orderInfo orderId]
+                update:NO
+     ];
     [self loadingRequest:@"Order ophalen..."];
 }
 
@@ -46,7 +49,9 @@
               username:[shopInfo username]
               password:[shopInfo password]
                request:@"salesOrderInfo"
-         requestParams:[orderInfo orderId]];
+         requestParams:[orderInfo orderId]
+            update:NO
+     ];
 }
 
 #pragma mark Construct view
@@ -617,7 +622,7 @@
         [alertInvoice show];
     }else if(invoiced == false){
         NSLog(@"Order not invoiced, able to cancel");
-        [self loginRequest:[shopInfo shopUrl] username:[shopInfo username] password:[shopInfo password] request:@"salesOrderCancel" requestParams:[orderInfo orderId]];
+        [self loginRequest:[shopInfo shopUrl] username:[shopInfo username] password:[shopInfo password] request:@"salesOrderCancel" requestParams:[orderInfo orderId] update:NO];
         
     } else if(invoiced == true) {
         NSLog(@"Order already invoiced, unable to cancel");
@@ -671,7 +676,7 @@
     }
     
     NSLog(@"Created product string: %@", requestParams);
-    [self loginRequest:[shopInfo shopUrl] username:[shopInfo username] password:[shopInfo password] request:@"salesOrderInvoiceCreate" requestParams:requestParams];
+    [self loginRequest:[shopInfo shopUrl] username:[shopInfo username] password:[shopInfo password] request:@"salesOrderInvoiceCreate" requestParams:requestParams update:NO];
     scrollViewHeight = 0;
 }
 
@@ -683,7 +688,7 @@
     [requestParams appendString:[orderInfo orderId]];
     
     NSLog(@"Created product string: %@", requestParams);
-    [self loginRequest:[shopInfo shopUrl] username:[shopInfo username] password:[shopInfo password] request:type requestParams:requestParams];
+    [self loginRequest:[shopInfo shopUrl] username:[shopInfo username] password:[shopInfo password] request:type requestParams:requestParams update:NO];
     
     //Scrollview reloaden
     scrollViewHeight = 0;
@@ -692,7 +697,7 @@
 
 #pragma mark Requests
 
--(void)loginRequest:(NSString *)shopUrl username:(NSString *)username password:(NSString *)password request:(NSString *)requestFunction requestParams:(NSString *)requestParams
+-(void)loginRequest:(NSString *)shopUrl username:(NSString *)username password:(NSString *)password request:(NSString *)requestFunction requestParams:(NSString *)requestParams update:(bool)update
 {
     NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
     [params setObject:shopUrl forKey:@"url"];
@@ -700,9 +705,14 @@
     [params setObject:password forKey:@"password"];
     [params setObject:requestFunction forKey:@"requestFunction"];
     [params setObject:requestParams forKey:@"requestParams"];
+    if(update == YES){
+        [params setObject:@"1" forKey:@"update"];
+    } else {
+        [params setObject:@"0" forKey:@"update"];
+    }
     NSLog(@"Shop %@ with username %@", shopUrl, username);
     NSLog(@"Executing %@ with params %@", requestFunction, requestParams);
-    [[LRResty client] post:@"http://www.magboard.nl/api/index.php" payload:params delegate:self];
+    [[LRResty client] post:@"http://www.leoflapper.nl/api2/index.php" payload:params delegate:self];
 }
 
 - (void)restClient:(LRRestyClient *)client receivedResponse:(LRRestyResponse *)response;
@@ -721,16 +731,23 @@
                 orderInfo.orderStatus = [[orderInfoHolder objectForKey:@"data-items"] objectForKey:@"status"];
                 [self makeBlocks];
                 [loadingHolder removeFromSuperview];
+                if(firstRun == YES){
+                    [self updateOrderInfo];
+                    firstRun = NO;
+                }
             }else if([[orderInfoHolder valueForKey:@"message"] isEqualToString: @"1003"]){
                 NSLog(@"Order has been put on hold");
                 [self reloadScrollview];
+                [self updateOrderInfo];
                 
             } else if([[orderInfoHolder valueForKey:@"message"] isEqualToString: @"1004"]){
                 NSLog(@"Order has been unholded");
                 [self reloadScrollview];
+                [self updateOrderInfo];
             } else if([[orderInfoHolder valueForKey:@"message"] isEqualToString: @"1005"]){
                 NSLog(@"Order has been canceled");
                 [self reloadScrollview];
+                [self updateOrderInfo];
             }else {
                  NSLog(@"Message: %@", [orderInfoHolder valueForKey:@"data-items"]);
                 [loadingIcon stopAnimating];
@@ -747,6 +764,9 @@
     
 }
 
-
+-(void)updateOrderInfo
+{
+    [self loginRequest:[shopInfo shopUrl] username:[shopInfo username] password:[shopInfo password]  request:@"salesOrderInfo" requestParams:[orderInfo orderId] update:YES];
+}
 
 @end
