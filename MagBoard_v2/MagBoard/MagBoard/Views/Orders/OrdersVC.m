@@ -310,7 +310,7 @@
         
         lastOrderIncrementalId = newestOrderIncrementalId;
     } else {
-        lastOrderIncrementalId = [[[[[orderHolder valueForKey:@"data-items"] objectAtIndex:0] objectAtIndex:1]valueForKey:@"increment_id"]intValue];
+        lastOrderIncrementalId = [[[[[orderHolder valueForKey:@"data-items"] objectAtIndex:0] objectAtIndex:1] valueForKey:@"increment_id"]intValue];
     }
 }
 -(void)updateOrders
