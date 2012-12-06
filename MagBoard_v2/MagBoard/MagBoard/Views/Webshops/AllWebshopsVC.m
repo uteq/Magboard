@@ -328,7 +328,7 @@
         [alert setCancelButtonWithTitle:@"Annuleren" block:^{
         }];
         
-        [alert addButtonWithTitle:@"Inloggen" block:^{
+        [alert setCancelButtonWithTitle:@"Inloggen" block:^{
             // Do something nasty when this button is pressed
             NSLog(@"Login clicked : %@", passwordField.text);
             sharedShop.password = passwordField.text;
