@@ -151,7 +151,7 @@
     
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0];
-    ordersTable.frame = CGRectMake(0, 0, 320, 365);
+    ordersTable.frame = CGRectMake(0, 44, 320, 321);
     [UIView commitAnimations];
     
     [searchOverlay removeFromSuperview];
@@ -451,7 +451,7 @@
     
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0];
-    ordersTable.frame = CGRectMake(0, 0, 320, [constants getScreenHeight] - 280);
+    ordersTable.frame = CGRectMake(0, 44, 320, [constants getScreenHeight] - 324);
     [UIView commitAnimations];
     
     [searchOverlay removeFromSuperview];
@@ -466,7 +466,7 @@
     //Update height of tableview
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0];
-    ordersTable.frame = CGRectMake(0, 0, 320, 365);
+    ordersTable.frame = CGRectMake(0, 44, 320, 326);
     [UIView commitAnimations];
     
     //Update the header button
@@ -534,7 +534,7 @@
 -(void)makeTable
 {
     //Add view to tableview
-    ordersTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, [constants getScreenHeight] - 110)];
+    ordersTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 44, 320, [constants getScreenHeight] - 154)];
     ordersTable.dataSource = self;
     ordersTable.delegate = self;
     ordersTable.backgroundColor = [UIColor clearColor];
@@ -542,11 +542,11 @@
     [self.view addSubview:ordersTable];
     
     //Add searchbar
-    searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0,70,320,44)];
+    searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0,0,320,44)];
     searchBar.delegate = self;
     searchBar.placeholder = @"Search orders by name or ordernumber";
     searchBar.tintColor = [UIColor colorWithRed:48/255 green:47/255 blue:54/255 alpha:1.0];
-    [ordersTable setTableHeaderView:searchBar];
+    [self.view addSubview:searchBar];
 }
 
 // Checking the total of sections
