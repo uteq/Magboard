@@ -16,7 +16,7 @@
 
 @implementation OrdersVC
 
-@synthesize shopInfo, orderHolder,loadingHolder, loadingIcon, ordersTable, searchBar, searching, letUserSelectRow, searchOverlay, sorting;
+@synthesize shopInfo, orderHolder,loadingHolder, loadingIcon, ordersTable, searchBar, searching, letUserSelectRow, searchOverlay, sorting, loadingPanel;
 
 - (void)viewDidLoad
 {
@@ -40,7 +40,7 @@
 {
     [super viewDidAppear:YES];
     if(ordersTable){
-        [self loginRequest:[shopInfo shopUrl] username:[shopInfo username] password:[shopInfo password]  request:@"salesOrderList" requestParams:nil update:YES];
+        [self updateOrders];
     }
 }
 
@@ -115,6 +115,22 @@
     UIButton *ordersButton = [UIBarButtonItem styledSubHeaderButtonWithTarget:self selector:nil name:@"ordersSelected" disabled:NO];
     [tabBar addSubview:dashboardButton];
     [tabBar addSubview:ordersButton];
+}
+
+-(void)constructLoadingNotification
+{
+    
+    NSString *notificationText = [[NSString alloc] initWithFormat:@"Searching for new orders"];
+    loadingPanel = [AJNotificationView showNoticeInView:self.view
+                                    type:AJNotificationTypeDefault
+                                   title:notificationText
+                         linedBackground:AJLinedBackgroundTypeAnimated
+                               hideAfter:0.0f
+                                  offset:0.0f
+                                   delay:0.0f
+                                                            response:^{}
+     ];
+    
 }
 
 #pragma mark Button actions
@@ -274,6 +290,7 @@
         int newOrders = newestOrderIncrementalId - lastOrderIncrementalId;
         if(newOrders != 0){
             if(newOrders == 1){
+                [loadingPanel hide];
                 NSString *notificationText = [[NSString alloc] initWithFormat:@"There's 1 new order"];
                 [AJNotificationView showNoticeInView:self.view
                                                 type:AJNotificationTypeDefault
@@ -288,6 +305,7 @@
             
             
             } else {
+                [loadingPanel hide];
                 NSString *notificationText = [[NSString alloc] initWithFormat:@"There are %d new orders", newOrders];
                 [AJNotificationView showNoticeInView:self.view
                                                 type:AJNotificationTypeDefault
@@ -303,7 +321,20 @@
             }
              
         } else {
-           
+    
+           [loadingPanel hide];
+            NSString *notificationText = [[NSString alloc] initWithFormat:@"No new orders found", newOrders];
+            [AJNotificationView showNoticeInView:self.view
+                                            type:AJNotificationTypeDefault
+                                           title:notificationText
+                                 linedBackground:AJLinedBackgroundTypeDisabled
+                                       hideAfter:2.5f
+                                          offset:0.0f
+                                           delay:0.0f
+                                        response:^{
+                                            
+                                        }
+             ];
             
         }
        
@@ -313,10 +344,13 @@
         lastOrderIncrementalId = [[[[[orderHolder valueForKey:@"data-items"] objectAtIndex:0] objectAtIndex:1] valueForKey:@"increment_id"]intValue];
     }
 }
+
 -(void)updateOrders
 {
+    [self constructLoadingNotification];
     [self loginRequest:[shopInfo shopUrl] username:[shopInfo username] password:[shopInfo password]  request:@"salesOrderList" requestParams:nil update:YES];
 }
+
 #pragma mark Filter
 
 -(void)showSortFilter
