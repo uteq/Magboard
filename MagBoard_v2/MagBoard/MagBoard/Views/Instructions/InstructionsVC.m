@@ -34,9 +34,9 @@
 
 -(void)constructHeader
 {
-    UILabel* navBarTitle = [CustomNavBar setNavBarTitle:@"Instructies"];
+    UILabel* navBarTitle = [CustomNavBar setNavBarTitle:@"Instructions"];
     self.navigationItem.titleView = navBarTitle;
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTarget:self selector:@selector(backButtonTouched) title:@"Terug"];
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTarget:self selector:@selector(backButtonTouched) title:@"Back"];
 }
 
 //Draw dots for scroller
@@ -97,7 +97,7 @@
             
             UIButton *addShopButton = [UIButton buttonWithType:UIButtonTypeCustom];
             addShopButton.frame = CGRectMake((xPos * xPosDoubler) + 10, 336.0, 300.0, 43.0);
-            [addShopButton setTitle:@"Webshop toevoegen" forState:UIControlStateNormal];
+            [addShopButton setTitle:@"Add webshop" forState:UIControlStateNormal];
             [addShopButton.titleLabel setFont:[UIFont boldSystemFontOfSize:14]];
             addShopButton.backgroundColor = [UIColor clearColor];
             [addShopButton setTitleColor:[UIColor colorWithRed:42.0/255.0 green:43.0/255.0 blue:53.0/255.0 alpha:1.0] forState:UIControlStateNormal ];

@@ -177,7 +177,7 @@
     loadingText.textAlignment = UITextAlignmentCenter;
     loadingText.shadowColor = [UIColor blackColor];
     loadingText.shadowOffset = CGSizeMake(0, 1);
-    loadingText.text = @"Orders laden...";
+    loadingText.text = @"Loading orders...";
     
     loadingIcon = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
 	loadingIcon.center = loadingHolder.center;
@@ -220,15 +220,15 @@
         //If incorrect login
         if([[orderHolder valueForKey:@"message"] isEqualToString:@"607"])
         {
-            [self makeAlert:@"Incorrect login" message:@"De combinatie tussen gebruikersnaam en wachtwoord komt niet overeen. Probeer het nogmaals." button:@"607"];
+            [self makeAlert:@"Incorrect login" message:@"Username and password don't match. Please check your login credentials and try again." button:@"607"];
         }
         //if incorrect url
         else if([[orderHolder valueForKey:@"message"] isEqualToString:@"608"] || [[orderHolder valueForKey:@"message"] isEqualToString:@"1000"]) {
-            [self makeAlert:@"Onjuiste URL" message:@"Er bestaat geen Magento webshop op dit domein. Controleer de website url op eventuele fouten en probeer het opnieuw." button:@"608"];
+            [self makeAlert:@"Incorrect URL" message:@"No webshop found on this URL. Please check the URL for errors and try again." button:@"608"];
         }
         //if the soap can't be loaded
         else if([[orderHolder valueForKey:@"message"] isEqualToString:@"621"]){
-            BlockAlertView *alertSOAPError = [BlockAlertView alertWithTitle:@"Magento Server Probleem" message:@"Er ging iets mis bij het laden van de bestellingen van je website. SOAP moet geïnstalleerd en geactiveerd zijn op je Magento Server om de app te kunnen gebruiken."];
+            BlockAlertView *alertSOAPError = [BlockAlertView alertWithTitle:@"Magento Server Problem" message:@"Something went wrong while loading the orders. Please ensure SOAP is installed on your server."];
             [alertSOAPError addButtonWithTitle:@"Ok" block:^{
                 [self backButtonTouched];
             }];
@@ -254,7 +254,7 @@
     }
     else
     {
-        NSLog(@"Er ging iets mis %d", [response status]);
+        NSLog(@"Something went wrong: %d", [response status]);
 
         if(firstRun == YES){
            [self backButtonTouched]; 
@@ -274,7 +274,7 @@
         int newOrders = newestOrderIncrementalId - lastOrderIncrementalId;
         if(newOrders != 0){
             if(newOrders == 1){
-                NSString *notificationText = [[NSString alloc] initWithFormat:@"Er is 1 nieuwe bestelling."];
+                NSString *notificationText = [[NSString alloc] initWithFormat:@"There's 1 new order"];
                 [AJNotificationView showNoticeInView:self.view
                                                 type:AJNotificationTypeDefault
                                                title:notificationText
@@ -288,7 +288,7 @@
             
             
             } else {
-                NSString *notificationText = [[NSString alloc] initWithFormat:@"Er zijn %d nieuwe bestellingen.", newOrders];
+                NSString *notificationText = [[NSString alloc] initWithFormat:@"There are %d new orders", newOrders];
                 [AJNotificationView showNoticeInView:self.view
                                                 type:AJNotificationTypeDefault
                                                title:notificationText
@@ -297,7 +297,7 @@
                                               offset:0.0f
                                                delay:0.0f
                                             response:^{
-                                                NSLog(@"User tap in the notification");
+                                                NSLog(@"User tapped the notification");
                                             }
                  ];
             }
@@ -323,10 +323,10 @@
 {
 
     BlockAlertView *alert = [BlockAlertView
-                             alertWithTitle:@"Waar wilt u op filteren?"
+                             alertWithTitle:@"Filter your orders by status"
                              message:nil];
     
-    [alert setCancelButtonWithTitle:@"Alle orders" block:^{
+    [alert setCancelButtonWithTitle:@"All orders" block:^{
         [self sortTableView:@"all orders"];
     }];
     [alert setCancelButtonWithTitle:@"Pending" block:^{
@@ -382,7 +382,7 @@
         sorting = YES;
         [ordersTable reloadData];
         
-        NSString *notificationText = [[NSString alloc] initWithFormat:@"Gefilterd op %@", status];
+        NSString *notificationText = [[NSString alloc] initWithFormat:@"Showing %@", status];
         [AJNotificationView showNoticeInView:self.view
                                         type:AJNotificationTypeDefault
                                        title:notificationText
@@ -393,7 +393,7 @@
         sorting = NO;
         [ordersTable reloadData];
         
-        NSString *notificationText = [[NSString alloc] initWithFormat:@"Gefilterd op %@", status];
+        NSString *notificationText = [[NSString alloc] initWithFormat:@"Showing %@", status];
         [AJNotificationView showNoticeInView:self.view
                                         type:AJNotificationTypeDefault
                                        title:notificationText
@@ -544,7 +544,7 @@
     //Add searchbar
     searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0,70,320,44)];
     searchBar.delegate = self;
-    searchBar.placeholder = @"Zoeken in alle orders";
+    searchBar.placeholder = @"Search orders by name or ordernumber";
     searchBar.tintColor = [UIColor colorWithRed:48/255 green:47/255 blue:54/255 alpha:1.0];
     [ordersTable setTableHeaderView:searchBar];
 }
@@ -778,7 +778,7 @@
         orderName.font = font;
         orderName.textAlignment = UITextAlignmentCenter;
         orderName.textColor = [UIColor whiteColor];
-        orderName.text = @"Er zijn geen orders voor deze status";
+        orderName.text = @"Sorry, there are no orders for this status..";
         [cell addSubview:orderName];
     
     }
@@ -811,7 +811,7 @@
         [viewControllers addObject:dashboard];
         [[self navigationController] setViewControllers:viewControllers animated:YES];
     } else {
-        [self makeAlert:@"Geen Order ID" message:@"Kon de order niet inladen omdat er geen order id is." button:@"Ok"];
+        [self makeAlert:@"No order ID" message:@"Something went wrong while loading the order." button:@"Ok"];
     }
     
 }
@@ -851,7 +851,7 @@
                               initWithTitle:alertTitle
                               message:alertMessage
                               delegate:self
-                              cancelButtonTitle:@"Annuleren"
+                              cancelButtonTitle:@"Cancel"
                               otherButtonTitles:buttonTitle, nil];
         
         [alert show];

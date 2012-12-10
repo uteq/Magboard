@@ -39,9 +39,9 @@
 
 -(void)constructHeader
 {
-    UILabel* navBarTitle = [CustomNavBar setNavBarTitle:@"Shop wijzigen"];
+    UILabel* navBarTitle = [CustomNavBar setNavBarTitle:@"Edit webshop"];
     self.navigationItem.titleView = navBarTitle;
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTarget:self selector:@selector(backButtonTouched) title:@"Terug"];
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTarget:self selector:@selector(backButtonTouched) title:@"Back"];
 }
 
 -(void)backButtonTouched
@@ -127,7 +127,7 @@
     UILabel* labelForSwitch = [[UILabel alloc] initWithFrame:CGRectMake(11.0, 240.0, 170.0, 30.0)];
     labelForSwitch.backgroundColor = [UIColor clearColor];
     labelForSwitch.font = [UIFont boldSystemFontOfSize:14];
-    labelForSwitch.text = @"Wachtwoord onthouden";
+    labelForSwitch.text = @"Save password";
     labelForSwitch.textColor = [UIColor whiteColor];
     labelForSwitch.shadowColor = [UIColor blackColor];
     labelForSwitch.shadowOffset = CGSizeMake(1, 1);
@@ -144,7 +144,7 @@
     // Make cancel button
     UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
     cancelButton.frame = CGRectMake(11.0, [constants getScreenHeight] - 120, 145.0, 43.0);
-    [cancelButton setTitle:@"Verwijderen" forState:UIControlStateNormal];
+    [cancelButton setTitle:@"Delete" forState:UIControlStateNormal];
     [cancelButton setFont:[UIFont boldSystemFontOfSize:14]];
     cancelButton.backgroundColor = [UIColor clearColor];
     [cancelButton setTitleColor:[UIColor colorWithRed:42.0/255.0 green:43.0/255.0 blue:53.0/255.0 alpha:1] forState:UIControlStateNormal ];
@@ -161,7 +161,7 @@
     //Make Save button
     UIButton *addShopButton = [UIButton buttonWithType:UIButtonTypeCustom];
     addShopButton.frame = CGRectMake(165.0, [constants getScreenHeight] - 120, 145.0, 43.0);
-    [addShopButton setTitle:@"Opslaan" forState:UIControlStateNormal];
+    [addShopButton setTitle:@"Save" forState:UIControlStateNormal];
     [addShopButton setFont:[UIFont boldSystemFontOfSize:14]];
     addShopButton.backgroundColor = [UIColor clearColor];
     [addShopButton setTitleColor:[UIColor colorWithRed:42.0/255.0 green:43.0/255.0 blue:53.0/255.0 alpha:1.0] forState:UIControlStateNormal ];
@@ -180,13 +180,13 @@
 //Make alert
 -(void)makeAlert:(NSString*)alertTitle message:(NSString*)alertMessage button:(NSString *)buttonTitle
 {
-    if([buttonTitle isEqualToString:@"Verwijderen"])
+    if([buttonTitle isEqualToString:@"Delete"])
     {
         BlockAlertView *alert = [BlockAlertView
                                  alertWithTitle:alertTitle
                                  message:alertMessage];
         
-        [alert setCancelButtonWithTitle:@"Annuleren" block:^{
+        [alert setCancelButtonWithTitle:@"Cancel" block:^{
         }];
         
         [alert setDestructiveButtonWithTitle:buttonTitle block:^{
@@ -232,22 +232,23 @@
 - (void)saveWebshop
 {
     //Checken of velden gevuld zijn
+    //Checken of velden gevuld zijn
     if([shopName.text isEqualToString:@""] || shopName.text == nil){
-        alertTitle = @"Geen naam";
-        message = @"U dient een naam op te geven voor uw webshop";
+        alertTitle = @"No name";
+        message = @"Please enter a name for your webshop";
         empty = TRUE;
         [self makeAlert:alertTitle message:message button:@"Ok"];
     } else if (![self validateUrl:shopUrl.text]){
-        alertTitle = @"Onjuiste URL";
-        message = @"U dient een correcte url op te geven voor uw webshop. Bijvoorbeeld www.uwdomein.nl";
+        alertTitle = @"Incorrect URL";
+        message = @"Please enter a correct URL, for example www.yourwebshop.com";
         empty = TRUE;
         [self makeAlert:alertTitle message:message button:@"Ok"];
     } else if ([username.text isEqualToString:@""] || username.text == nil){
-        alertTitle = @"Geen gebruikersnaam";
-        message = @"U dient een username op te geven voor uw webshop";
+        alertTitle = @"No gebruikersnaam";
+        message = @"Please enter a username for your webshop";
         empty = TRUE;
         [self makeAlert:alertTitle message:message button:@"Ok"];
-    } else {
+    }  else {
         empty = FALSE;
     }
     
@@ -282,7 +283,7 @@
     [defaults setInteger:0 forKey:@"lastShop"];
     [defaults synchronize];
     NSLog(@"Delete shop touched");
-    [self makeAlert:@"Webshop verwijderen" message:@"Weet u zeker dat u deze webshop uit de applicatie wilt verwijderen?" button:@"Verwijderen"];
+    [self makeAlert:@"Delete webshop" message:@"Are you sure you want to remove this account from MagBoard?" button:@"Delete"];
 }
 
 -(void)deleteShop

@@ -33,9 +33,9 @@
 
 -(void)constructHeader
 {
-    UILabel* navBarTitle = [CustomNavBar setNavBarTitle:@"Shop toevoegen"];
+    UILabel* navBarTitle = [CustomNavBar setNavBarTitle:@"Add webshop"];
     self.navigationItem.titleView = navBarTitle;
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTarget:self selector:@selector(backButtonTouched) title:@"Terug"];
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTarget:self selector:@selector(backButtonTouched) title:@"Back"];
 }
 
 -(void)backButtonTouched
@@ -63,7 +63,7 @@
     [scrollView addSubview:backgroundForName];
     
     shopName = [[UITextField alloc] initWithFrame:CGRectMake(20, 40, 277, 38)];
-    shopName.placeholder = @"Naam webshop";  
+    shopName.placeholder = @"Webshop name";  
     shopName.textAlignment = UITextAlignmentLeft;          
     shopName.font = [UIFont boldSystemFontOfSize:14]; 
     shopName.adjustsFontSizeToFitWidth = YES;
@@ -78,7 +78,7 @@
     [scrollView addSubview:backgroundForUrl];
     
     shopUrl = [[UITextField alloc] initWithFrame:CGRectMake(20, 90, 277, 38)];
-    shopUrl.placeholder = @"Url webshop";
+    shopUrl.placeholder = @"Webshop URL";
     shopUrl.textAlignment = UITextAlignmentLeft;
     shopUrl.font = [UIFont boldSystemFontOfSize:14];
     shopUrl.adjustsFontSizeToFitWidth = YES;
@@ -94,7 +94,7 @@
     [scrollView addSubview:backgroundForUsername];
     
     username = [[UITextField alloc] initWithFrame:CGRectMake(20, 140, 277, 38)];
-    username.placeholder = @"Magento API gebruikersnaam";
+    username.placeholder = @"Magento API username";
     username.textAlignment = UITextAlignmentLeft;
     username.font = [UIFont boldSystemFontOfSize:14];
     username.adjustsFontSizeToFitWidth = YES;
@@ -110,7 +110,7 @@
     [scrollView addSubview:backgroundForPassword];
     
     password = [[UITextField alloc] initWithFrame:CGRectMake(20, 190, 277, 38)];
-    password.placeholder = @"Magento API wachtwoord";
+    password.placeholder = @"Magento API password";
     password.textAlignment = UITextAlignmentLeft;
     password.font = [UIFont boldSystemFontOfSize:14];
     password.adjustsFontSizeToFitWidth = YES;
@@ -125,7 +125,7 @@
     UILabel* labelForSwitch = [[UILabel alloc] initWithFrame:CGRectMake(11.0, 240.0, 170.0, 30.0)];
     labelForSwitch.backgroundColor = [UIColor clearColor];
     labelForSwitch.font = [UIFont boldSystemFontOfSize:14];
-    labelForSwitch.text = @"Wachtwoord onthouden";
+    labelForSwitch.text = @"Save password";
     labelForSwitch.textColor = [UIColor whiteColor];
     labelForSwitch.shadowColor = [UIColor blackColor];
     labelForSwitch.shadowOffset = CGSizeMake(1, 1);
@@ -138,7 +138,7 @@
     // Make cancel button
     UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
     cancelButton.frame = CGRectMake(11.0, [constants getScreenHeight] - 120, 145.0, 43.0);
-    [cancelButton setTitle:@"Annuleren" forState:UIControlStateNormal];
+    [cancelButton setTitle:@"Cancel" forState:UIControlStateNormal];
     [cancelButton setFont:[UIFont boldSystemFontOfSize:14]];
     cancelButton.backgroundColor = [UIColor clearColor];
     [cancelButton setTitleColor:[UIColor colorWithRed:42.0/255.0 green:43.0/255.0 blue:53.0/255.0 alpha:1] forState:UIControlStateNormal ];
@@ -155,7 +155,7 @@
     //Make Save button
     UIButton *addShopButton = [UIButton buttonWithType:UIButtonTypeCustom];
     addShopButton.frame = CGRectMake(165.0, [constants getScreenHeight] - 120, 145.0, 43.0);
-    [addShopButton setTitle:@"Opslaan" forState:UIControlStateNormal];
+    [addShopButton setTitle:@"Save" forState:UIControlStateNormal];
     [addShopButton setFont:[UIFont boldSystemFontOfSize:14]];
     addShopButton.backgroundColor = [UIColor clearColor];
     [addShopButton setTitleColor:[UIColor colorWithRed:42.0/255.0 green:43.0/255.0 blue:53.0/255.0 alpha:1.0] forState:UIControlStateNormal ];
@@ -216,23 +216,23 @@
     
     //Checken of velden gevuld zijn
     if([shopName.text isEqualToString:@""] || shopName.text == nil){
-        alertTitle = @"Geen naam";
-        message = @"U dient een naam op te geven voor uw webshop";
+        alertTitle = @"No name";
+        message = @"Please enter a name for your webshop";
         empty = TRUE;
         [self makeAlert:alertTitle message:message button:@"Ok"];
     } else if (![self validateUrl:shopUrl.text]){
-        alertTitle = @"Onjuiste URL";
-        message = @"U dient een correcte url op te geven voor uw webshop. Bijvoorbeeld www.uwdomein.nl";
+        alertTitle = @"Incorrect URL";
+        message = @"Please enter a correct URL, for example www.yourwebshop.com";
         empty = TRUE;
         [self makeAlert:alertTitle message:message button:@"Ok"];
     } else if ([username.text isEqualToString:@""] || username.text == nil){
-        alertTitle = @"Geen gebruikersnaam";
-        message = @"U dient een gebruikersnaam op te geven voor uw webshop";
+        alertTitle = @"No gebruikersnaam";
+        message = @"Please enter a username for your webshop";
         empty = TRUE;
         [self makeAlert:alertTitle message:message button:@"Ok"];
     } else if (findShop != nil){
-        alertTitle = @"Account bestaat al";
-        message = @"Er bestaat al een webshop met dezelfde naam. Probeer een andere webshop toe te voegen of ga naar het overzicht.";
+        alertTitle = @"Duplicated account";
+        message = @"MagBoard already found an account for this webshop. Please enter a different URL or visit the existing webshop.";
         empty = TRUE;
         [self makeAlert:alertTitle message:message button:@"Ok"];
     } else {

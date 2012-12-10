@@ -58,7 +58,7 @@
     //Refresh header
     if([allShops count] != 0)
     {
-        self.navigationItem.rightBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTarget:self selector:@selector(settingsButtonTouched) title:@"Wijzig"];
+        self.navigationItem.rightBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTarget:self selector:@selector(settingsButtonTouched) title:@"Edit"];
     }
 }
 
@@ -114,13 +114,17 @@
     {
         NSLog(@"There are no shops");
         // Add label for text when no shops are available
-        noShopsLabel = [[UILabel alloc] initWithFrame:CGRectMake(44.0f, 140.0f, 232.0f, 20.0f)];
-        [noShopsLabel setFont:[UIFont systemFontOfSize:14]];
+        UIFont *font = [UIFont fontWithName:@"Lobster 1.3" size:16.0f];
+        noShopsLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 140.0f, 300.0f, 50.0f)];
+        noShopsLabel.font = font;
+        noShopsLabel.text = @"There are no webshops added to your MagBoard.";
         [noShopsLabel setTextColor:[UIColor whiteColor]];
-        UIImage *image = [UIImage imageNamed:@"no_shops_text"];
-        noShopsLabel.backgroundColor = [UIColor colorWithPatternImage:image];
+        noShopsLabel.backgroundColor = [UIColor clearColor];
         [noShopsLabel setTextAlignment:UITextAlignmentCenter];
         [noShopsLabel setNumberOfLines:0];
+        noShopsLabel.lineBreakMode = UILineBreakModeWordWrap;
+        noShopsLabel.shadowColor = [UIColor blackColor];
+        noShopsLabel.shadowOffset = CGSizeMake(1, 1);
         [self.view addSubview:noShopsLabel];
     }
     else
@@ -222,7 +226,7 @@
     // Make instructions button
     UIButton *instructionsButton = [UIButton buttonWithType:UIButtonTypeCustom];
     instructionsButton.frame = CGRectMake(15.0, [constants getScreenHeight] - 170.0, 290.0, 43.0);
-    [instructionsButton setTitle:@"Instructies" forState:UIControlStateNormal];
+    [instructionsButton setTitle:@"Instructions" forState:UIControlStateNormal];
     [instructionsButton.titleLabel setFont:[UIFont boldSystemFontOfSize:14]];
     instructionsButton.backgroundColor = [UIColor clearColor];
     [instructionsButton setTitleColor:[UIColor colorWithRed:42.0/255.0 green:43.0/255.0 blue:53.0/255.0 alpha:1] forState:UIControlStateNormal ];
@@ -239,7 +243,7 @@
     //Make add shop button
     UIButton *addShopButton = [UIButton buttonWithType:UIButtonTypeCustom];
     addShopButton.frame = CGRectMake(15.0, [constants getScreenHeight] - 118.0, 290.0, 43.0);
-    [addShopButton setTitle:@"Webshop toevoegen" forState:UIControlStateNormal];
+    [addShopButton setTitle:@"Add webshop" forState:UIControlStateNormal];
     [addShopButton.titleLabel setFont:[UIFont boldSystemFontOfSize:14]];
     addShopButton.backgroundColor = [UIColor clearColor];
     [addShopButton setTitleColor:[UIColor colorWithRed:42.0/255.0 green:43.0/255.0 blue:53.0/255.0 alpha:1.0] forState:UIControlStateNormal ];
@@ -321,14 +325,14 @@
     {
         UITextField *passwordField = [[UITextField alloc] initWithFrame:CGRectMake(12.0, 45.0, 260.0, 25.0)];
         BlockTextPromptAlertView *alert = [BlockTextPromptAlertView
-                                           promptWithTitle:@"Inloggen"
-                                           message:@"Geef uw wachtwoord op"
+                                           promptWithTitle:@"Login"
+                                           message:@"Please enter your password"
                                            textField:&passwordField];
         
-        [alert setCancelButtonWithTitle:@"Annuleren" block:^{
+        [alert setCancelButtonWithTitle:@"Cancel" block:^{
         }];
         
-        [alert setCancelButtonWithTitle:@"Inloggen" block:^{
+        [alert setCancelButtonWithTitle:@"Login" block:^{
             // Do something nasty when this button is pressed
             NSLog(@"Login clicked : %@", passwordField.text);
             sharedShop.password = passwordField.text;

@@ -42,7 +42,7 @@
 
 @end
 
-#define PANELHEIGHT  50.0f
+#define PANELHEIGHT  45.0f
 
 static NSMutableArray *notificationQueue = nil;       // Global notification queue
 
@@ -70,8 +70,9 @@ static NSMutableArray *notificationQueue = nil;       // Global notification que
         //Title Label
         _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0, 0, self.bounds.size.width -10, PANELHEIGHT)];
         _titleLabel.textColor = [UIColor colorWithWhite:0.2f alpha:1.0f];
-        _titleLabel.font = [UIFont fontWithName:@"Helvetica Neue"size:15];
-        _titleLabel.font = [UIFont boldSystemFontOfSize:15.0];
+        _titleLabel.font = [UIFont fontWithName:@"Helvetica Neue"size:14];
+        _titleLabel.font = [UIFont boldSystemFontOfSize:14.0];
+        _titleLabel.textAlignment = UITextAlignmentCenter;
         _titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
         _titleLabel.numberOfLines = 0;
         _titleLabel.alpha = 0.0;

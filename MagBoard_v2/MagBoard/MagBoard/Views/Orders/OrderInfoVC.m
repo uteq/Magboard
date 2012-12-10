@@ -32,7 +32,7 @@
                 requestParams:[orderInfo orderId]
                 update:NO
      ];
-    [self loadingRequest:@"Order ophalen..."];
+    [self loadingRequest:@"Fetching order..."];
 }
 
 -(void)reloadScrollview
@@ -41,7 +41,7 @@
     [orderInfoScrollView removeFromSuperview];
     
     //Show loading view
-    [self loadingRequest:@"Status wijzigen..."];
+    [self loadingRequest:@"Changing status..."];
     
     //Reload scrollview
     [self loginRequest:[shopInfo shopUrl]
@@ -61,7 +61,7 @@
     
     UILabel* navBarTitle = [CustomNavBar setNavBarTitle:barTitle];
     self.navigationItem.titleView = navBarTitle;
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTarget:self selector:@selector(backButtonTouched) title:@"Terug"];
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTarget:self selector:@selector(backButtonTouched) title:@"Back"];
 }
 
 //While doing request show loading icon
@@ -131,6 +131,7 @@
     
     [self orderStatisticsHolder];
     [self orderShippingHolder];
+    [self orderBillingHolder];
     [self orderProducts];
     [self orderTotals];
     [self orderInfoScrollView];
@@ -258,7 +259,7 @@
     [orderStatisticsBody addSubview:statusHolder];
     
     //Store
-    NSString *storeText = [[NSString alloc] initWithFormat:@"Orderwaarde:"];
+    NSString *storeText = [[NSString alloc] initWithFormat:@"Total value:"];
     UILabel *store = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 45.0f, 301.0f, 25.0f)];
     store.backgroundColor = [UIColor clearColor];
     store.font = [UIFont systemFontOfSize:14.0f];
@@ -303,7 +304,7 @@
     title.textColor = [UIColor whiteColor];
     //title.shadowColor = [UIColor whiteColor];
     //title.shadowOffset = CGSizeMake(0, 1);
-    title.text = @"Factuuradres";
+    title.text = @"Shipping address";
     [statisticsHeader addSubview:title];
     
     //Create body
@@ -357,20 +358,13 @@
     [orderShippingBody addSubview:telephone];
 }
 
--(void)orderProducts
+-(void)orderBillingHolder
 {
-    
-    // Count the items
-    int itemsCount = [[[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"items" ] count];
-    NSLog(@"Creating block and sublocks for %d products", itemsCount);
-    // The holder for all the products
-    // Setting productsheight so that the totals are getting good alligned
-    productsHolderHeight = (61 * itemsCount + 30);
-    
+    NSLog(@"Creating block Shipping");
     //Add to Scroll View Height
-    scrollViewHeight += (productsHolderHeight + 10);
+    scrollViewHeight += (150 + 10);
     
-    UIView *orderStatisticsHolder = [[UIView alloc] initWithFrame:CGRectMake(10.0f, 360.0f, 301.0f, productsHolderHeight)];
+    UIView *orderStatisticsHolder = [[UIView alloc] initWithFrame:CGRectMake(10.0f, 360.0f, 301.0f, 150.0f)];
     orderStatisticsHolder.backgroundColor = [UIColor colorWithRed:225.0f/255.0f green:224.0f/255.0f blue:225.0f/255.0f alpha:1.0f];
     orderStatisticsHolder.layer.cornerRadius = 5.0f;
     orderStatisticsHolder.layer.masksToBounds = YES;
@@ -391,7 +385,95 @@
     title.textColor = [UIColor whiteColor];
     //title.shadowColor = [UIColor whiteColor];
     //title.shadowOffset = CGSizeMake(0, 1);
-    title.text = @"Bestelde producten";
+    title.text = @"Billing address";
+    [statisticsHeader addSubview:title];
+    
+    //Create body
+    UIView *orderShippingBody = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 31.0f, 301.0f, 110.0f)];
+    orderShippingBody.backgroundColor = [UIColor clearColor];
+    [orderStatisticsHolder addSubview:orderShippingBody];
+    
+    //First and lastname
+    NSString *firstLastNameText = [[NSString alloc] initWithFormat:@"%@ %@", [[[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"billing_address"] valueForKey:@"firstname" ], [[[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"billing_address"] valueForKey:@"lastname" ]];
+    UILabel *firstLastName = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 5.0f, 301.0f, 25.0f)];
+    firstLastName.backgroundColor = [UIColor clearColor];
+    firstLastName.font = [UIFont systemFontOfSize:14.0f];
+    firstLastName.textColor = [UIColor colorWithRed:87.0f/255.0f green:83.0f/255.0f blue:89.0f/255.0f alpha:1.0f];
+    firstLastName.text = firstLastNameText;
+    [orderShippingBody addSubview:firstLastName];
+    
+    //Street
+    NSString *streetText = [[NSString alloc] initWithFormat:@"%@", [[[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"billing_address"] valueForKey:@"street" ]];
+    UILabel *street = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 25.0f, 301.0f, 25.0f)];
+    street.backgroundColor = [UIColor clearColor];
+    street.font = [UIFont systemFontOfSize:14.0f];
+    street.textColor = [UIColor colorWithRed:87.0f/255.0f green:83.0f/255.0f blue:89.0f/255.0f alpha:1.0f];
+    street.text = streetText;
+    [orderShippingBody addSubview:street];
+    
+    //Postcode and City
+    NSString *postcodeCityText = [[NSString alloc] initWithFormat:@"%@, %@", [[[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"billing_address"] valueForKey:@"postcode" ], [[[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"billing_address"] valueForKey:@"city" ]];
+    UILabel *postcodeCity = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 45.0f, 301.0f, 25.0f)];
+    postcodeCity.backgroundColor = [UIColor clearColor];
+    postcodeCity.font = [UIFont systemFontOfSize:14.0f];
+    postcodeCity.textColor = [UIColor colorWithRed:87.0f/255.0f green:83.0f/255.0f blue:89.0f/255.0f alpha:1.0f];
+    postcodeCity.text = postcodeCityText;
+    [orderShippingBody addSubview:postcodeCity];
+    
+    //Country
+    NSString *countryText = [[NSString alloc] initWithFormat:@"%@", [[[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"billing_address"] valueForKey:@"country_id" ]];
+    UILabel *country = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 65.0f, 301.0f, 25.0f)];
+    country.backgroundColor = [UIColor clearColor];
+    country.font = [UIFont systemFontOfSize:14.0f];
+    country.textColor = [UIColor colorWithRed:87.0f/255.0f green:83.0f/255.0f blue:89.0f/255.0f alpha:1.0f];
+    country.text = countryText;
+    [orderShippingBody addSubview:country];
+    
+    //Telephone
+    NSString *telephoneText = [[NSString alloc] initWithFormat:@"Tel: %@", [[[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"billing_address"] valueForKey:@"telephone" ]];
+    UILabel *telephone = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 85.0f, 301.0f, 25.0f)];
+    telephone.backgroundColor = [UIColor clearColor];
+    telephone.font = [UIFont systemFontOfSize:14.0f];
+    telephone.textColor = [UIColor colorWithRed:87.0f/255.0f green:83.0f/255.0f blue:89.0f/255.0f alpha:1.0f];
+    telephone.text = telephoneText;
+    [orderShippingBody addSubview:telephone];
+}
+
+-(void)orderProducts
+{
+    
+    // Count the items
+    int itemsCount = [[[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"items" ] count];
+    NSLog(@"Creating block and sublocks for %d products", itemsCount);
+    // The holder for all the products
+    // Setting productsheight so that the totals are getting good alligned
+    productsHolderHeight = (61 * itemsCount + 30);
+    
+    //Add to Scroll View Height
+    scrollViewHeight += (productsHolderHeight + 10);
+    
+    UIView *orderStatisticsHolder = [[UIView alloc] initWithFrame:CGRectMake(10.0f, 530.0f, 301.0f, productsHolderHeight)];
+    orderStatisticsHolder.backgroundColor = [UIColor colorWithRed:225.0f/255.0f green:224.0f/255.0f blue:225.0f/255.0f alpha:1.0f];
+    orderStatisticsHolder.layer.cornerRadius = 5.0f;
+    orderStatisticsHolder.layer.masksToBounds = YES;
+    [orderInfoScrollView addSubview:orderStatisticsHolder];
+    
+    //Create header for the statistics holder
+    UIView *statisticsHeader = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 301, 30)];
+    UIView *borderBottom = [[UIView alloc] initWithFrame:CGRectMake(0, 30, 301, 1)];
+    statisticsHeader.backgroundColor = headerColor;
+    borderBottom.backgroundColor = [UIColor clearColor];
+    [orderStatisticsHolder addSubview:statisticsHeader];
+    [orderStatisticsHolder addSubview:borderBottom];
+    
+    //Create Title
+    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 3.0f, 301.0f, 25.0f)];
+    title.backgroundColor = [UIColor clearColor];
+    title.font = [UIFont boldSystemFontOfSize:14.0f];
+    title.textColor = [UIColor whiteColor];
+    //title.shadowColor = [UIColor whiteColor];
+    //title.shadowOffset = CGSizeMake(0, 1);
+    title.text = @"Ordered products";
     [statisticsHeader addSubview:title];
     
     
@@ -418,8 +500,8 @@
         
         NSString *productNameText = [[NSString alloc] initWithFormat:@"%@", [[[[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"items" ] objectAtIndex:i] valueForKey:@"name"]];
         NSMutableString *qtyText = [[NSMutableString alloc] initWithFormat:@"%@", [[[[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"items" ] objectAtIndex:i] valueForKey:@"qty_ordered"]];
-        [qtyText appendString:@" stuk(s)"];
-        NSString *priceText = [[NSString alloc] initWithFormat:@"€%@", [[[[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"items" ] objectAtIndex:i] valueForKey:@"price"]];
+        [qtyText appendString:@" piece(s)"];
+        NSString *priceText = [[NSString alloc] initWithFormat:@"€%@", [[[[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"items" ] objectAtIndex:i] valueForKey:@"row_total"]];
         
         UILabel *productName = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 230.0f, 20.0f)];
         productName.font = [UIFont systemFontOfSize:14.0f];
@@ -451,7 +533,7 @@
     //Add to Scroll View Height
     scrollViewHeight += (210 + 10);
     
-    UIView *orderStatisticsHolder = [[UIView alloc] initWithFrame:CGRectMake(10.0f, productsHolderHeight + 380, 301.0f, 210.0)];
+    UIView *orderStatisticsHolder = [[UIView alloc] initWithFrame:CGRectMake(10.0f, productsHolderHeight + 550, 301.0f, 210.0)];
     orderStatisticsHolder.backgroundColor = [UIColor colorWithRed:225.0f/255.0f green:224.0f/255.0f blue:225.0f/255.0f alpha:1.0f];
     orderStatisticsHolder.layer.cornerRadius = 5.0f;
     orderStatisticsHolder.layer.masksToBounds = YES;
@@ -472,7 +554,7 @@
     title.textColor = [UIColor whiteColor];
     //title.shadowColor = [UIColor whiteColor];
     //title.shadowOffset = CGSizeMake(0, 1);
-    title.text = @"Totalen";
+    title.text = @"Totals";
     [statisticsHeader addSubview:title];
     
     UIView *orderTotalsBody = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 31.0f, 301.0f, 175.0f)];
@@ -480,7 +562,7 @@
     [orderStatisticsHolder addSubview:orderTotalsBody];
     
     //Subtotal
-    NSString *subtotalText = @"Subtotaal:";
+    NSString *subtotalText = @"Subtotal:";
     UILabel *subtotal = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 301.0f, 25.0f)];
     subtotal.backgroundColor = [UIColor clearColor];
     subtotal.font = [UIFont systemFontOfSize:14.0f];
@@ -498,7 +580,7 @@
     [orderTotalsBody addSubview:subtotalContent];
     
     //Tax
-    NSString *taxAmountText = @"BTW:";
+    NSString *taxAmountText = @"Tax:";
     UILabel *taxAmount = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 30.0f, 301.0f, 25.0f)];
     taxAmount.backgroundColor = [UIColor clearColor];
     taxAmount.font = [UIFont systemFontOfSize:14.0f];
@@ -516,7 +598,7 @@
     [orderTotalsBody addSubview:taxAmountContent];
     
     //Shipping amount
-    NSString *shippingAmountText = @"Verzendkosten:";
+    NSString *shippingAmountText = @"Shipping costs:";
     UILabel *shippingAmount = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 50.0f, 301.0f, 25.0f)];
     shippingAmount.backgroundColor = [UIColor clearColor];
     shippingAmount.font = [UIFont systemFontOfSize:14.0f];
@@ -534,7 +616,7 @@
     [orderTotalsBody addSubview:shippingAmountContent];
     
     //Grand total
-    NSString *grandTotalText = @"Totaal:";
+    NSString *grandTotalText = @"Total:";
     UILabel *grandTotal = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 70.0f, 301.0f, 25.0f)];
     grandTotal.backgroundColor = [UIColor clearColor];
     grandTotal.font = [UIFont systemFontOfSize:14.0f];
@@ -552,7 +634,7 @@
     [orderTotalsBody addSubview:grandTotalContent];
     
     //Total paid
-    NSString *totalPaidText = @"Totaal betaald:";
+    NSString *totalPaidText = @"Total paid:";
     UILabel *totalPaid = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 105.0f, 301.0f, 25.0f)];
     totalPaid.backgroundColor = [UIColor clearColor];
     totalPaid.font = [UIFont systemFontOfSize:14.0f];
@@ -570,7 +652,7 @@
     [orderTotalsBody addSubview:totalPaidContent];
     
     //Total refunded
-    NSString *totalRefundedText = @"Totaal terugbetaald:";
+    NSString *totalRefundedText = @"Total refunded:";
     UILabel *totalRefunded = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 125.0f, 301.0f, 25.0f)];
     totalRefunded.backgroundColor = [UIColor clearColor];
     totalRefunded.font = [UIFont systemFontOfSize:14.0f];
@@ -588,7 +670,7 @@
     [orderTotalsBody addSubview:totalRefundedContent];
     
     //Total due
-    NSString *totalDueText = @"Totaal openstaand:";
+    NSString *totalDueText = @"Total due:";
     UILabel *totalDue = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 145.0f, 301.0f, 25.0f)];
     totalDue.backgroundColor = [UIColor clearColor];
     totalDue.font = [UIFont systemFontOfSize:14.0f];
@@ -607,8 +689,8 @@
     
     //Make send order button
     UIButton *sendOrderButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    sendOrderButton.frame = CGRectMake(9.0, productsHolderHeight + 605, 303.0, 43.0);
-    [sendOrderButton setTitle:@"Order verzenden" forState:UIControlStateNormal];
+    sendOrderButton.frame = CGRectMake(9.0, productsHolderHeight + 775, 303.0, 43.0);
+    [sendOrderButton setTitle:@"Ship order" forState:UIControlStateNormal];
     [sendOrderButton.titleLabel setFont:[UIFont boldSystemFontOfSize:14]];
     sendOrderButton.backgroundColor = [UIColor clearColor];
     [sendOrderButton setTitleColor:[UIColor colorWithRed:42.0/255.0 green:43.0/255.0 blue:53.0/255.0 alpha:1.0] forState:UIControlStateNormal ];
