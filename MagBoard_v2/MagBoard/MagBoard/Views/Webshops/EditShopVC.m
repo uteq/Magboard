@@ -14,7 +14,7 @@
 
 @implementation EditShopVC
 
-@synthesize shopName, shopUrl,username, password, passwordSwitch, message, alertTitle, empty, sharedShop, editShop, urlRegEx, urlTest;
+@synthesize shopName, shopUrl,username, password, passwordSwitch, message, alertTitle, empty, sharedShop, editShop, urlRegEx, urlTest, update;
 
 - (void)viewDidLoad
 {
@@ -271,6 +271,7 @@
         if(editShop.save)
         {
             NSLog(@"shop gesaved");
+            [self updateOrders];
             [self backButtonTouched];
         }
     }
@@ -300,4 +301,47 @@
     [textField resignFirstResponder];
 }
 
+-(void)updateOrders
+{
+    NSLog(@"Update orders with:%@,%@, %@, ", shopUrl.text, username.text, password.text);
+    
+    [self loginRequest:shopUrl.text magUsername:username.text magPassword:password.text  magRequestFunction:@"salesOrderList" magRequestParams:nil magUpdate:YES];
+    
+}
+
+//Make request for logging in en fetching orders
+-(void)loginRequest:(NSString *)magShopUrl magUsername:(NSString *)magUsername magPassword:(NSString *)magPassword magRequestFunction:(NSString *)magRequestFunction magRequestParams:(NSString *)magRequestParams magUpdate:(bool)magUpdate
+{
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setObject:magShopUrl forKey:@"url"];
+    [params setObject:magUsername forKey:@"username"];
+    [params setObject:magPassword forKey:@"password"];
+    [params setObject:magRequestFunction forKey:@"requestFunction"];
+    if(magRequestParams){
+        [params setObject:magRequestParams forKey:@"requestParams"];
+    }
+    if(magUpdate == YES){
+        [params setObject:@"1" forKey:@"update"];
+    } else if(magUpdate == NO) {
+        [params setObject:@"0" forKey:@"update"];
+    }
+    
+    [[LRResty client] post:@"http://www.magboard.nl/api2/index.php" payload:params delegate:self];
+}
+
+//Catch response for request
+- (void)restClient:(LRRestyClient *)client receivedResponse:(LRRestyResponse *)response;
+{
+    // do something with the response
+    if(response.status == 200) {
+        
+        update = [NSJSONSerialization JSONObjectWithData:[response responseData] options:kNilOptions error:nil];
+        if([[update valueForKey:@"message"]isEqualToString:@"1001"]){
+            NSLog(@"Shop orders have been added to the cache.");
+        } else {
+            NSLog(@"Shop orders have not been cached error: %@", [update valueForKey:@"status"]);
+        }
+    }
+    
+}
 @end

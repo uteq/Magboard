@@ -119,7 +119,6 @@
 
 -(void)constructLoadingNotification
 {
-    
     NSString *notificationText = [[NSString alloc] initWithFormat:@"Searching for new orders"];
     loadingPanel = [AJNotificationView showNoticeInView:self.view
                                     type:AJNotificationTypeDefault
@@ -233,10 +232,9 @@
     }
     if(update == YES){
         [params setObject:@"1" forKey:@"update"];
-    } else {
+    } else if(update == NO) {
         [params setObject:@"0" forKey:@"update"];
     }
-
     [[LRResty client] post:@"http://www.magboard.nl/api2/index.php" payload:params delegate:self];
 }
 
@@ -867,5 +865,4 @@
         [alert show];
     }
 }
-
 @end
