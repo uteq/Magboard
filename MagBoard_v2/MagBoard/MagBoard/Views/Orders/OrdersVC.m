@@ -16,7 +16,7 @@
 
 @implementation OrdersVC
 
-@synthesize shopInfo, orderHolder,loadingHolder, loadingIcon, ordersTable, searchBar, searching, letUserSelectRow, searchOverlay, sorting, loadingPanel;
+@synthesize shopInfo, orderHolder,loadingHolder, loadingIcon, ordersTable, searchBar, searching, letUserSelectRow, searchOverlay, sorting, loadingPanel, notificationPanel;
 
 - (void)viewDidLoad
 {
@@ -136,7 +136,7 @@
 {
 
     NSString *notificationText = [[NSString alloc] initWithFormat:@"%@", text];
-    [AJNotificationView showNoticeInView:self.view
+    notificationPanel = [AJNotificationView showNoticeInView:self.view
                                     type:AJNotificationTypeDefault
                                    title:notificationText
                          linedBackground:AJLinedBackgroundTypeDisabled
@@ -268,9 +268,11 @@
         else {
             if(ordersTable){
                 [ordersTable reloadData];
+                [loadingPanel hide];
                 [self checkNewOrders];
             } else {
                 [loadingIcon stopAnimating];
+                [loadingPanel hide];
                 [loadingHolder removeFromSuperview];
                 [self makeTable];
                 [self checkNewOrders];
@@ -305,18 +307,18 @@
         if(newOrders != 0){
             if(newOrders == 1){
                 [loadingPanel hide];
-                [self constructNotificationBar:@"There is 1 new update" duration:2.5f];
+                [self constructNotificationBar:@"There is 1 new update" duration:1.0f];
             
             } else {
                 [loadingPanel hide];
                 NSString *notificationText = [[NSString alloc] initWithFormat:@"There are %d new orders", newOrders];
-                [self constructNotificationBar:notificationText duration:2.5f];
+                [self constructNotificationBar:notificationText duration:1.0f];
             }
              
         } else {
     
            [loadingPanel hide];
-            [self constructNotificationBar:@"No new orders found.." duration:2.5f];
+            [self constructNotificationBar:@"No new orders found.." duration:1.0f];
             
         }
        
@@ -818,6 +820,8 @@
         NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];
         [viewControllers addObject:dashboard];
         [[self navigationController] setViewControllers:viewControllers animated:YES];
+        [loadingPanel hide];
+        [notificationPanel hide];
     } else {
         [self makeAlert:@"No order ID" message:@"Something went wrong while loading the order." button:@"Ok"];
     }

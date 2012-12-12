@@ -69,7 +69,6 @@
 		9576662316414D1300B68687 /* no_shops_text.png in Resources */ = {isa = PBXBuildFile; fileRef = 9576662216414D1300B68687 /* no_shops_text.png */; };
 		9576662516414D2400B68687 /* no_shops_text@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9576662416414D2400B68687 /* no_shops_text@2x.png */; };
 		95766628164156AA00B68687 /* MagboardInstructions.plist in Resources */ = {isa = PBXBuildFile; fileRef = 95766627164156AA00B68687 /* MagboardInstructions.plist */; };
-		957CAE3B165E4C5E00C0E1E3 /* Alert.m in Sources */ = {isa = PBXBuildFile; fileRef = 957CAE3A165E4C5E00C0E1E3 /* Alert.m */; };
 		95924B90164A78AE0082A391 /* order_holder_canceled.png in Resources */ = {isa = PBXBuildFile; fileRef = 95924B8F164A78AE0082A391 /* order_holder_canceled.png */; };
 		95924B93164A78BC0082A391 /* order_holder_canceled@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 95924B92164A78BC0082A391 /* order_holder_canceled@2x.png */; };
 		959963F916483FC100DBB279 /* settings_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 959963F816483FC100DBB279 /* settings_button.png */; };
@@ -78,6 +77,7 @@
 		9599640816491B7C00DBB279 /* screenshot_webshop@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9599640716491B7B00DBB279 /* screenshot_webshop@2x.png */; };
 		9599640B1649396400DBB279 /* EditShopVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9599640A1649396400DBB279 /* EditShopVC.m */; };
 		95B0B9EA1649ABD100061DD2 /* bar_button_empty.png in Resources */ = {isa = PBXBuildFile; fileRef = 95B0B9E91649ABD100061DD2 /* bar_button_empty.png */; };
+		95B2FF951678C36700E7A975 /* alert.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B2FF941678C36700E7A975 /* alert.m */; };
 		95BA1AAE166CC889007BC971 /* instr_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 95BA1AA8166CC889007BC971 /* instr_1@2x.png */; };
 		95BA1AAF166CC889007BC971 /* instr_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 95BA1AA9166CC889007BC971 /* instr_2@2x.png */; };
 		95BA1AB0166CC889007BC971 /* instr_3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 95BA1AAA166CC889007BC971 /* instr_3@2x.png */; };
@@ -204,8 +204,6 @@
 		9576662216414D1300B68687 /* no_shops_text.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = no_shops_text.png; path = "Resources/Images/Non-retina/no_shops_text.png"; sourceTree = "<group>"; };
 		9576662416414D2400B68687 /* no_shops_text@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "no_shops_text@2x.png"; path = "Resources/Images/Retina/no_shops_text@2x.png"; sourceTree = "<group>"; };
 		95766627164156AA00B68687 /* MagboardInstructions.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = MagboardInstructions.plist; path = Resources/Plists/MagboardInstructions.plist; sourceTree = "<group>"; };
-		957CAE39165E4C5E00C0E1E3 /* Alert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Alert.h; path = Helpers/Alert.h; sourceTree = "<group>"; };
-		957CAE3A165E4C5E00C0E1E3 /* Alert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Alert.m; path = Helpers/Alert.m; sourceTree = "<group>"; };
 		95924B8F164A78AE0082A391 /* order_holder_canceled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = order_holder_canceled.png; path = "Resources/Images/Non-retina/order_holder_canceled.png"; sourceTree = "<group>"; };
 		95924B92164A78BC0082A391 /* order_holder_canceled@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "order_holder_canceled@2x.png"; path = "Resources/Images/Retina/order_holder_canceled@2x.png"; sourceTree = "<group>"; };
 		959963F816483FC100DBB279 /* settings_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = settings_button.png; path = "Resources/Images/Non-retina/settings_button.png"; sourceTree = "<group>"; };
@@ -215,6 +213,8 @@
 		959964091649396400DBB279 /* EditShopVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditShopVC.h; path = Views/Webshops/EditShopVC.h; sourceTree = "<group>"; };
 		9599640A1649396400DBB279 /* EditShopVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditShopVC.m; path = Views/Webshops/EditShopVC.m; sourceTree = "<group>"; };
 		95B0B9E91649ABD100061DD2 /* bar_button_empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bar_button_empty.png; path = "Resources/Images/Non-retina/bar_button_empty.png"; sourceTree = "<group>"; };
+		95B2FF931678C36700E7A975 /* alert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = alert.h; path = Helpers/alert.h; sourceTree = "<group>"; };
+		95B2FF941678C36700E7A975 /* alert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = alert.m; path = Helpers/alert.m; sourceTree = "<group>"; };
 		95BA1AA8166CC889007BC971 /* instr_1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "instr_1@2x.png"; path = "Resources/Images/Retina/Instructions/instr_1@2x.png"; sourceTree = "<group>"; };
 		95BA1AA9166CC889007BC971 /* instr_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "instr_2@2x.png"; path = "Resources/Images/Retina/Instructions/instr_2@2x.png"; sourceTree = "<group>"; };
 		95BA1AAA166CC889007BC971 /* instr_3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "instr_3@2x.png"; path = "Resources/Images/Retina/Instructions/instr_3@2x.png"; sourceTree = "<group>"; };
@@ -409,12 +409,12 @@
 		957665BC16412ECE00B68687 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				95B2FF931678C36700E7A975 /* alert.h */,
+				95B2FF941678C36700E7A975 /* alert.m */,
 				95485C90165CD30C002F1985 /* constants.h */,
 				95485C91165CD30C002F1985 /* constants.m */,
 				957665CC16412FE100B68687 /* User interface */,
 				957665CD1641308A00B68687 /* Helpers.h */,
-				957CAE39165E4C5E00C0E1E3 /* Alert.h */,
-				957CAE3A165E4C5E00C0E1E3 /* Alert.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -875,7 +875,7 @@
 				CE8585881647DE3100F94506 /* OrderSingleton.m in Sources */,
 				9599640B1649396400DBB279 /* EditShopVC.m in Sources */,
 				95485C92165CD30C002F1985 /* constants.m in Sources */,
-				957CAE3B165E4C5E00C0E1E3 /* Alert.m in Sources */,
+				95B2FF951678C36700E7A975 /* alert.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

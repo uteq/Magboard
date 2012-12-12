@@ -14,7 +14,7 @@
 
 @implementation OrderInfoVC
 
-@synthesize shopInfo, orderInfoHolder, orderInfo, subHeader, createInvoice, headerColor, loadingHolder, loadingIcon;
+@synthesize shopInfo, orderInfoHolder, orderInfo, subHeader, createInvoice, headerColor, loadingHolder, loadingIcon, loadingPanel;
 
 - (void)viewDidLoad
 {
@@ -24,6 +24,7 @@
     orderInfo = [OrderSingleton orderSingleton];
     [self constructHeader];
     firstRun = YES;
+    numberOfScrolls = 0;
     [self loginRequest:[shopInfo shopUrl]
               username:[shopInfo username]
               password:[shopInfo password]
@@ -32,18 +33,6 @@
                 update:NO
      ];
     [self loadingRequest:@"Fetching order..."];
-}
-
--(void)reloadScrollview
-{
-    //Remove scrollview
-    [orderInfoScrollView removeFromSuperview];
-    
-    //Show loading view
-    [self loadingRequest:@"Changing status..."];
-    
-    //Reload scrollview
-    [self loginRequest:[shopInfo shopUrl] username:[shopInfo username] password:[shopInfo password]  request:@"salesOrderInfo" requestParams:[orderInfo orderId] update:YES];
 }
 
 #pragma mark Construct view
@@ -55,6 +44,35 @@
     UILabel* navBarTitle = [CustomNavBar setNavBarTitle:barTitle];
     self.navigationItem.titleView = navBarTitle;
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTarget:self selector:@selector(backButtonTouched) title:@"Back"];
+}
+
+//For notificationbars
+-(void)constructNotificationBar:(NSString*)text duration:(float)duration animated:(BOOL)animated
+{
+    if(animated){
+        NSString *notificationText = [[NSString alloc] initWithFormat:@"%@", text];
+        loadingPanel = [AJNotificationView showNoticeInView:self.view
+                                        type:AJNotificationTypeDefault
+                                       title:notificationText
+                             linedBackground:AJLinedBackgroundTypeAnimated
+                                   hideAfter:duration
+                                      offset:0.0f
+                                       delay:0.0f
+                                    response:^{}
+         ];
+    } else {
+        NSString *notificationText = [[NSString alloc] initWithFormat:@"%@", text];
+        loadingPanel = [AJNotificationView showNoticeInView:self.view
+                                        type:AJNotificationTypeDefault
+                                       title:notificationText
+                             linedBackground:AJLinedBackgroundTypeDisabled
+                                   hideAfter:duration
+                                      offset:0.0f
+                                       delay:0.0f
+                                    response:^{}
+         ];
+    }
+    
 }
 
 //While doing request show loading icon
@@ -85,7 +103,7 @@
 //Function for generating color for header
 -(void)generateHeaderColor
 {
-    NSLog(@"STATUS:%@",[[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"status"]);
+    //NSLog(@"STATUS:%@",[[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"status"]);
     
     if([[[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"status"] isEqualToString:@"Pending"]){
         
@@ -110,11 +128,19 @@
     }
 }
 
+//Add scrollview to screen
+-(void)makeScrollview
+{
+    orderInfoScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, [constants getScreenHeight] - 40)];
+    [self.view addSubview:orderInfoScrollView];
+}
+
+//Make content for scrollview
 - (void)makeBlocks
 {
     NSLog(@"Making blocks");
-    orderInfoScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, [constants getScreenHeight] - 40)];
-    [self.view addSubview:orderInfoScrollView];
+    //For checking if scroll is already initialized
+    numberOfScrolls++;
     
     //Set color for headers
     [self generateHeaderColor];
@@ -127,7 +153,11 @@
     [self orderBillingHolder];
     [self orderProducts];
     [self orderTotals];
-    [self orderInfoScrollView];
+    
+    //If scroll is not initialized define height of scrollview
+    if(numberOfScrolls <= 1){
+        [self orderInfoScrollView];
+    }
 }
 
 //Function for making subheader
@@ -181,7 +211,7 @@
 }
 
 -(void)orderStatisticsHolder{
-    NSLog(@"Creating block Statistics");
+    //NSLog(@"Creating block Statistics");
     //Add to Scroll View Height
     scrollViewHeight += (110 + 10);
     
@@ -272,7 +302,7 @@
 
 -(void)orderShippingHolder
 {
-    NSLog(@"Creating block Shipping");
+    //NSLog(@"Creating block Shipping");
     //Add to Scroll View Height
     scrollViewHeight += (150 + 10);
     
@@ -353,7 +383,7 @@
 
 -(void)orderBillingHolder
 {
-    NSLog(@"Creating block Shipping");
+    //NSLog(@"Creating block Shipping");
     //Add to Scroll View Height
     scrollViewHeight += (150 + 10);
     
@@ -437,7 +467,7 @@
     
     // Count the items
     int itemsCount = [[[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"items" ] count];
-    NSLog(@"Creating block and sublocks for %d products", itemsCount);
+    //NSLog(@"Creating block and sublocks for %d products", itemsCount);
     // The holder for all the products
     // Setting productsheight so that the totals are getting good alligned
     productsHolderHeight = (61 * itemsCount + 30);
@@ -522,7 +552,7 @@
 }
 
 -(void)orderTotals{
-    NSLog(@"Creating block Totals");
+    //NSLog(@"Creating block Totals");
     //Add to Scroll View Height
     scrollViewHeight += (210 + 10);
     
@@ -701,7 +731,7 @@
 
 -(void)orderInfoScrollView
 {
-    NSLog(@"Setting height of scrollview");
+    //NSLog(@"Setting height of scrollview");
     [orderInfoScrollView setContentSize:CGSizeMake(320, scrollViewHeight + 180)];
     
 }
@@ -714,6 +744,7 @@
     NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];
     [viewControllers removeLastObject];
     [[self navigationController] setViewControllers:viewControllers animated:YES];
+    [loadingPanel hide];
 }
 
 //Handle action for shipping the order
@@ -725,7 +756,7 @@
     BlockAlertView *alertInvoice = [BlockAlertView alertWithTitle:@"Ship order" message:@"Are you sure you want to ship this order?"];
     [alertInvoice setCancelButtonWithTitle:@"No" block:nil];
     [alertInvoice setCancelButtonWithTitle:@"Yes" block:^{
-        [self loginRequest:[shopInfo shopUrl] username:[shopInfo username] password:[shopInfo password] request:@"salesOrderShipmentCreate" requestParams:requestParams update:NO];
+        [self actionRequest:[shopInfo shopUrl] username:[shopInfo username] password:[shopInfo password] request:@"salesOrderShipmentCreate" requestParams:requestParams];
     }];
     [alertInvoice show];
 }
@@ -764,16 +795,13 @@
 {
     int invoiced = [[[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"order_invoiced"]intValue ];
     if([[orderInfo orderStatus] isEqualToString:@"Holded"]){
-        NSLog(@"Order on hold, unable to cancel");
         BlockAlertView *alertInvoice = [BlockAlertView alertWithTitle:@"Cancel order" message:@"This order can't be canceled because it's been put on hold."];
         [alertInvoice setCancelButtonWithTitle:@"Ok" block:nil];
         [alertInvoice show];
     }else if(invoiced == false){
-        NSLog(@"Order not invoiced, able to cancel");
-        [self loginRequest:[shopInfo shopUrl] username:[shopInfo username] password:[shopInfo password] request:@"salesOrderCancel" requestParams:[orderInfo orderId] update:NO];
+        [self actionRequest:[shopInfo shopUrl] username:[shopInfo username] password:[shopInfo password] request:@"salesOrderCancel" requestParams:[orderInfo orderId]];
         
     } else if(invoiced == true) {
-        NSLog(@"Order already invoiced, unable to cancel");
         BlockAlertView *alertInvoice = [BlockAlertView alertWithTitle:@"Cancel order" message:@"This order can't be canceled because it's already been invoiced."];
         [alertInvoice setCancelButtonWithTitle:@"Ok" block:nil];
         [alertInvoice show];
@@ -811,7 +839,7 @@
 //If the 'Invoice' button is pressed
 -(void)requestInvoice{
     
-    NSLog(@"Creating Invoice initiated");
+    //NSLog(@"Creating Invoice initiated");
     int itemsCount = [[[orderInfoHolder valueForKey:@"data-items"] valueForKey:@"items" ] count];
     NSMutableString* requestParams = [NSMutableString string];
     [requestParams appendString:[orderInfo orderId] ];
@@ -823,20 +851,23 @@
         [requestParams appendString:[NSString stringWithFormat:@"|%@ . %@", itemId, qtyText] ];
     }
     
-    NSLog(@"Created product string: %@", requestParams);
-    [self loginRequest:[shopInfo shopUrl] username:[shopInfo username] password:[shopInfo password] request:@"salesOrderInvoiceCreate" requestParams:requestParams update:NO];
+    //NSLog(@"Created product string: %@", requestParams);
+    [self actionRequest:[shopInfo shopUrl] username:[shopInfo username] password:[shopInfo password] request:@"salesOrderInvoiceCreate" requestParams:requestParams];
     scrollViewHeight = 0;
 }
 
 //If the 'Hold' button is pressed
 -(void)requestHold:(NSString*)type{
     
-    NSLog(@"Hold order request initiated");
+    //Show loading notification
+    [self constructNotificationBar:@"Changing status.." duration:0 animated:YES];
+    
+    //NSLog(@"Hold order request initiated");
     NSMutableString* requestParams = [NSMutableString string];
     [requestParams appendString:[orderInfo orderId]];
     
-    NSLog(@"Created product string: %@", requestParams);
-    [self loginRequest:[shopInfo shopUrl] username:[shopInfo username] password:[shopInfo password] request:type requestParams:requestParams update:NO];
+    //NSLog(@"Created product string: %@", requestParams);
+    [self actionRequest:[shopInfo shopUrl] username:[shopInfo username] password:[shopInfo password] request:type requestParams:requestParams];
     
     //Scrollview reloaden
     scrollViewHeight = 0;
@@ -858,8 +889,22 @@
     } else {
         [params setObject:@"0" forKey:@"update"];
     }
-    NSLog(@"Shop %@ with username %@", shopUrl, username);
-    NSLog(@"Executing %@ with params %@", requestFunction, requestParams);
+    //NSLog(@"Shop %@ with username %@", shopUrl, username);
+    //NSLog(@"Executing %@ with params %@", requestFunction, requestParams);
+    [[LRResty client] post:@"http://www.magboard.nl/api2/index.php" payload:params delegate:self];
+}
+
+//Request for changing status
+-(void)actionRequest:(NSString *)shopUrl username:(NSString *)username password:(NSString *)password request:(NSString *)requestFunction requestParams:(NSString *)requestParams
+{
+    NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
+    [params setObject:shopUrl forKey:@"url"];
+    [params setObject:username forKey:@"username"];
+    [params setObject:password forKey:@"password"];
+    [params setObject:requestFunction forKey:@"requestFunction"];
+    [params setObject:requestParams forKey:@"requestParams"];
+    //NSLog(@"Shop %@ with username %@", shopUrl, username);
+    //NSLog(@"Executing %@ with params %@", requestFunction, requestParams);
     [[LRResty client] post:@"http://www.magboard.nl/api2/index.php" payload:params delegate:self];
 }
 
@@ -870,48 +915,57 @@
         orderInfoHolder = [NSJSONSerialization JSONObjectWithData:[response responseData] options:kNilOptions error:nil];
         if([orderInfoHolder valueForKey:@"message"] != NULL)
         {
-           
-            NSLog(@"Status: %@", [orderInfoHolder valueForKey:@"session"]);
-            NSLog(@"Code: %@", [orderInfoHolder valueForKey:@"message"]);
             
+            //NSLog(@"Status: %@", [orderInfoHolder valueForKey:@"session"]);
+            //NSLog(@"Code: %@", [orderInfoHolder valueForKey:@"message"]);
+            //NSLog(@"Data-items: %@", [orderInfoHolder valueForKey:@"data-items"]);
+            //Check what type of data is given back (1002 is orderInfo, 1003 is invoiceCreate)
             if([[orderInfoHolder valueForKey:@"message"] isEqualToString: @"1002"]){
                 orderInfo.orderStatus = [[orderInfoHolder objectForKey:@"data-items"] objectForKey:@"status"];
                 [loadingHolder removeFromSuperview];
                 if(firstRun == YES){
+                    [self makeScrollview];
+                    [self makeBlocks];
                     [self updateOrderInfo];
                     firstRun = NO;
                 } else {
-                    [self updateOrderInfo];
+                    [self makeBlocks];
+                    if(loadingPanel){
+                        [loadingPanel hide];
+                    }
                 }
             }
             
-            else if([[orderInfoHolder valueForKey:@"message"] isEqualToString: @"1003"]){
-                NSLog(@"Order has been put on hold");
-                [self reloadScrollview];
+            else if([[orderInfoHolder valueForKey:@"message"] isEqualToString: @"1003"])
+            {
+                //NSLog(@"Order has been put on hold");
+                [self updateOrderInfo];
+                
+            }
+            else if([[orderInfoHolder valueForKey:@"message"] isEqualToString: @"1004"])
+            {
+                //NSLog(@"Order has been unholded");
+                [self updateOrderInfo];
             }
             
-            else if([[orderInfoHolder valueForKey:@"message"] isEqualToString: @"1004"]){
-                NSLog(@"Order has been unholded");
-                [self reloadScrollview];
-            }
-            
-            else if([[orderInfoHolder valueForKey:@"message"] isEqualToString: @"1005"]){
-                NSLog(@"Order has been canceled");
-                [self reloadScrollview];
+            else if([[orderInfoHolder valueForKey:@"message"] isEqualToString: @"1005"])
+            {
+                //NSLog(@"Order has been canceled");
+                [self updateOrderInfo];
             }
             
             else {
-                 NSLog(@"Message: %@", [orderInfoHolder valueForKey:@"data-items"]);
+                //NSLog(@"Message: %@", [orderInfoHolder valueForKey:@"data-items"]);
                 [loadingIcon stopAnimating];
                 [loadingHolder removeFromSuperview];
             }
-        
-        } else{
-            NSLog(@"Something went wrong in the API");
+            
+        } else
+        {
+            //NSLog(@"Something went wrong in the API");
         }
-        
     } else {
-        NSLog(@"Er ging iets mis %d", [response status]);
+        //NSLog(@"Er ging iets mis %d", [response status]);
         if(firstRun == YES){
             [self backButtonTouched];
         }
@@ -922,9 +976,7 @@
 -(void)updateOrderInfo
 {
     [self loginRequest:[shopInfo shopUrl] username:[shopInfo username] password:[shopInfo password]  request:@"salesOrderInfo" requestParams:[orderInfo orderId] update:YES];
-    [orderInfoScrollView removeFromSuperview];
-    [self makeBlocks];
-    
 }
+
 
 @end
