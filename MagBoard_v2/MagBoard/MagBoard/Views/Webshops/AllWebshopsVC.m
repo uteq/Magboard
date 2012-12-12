@@ -166,14 +166,9 @@
         [shopHolder addSubview:loginButton];
         
         //Add screenshot holder
-        UIImage * screenshot = [UIImage imageNamed:@"screenshot_placeholder"];
-        UIImageView * screenshotHolder = [[UIImageView alloc] initWithFrame:CGRectMake(23.0f, 10.0f, 234.0f, 154.0f)];
+        UIImage * screenshot = [UIImage imageNamed:@"shop_avatar_holder"];
+        UIImageView * screenshotHolder = [[UIImageView alloc] initWithFrame:CGRectMake(2.5f, 10.0f, 275.0f, 187.0f)];
         screenshotHolder.image = screenshot;
-        [screenshotHolder.layer setBorderColor: [[UIColor whiteColor] CGColor]];
-        [screenshotHolder.layer setBorderWidth: 7.0];
-//        screenshotHolder.layer.shadowColor = [UIColor blackColor].CGColor;
-//        screenshotHolder.layer.shadowOffset = CGSizeMake(0, 2);
-//        screenshotHolder.layer.shadowOpacity = 0.8;
         [shopHolder addSubview:screenshotHolder];
         
         //Add shop name

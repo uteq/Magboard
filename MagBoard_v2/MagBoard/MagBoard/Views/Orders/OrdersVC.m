@@ -133,6 +133,22 @@
     
 }
 
+-(void)constructNotificationBar:(NSString*)text duration:(float)duration
+{
+
+    NSString *notificationText = [[NSString alloc] initWithFormat:@"%@", text];
+    [AJNotificationView showNoticeInView:self.view
+                                    type:AJNotificationTypeDefault
+                                   title:notificationText
+                         linedBackground:AJLinedBackgroundTypeDisabled
+                               hideAfter:duration
+                                  offset:0.0f
+                                   delay:0.0f
+                                response:^{[self titleTap];}
+     ];
+    
+}
+
 #pragma mark Button actions
 
 ///////////////////////////////////////////////////////
@@ -221,7 +237,7 @@
         [params setObject:@"0" forKey:@"update"];
     }
 
-    [[LRResty client] post:@"http://www.leoflapper.nl/api2/index.php" payload:params delegate:self];
+    [[LRResty client] post:@"http://www.magboard.nl/api2/index.php" payload:params delegate:self];
 }
 
 //Catch response for request
@@ -291,50 +307,18 @@
         if(newOrders != 0){
             if(newOrders == 1){
                 [loadingPanel hide];
-                NSString *notificationText = [[NSString alloc] initWithFormat:@"There's 1 new order"];
-                [AJNotificationView showNoticeInView:self.view
-                                                type:AJNotificationTypeDefault
-                                               title:notificationText
-                                     linedBackground:AJLinedBackgroundTypeDisabled
-                                           hideAfter:2.5f
-                                              offset:0.0f
-                                               delay:0.0f
-                                            response:^{[self titleTap];}
-                 ];
-
-            
+                [self constructNotificationBar:@"There is 1 new update" duration:2.5f];
             
             } else {
                 [loadingPanel hide];
                 NSString *notificationText = [[NSString alloc] initWithFormat:@"There are %d new orders", newOrders];
-                [AJNotificationView showNoticeInView:self.view
-                                                type:AJNotificationTypeDefault
-                                               title:notificationText
-                                     linedBackground:AJLinedBackgroundTypeDisabled
-                                           hideAfter:2.5f
-                                              offset:0.0f
-                                               delay:0.0f
-                                            response:^{
-                                                NSLog(@"User tapped the notification");
-                                            }
-                 ];
+                [self constructNotificationBar:notificationText duration:2.5f];
             }
              
         } else {
     
            [loadingPanel hide];
-            NSString *notificationText = [[NSString alloc] initWithFormat:@"No new orders found", newOrders];
-            [AJNotificationView showNoticeInView:self.view
-                                            type:AJNotificationTypeDefault
-                                           title:notificationText
-                                 linedBackground:AJLinedBackgroundTypeDisabled
-                                       hideAfter:2.5f
-                                          offset:0.0f
-                                           delay:0.0f
-                                        response:^{
-                                            
-                                        }
-             ];
+            [self constructNotificationBar:@"No new orders found.." duration:2.5f];
             
         }
        
@@ -417,22 +401,14 @@
         [ordersTable reloadData];
         
         NSString *notificationText = [[NSString alloc] initWithFormat:@"Showing %@", status];
-        [AJNotificationView showNoticeInView:self.view
-                                        type:AJNotificationTypeDefault
-                                       title:notificationText
-                             linedBackground:AJLinedBackgroundTypeDisabled
-                                   hideAfter:1.0f];
+        [self constructNotificationBar:notificationText duration:1.0f];
     } else {
         
         sorting = NO;
         [ordersTable reloadData];
         
         NSString *notificationText = [[NSString alloc] initWithFormat:@"Showing %@", status];
-        [AJNotificationView showNoticeInView:self.view
-                                        type:AJNotificationTypeDefault
-                                       title:notificationText
-                             linedBackground:AJLinedBackgroundTypeDisabled
-                                   hideAfter:1.0f];
+        [self constructNotificationBar:notificationText duration:1.0f];
         
     }
 }

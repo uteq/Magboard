@@ -18,6 +18,8 @@
 		954233C71652886B00F2C310 /* tabbar_orders@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 954233C31652886B00F2C310 /* tabbar_orders@2x.png */; };
 		954233C916528FB200F2C310 /* bar_button_empty@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 954233C816528FB200F2C310 /* bar_button_empty@2x.png */; };
 		95485C92165CD30C002F1985 /* constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 95485C91165CD30C002F1985 /* constants.m */; };
+		955090BE167752E900D66AA8 /* shop_avatar_holder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 955090BD167752E900D66AA8 /* shop_avatar_holder@2x.png */; };
+		955090C1167752F500D66AA8 /* shop_avatar_holder.png in Resources */ = {isa = PBXBuildFile; fileRef = 955090C0167752F500D66AA8 /* shop_avatar_holder.png */; };
 		95766567164125B400B68687 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95766566164125B400B68687 /* UIKit.framework */; };
 		95766569164125B400B68687 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95766568164125B400B68687 /* Foundation.framework */; };
 		9576656B164125B400B68687 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9576656A164125B400B68687 /* CoreGraphics.framework */; };
@@ -137,6 +139,8 @@
 		954233C816528FB200F2C310 /* bar_button_empty@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bar_button_empty@2x.png"; path = "Resources/Images/Retina/bar_button_empty@2x.png"; sourceTree = "<group>"; };
 		95485C90165CD30C002F1985 /* constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = constants.h; path = Helpers/constants.h; sourceTree = "<group>"; };
 		95485C91165CD30C002F1985 /* constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = constants.m; path = Helpers/constants.m; sourceTree = "<group>"; };
+		955090BD167752E900D66AA8 /* shop_avatar_holder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "shop_avatar_holder@2x.png"; path = "Resources/Images/Retina/shop_avatar_holder@2x.png"; sourceTree = "<group>"; };
+		955090C0167752F500D66AA8 /* shop_avatar_holder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = shop_avatar_holder.png; path = "Resources/Images/Non-retina/shop_avatar_holder.png"; sourceTree = "<group>"; };
 		95766562164125B400B68687 /* MagBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MagBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95766566164125B400B68687 /* UIKit.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		95766568164125B400B68687 /* Foundation.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -429,6 +433,7 @@
 		957665BE16412EF400B68687 /* Retina */ = {
 			isa = PBXGroup;
 			children = (
+				955090BD167752E900D66AA8 /* shop_avatar_holder@2x.png */,
 				95BA1AC1166CCFE6007BC971 /* screenshot_placeholder@2x.png */,
 				CEE78BE0165BDD1300E204C9 /* icon@2x.png */,
 				CEE78BC7165B9BBB00E204C9 /* Instructions */,
@@ -462,6 +467,7 @@
 		957665BF16412EFB00B68687 /* Non-retina */ = {
 			isa = PBXGroup;
 			children = (
+				955090C0167752F500D66AA8 /* shop_avatar_holder.png */,
 				95BA1AC3166CCFF1007BC971 /* screenshot_placeholder.png */,
 				CEE78BDE165BDD0A00E204C9 /* icon.png */,
 				CEE78BC1165B9ABF00E204C9 /* Instructions */,
@@ -803,6 +809,8 @@
 				95BA1AC0166CC89A007BC971 /* instr_6.png in Resources */,
 				95BA1AC2166CCFE6007BC971 /* screenshot_placeholder@2x.png in Resources */,
 				95BA1AC4166CCFF1007BC971 /* screenshot_placeholder.png in Resources */,
+				955090BE167752E900D66AA8 /* shop_avatar_holder@2x.png in Resources */,
+				955090C1167752F500D66AA8 /* shop_avatar_holder.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
