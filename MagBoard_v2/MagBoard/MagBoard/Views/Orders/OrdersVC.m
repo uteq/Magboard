@@ -781,9 +781,8 @@
         //NSLog(@"All fields: %@", [orderHolder valueForKey:@"data-items"]);
     } else {
     
-        UIFont *font = [UIFont fontWithName:@"Lobster 1.3" size:18.0f];
+        UIFont *font = [UIFont fontWithName:@"Lobster 1.3" size:16.0f];
         UILabel *orderName = [[UILabel alloc] initWithFrame:CGRectMake(20, 30, 280, 20)];
-        orderName.font = [UIFont boldSystemFontOfSize:12.0f];
         orderName.backgroundColor = [UIColor clearColor];
         orderName.font = font;
         orderName.textAlignment = UITextAlignmentCenter;

@@ -799,7 +799,12 @@
         [alertInvoice setCancelButtonWithTitle:@"Ok" block:nil];
         [alertInvoice show];
     }else if(invoiced == false){
-        [self actionRequest:[shopInfo shopUrl] username:[shopInfo username] password:[shopInfo password] request:@"salesOrderCancel" requestParams:[orderInfo orderId]];
+        BlockAlertView *alertInvoice = [BlockAlertView alertWithTitle:@"Cancel order" message:@"Are you sure you want to cancel this order? The action cannot be reverted."];
+        [alertInvoice setCancelButtonWithTitle:@"No" block:nil];
+        [alertInvoice setCancelButtonWithTitle:@"Yes" block:^{
+            [self actionRequest:[shopInfo shopUrl] username:[shopInfo username] password:[shopInfo password] request:@"salesOrderCancel" requestParams:[orderInfo orderId]];
+        }];
+        [alertInvoice show];
         
     } else if(invoiced == true) {
         BlockAlertView *alertInvoice = [BlockAlertView alertWithTitle:@"Cancel order" message:@"This order can't be canceled because it's already been invoiced."];
@@ -859,9 +864,6 @@
 //If the 'Hold' button is pressed
 -(void)requestHold:(NSString*)type{
     
-    //Show loading notification
-    [self constructNotificationBar:@"Changing status.." duration:0 animated:YES];
-    
     //NSLog(@"Hold order request initiated");
     NSMutableString* requestParams = [NSMutableString string];
     [requestParams appendString:[orderInfo orderId]];
@@ -897,6 +899,9 @@
 //Request for changing status
 -(void)actionRequest:(NSString *)shopUrl username:(NSString *)username password:(NSString *)password request:(NSString *)requestFunction requestParams:(NSString *)requestParams
 {
+    //Show loading notification
+    [self constructNotificationBar:@"Changing status.." duration:0 animated:YES];
+    
     NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
     [params setObject:shopUrl forKey:@"url"];
     [params setObject:username forKey:@"username"];
