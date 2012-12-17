@@ -8,9 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		183EDE67F4614EA7B821087D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C53D467431945D9A56F0FD1 /* libPods.a */; };
-		9518C96B167F1BD100749A2D /* FilterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9518C96A167F1BD100749A2D /* FilterTests.m */; };
 		9518C973167F39C000749A2D /* DashboardVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9518C972167F39C000749A2D /* DashboardVC.m */; };
-		9518C974167F39C000749A2D /* DashboardVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9518C972167F39C000749A2D /* DashboardVC.m */; };
 		954233BB1652885800F2C310 /* tabbar_dashboard_active.png in Resources */ = {isa = PBXBuildFile; fileRef = 954233B71652885800F2C310 /* tabbar_dashboard_active.png */; };
 		954233BC1652885800F2C310 /* tabbar_dashboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 954233B81652885800F2C310 /* tabbar_dashboard.png */; };
 		954233BD1652885800F2C310 /* tabbar_orders_active.png in Resources */ = {isa = PBXBuildFile; fileRef = 954233B91652885800F2C310 /* tabbar_orders_active.png */; };
@@ -34,12 +32,6 @@
 		9576657D164125B400B68687 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9576657C164125B400B68687 /* Default@2x.png */; };
 		9576657F164125B400B68687 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9576657E164125B400B68687 /* Default-568h@2x.png */; };
 		95766582164125B400B68687 /* MagBoard.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 95766580164125B400B68687 /* MagBoard.xcdatamodeld */; };
-		9576658A164125B400B68687 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95766589164125B400B68687 /* SenTestingKit.framework */; };
-		9576658B164125B400B68687 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95766566164125B400B68687 /* UIKit.framework */; };
-		9576658C164125B400B68687 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95766568164125B400B68687 /* Foundation.framework */; };
-		9576658D164125B400B68687 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9576656C164125B400B68687 /* CoreData.framework */; };
-		95766595164125B400B68687 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 95766593164125B400B68687 /* InfoPlist.strings */; };
-		95766598164125B400B68687 /* MagBoardTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 95766597164125B400B68687 /* MagBoardTests.m */; };
 		957665D11641314800B68687 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 957665D01641314800B68687 /* QuartzCore.framework */; };
 		957665D41641328900B68687 /* CustomNavBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 957665D31641328900B68687 /* CustomNavBar.m */; };
 		957665DE1641338800B68687 /* back_button_top.png in Resources */ = {isa = PBXBuildFile; fileRef = 957665D51641338800B68687 /* back_button_top.png */; };
@@ -129,13 +121,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		9576658E164125B400B68687 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 95766559164125B400B68687 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 95766561164125B400B68687;
-			remoteInfo = MagBoard;
-		};
 		959CD4F8167E140500A7C4D1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 959CD4ED167E140400A7C4D1 /* Pods.xcodeproj */;
@@ -169,7 +154,6 @@
 /* Begin PBXFileReference section */
 		0C53D467431945D9A56F0FD1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8886B73E60E04F26BDA416E3 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
-		9518C96A167F1BD100749A2D /* FilterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterTests.m; sourceTree = "<group>"; };
 		9518C971167F39C000749A2D /* DashboardVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DashboardVC.h; path = Views/Dashboard/DashboardVC.h; sourceTree = "<group>"; };
 		9518C972167F39C000749A2D /* DashboardVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DashboardVC.m; path = Views/Dashboard/DashboardVC.m; sourceTree = "<group>"; };
 		954233B71652885800F2C310 /* tabbar_dashboard_active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tabbar_dashboard_active.png; path = "Resources/Images/Non-retina/tabbar_dashboard_active.png"; sourceTree = "<group>"; };
@@ -200,12 +184,7 @@
 		9576657C164125B400B68687 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		9576657E164125B400B68687 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		95766581164125B400B68687 /* MagBoard.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MagBoard.xcdatamodel; sourceTree = "<group>"; };
-		95766588164125B400B68687 /* MagBoardTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MagBoardTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		95766589164125B400B68687 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		95766592164125B400B68687 /* MagBoardTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MagBoardTests-Info.plist"; sourceTree = "<group>"; };
-		95766594164125B400B68687 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		95766596164125B400B68687 /* MagBoardTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MagBoardTests.h; sourceTree = "<group>"; };
-		95766597164125B400B68687 /* MagBoardTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MagBoardTests.m; sourceTree = "<group>"; };
 		957665CD1641308A00B68687 /* Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Helpers.h; path = Helpers/Helpers.h; sourceTree = "<group>"; };
 		957665D01641314800B68687 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		957665D21641328900B68687 /* CustomNavBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomNavBar.h; path = Helpers/UI/CustomNavBar.h; sourceTree = "<group>"; };
@@ -550,17 +529,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		95766584164125B400B68687 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9576658A164125B400B68687 /* SenTestingKit.framework in Frameworks */,
-				9576658B164125B400B68687 /* UIKit.framework in Frameworks */,
-				9576658C164125B400B68687 /* Foundation.framework in Frameworks */,
-				9576658D164125B400B68687 /* CoreData.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		959CD3AF167E0CD000A7C4D1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -589,7 +557,6 @@
 			children = (
 				959CD3E0167E140400A7C4D1 /* Pods */,
 				9576656E164125B400B68687 /* MagBoard */,
-				95766590164125B400B68687 /* MagBoardTests */,
 				959CD3B7167E0CD000A7C4D1 /* UnitTests */,
 				95766565164125B400B68687 /* Frameworks */,
 				95766563164125B400B68687 /* Products */,
@@ -601,7 +568,6 @@
 			isa = PBXGroup;
 			children = (
 				95766562164125B400B68687 /* MagBoard.app */,
-				95766588164125B400B68687 /* MagBoardTests.octest */,
 				959CD3B2167E0CD000A7C4D1 /* UnitTests.app */,
 			);
 			name = Products;
@@ -648,25 +614,6 @@
 				9576657A164125B400B68687 /* Default.png */,
 				9576657C164125B400B68687 /* Default@2x.png */,
 				9576657E164125B400B68687 /* Default-568h@2x.png */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		95766590164125B400B68687 /* MagBoardTests */ = {
-			isa = PBXGroup;
-			children = (
-				95766596164125B400B68687 /* MagBoardTests.h */,
-				95766597164125B400B68687 /* MagBoardTests.m */,
-				95766591164125B400B68687 /* Supporting Files */,
-			);
-			path = MagBoardTests;
-			sourceTree = "<group>";
-		};
-		95766591164125B400B68687 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				95766592164125B400B68687 /* MagBoardTests-Info.plist */,
-				95766593164125B400B68687 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -932,7 +879,6 @@
 			children = (
 				959CD3B8167E0CD000A7C4D1 /* Supporting Files */,
 				959CD3D0167E0ECD00A7C4D1 /* SearchTests.m */,
-				9518C96A167F1BD100749A2D /* FilterTests.m */,
 			);
 			path = UnitTests;
 			sourceTree = "<group>";
@@ -1642,25 +1588,6 @@
 			productReference = 95766562164125B400B68687 /* MagBoard.app */;
 			productType = "com.apple.product-type.application";
 		};
-		95766587164125B400B68687 /* MagBoardTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 9576659E164125B400B68687 /* Build configuration list for PBXNativeTarget "MagBoardTests" */;
-			buildPhases = (
-				95766583164125B400B68687 /* Sources */,
-				95766584164125B400B68687 /* Frameworks */,
-				95766585164125B400B68687 /* Resources */,
-				95766586164125B400B68687 /* ShellScript */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				9576658F164125B400B68687 /* PBXTargetDependency */,
-			);
-			name = MagBoardTests;
-			productName = MagBoardTests;
-			productReference = 95766588164125B400B68687 /* MagBoardTests.octest */;
-			productType = "com.apple.product-type.bundle";
-		};
 		959CD3B1167E0CD000A7C4D1 /* UnitTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 959CD3CB167E0CD000A7C4D1 /* Build configuration list for PBXNativeTarget "UnitTests" */;
@@ -1708,7 +1635,6 @@
 			projectRoot = "";
 			targets = (
 				95766561164125B400B68687 /* MagBoard */,
-				95766587164125B400B68687 /* MagBoardTests */,
 				959CD3B1167E0CD000A7C4D1 /* UnitTests */,
 			);
 		};
@@ -1809,14 +1735,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		95766585164125B400B68687 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				95766595164125B400B68687 /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		959CD3B0167E0CD000A7C4D1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1831,19 +1749,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		95766586164125B400B68687 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
-		};
 		BA5A63AB14B74E23BB32FC08 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1886,33 +1791,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		95766583164125B400B68687 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				95766598164125B400B68687 /* MagBoardTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		959CD3AE167E0CD000A7C4D1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				959CD3BE167E0CD000A7C4D1 /* main.m in Sources */,
 				959CD3D1167E0ECD00A7C4D1 /* SearchTests.m in Sources */,
-				9518C96B167F1BD100749A2D /* FilterTests.m in Sources */,
-				9518C974167F39C000749A2D /* DashboardVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		9576658F164125B400B68687 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 95766561164125B400B68687 /* MagBoard */;
-			targetProxy = 9576658E164125B400B68687 /* PBXContainerItemProxy */;
-		};
 		959CD4FD167E142E00A7C4D1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Pods;
@@ -1935,14 +1825,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				95766572164125B400B68687 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		95766593164125B400B68687 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				95766594164125B400B68687 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -2032,40 +1914,6 @@
 			};
 			name = Release;
 		};
-		9576659F164125B400B68687 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MagBoard.app/MagBoard";
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "MagBoard/MagBoard-Prefix.pch";
-				INFOPLIST_FILE = "MagBoardTests/MagBoardTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Debug;
-		};
-		957665A0164125B400B68687 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MagBoard.app/MagBoard";
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "MagBoard/MagBoard-Prefix.pch";
-				INFOPLIST_FILE = "MagBoardTests/MagBoardTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Release;
-		};
 		959CD3C9167E0CD000A7C4D1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2125,15 +1973,6 @@
 			buildConfigurations = (
 				9576659C164125B400B68687 /* Debug */,
 				9576659D164125B400B68687 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		9576659E164125B400B68687 /* Build configuration list for PBXNativeTarget "MagBoardTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				9576659F164125B400B68687 /* Debug */,
-				957665A0164125B400B68687 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
