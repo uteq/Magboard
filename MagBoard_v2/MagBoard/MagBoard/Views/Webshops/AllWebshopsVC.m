@@ -18,7 +18,7 @@
 
 @implementation AllWebshopsVC
 
-@synthesize shopsScroller, noShopsLabel, allShops, pageControl, scrollerAtIndex;
+@synthesize shopsScroller, noShopsLabel, allShops, pageControl, scrollerAtIndex, shopHolder;
 
 - (void)viewDidLoad
 {
@@ -27,6 +27,8 @@
     [self fetchAllShops];
     if(allShops == nil){
         [self goToInstructions];
+    } else {
+        
     }
     [self drawNavigationBar];
     [self makeButtons];
@@ -152,10 +154,11 @@
     for(int i = 0; i < [allShops count]; i++)
     {
         NSString *name = [[allShops objectAtIndex:i] name];
+        
         int pagePosition = 320 * i;
         
         //Add shopHolder
-        UIView * shopHolder = [[UIView alloc] initWithFrame:CGRectMake(pagePosition + 20, 20.0f, 280.0f, 250.0f)];
+        shopHolder = [[UIView alloc] initWithFrame:CGRectMake(pagePosition + 20, 20.0f, 280.0f, 250.0f)];
         shopHolder.backgroundColor = [UIColor clearColor];
         [shopsScroller addSubview:shopHolder];
         
@@ -168,7 +171,7 @@
         [shopHolder addSubview:loginButton];
         
         //Add screenshot holder
-        UIImage * screenshot = [UIImage imageNamed:@"shop_avatar_holder"];
+        UIImage *screenshot = [UIImage imageNamed:@"shop_avatar_holder"];
         UIImageView * screenshotHolder = [[UIImageView alloc] initWithFrame:CGRectMake(2.5f, 10.0f, 275.0f, 187.0f)];
         screenshotHolder.image = screenshot;
         [shopHolder addSubview:screenshotHolder];
@@ -183,9 +186,41 @@
         shopName.shadowColor = [UIColor blackColor];
         shopName.shadowOffset = CGSizeMake(1, 1);
         [shopHolder addSubview:shopName];
+        
+        //load thumbnail
+        thumbnailTransition = NO;
+        NSURL *shopUrl = [[allShops objectAtIndex:i] url];
+        [self getThumbnail:shopUrl];
     }
 }
+//Getting the thumbnail for the shop
+-(void)getThumbnail:(NSURL*)shopUrl
+{
+    NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *pngFilePath = [NSString stringWithFormat:@"%@/%@.png",docDir, shopUrl];
 
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    if ([fileManager fileExistsAtPath:pngFilePath]){
+        UIImage *thumbnail = [UIImage imageWithContentsOfFile:pngFilePath];
+        UIImageView * thumbnailHolder = [[UIImageView alloc] initWithFrame:CGRectMake(59.5f, 35.5f, 163.5f, 98.0f)];
+        thumbnailHolder.image = thumbnail;
+        if(thumbnailTransition == YES){
+            thumbnailHolder.alpha = 0.0;
+            [UIView beginAnimations:@"fade in" context:nil];
+            [UIView setAnimationDuration:1.0];
+            thumbnailHolder.alpha = 1.0;
+            [UIView commitAnimations];
+            [shopHolder addSubview:thumbnailHolder];
+        } else {
+            [shopHolder addSubview:thumbnailHolder];   
+        }
+    } else {
+        //If the file does not exist, it is probably still downloading. Do the same function every 3 seconds.
+        thumbnailTransition = YES;
+        [self performSelector:@selector(getThumbnail:) withObject:shopUrl afterDelay:3.0 ];
+    }
+}
 //Draw dots for scroller
 -(void)shopsControlDots
 {

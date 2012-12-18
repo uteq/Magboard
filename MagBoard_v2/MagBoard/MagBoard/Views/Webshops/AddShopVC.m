@@ -15,7 +15,7 @@
 
 @implementation AddShopVC
 
-@synthesize shopName, shopUrl,username, password, passwordSwitch, message, alertTitle, empty, urlRegEx, urlTest, update;
+@synthesize shopName, shopUrl,username, password, passwordSwitch, message, alertTitle, empty, urlRegEx, urlTest, apiResponse;
 
 - (void)viewDidLoad
 {
@@ -258,6 +258,7 @@
         {
             NSLog(@"shop gesaved");
             [self updateOrders];
+            [self getThumbnail];
             [self backToHome];
             
             //Set new referer
@@ -294,6 +295,8 @@
         [params setObject:@"0" forKey:@"update"];
     }
     
+    NSLog(@"%d", magUpdate);
+    
     [[LRResty client] post:@"http://www.magboard.nl/api2/index.php" payload:params delegate:self];
 }
 
@@ -303,11 +306,14 @@
     // do something with the response
     if(response.status == 200) {
         
-        update = [NSJSONSerialization JSONObjectWithData:[response responseData] options:kNilOptions error:nil];
-        if([[update valueForKey:@"message"]isEqualToString:@"1001"]){
+        apiResponse = [NSJSONSerialization JSONObjectWithData:[response responseData] options:kNilOptions error:nil];
+        NSLog(@"%@", [apiResponse valueForKey:@"message"]);
+        if([[apiResponse valueForKey:@"message"]isEqualToString:@"1001"]){
             NSLog(@"Shop orders have been added to the cache.");
+        } else if([[apiResponse valueForKey:@"message"]isEqualToString:@"1006"]) {
+            [self saveThumbnail];
         } else {
-            NSLog(@"Shop orders have not been cached error: %@", [update valueForKey:@"status"]);
+             NSLog(@"Shop orders have not been cached error: %@", [apiResponse valueForKey:@"status"]);
         }
     }
     
@@ -326,4 +332,34 @@
     [textField resignFirstResponder];
 }
 
+// Getting thumbnail
+-(void)getThumbnail
+{
+    NSLog(@"Getting thumbnail from Magento Shop:%@,%@, %@, ", shopUrl.text, username.text, password.text);
+    [self thumbnailRequest:shopUrl.text magUsername:username.text magPassword:password.text  magRequestFunction:@"webshopWebthumbThumburl"];
+    
+}
+-(void)saveThumbnail
+{
+    NSLog(@"Saving thumbnail:%@", [apiResponse valueForKey:@"data-items"]);
+    NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *imageUrl = [[NSString alloc]initWithFormat:@"%@", [apiResponse valueForKey:@"data-items"]];
+    NSData *imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: imageUrl]];
+    NSString *pngFilePath = [NSString stringWithFormat:@"%@/%@.png",docDir, shopUrl.text];
+
+    NSData *imageFile = [NSData dataWithData:UIImagePNGRepresentation([UIImage imageWithData:imageData])];
+    [imageFile writeToFile:pngFilePath atomically:YES];
+}
+
+-(void)thumbnailRequest:(NSString *)magShopUrl magUsername:(NSString *)magUsername magPassword:(NSString *)magPassword magRequestFunction:(NSString *)magRequestFunction
+{
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setObject:magShopUrl forKey:@"url"];
+    [params setObject:magUsername forKey:@"username"];
+    [params setObject:magPassword forKey:@"password"];
+    [params setObject:magRequestFunction forKey:@"requestFunction"];
+    
+    
+    [[LRResty client] post:@"http://www.magboard.nl/api2/index.php" payload:params delegate:self];
+}
 @end

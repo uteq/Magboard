@@ -14,6 +14,9 @@
 -(void)backButtonTouched;
 -(void)makeForm;
 -(void)loginRequest:(NSString *)magShopUrl magUsername:(NSString *)magUsername magPassword:(NSString *)magPassword magRequestFunction:(NSString *)magRequestFunction magRequestParams:(NSString *)magRequestParams magUpdate:(bool)magUpdate;
+-(void)getThumbnail;
+-(void)saveThumbnail;
+-(void)thumbnailRequest:(NSString *)magShopUrl magUsername:(NSString *)magUsername magPassword:(NSString *)magPassword magRequestFunction:(NSString *)magRequestFunction;
 
 @property (strong, nonatomic) UITextField* shopName;
 @property (strong, nonatomic) UITextField* shopUrl;
@@ -25,6 +28,6 @@
 @property BOOL empty;
 @property (weak, nonatomic) NSPredicate *urlTest;
 @property (weak, nonatomic) NSString *urlRegEx;
-@property (nonatomic, retain) NSMutableDictionary *update;
+@property (nonatomic, retain) NSMutableDictionary *apiResponse;
 
 @end

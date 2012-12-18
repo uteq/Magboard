@@ -16,8 +16,13 @@
 -(void)makeAlert:(NSString*)alertTitle message:(NSString*)alertMessage button:(NSString *)buttonTitle;
 -(void)makeForm;
 -(void)loginRequest:(NSString *)magShopUrl magUsername:(NSString *)magUsername magPassword:(NSString *)magPassword magRequestFunction:(NSString *)magRequestFunction magRequestParams:(NSString *)magRequestParams magUpdate:(bool)magUpdate;
+-(void)updateThumbnail;
+-(void)saveThumbnail;
+-(void)thumbnailRequest:(NSString *)magShopUrl magUsername:(NSString *)magUsername magPassword:(NSString *)magPassword magRequestFunction:(NSString *)magRequestFunction;
+-(void)deleteThumbnail;
 
-@property (strong, nonatomic) NSMutableDictionary* update;
+
+@property (strong, nonatomic) NSMutableDictionary* apiResponse;
 @property (strong, nonatomic) UITextField* shopName;
 @property (strong, nonatomic) UITextField* shopUrl;
 @property (strong, nonatomic) UITextField* username;

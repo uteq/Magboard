@@ -9,9 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface AllWebshopsVC : UIViewController <UIScrollViewDelegate>
-
+{
+    BOOL thumbnailTransition;
+}
 @property (strong, nonatomic) UIScrollView* shopsScroller;
 @property (strong, nonatomic) UILabel* noShopsLabel;
+@property (strong, nonatomic) UIView * shopHolder;          //View for holding the shops
 @property (strong, nonatomic) NSArray* allShops;            //For holding the shops from database
 @property (assign, nonatomic) int scrollerAtIndex;          //For saving the index for the scrollview
 @property (strong, nonatomic) UIPageControl * pageControl;  //For making the pagination dots
@@ -24,6 +27,7 @@
 -(void)makeAlert;
 -(void)fetchAllShops;
 -(void)scrollToWebshop;
+-(void)getThumbnail:(NSURL*)shopUrl;
 
 //Actions for buttons
 -(void)goToInstructions;
