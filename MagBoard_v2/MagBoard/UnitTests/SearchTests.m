@@ -128,7 +128,7 @@
 - (void)testSearchForWordExists
 {
     //Set up search word
-    searchBar.text = @"a";
+    searchBar.text = @"Dennis";
     NSString *searchWord = searchBar.text;
     GHTestLog(@"There should be a result when searching with searchword: %@", searchWord);
     

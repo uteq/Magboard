@@ -8,6 +8,7 @@
 
 #import "OrdersVC.h"
 #import "OrderInfoVC.h"
+#import "DashboardVC.h"
 #import "Alert.h"
 
 @interface OrdersVC ()
@@ -164,6 +165,10 @@
 -(void)goToDashboard
 {
     NSLog(@"Dashboard button pressed");
+    DashboardVC *dashboardView = [[DashboardVC alloc] init];
+    NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];
+    [viewControllers addObject:dashboardView];
+    [[self navigationController] setViewControllers:viewControllers animated:NO];
 }
 
 -(void)doneSearching
