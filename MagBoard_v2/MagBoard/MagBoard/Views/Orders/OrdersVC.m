@@ -305,10 +305,7 @@
             }
              
         } else {
-    
-           [YRDropdownView hideDropdownInView:self.view];
-            [self constructNotificationBar:@"No new orders found.." duration:1.0f];
-            
+            [YRDropdownView hideDropdownInView:self.view];
         }
        
         

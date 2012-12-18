@@ -262,9 +262,20 @@
             [self backToHome];
             
             //Set new referer
+            NSArray *webshops = [Webshop all];
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            
             int oldId = [[defaults objectForKey:@"lastShop"] integerValue];
-            int newId = oldId + 1;
+            int newId;
+            
+            if(webshops.count >= 2){
+                newId = oldId + 1;
+                NSLog(@"Adding number");
+            } else {
+                newId = 0;
+                NSLog(@"NOT Adding number");
+            }
+            
             [defaults setInteger:newId forKey:@"lastShop"];
             [defaults synchronize];
         }

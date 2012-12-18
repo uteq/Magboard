@@ -64,8 +64,7 @@
     } else {
         self.navigationItem.rightBarButtonItem = nil;
     }
-    
-    NSLog(@"SROLLLEEERRRR = %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"lastShop"]);}
+}
 
 - (void)didReceiveMemoryWarning
 {
