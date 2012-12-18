@@ -5,6 +5,7 @@ PODS:
 - FontLabel (0.0.1)
 - LRResty (0.11.0):
   - NSData+Base64 (~> 1.0)
+- MagicalRecord (2.1.beta.1)
 - NSData+Base64 (1.0.0)
 - ObjectiveRecord (1.0)
 - TPKeyboardAvoiding (0.0.1)
@@ -14,6 +15,7 @@ DEPENDENCIES:
 - BlockAlertsAnd-ActionSheets
 - FontLabel
 - LRResty
+- MagicalRecord
 - ObjectiveRecord (= 1.0)
 - TPKeyboardAvoiding
 
@@ -22,8 +24,9 @@ SPEC CHECKSUMS:
   BlockAlertsAnd-ActionSheets: cb6379caff86c068616d112b8bfb862b0ec932a6
   FontLabel: 5f7922f69cad408bc9abc59b5044b05bf42454ed
   LRResty: 8a51275030ac5bfc6c44775d64a16dc0f9267b8e
+  MagicalRecord: 586523b576a7b8e7d5a5de301f7ea3186f9d1101
   NSData+Base64: 8b910cb8a64f45daec6fb15936c36a9a911c57ca
   ObjectiveRecord: d96681e61d28251e80772cc37ceea93dcb168363
-  TPKeyboardAvoiding: 129e3c55ac9165d0692e66f02fd1f611d917ec1a
+  TPKeyboardAvoiding: 7289409b17dc2193a3f324672283c542f17c1bb1
 
 COCOAPODS: 0.15.1

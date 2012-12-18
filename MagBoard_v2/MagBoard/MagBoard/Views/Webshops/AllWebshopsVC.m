@@ -59,8 +59,11 @@
     if([allShops count] != 0)
     {
         self.navigationItem.rightBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTarget:self selector:@selector(settingsButtonTouched) title:@"Edit"];
+    } else {
+        self.navigationItem.rightBarButtonItem = nil;
     }
-}
+    
+    NSLog(@"SROLLLEEERRRR = %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"lastShop"]);}
 
 - (void)didReceiveMemoryWarning
 {
@@ -102,10 +105,9 @@
 }
 
 //Fetch all shops from Core Data
--(NSArray*)fetchAllShops
+-(void)fetchAllShops
 {
     allShops = [Webshop all];
-    return allShops;
 }
 
 -(void)makeScrollview
@@ -199,6 +201,7 @@
         scrollPosition = [[defaults objectForKey:@"totalNumberOfShops"] integerValue];
     }
     
+    scrollerAtIndex = [[[NSUserDefaults standardUserDefaults] objectForKey:@"lastShop"] integerValue];
     pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(20.0f, 250.0f, 280.0f, 40.0f)];
     [pageControl setNumberOfPages:[allShops count]];
     [pageControl setCurrentPage:scrollPosition];

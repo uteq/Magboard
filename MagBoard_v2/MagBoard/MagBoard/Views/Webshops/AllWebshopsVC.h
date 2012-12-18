@@ -22,7 +22,7 @@
 -(void)addShopsToScrollview;
 -(void)makeButtons;
 -(void)makeAlert;
--(NSArray*)fetchAllShops;
+-(void)fetchAllShops;
 -(void)scrollToWebshop;
 
 //Actions for buttons

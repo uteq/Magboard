@@ -259,6 +259,13 @@
             NSLog(@"shop gesaved");
             [self updateOrders];
             [self backToHome];
+            
+            //Set new referer
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            int oldId = [[defaults objectForKey:@"lastShop"] integerValue];
+            int newId = oldId + 1;
+            [defaults setInteger:newId forKey:@"lastShop"];
+            [defaults synchronize];
         }
     }
 }

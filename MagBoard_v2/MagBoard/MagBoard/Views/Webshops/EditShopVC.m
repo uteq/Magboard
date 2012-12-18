@@ -279,10 +279,6 @@
 
 -(void)deleteButtonTouched
 {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:@"editShop" forKey:@"referer"];
-    [defaults setInteger:0 forKey:@"lastShop"];
-    [defaults synchronize];
     NSLog(@"Delete shop touched");
     [self makeAlert:@"Delete webshop" message:@"Are you sure you want to remove this account from MagBoard?" button:@"Delete"];
 }
@@ -292,7 +288,23 @@
     //Query opzetten om webshop met username op te halen
     NSString *findQuery = [[NSString alloc] initWithFormat:@"url == '%@'", [sharedShop shopUrl]];
     Webshop *findShop = [Webshop where:findQuery].first;
+    
+    //Delete shop from core data
     [findShop delete];
+    
+    //Set new referer
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    int oldId = [[defaults objectForKey:@"lastShop"] integerValue];
+    int newId;
+    if(oldId != 0){
+        newId = oldId - 1;
+    } else {
+        newId = oldId;
+    }
+    [defaults setInteger:newId forKey:@"lastShop"];
+    [defaults synchronize];
+    
+    //Return to home screen
     [self backButtonTouched];
 }
 
