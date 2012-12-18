@@ -14,8 +14,7 @@
 #import "BlockAlertView.h"
 #import "BlockActionSheet.h"
 #import "BlockTextPromptAlertView.h"
-#import "AJNotificationView.h"
-#import "CoreData+MagicalRecord.h"
+#import "YRDropdownView.h"
 
 //Importing Frameworks
 #import <QuartzCore/QuartzCore.h>

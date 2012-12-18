@@ -14,7 +14,7 @@
 
 @implementation OrderInfoVC
 
-@synthesize shopInfo, orderInfoHolder, orderInfo, subHeader, createInvoice, headerColor, loadingHolder, loadingIcon, loadingPanel;
+@synthesize shopInfo, orderInfoHolder, orderInfo, subHeader, createInvoice, headerColor, loadingHolder, loadingIcon;
 
 - (void)viewDidLoad
 {
@@ -51,25 +51,21 @@
 {
     if(animated){
         NSString *notificationText = [[NSString alloc] initWithFormat:@"%@", text];
-        loadingPanel = [AJNotificationView showNoticeInView:self.view
-                                        type:AJNotificationTypeDefault
-                                       title:notificationText
-                             linedBackground:AJLinedBackgroundTypeAnimated
-                                   hideAfter:duration
-                                      offset:0.0f
-                                       delay:0.0f
-                                    response:^{}
+        [YRDropdownView showDropdownInView:self.view
+                                     title:notificationText
+                                    detail:nil
+                                     image:nil
+                                  animated:YES
+                                 hideAfter:duration
          ];
     } else {
         NSString *notificationText = [[NSString alloc] initWithFormat:@"%@", text];
-        loadingPanel = [AJNotificationView showNoticeInView:self.view
-                                        type:AJNotificationTypeDefault
-                                       title:notificationText
-                             linedBackground:AJLinedBackgroundTypeDisabled
-                                   hideAfter:duration
-                                      offset:0.0f
-                                       delay:0.0f
-                                    response:^{}
+        [YRDropdownView showDropdownInView:self.view
+                                     title:notificationText
+                                    detail:nil
+                                     image:nil
+                                  animated:NO
+                                 hideAfter:duration
          ];
     }
     
@@ -744,7 +740,7 @@
     NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];
     [viewControllers removeLastObject];
     [[self navigationController] setViewControllers:viewControllers animated:YES];
-    [loadingPanel hide];
+    [YRDropdownView hideDropdownInView:self.view];
 }
 
 //Handle action for shipping the order
@@ -935,9 +931,7 @@
                     firstRun = NO;
                 } else {
                     [self makeBlocks];
-                    if(loadingPanel){
-                        [loadingPanel hide];
-                    }
+                    [YRDropdownView hideDropdownInView:self.view];
                 }
             }
             

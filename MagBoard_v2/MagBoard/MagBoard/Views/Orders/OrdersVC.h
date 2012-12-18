@@ -22,8 +22,6 @@
 @property (nonatomic, retain) UIActivityIndicatorView *loadingIcon;
 @property (nonatomic, strong) UITableView *ordersTable;
 @property (nonatomic, strong) UIView *loadingHolder;
-@property (nonatomic, strong) AJNotificationView *loadingPanel;
-@property (nonatomic, strong) AJNotificationView *notificationPanel;
 
 //For searching orders
 @property (nonatomic, strong) UIView *searchOverlay;

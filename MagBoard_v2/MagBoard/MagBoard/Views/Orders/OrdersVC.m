@@ -17,7 +17,7 @@
 
 @implementation OrdersVC
 
-@synthesize shopInfo, orderHolder,loadingHolder, loadingIcon, ordersTable, searchBar, searching, letUserSelectRow, searchOverlay, sorting, loadingPanel, notificationPanel;
+@synthesize shopInfo, orderHolder,loadingHolder, loadingIcon, ordersTable, searchBar, searching, letUserSelectRow, searchOverlay, sorting;
 
 - (void)viewDidLoad
 {
@@ -51,7 +51,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark construct view
+#pragma mark - construct view
 
 ///////////////////////////////////////////////////////
 //////////////// Construct view ///////////////////////
@@ -118,38 +118,20 @@
     [tabBar addSubview:ordersButton];
 }
 
--(void)constructLoadingNotification
-{
-    NSString *notificationText = [[NSString alloc] initWithFormat:@"Searching for new orders"];
-    loadingPanel = [AJNotificationView showNoticeInView:self.view
-                                    type:AJNotificationTypeDefault
-                                   title:notificationText
-                         linedBackground:AJLinedBackgroundTypeAnimated
-                               hideAfter:0.0f
-                                  offset:0.0f
-                                   delay:0.0f
-                                                            response:^{}
-     ];
-    
-}
-
 -(void)constructNotificationBar:(NSString*)text duration:(float)duration
 {
 
     NSString *notificationText = [[NSString alloc] initWithFormat:@"%@", text];
-    notificationPanel = [AJNotificationView showNoticeInView:self.view
-                                    type:AJNotificationTypeDefault
-                                   title:notificationText
-                         linedBackground:AJLinedBackgroundTypeDisabled
-                               hideAfter:duration
-                                  offset:0.0f
-                                   delay:0.0f
-                                response:^{[self titleTap];}
-     ];
+    [YRDropdownView showDropdownInView:self.view
+                                 title:notificationText
+                                detail:nil
+                                 image:nil
+                              animated:YES
+                             hideAfter:duration];
     
 }
 
-#pragma mark Button actions
+#pragma mark - Button actions
 
 ///////////////////////////////////////////////////////
 //////////////// Button actions ///////////////////////
@@ -165,6 +147,8 @@
 -(void)goToDashboard
 {
     NSLog(@"Dashboard button pressed");
+    
+    //Add dashboardview to array
     DashboardVC *dashboardView = [[DashboardVC alloc] init];
     NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];
     [viewControllers addObject:dashboardView];
@@ -193,7 +177,7 @@
     [searchOverlay removeFromSuperview];
 }
 
-#pragma mark Requests
+#pragma mark - Requests
 
 ///////////////////////////////////////////////////////
 //////////////// Request to API ///////////////////////
@@ -273,11 +257,11 @@
         else {
             if(ordersTable){
                 [ordersTable reloadData];
-                [loadingPanel hide];
+                [YRDropdownView hideDropdownInView:self.view];
                 [self checkNewOrders];
             } else {
                 [loadingIcon stopAnimating];
-                [loadingPanel hide];
+                [YRDropdownView hideDropdownInView:self.view];
                 [loadingHolder removeFromSuperview];
                 [self makeTable];
                 [self checkNewOrders];
@@ -311,18 +295,18 @@
         int newOrders = newestOrderIncrementalId - lastOrderIncrementalId;
         if(newOrders != 0){
             if(newOrders == 1){
-                [loadingPanel hide];
+                [YRDropdownView hideDropdownInView:self.view];
                 [self constructNotificationBar:@"There is 1 new update" duration:1.0f];
             
             } else {
-                [loadingPanel hide];
+                [YRDropdownView hideDropdownInView:self.view];
                 NSString *notificationText = [[NSString alloc] initWithFormat:@"There are %d new orders", newOrders];
                 [self constructNotificationBar:notificationText duration:1.0f];
             }
              
         } else {
     
-           [loadingPanel hide];
+           [YRDropdownView hideDropdownInView:self.view];
             [self constructNotificationBar:@"No new orders found.." duration:1.0f];
             
         }
@@ -336,11 +320,11 @@
 
 -(void)updateOrders
 {
-    [self constructLoadingNotification];
+    [self constructNotificationBar:@"Searching for new orders..." duration:0.0f];
     [self loginRequest:[shopInfo shopUrl] username:[shopInfo username] password:[shopInfo password]  request:@"salesOrderList" requestParams:nil update:YES];
 }
 
-#pragma mark Filter
+#pragma mark - Filter
 
 -(void)showSortFilter
 {
@@ -418,7 +402,7 @@
     }
 }
 
-#pragma mark Search orders
+#pragma mark - Search orders
 
 ///////////////////////////////////////////////////////
 //////////////// Search orders  ///////////////////////
@@ -539,7 +523,7 @@
     
 }
 
-#pragma mark Make tableview
+#pragma mark - Make tableview
 
 ///////////////////////////////////////////////////////
 //////////////// Make tableview ///////////////////////
@@ -824,8 +808,7 @@
         NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];
         [viewControllers addObject:dashboard];
         [[self navigationController] setViewControllers:viewControllers animated:YES];
-        [loadingPanel hide];
-        [notificationPanel hide];
+        [YRDropdownView hideDropdownInView:self.view];
     } else {
         [self makeAlert:@"No order ID" message:@"Something went wrong while loading the order." button:@"Ok"];
     }

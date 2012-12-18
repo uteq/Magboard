@@ -25,7 +25,6 @@
 @property (nonatomic, retain) UIColor *headerColor;
 @property (nonatomic, retain) UIActivityIndicatorView *loadingIcon;
 @property (nonatomic, strong) UIView *loadingHolder;
-@property (nonatomic, strong) AJNotificationView *loadingPanel;
 
 //For making request for order details
 -(void)loginRequest:(NSString *)shopUrl username:(NSString *)username password:(NSString *)password request:(NSString *)requestFunction requestParams:(NSString *)requestParams update:(bool)update;

@@ -40,3 +40,7 @@ install_resource 'BlockAlertsAnd-ActionSheets/BlockAlertsDemo/images/AlertView/a
 install_resource 'BlockAlertsAnd-ActionSheets/BlockAlertsDemo/images/AlertView/alert-window-light.png'
 install_resource 'BlockAlertsAnd-ActionSheets/BlockAlertsDemo/images/AlertView/alert-window.png'
 install_resource 'BlockAlertsAnd-ActionSheets/BlockAlertsDemo/images/AlertView/alert-window@2x.png'
+install_resource 'YRDropdownView/YRDropdownView/bg-yellow.png'
+install_resource 'YRDropdownView/YRDropdownView/bg-yellow2.png'
+install_resource 'YRDropdownView/YRDropdownView/bg-yellow@2x.png'
+install_resource 'YRDropdownView/YRDropdownView/bg-yellow@2x2.png'
