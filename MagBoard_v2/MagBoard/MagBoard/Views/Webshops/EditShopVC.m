@@ -14,7 +14,7 @@
 
 @implementation EditShopVC
 
-@synthesize shopName, shopUrl,username, password, passwordSwitch, message, alertTitle, empty, sharedShop, editShop, urlRegEx, urlTest, apiResponse;
+@synthesize shopName, shopUrl,username, password, passwordSwitch, message, setAlertTitle, empty, sharedShop, editShop, urlRegEx, urlTest, apiResponse;
 
 - (void)viewDidLoad
 {
@@ -145,7 +145,7 @@
     UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
     cancelButton.frame = CGRectMake(11.0, [constants getScreenHeight] - 120, 145.0, 43.0);
     [cancelButton setTitle:@"Delete" forState:UIControlStateNormal];
-    [cancelButton setFont:[UIFont boldSystemFontOfSize:14]];
+    cancelButton.titleLabel.font = [UIFont boldSystemFontOfSize:14];
     cancelButton.backgroundColor = [UIColor clearColor];
     [cancelButton setTitleColor:[UIColor colorWithRed:42.0/255.0 green:43.0/255.0 blue:53.0/255.0 alpha:1] forState:UIControlStateNormal ];
     cancelButton.titleLabel.shadowColor = [UIColor whiteColor];
@@ -162,7 +162,7 @@
     UIButton *addShopButton = [UIButton buttonWithType:UIButtonTypeCustom];
     addShopButton.frame = CGRectMake(165.0, [constants getScreenHeight] - 120, 145.0, 43.0);
     [addShopButton setTitle:@"Save" forState:UIControlStateNormal];
-    [addShopButton setFont:[UIFont boldSystemFontOfSize:14]];
+    addShopButton.titleLabel.font = [UIFont boldSystemFontOfSize:14];
     addShopButton.backgroundColor = [UIColor clearColor];
     [addShopButton setTitleColor:[UIColor colorWithRed:42.0/255.0 green:43.0/255.0 blue:53.0/255.0 alpha:1.0] forState:UIControlStateNormal ];
     addShopButton.titleLabel.shadowColor = [UIColor whiteColor];
@@ -234,20 +234,20 @@
     //Checken of velden gevuld zijn
     //Checken of velden gevuld zijn
     if([shopName.text isEqualToString:@""] || shopName.text == nil){
-        alertTitle = @"No name";
+        setAlertTitle = @"No name";
         message = @"Please enter a name for your webshop";
         empty = TRUE;
-        [self makeAlert:alertTitle message:message button:@"Ok"];
+        [self makeAlert:setAlertTitle message:message button:@"Ok"];
     } else if (![self validateUrl:shopUrl.text]){
-        alertTitle = @"Incorrect URL";
+        setAlertTitle = @"Incorrect URL";
         message = @"Please enter a correct URL, for example www.yourwebshop.com";
         empty = TRUE;
-        [self makeAlert:alertTitle message:message button:@"Ok"];
+        [self makeAlert:setAlertTitle message:message button:@"Ok"];
     } else if ([username.text isEqualToString:@""] || username.text == nil){
-        alertTitle = @"No gebruikersnaam";
+        setAlertTitle = @"No gebruikersnaam";
         message = @"Please enter a username for your webshop";
         empty = TRUE;
-        [self makeAlert:alertTitle message:message button:@"Ok"];
+        [self makeAlert:setAlertTitle message:message button:@"Ok"];
     }  else {
         empty = FALSE;
     }
@@ -318,6 +318,7 @@
 //For hiding keyboard when done is tapped
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
+    return 0;
 }
 
 
@@ -376,7 +377,7 @@
     [params setObject:magRequestFunction forKey:@"requestFunction"];
     
     
-    [[LRResty client] post:@"http://www.magboard.nl/api2/index.php" payload:params delegate:self];
+    [[LRResty client] post:[constants apiUrl] payload:params delegate:self];
 }
 
 //Make request for logging in en fetching orders
@@ -396,7 +397,7 @@
         [params setObject:@"0" forKey:@"update"];
     }
     
-    [[LRResty client] post:@"http://www.magboard.nl/api2/index.php" payload:params delegate:self];
+    [[LRResty client] post:[constants apiUrl] payload:params delegate:self];
 }
 //Catch response for request
 - (void)restClient:(LRRestyClient *)client receivedResponse:(LRRestyResponse *)response;

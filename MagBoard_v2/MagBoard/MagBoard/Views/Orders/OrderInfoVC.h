@@ -28,15 +28,13 @@
 
 //For making request for order details
 -(void)loginRequest:(NSString *)shopUrl username:(NSString *)username password:(NSString *)password request:(NSString *)requestFunction requestParams:(NSString *)requestParams update:(bool)update;
--(void)updateOrderInfo;
 //For changing status of order
 -(void)setOrderOnHold;
 -(void)setOrderCancel;
 -(void)setOrderInvoice;
+-(void)createSubheader;
 -(void)requestInvoice;
 -(void)requestHold:(NSString*)type;
 -(void)loadingRequest:(NSString*)message;
--(void)openStatusPopover;
-
 
 @end

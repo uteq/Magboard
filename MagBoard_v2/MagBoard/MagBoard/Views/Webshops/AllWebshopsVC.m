@@ -186,22 +186,27 @@
         shopName.shadowOffset = CGSizeMake(1, 1);
         [shopHolder addSubview:shopName];
         
+        
         //load thumbnail
         thumbnailTransition = NO;
+        thumbnailSearchCount = 1;
         NSURL *shopUrl = [[allShops objectAtIndex:i] url];
+        NSLog(@"%@", shopUrl);
+        NSLog(@"Searchcount: %d", thumbnailSearchCount);
         [self getThumbnail:shopUrl];
+        
     }
 }
 //Getting the thumbnail for the shop
 -(void)getThumbnail:(NSURL*)shopUrl
 {
+    NSLog(@"%@", shopUrl);
     NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *pngFilePath = [NSString stringWithFormat:@"%@/%@.png",docDir, shopUrl];
-
-    NSFileManager *fileManager = [NSFileManager defaultManager];
     
-    if ([fileManager fileExistsAtPath:pngFilePath]){
-        UIImage *thumbnail = [UIImage imageWithContentsOfFile:pngFilePath];
+    UIImage *thumbnail = [AllWebshopsVC loadThumbnail:pngFilePath];
+    
+    if (thumbnail){
         UIImageView * thumbnailHolder = [[UIImageView alloc] initWithFrame:CGRectMake(59.5f, 35.5f, 163.5f, 98.0f)];
         thumbnailHolder.image = thumbnail;
         if(thumbnailTransition == YES){
@@ -215,9 +220,26 @@
             [shopHolder addSubview:thumbnailHolder];   
         }
     } else {
-        //If the file does not exist, it is probably still downloading. Do the same function every 3 seconds.
-        thumbnailTransition = YES;
-        [self performSelector:@selector(getThumbnail:) withObject:shopUrl afterDelay:3.0 ];
+        if(thumbnailSearchCount != 3)
+        {
+            //If the file does not exist, it is probably still downloading. Do the same function every 3 seconds.
+            thumbnailTransition = YES;
+            thumbnailSearchCount++;
+            [self performSelector:@selector(getThumbnail:) withObject:shopUrl afterDelay:5.0 ];
+        } else {
+            NSLog(@"Could not find the thumbnail for shop: %@", shopUrl);
+        }
+    }
+}
+
++(id)loadThumbnail:(NSString *)pngFilePath
+{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if ([fileManager fileExistsAtPath:pngFilePath]){
+        UIImage *thumbnail = [UIImage imageWithContentsOfFile:pngFilePath];
+        return thumbnail;
+    } else {
+        return false;
     }
 }
 //Draw dots for scroller

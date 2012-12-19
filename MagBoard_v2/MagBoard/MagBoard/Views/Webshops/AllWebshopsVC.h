@@ -11,6 +11,7 @@
 @interface AllWebshopsVC : UIViewController <UIScrollViewDelegate>
 {
     BOOL thumbnailTransition;
+    int thumbnailSearchCount;
 }
 @property (strong, nonatomic) UIScrollView* shopsScroller;
 @property (strong, nonatomic) UILabel* noShopsLabel;
@@ -24,11 +25,10 @@
 -(void)makeScrollview;
 -(void)addShopsToScrollview;
 -(void)makeButtons;
--(void)makeAlert;
 -(void)fetchAllShops;
 -(void)scrollToWebshop;
 -(void)getThumbnail:(NSURL*)shopUrl;
-
++(id)loadThumbnail:(NSString *)pngFilePath;
 //Actions for buttons
 -(void)goToInstructions;
 -(void)goToAddShop;

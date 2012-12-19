@@ -35,10 +35,9 @@
 -(void)sortTableView:(NSString*)status;
 -(void)updateOrders;
 -(void)loginRequest:(NSString *)shopUrl username:(NSString *)username password:(NSString *)password request:(NSString *)requestFunction requestParams:(NSString *)requestParams update:(bool)update;
--(void)makeTabel;
+-(void)makeTable;
 -(void)constructHeader;
 -(void)loadingRequest;
--(void)alertForIncorrectLogin;
 -(void)constructTabBar;
 -(void)goToDashboard;
 -(void)doneSearching;

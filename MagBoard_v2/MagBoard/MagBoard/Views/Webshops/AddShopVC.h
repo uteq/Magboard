@@ -24,7 +24,7 @@
 @property (strong, nonatomic) UITextField* password;
 @property (strong, nonatomic) UISwitch* passwordSwitch;
 @property (weak, nonatomic) NSString *message;
-@property (weak, nonatomic) NSString *alertTitle;
+@property (weak, nonatomic) NSString *setAlertTitle;
 @property BOOL empty;
 @property (weak, nonatomic) NSPredicate *urlTest;
 @property (weak, nonatomic) NSString *urlRegEx;

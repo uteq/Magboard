@@ -10,6 +10,8 @@
 
 @interface constants : NSObject
 
+
++(NSString *)apiUrl;
 +(CGFloat)getScreenHeight;
 
 @end

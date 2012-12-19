@@ -142,7 +142,7 @@
     [self generateHeaderColor];
     
     //Initialize subheader
-    [self subHeader];
+    [self createSubheader];
     
     [self orderStatisticsHolder];
     [self orderShippingHolder];
@@ -157,7 +157,7 @@
 }
 
 //Function for making subheader
--(void) subHeader
+-(void)createSubheader
 {    
     //Make subheader holder
     subHeader = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 00.0f, 320.0f, 50.0f)];
@@ -889,7 +889,7 @@
     }
     //NSLog(@"Shop %@ with username %@", shopUrl, username);
     //NSLog(@"Executing %@ with params %@", requestFunction, requestParams);
-    [[LRResty client] post:@"http://www.magboard.nl/api2/index.php" payload:params delegate:self];
+    [[LRResty client] post:[constants apiUrl] payload:params delegate:self];
 }
 
 //Request for changing status
@@ -906,7 +906,7 @@
     [params setObject:requestParams forKey:@"requestParams"];
     //NSLog(@"Shop %@ with username %@", shopUrl, username);
     //NSLog(@"Executing %@ with params %@", requestFunction, requestParams);
-    [[LRResty client] post:@"http://www.magboard.nl/api2/index.php" payload:params delegate:self];
+    [[LRResty client] post:[constants apiUrl] payload:params delegate:self];
 }
 
 - (void)restClient:(LRRestyClient *)client receivedResponse:(LRRestyResponse *)response;

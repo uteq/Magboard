@@ -21,7 +21,6 @@
 -(void)thumbnailRequest:(NSString *)magShopUrl magUsername:(NSString *)magUsername magPassword:(NSString *)magPassword magRequestFunction:(NSString *)magRequestFunction;
 -(void)deleteThumbnail;
 
-
 @property (strong, nonatomic) NSMutableDictionary* apiResponse;
 @property (strong, nonatomic) UITextField* shopName;
 @property (strong, nonatomic) UITextField* shopUrl;
@@ -29,7 +28,7 @@
 @property (strong, nonatomic) UITextField* password;
 @property (strong, nonatomic) UISwitch* passwordSwitch;
 @property (weak, nonatomic) NSString *message;
-@property (weak, nonatomic) NSString *alertTitle;
+@property (weak, nonatomic) NSString *setAlertTitle;
 @property (strong, nonatomic) ShopSingleton * sharedShop;
 @property BOOL empty;
 @property (strong, nonatomic) Webshop *editShop;

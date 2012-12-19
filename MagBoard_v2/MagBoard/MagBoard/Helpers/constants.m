@@ -10,6 +10,11 @@
 
 @implementation constants
 
++(NSString*)apiUrl
+{
+    return @"http://www.magboard.nl/api2/index.php";
+}
+
 +(CGFloat)getScreenHeight
 {
     //Set variables for screensize

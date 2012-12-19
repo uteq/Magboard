@@ -64,7 +64,7 @@
     UIButton *titleLabel = [UIButton buttonWithType:UIButtonTypeCustom];
     [titleLabel setTitle:[shopInfo shopName] forState:UIControlStateNormal];
     titleLabel.frame = CGRectMake(0, 0, 200, 44);
-    titleLabel.font = [UIFont boldSystemFontOfSize:16];
+    titleLabel.titleLabel.font = [UIFont boldSystemFontOfSize:16];
     titleLabel.titleLabel.shadowColor = [UIColor blackColor];
     titleLabel.titleLabel.shadowOffset = CGSizeMake(1, 1);
     [titleLabel addTarget:self action:@selector(titleTap) forControlEvents:UIControlEventTouchUpInside];
@@ -224,7 +224,7 @@
     } else if(update == NO) {
         [params setObject:@"0" forKey:@"update"];
     }
-    [[LRResty client] post:@"http://www.magboard.nl/api2/index.php" payload:params delegate:self];
+    [[LRResty client] post:[constants apiUrl] payload:params delegate:self];
 }
 
 //Catch response for request
