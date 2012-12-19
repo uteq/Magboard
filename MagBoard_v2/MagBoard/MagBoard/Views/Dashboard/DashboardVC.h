@@ -10,7 +10,12 @@
 
 @interface DashboardVC : UIViewController
 
+@property (nonatomic, retain) ShopSingleton *shopInfo;
+@property (nonatomic, retain) NSMutableDictionary *dashboardHolder;
+
 -(void)constructHeader;
 -(void)constructTabBar;
-
+-(void)loginRequest:(NSString *)shopUrl username:(NSString *)username password:(NSString *)password request:(NSString *)requestFunction requestParams:(NSString *)requestParams;
+-(void)makeAlert:(NSString*)alertTitle message:(NSString*)alertMessage button:(NSString *)buttonTitle;
+-(void)backButtonTouched;
 @end

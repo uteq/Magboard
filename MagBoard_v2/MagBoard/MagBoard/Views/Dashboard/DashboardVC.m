@@ -7,6 +7,7 @@
 //
 
 #import "DashboardVC.h"
+#import "Alert.h"
 
 @interface DashboardVC ()
 
@@ -14,12 +15,17 @@
 
 @implementation DashboardVC
 
+@synthesize shopInfo, dashboardHolder;
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    shopInfo = [ShopSingleton shopSingleton];
 	// Do any additional setup after loading the view.
     [self constructHeader];
     [self constructTabBar];
+    
+    [self loginRequest:[shopInfo shopUrl] username:[shopInfo username] password:[shopInfo password]  request:@"webshopDashboardData" requestParams:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -77,6 +83,43 @@
     [tabBar addSubview:dashboardButton];
     [tabBar addSubview:ordersButton];
 }
+-(void)loginRequest:(NSString *)shopUrl username:(NSString *)username password:(NSString *)password request:(NSString *)requestFunction requestParams:(NSString *)requestParams
+{
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setObject:shopUrl forKey:@"url"];
+    [params setObject:username forKey:@"username"];
+    [params setObject:password forKey:@"password"];
+    [params setObject:requestFunction forKey:@"requestFunction"];
+    if(requestParams){
+        [params setObject:requestParams forKey:@"requestParams"];
+    }
+    [[LRResty client] post:[constants apiUrl] payload:params delegate:self];
+}
+
+//Catch response for request
+- (void)restClient:(LRRestyClient *)client receivedResponse:(LRRestyResponse *)response;
+{
+    // do something with the response
+    if(response.status == 200) {
+        
+        dashboardHolder = [NSJSONSerialization JSONObjectWithData:[response responseData] options:kNilOptions error:nil];
+        
+        //If correct login
+        if([[dashboardHolder valueForKey:@"message"] isEqualToString:@"1007"])
+        {
+            NSLog(@"Data items: %@", [dashboardHolder valueForKey:@"data-items"]);
+        }
+    }
+    else
+    {
+        NSLog(@"Something went wrong: %d", [response status]);
+        [self backButtonTouched];
+    }
+    
+    NSLog(@"Status: %@", [dashboardHolder valueForKey:@"session"]);
+    NSLog(@"Code: %@", [dashboardHolder valueForKey:@"message"]);
+    
+}
 
 
 #pragma mark Button actions
@@ -96,4 +139,35 @@
     [[self navigationController] setViewControllers:viewControllers animated:NO];
 }
 
+///////////////////////////////////////////////////////
+//////////////// Make alerts     ///////////////////////
+///////////////////////////////////////////////////////
+
+//Make alert
+-(void)makeAlert:(NSString*)alertTitle message:(NSString*)alertMessage button:(NSString *)buttonTitle
+{
+    if([buttonTitle isEqualToString:@"607"] || [buttonTitle isEqualToString:@"608"])
+    {
+        BlockAlertView *alert = [BlockAlertView
+                                 alertWithTitle:alertTitle
+                                 message:alertMessage];
+        
+        [alert setCancelButtonWithTitle:@"Ok" block:^{
+            [self backButtonTouched];
+        }];
+        
+        [alert show];
+    }
+    else {
+        
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle:alertTitle
+                              message:alertMessage
+                              delegate:self
+                              cancelButtonTitle:@"Cancel"
+                              otherButtonTitles:buttonTitle, nil];
+        
+        [alert show];
+    }
+}
 @end
